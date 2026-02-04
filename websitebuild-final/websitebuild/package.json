@@ -1,0 +1,23 @@
+{
+  "name": "websitebuild",
+  "version": "1.0.0",
+  "description": "WebsiteBuild - Sites web professionnels en 48h",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "website",
+    "builder",
+    "landing-page"
+  ],
+  "author": "WebsiteBuild",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
