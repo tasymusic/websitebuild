@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script>
+    const CONFIG = {
+        nom: "YOUR RESTAURANT",
+        slogan: "Fine Dining Experience",
+        tagline: "An unforgettable culinary experience awaits you",
+        annee_creation: "2003",
+        adresse: "Ribera Local 5-6, BL E",
+        ville: "29660 Puerto Banús, Marbella",
+        telephone: "+34 952 81 00 04",
+        whatsapp: "34952810004",
+        email: "info@yourrestaurant.com",
+        horaires: "Todos los días: 10:00 — 01:00",
+        couleur_primary: "#1a2530",
+        couleur_accent: "#c4784a",
+        stats: [
+            { nombre: 22, suffixe: "+", label: "Años en Puerto Banús" },
+            { nombre: 278, suffixe: "", label: "Opiniones TripAdvisor" },
+            { nombre: 1003, suffixe: "", label: "Fans Foursquare" }
+        ],
+        about_titre: "El Mediterráneo en cada bocado",
+        about_texte: "Desde 2003, Red Pepper trae la esencia de la cocina griega y mediterránea a Puerto Banús. Nuestros platos combinan ingredientes frescos del mar y la tierra, preparados con recetas auténticas heredadas de generación en generación. Un viaje gastronómico a las islas griegas sin salir de Marbella.",
+        about_signature: "— El Equipo Red Pepper",
+        menu: [
+            { nom: "Ensalada Griega Tradicional", desc: "Tomate, pepino, cebolla roja, aceitunas Kalamata, queso feta DOP, orégano y aceite de oliva virgen extra", prix: "€14" },
+            { nom: "Pulpo a la Brasa", desc: "Tentáculos de pulpo a la parrilla, papas aplastadas, alcaparras y pimentón ahumado de La Vera", prix: "€19" },
+            { nom: "Moussaka Tradicional", desc: "Capas de berenjena, carne especiada, bechamel cremosa gratinada al horno de leña", prix: "€17" },
+            { nom: "Lubina a la Sal", desc: "Lubina salvaje en costra de sal marina, hierbas frescas, limón y aceite de oliva Koroneiki", prix: "€26" },
+            { nom: "Chuletillas de Cordero", desc: "Costillas de cordero lechal marinadas con romero, ajo y miel, a la brasa", prix: "€24" },
+            { nom: "Baklava Artesanal", desc: "Pasta filo crujiente, nueces caramelizadas, miel de tomillo y agua de azahar", prix: "€10" }
+        ],
+        instagram: "",
+        facebook: "",
+        tripadvisor: ""
+    };
+    </script>
+    
+    <title>Restaurant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Sora:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #111111;
+            --accent: #9a8057;
+            --bg: #fefdfb;
+            --text: #111111;
+            --text-mid: #555550;
+            --text-light: #a5a29d;
+            --line: rgba(0,0,0,0.06);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Sora', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        ::selection { background: var(--accent); color: white; }
+        h1, h2, h3 { font-family: 'Marcellus', serif; font-weight: 400; }
+
+        /* ═══ PRELOADER ═══ */
+        .preloader {
+            position: fixed;
+            inset: 0;
+            background: var(--bg);
+            z-index: 11000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            transition: opacity 0.8s ease 0.2s, visibility 0.8s ease 0.2s;
+        }
+        .preloader.done { opacity: 0; visibility: hidden; }
+        .preloader-logo {
+            font-family: 'Marcellus', serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            letter-spacing: 10px;
+            color: var(--primary);
+        }
+        .preloader-bar {
+            width: 120px;
+            height: 1px;
+            background: var(--line);
+            position: relative;
+            overflow: hidden;
+        }
+        .preloader-bar::after {
+            content: '';
+            position: absolute;
+            left: 0; top: 0;
+            height: 100%;
+            width: 0;
+            background: var(--accent);
+            animation: loadBar 2s ease forwards;
+        }
+        @keyframes loadBar { to { width: 100%; } }
+
+        /* ═══ NAV ═══ */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            z-index: 9000;
+            padding: 2rem 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.5s;
+        }
+        nav.solid {
+            background: rgba(254,253,251,0.97);
+            backdrop-filter: blur(20px);
+            padding: 1.2rem 6%;
+            border-bottom: 1px solid var(--line);
+        }
+        .n-logo {
+            font-family: 'Marcellus', serif;
+            font-size: 1.1rem;
+            letter-spacing: 6px;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .n-links { display: flex; gap: 3rem; list-style: none; align-items: center; }
+        .n-links a {
+            color: var(--text-mid);
+            text-decoration: none;
+            font-size: 0.65rem;
+            font-weight: 400;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+        .n-links a:hover { color: var(--primary); }
+        .n-cta {
+            border: 1px solid var(--primary) !important;
+            color: var(--primary) !important;
+            padding: 0.6rem 2rem;
+            transition: all 0.3s;
+        }
+        .n-cta:hover { background: var(--primary); color: var(--bg) !important; }
+
+        /* ═══ HERO - FULL IMAGE + CENTERED MINIMAL TEXT ═══ */
+        .hero {
+            height: 100vh;
+            min-height: 750px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+        .hero-bg img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transform: scale(1.15);
+            transition: transform 2s cubic-bezier(0.16,1,0.3,1);
+        }
+        .hero.in .hero-bg img { transform: scale(1); }
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.15), rgba(0,0,0,0.35));
+        }
+        .hero-center {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+        }
+        .hero-eyebrow {
+            font-size: 0.6rem;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            opacity: 0;
+            transform: translateY(15px);
+            margin-bottom: 1.5rem;
+            color: rgba(255,255,255,0.7);
+        }
+        .hero h1 {
+            font-size: clamp(3.5rem, 9vw, 7rem);
+            letter-spacing: 10px;
+            line-height: 1;
+            text-shadow: 0 2px 40px rgba(0,0,0,0.3);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        .hero-sub {
+            margin-top: 2rem;
+            font-size: 0.95rem;
+            font-weight: 200;
+            letter-spacing: 1px;
+            opacity: 0;
+            transform: translateY(15px);
+            color: rgba(255,255,255,0.75);
+        }
+        .hero-line {
+            width: 1px;
+            height: 0;
+            background: rgba(255,255,255,0.3);
+            margin: 3rem auto 0;
+            transition: height 1s ease 1.5s;
+        }
+        .hero.in .hero-line { height: 60px; }
+
+        /* ═══ SPACIOUS SECTION ═══ */
+        .zen-section {
+            padding: 10vh 8%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* ═══ INTRO STRIP ═══ */
+        .intro-strip {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4rem;
+            padding: 6rem 8%;
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+        }
+        .intro-stat {
+            text-align: center;
+        }
+        .intro-stat-num {
+            font-family: 'Marcellus', serif;
+            font-size: 2.8rem;
+            color: var(--accent);
+            line-height: 1;
+        }
+        .intro-stat-label {
+            font-size: 0.55rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-top: 0.8rem;
+        }
+        .intro-sep {
+            width: 1px;
+            height: 50px;
+            background: var(--line);
+        }
+
+        /* ═══ ABOUT - IMAGE LEFT, TEXT RIGHT WITH HUGE SPACE ═══ */
+        .story {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 8%;
+            align-items: center;
+            padding: 10vh 8%;
+        }
+        .story-img {
+            position: relative;
+            overflow: hidden;
+        }
+        .story-img img {
+            width: 100%;
+            height: 650px;
+            object-fit: cover;
+            clip-path: inset(0 0 100% 0);
+            transition: clip-path 1.4s cubic-bezier(0.16,1,0.3,1);
+        }
+        .story-img.vis img { clip-path: inset(0 0 0 0); }
+        .story-text { max-width: 480px; }
+        .story-eyebrow {
+            font-size: 0.55rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 2.5rem;
+        }
+        .story-text h2 {
+            font-size: clamp(2rem, 3.5vw, 2.8rem);
+            line-height: 1.3;
+            margin-bottom: 2rem;
+        }
+        .story-text p {
+            color: var(--text-mid);
+            font-weight: 300;
+            font-size: 0.95rem;
+            line-height: 2;
+        }
+        .story-sig {
+            font-family: 'Marcellus', serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            color: var(--accent);
+            margin-top: 2.5rem;
+        }
+
+        /* ═══ FULL WIDTH IMAGE BREAK ═══ */
+        .img-break {
+            height: 60vh;
+            position: relative;
+            overflow: hidden;
+        }
+        .img-break img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* ═══ MENU - CENTERED SINGLE COLUMN ═══ */
+        .carta {
+            padding: 12vh 8%;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .carta-eyebrow {
+            font-size: 0.55rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+        .carta h2 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            margin-bottom: 4rem;
+        }
+        .carta-item {
+            padding: 2.2rem 0;
+            border-bottom: 1px solid var(--line);
+            text-align: left;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 2rem;
+            align-items: start;
+            transition: all 0.4s;
+        }
+        .carta-item:first-of-type { border-top: 1px solid var(--line); }
+        .carta-item:hover { padding-left: 1rem; }
+        .carta-item h4 {
+            font-family: 'Marcellus', serif;
+            font-size: 1.15rem;
+            font-weight: 400;
+            margin-bottom: 0.4rem;
+            transition: color 0.3s;
+        }
+        .carta-item:hover h4 { color: var(--accent); }
+        .carta-item p {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            font-weight: 300;
+        }
+        .carta-price {
+            font-family: 'Marcellus', serif;
+            font-size: 1.1rem;
+            color: var(--accent);
+            white-space: nowrap;
+        }
+
+        /* ═══ GALLERY - ALTERNATING ROWS ═══ */
+        .gal-section { padding: 8vh 0; }
+        .gal-row {
+            display: grid;
+            gap: 1rem;
+            padding: 0 8%;
+            margin-bottom: 1rem;
+        }
+        .gal-row-a { grid-template-columns: 2fr 1fr; }
+        .gal-row-b { grid-template-columns: 1fr 2fr; }
+        .gal-cell {
+            overflow: hidden;
+            height: 45vh;
+        }
+        .gal-cell img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1s cubic-bezier(0.16,1,0.3,1);
+        }
+        .gal-cell:hover img { transform: scale(1.06); }
+
+        /* ═══ RESERVE ═══ */
+        .reserve {
+            text-align: center;
+            padding: 14vh 8%;
+            background: var(--primary);
+            color: white;
+        }
+        .reserve-eyebrow {
+            font-size: 0.55rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 2rem;
+        }
+        .reserve h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1.5rem;
+        }
+        .reserve p {
+            color: rgba(255,255,255,0.4);
+            font-weight: 300;
+            margin-bottom: 3rem;
+        }
+        .reserve-btns { display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap; }
+        .r-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 2.8rem;
+            text-decoration: none;
+            font-family: 'Sora', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 400;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            transition: all 0.4s;
+            border: 1px solid;
+        }
+        .r-fill { background: var(--accent); color: white; border-color: var(--accent); }
+        .r-fill:hover { background: transparent; }
+        .r-ghost { background: transparent; color: white; border-color: rgba(255,255,255,0.15); }
+        .r-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+        /* ═══ CONTACT ═══ */
+        .contact-sec {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            border-top: 1px solid var(--line);
+        }
+        .contact-left { padding: 8%; }
+        .contact-left h3 { font-size: 2.2rem; margin-bottom: 3rem; }
+        .c-item { display: flex; gap: 1.8rem; margin-bottom: 2.2rem; align-items: flex-start; }
+        .c-icon {
+            width: 42px; height: 42px;
+            border: 1px solid var(--line);
+            display: flex;
+            align-items: center; justify-content: center;
+            color: var(--accent);
+            font-size: 0.85rem;
+            flex-shrink: 0;
+            transition: all 0.3s;
+        }
+        .c-item:hover .c-icon { background: var(--accent); color: white; border-color: var(--accent); }
+        .c-item h4 {
+            font-family: 'Sora', sans-serif;
+            font-size: 0.55rem;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.3rem;
+        }
+        .c-item p { color: var(--text-light); font-weight: 300; font-size: 0.9rem; }
+        .contact-right iframe {
+            width: 100%; height: 100%; min-height: 500px; border: 0;
+            filter: saturate(0) contrast(1.05) brightness(1.1);
+        }
+
+        /* ═══ FOOTER ═══ */
+        footer {
+            border-top: 1px solid var(--line);
+            padding: 3.5rem 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .ft-logo {
+            font-family: 'Marcellus', serif;
+            font-size: 0.9rem;
+            letter-spacing: 5px;
+        }
+        .ft-links { display: flex; gap: 2.5rem; }
+        .ft-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+        .ft-links a:hover { color: var(--accent); }
+        .ft-copy { font-size: 0.6rem; color: var(--text-light); }
+
+        
+
+        /* ═══ SCROLL REVEAL ═══ */
+        .sr { opacity: 0; transform: translateY(40px); transition: opacity 1s ease, transform 1s cubic-bezier(0.16,1,0.3,1); }
+        .sr.vis { opacity: 1; transform: translateY(0); }
+        .srd1 { transition-delay: 0.12s; }
+        .srd2 { transition-delay: 0.24s; }
+        .srd3 { transition-delay: 0.36s; }
+
+        /* ═══ RESPONSIVE ═══ */
+        @media (max-width: 1024px) {
+            .story { grid-template-columns: 1fr; }
+            .story-img img { height: 450px; }
+            .intro-strip { flex-wrap: wrap; gap: 2rem; }
+            .intro-sep { display: none; }
+            .gal-row-a, .gal-row-b { grid-template-columns: 1fr; }
+            .gal-cell { height: 35vh; }
+            .contact-sec { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            .n-links { display: none; }
+            .hero h1 { letter-spacing: 5px; }
+            .story { padding: 6vh 5%; }
+            .carta { padding: 8vh 5%; }
+            footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+        }
+    
+/* ═══ WEBSITEBUILD MODAL (UNIFIED) ═══ */
+.wb-overlay{position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,0.75);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all 0.4s;padding:1.5rem;font-family:'Montserrat',system-ui,sans-serif}
+.wb-overlay.wb-active{opacity:1;visibility:visible}
+.wb-box{background:#fff;max-width:680px;width:100%;position:relative;transform:translateY(15px);transition:transform 0.4s;max-height:94vh;overflow-y:auto;border-radius:0;box-shadow:0 25px 80px rgba(0,0,0,0.3)}
+.wb-overlay.wb-active .wb-box{transform:translateY(0)}
+.wb-x{position:absolute;top:1rem;right:1.2rem;background:none;border:none;color:#999;font-size:1.6rem;cursor:pointer;line-height:1;transition:color 0.3s;font-family:sans-serif;z-index:2}.wb-x:hover{color:#333}
+.wb-hero{background:#111;padding:2.5rem 2.5rem 2rem;position:relative;overflow:hidden}
+.wb-hero::after{content:'';position:absolute;top:-40%;right:-10%;width:300px;height:300px;background:radial-gradient(circle,rgba(37,99,235,0.08),transparent 70%);border-radius:50%}
+.wb-hero-tag{font-size:0.58rem;font-weight:600;letter-spacing:0.25em;text-transform:uppercase;color:#2563eb;margin-bottom:0.8rem;display:flex;align-items:center;gap:0.5rem;position:relative;z-index:1}
+.wb-hero-tag::before{content:'';width:14px;height:2px;background:#2563eb}
+.wb-hero-h{font-size:clamp(1.4rem,3.5vw,1.9rem);font-weight:700;color:#fff;line-height:1.25;margin-bottom:0.6rem;position:relative;z-index:1}
+.wb-hero-h em{font-style:normal;color:#2563eb}
+.wb-hero-p{font-size:0.8rem;color:rgba(255,255,255,0.55);line-height:1.7;max-width:480px;position:relative;z-index:1}
+.wb-pills{display:flex;gap:0.6rem;margin-top:1.5rem;position:relative;z-index:1;flex-wrap:wrap}
+.wb-pill{display:flex;align-items:center;gap:0.5rem;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);padding:0.5rem 1rem;transition:border-color 0.3s}
+.wb-pill:hover{border-color:rgba(37,99,235,0.4)}
+.wb-pill-icon{font-size:1.1rem}
+.wb-pill-txt{font-size:0.62rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:rgba(255,255,255,0.85)}
+.wb-pill-num{font-size:0.62rem;font-weight:700;color:#2563eb}
+.wb-form-area{padding:2rem 2.5rem 2.5rem}
+.wb-form-title{font-size:0.65rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:#999;margin-bottom:1.2rem}
+.wb-row{display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;margin-bottom:0.8rem}
+.wb-field label{display:block;font-size:0.58rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#999;margin-bottom:0.35rem}
+.wb-inp,.wb-sel{width:100%;padding:0.75rem 0.9rem;background:#f8f8f8;border:1.5px solid #eee;color:#111;font-family:'Montserrat',system-ui,sans-serif;font-size:0.82rem;font-weight:400;outline:none;transition:border-color 0.3s;-webkit-appearance:none;border-radius:0}
+.wb-inp::placeholder{color:#bbb}
+.wb-inp:focus,.wb-sel:focus{border-color:#2563eb}
+.wb-sel{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='%23999'%3E%3Cpath d='M5 6L0 0h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 0.9rem center;padding-right:2.2rem}
+.wb-ta{width:100%;padding:0.75rem 0.9rem;background:#f8f8f8;border:1.5px solid #eee;color:#111;font-family:'Montserrat',system-ui,sans-serif;font-size:0.82rem;font-weight:400;resize:vertical;min-height:70px;outline:none;transition:border-color 0.3s;border-radius:0}
+.wb-ta:focus{border-color:#2563eb}
+.wb-btn{width:100%;padding:1rem;background:#2563eb;border:none;color:#fff;font-family:'Montserrat',system-ui,sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;cursor:pointer;transition:all 0.3s;margin-top:0.3rem;border-radius:0}
+.wb-btn:hover{background:#1d4ed8;transform:translateY(-1px);box-shadow:0 8px 25px rgba(37,99,235,0.25)}
+.wb-note{font-size:0.6rem;color:#aaa;text-align:center;margin-top:0.8rem}
+.wb-ok{display:none;text-align:center;padding:3.5rem 2rem}
+.wb-ok-icon{font-size:3rem;margin-bottom:1rem}
+.wb-ok-h{font-size:1.5rem;font-weight:700;color:#111;margin-bottom:0.5rem}
+.wb-ok-p{font-size:0.85rem;color:#666;line-height:1.7;max-width:380px;margin:0 auto}
+@media(max-width:600px){.wb-hero{padding:2rem 1.5rem 1.5rem}.wb-form-area{padding:1.5rem}.wb-row{grid-template-columns:1fr}.wb-pills{gap:0.4rem}.wb-pill{padding:0.4rem 0.7rem}}
+
+
+/* ═══ WEBSITEBUILD POWERED BAR ═══ */
+.wb-bar{position:fixed;bottom:0;left:0;right:0;z-index:9998;background:#111;border-top:1px solid rgba(255,255,255,0.08);padding:0.7rem 2rem;display:flex;align-items:center;justify-content:center;gap:1.2rem;font-family:'Montserrat',system-ui,sans-serif}
+.wb-bar-txt{font-size:0.72rem;color:rgba(255,255,255,0.5)}.wb-bar-txt strong{color:#fff;font-weight:600}
+.wb-bar-btn{padding:0.4rem 1.3rem;background:#fff;color:#111;font-size:0.6rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;transition:all 0.3s;cursor:pointer;border:none;font-family:'Montserrat',system-ui,sans-serif;border-radius:0}
+.wb-bar-btn:hover{background:#eee;transform:translateY(-1px)}
+
+    footer { padding-bottom: 4.5rem; }
+    </style>
+</head>
+<body>
+
+    <div class="preloader" id="preloader">
+        <div class="preloader-logo" id="pl-logo"></div>
+        <div class="preloader-bar"></div>
+    </div>
+
+    <nav id="navbar">
+        <a href="#" class="n-logo" id="n-logo"></a>
+        <ul class="n-links">
+            <li><a href="#story">Nosotros</a></li>
+            <li><a href="#carta">Carta</a></li>
+            <li><a href="#galeria">Galería</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+            <li><a href="#reservar" class="n-cta">Reservar</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero" id="hero">
+        <div class="hero-bg">
+            <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=85" alt="">
+        </div>
+        <div class="hero-center">
+            <p class="hero-eyebrow" id="h-eye"></p>
+            <h1 id="h-title"></h1>
+            <p class="hero-sub" id="h-sub"></p>
+            <div class="hero-line"></div>
+        </div>
+    </section>
+
+    <div class="intro-strip" id="intro-strip"></div>
+
+    <section class="story" id="story">
+        <div class="story-img" id="story-img">
+            <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?w=900&q=80" alt="">
+        </div>
+        <div class="story-text">
+            <span class="story-eyebrow sr">Nuestra Historia</span>
+            <h2 class="sr srd1" id="s-titre"></h2>
+            <p class="sr srd2" id="s-text"></p>
+            <p class="story-sig sr srd3" id="s-sig"></p>
+        </div>
+    </section>
+
+    <div class="img-break">
+        <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1920&q=80" alt="">
+    </div>
+
+    <section class="carta" id="carta">
+        <span class="carta-eyebrow sr">Selección del Chef</span>
+        <h2 class="sr srd1">La Carta</h2>
+        <div id="carta-items"></div>
+    </section>
+
+    <section class="gal-section" id="galeria">
+        <div class="gal-row gal-row-a">
+            <div class="gal-cell"><img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&q=80" alt=""></div>
+            <div class="gal-cell"><img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=600&q=80" alt=""></div>
+        </div>
+        <div class="gal-row gal-row-b">
+            <div class="gal-cell"><img src="https://images.unsplash.com/photo-1544148103-0773bf10d330?w=600&q=80" alt=""></div>
+            <div class="gal-cell"><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80" alt=""></div>
+        </div>
+        <div class="gal-row gal-row-a">
+            <div class="gal-cell"><img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&q=80" alt=""></div>
+            <div class="gal-cell"><img src="https://images.unsplash.com/photo-1579684947550-22e945225d9a?w=600&q=80" alt=""></div>
+        </div>
+    </section>
+
+    <section class="reserve" id="reservar">
+        <span class="reserve-eyebrow sr">Reservas</span>
+        <h2 class="sr srd1">Reserve Su Mesa</h2>
+        <p class="sr srd2">Una experiencia culinaria inolvidable le espera</p>
+        <div class="reserve-btns sr srd3">
+            <a href="#" class="r-btn r-fill" id="r-phone"><i class="fas fa-phone"></i> <span id="r-phone-txt"></span></a>
+            <a href="#" class="r-btn r-ghost" id="r-wa"><i class="fab fa-whatsapp"></i> <span>WhatsApp</span></a>
+        </div>
+    </section>
+
+    <section class="contact-sec" id="contacto">
+        <div class="contact-left">
+            <h3 class="sr">Encuéntrenos</h3>
+            <div class="c-item sr srd1"><div class="c-icon"><i class="fas fa-map-marker-alt"></i></div><div><h4>Dirección</h4><p id="c-addr"></p></div></div>
+            <div class="c-item sr srd2"><div class="c-icon"><i class="fas fa-clock"></i></div><div><h4>Horario</h4><p id="c-hrs"></p></div></div>
+            <div class="c-item sr srd3"><div class="c-icon"><i class="fas fa-phone"></i></div><div><h4>Reservas</h4><p id="c-tel"></p></div></div>
+            <div class="c-item sr"><div class="c-icon"><i class="fas fa-envelope"></i></div><div><h4>Email</h4><p id="c-mail"></p></div></div>
+        </div>
+        <div class="contact-right">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3229.5!2d-4.95!3d36.48!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzbCsDI4JzQ4LjAiTiA0wrA1NycwMC4wIlc!5e0!3m2!1sen!2ses!4v1600000000000!5m2!1sen!2ses" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </section>
+
+    <footer>
+        <span class="ft-logo" id="ft-logo"></span>
+        <div class="ft-links">
+            <a href="#story">Nosotros</a><a href="#carta">Carta</a><a href="#galeria">Galería</a><a href="#contacto">Contacto</a>
+        </div>
+        <span class="ft-copy" id="ft-copy"></span>
+    </footer>
+
+    
+
+    <script>
+    (function() {
+        document.documentElement.style.setProperty('--primary', CONFIG.couleur_primary);
+        document.documentElement.style.setProperty('--accent', CONFIG.couleur_accent);
+        document.title = CONFIG.nom + ' | ' + CONFIG.slogan;
+
+        document.getElementById('pl-logo').textContent = CONFIG.nom;
+        document.getElementById('n-logo').textContent = CONFIG.nom;
+        document.getElementById('h-eye').textContent = CONFIG.slogan + ' · Puerto Banús';
+        document.getElementById('h-title').textContent = CONFIG.nom;
+        document.getElementById('h-sub').textContent = CONFIG.tagline;
+
+        // Intro stats
+        const is = document.getElementById('intro-strip');
+        CONFIG.stats.forEach((s, i) => {
+            if (i > 0) is.innerHTML += '<div class="intro-sep"></div>';
+            is.innerHTML += `<div class="intro-stat"><div class="intro-stat-num" data-t="${s.nombre}" data-s="${s.suffixe}">0${s.suffixe}</div><div class="intro-stat-label">${s.label}</div></div>`;
+        });
+
+        // About
+        document.getElementById('s-titre').textContent = CONFIG.about_titre;
+        document.getElementById('s-text').textContent = CONFIG.about_texte;
+        document.getElementById('s-sig').textContent = CONFIG.about_signature;
+
+        // Menu
+        const ci = document.getElementById('carta-items');
+        CONFIG.menu.forEach((m, i) => {
+            ci.innerHTML += `<div class="carta-item sr" style="transition-delay:${i*0.08}s"><div><h4>${m.nom}</h4><p>${m.desc}</p></div><span class="carta-price">${m.prix}</span></div>`;
+        });
+
+        // CTA
+        document.getElementById('r-phone').href = 'tel:' + CONFIG.telephone.replace(/\s/g,'');
+        document.getElementById('r-phone-txt').textContent = CONFIG.telephone;
+        document.getElementById('r-wa').href = 'https://wa.me/' + CONFIG.whatsapp;
+
+        // Contact
+        document.getElementById('c-addr').innerHTML = CONFIG.adresse + '<br>' + CONFIG.ville;
+        document.getElementById('c-hrs').textContent = CONFIG.horaires;
+        document.getElementById('c-tel').textContent = CONFIG.telephone;
+        document.getElementById('c-mail').textContent = CONFIG.email;
+
+        // Footer
+        document.getElementById('ft-logo').textContent = CONFIG.nom;
+        document.getElementById('ft-copy').textContent = '© 2025 ' + CONFIG.nom;
+
+        // Preloader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('preloader').classList.add('done');
+                setTimeout(heroAnim, 400);
+            }, 2200);
+        });
+
+        function heroAnim() {
+            const h = document.querySelector('.hero');
+            h.classList.add('in');
+            ['.hero-eyebrow', '.hero h1', '.hero-sub'].forEach((s, i) => {
+                setTimeout(() => {
+                    const el = document.querySelector(s);
+                    el.style.transition = 'opacity 1.2s ease, transform 1.2s cubic-bezier(0.16,1,0.3,1)';
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, 300 + i * 250);
+            });
+        }
+
+        // Scroll observer
+        const obs = new IntersectionObserver(e => {
+            e.forEach(en => { if (en.isIntersecting) en.target.classList.add('vis'); });
+        }, { threshold: 0.15 });
+        document.querySelectorAll('.sr, .story-img').forEach(el => obs.observe(el));
+
+        // Counters
+        const cObs = new IntersectionObserver(e => {
+            e.forEach(en => {
+                if (!en.isIntersecting) return;
+                const el = en.target, t = +el.dataset.t, s = el.dataset.s;
+                let c = 0; const st = t / 100;
+                const ti = setInterval(() => {
+                    c += st; if (c >= t) { c = t; clearInterval(ti); }
+                    el.textContent = Math.floor(c) + s;
+                }, 16);
+                cObs.unobserve(el);
+            });
+        }, { threshold: 0.5 });
+        setTimeout(() => document.querySelectorAll('.intro-stat-num').forEach(el => cObs.observe(el)), 100);
+
+        // Nav
+        window.addEventListener('scroll', () => {
+            document.getElementById('navbar').classList.toggle('solid', window.scrollY > 80);
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => { e.preventDefault(); const t = document.querySelector(a.getAttribute('href')); if (t) t.scrollIntoView({behavior:'smooth'}); });
+        });
+    })();
+    
+function wbOpen(){document.getElementById('wbModal').classList.add('wb-active');document.body.style.overflow='hidden'}
+function wbClose(){document.getElementById('wbModal').classList.remove('wb-active');document.body.style.overflow=''}
+document.getElementById('wbModal').addEventListener('click',function(e){if(e.target===this)wbClose()});
+document.getElementById('wbLeadForm').addEventListener('submit',function(e){
+  e.preventDefault();var f=this;fetch(f.action,{method:'POST',body:new FormData(f),headers:{'Accept':'application/json'}})
+  .then(function(r){if(r.ok){document.getElementById('wbForm').style.display='none';document.getElementById('wbSuccess').style.display='block';setTimeout(function(){wbClose();document.getElementById('wbForm').style.display='block';document.getElementById('wbSuccess').style.display='none';f.reset()},4000)}})
+  .catch(function(){alert('Something went wrong. Please try again.')});
+});
+
+    </script>
+
+<!-- WEBSITEBUILD LEAD MODAL -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<div class="wb-overlay" id="wbModal">
+  <div class="wb-box">
+    <button class="wb-x" onclick="wbClose()">&times;</button>
+    <div id="wbForm">
+      <div class="wb-hero">
+        <div class="wb-hero-tag">WebsiteBuild</div>
+        <div class="wb-hero-h">Ce site — mais pour <em>votre</em> restaurant</div>
+        <p class="wb-hero-p">On prend ce template, on le personnalise avec vos photos, votre menu, vos infos — et on vous le livre clé en main.</p>
+        <div class="wb-pills">
+          <div class="wb-pill"><span class="wb-pill-icon">⚡</span><span class="wb-pill-txt">Livré en </span><span class="wb-pill-num">&nbsp;48h</span></div>
+          <div class="wb-pill"><span class="wb-pill-icon">🎁</span><span class="wb-pill-txt">Template </span><span class="wb-pill-num">&nbsp;gratuite</span></div>
+          <div class="wb-pill"><span class="wb-pill-icon">🤝</span><span class="wb-pill-txt">Zéro </span><span class="wb-pill-num">&nbsp;engagement</span></div>
+        </div>
+      </div>
+      <div class="wb-form-area">
+        <div class="wb-form-title">Recevez votre maquette gratuite</div>
+        <form action="https://formspree.io/f/mwvnrdgb" method="POST" id="wbLeadForm">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="source_page" value="restaurant-demo-minimal">
+          <div class="wb-row">
+            <div class="wb-field"><label>Nom du restaurant *</label><input type="text" name="business_name" class="wb-inp" placeholder="ex: La Terraza" required></div>
+            <div class="wb-field"><label>Votre email *</label><input type="email" name="email" class="wb-inp" placeholder="vous@email.com" required></div>
+          </div>
+          <div class="wb-row">
+            <div class="wb-field"><label>Téléphone</label><input type="tel" name="phone" class="wb-inp" placeholder="+34 ..."></div>
+            <div class="wb-field"><label>Site actuel (optionnel)</label><input type="url" name="current_website" class="wb-inp" placeholder="https://..."></div>
+          </div>
+          <div class="wb-field" style="margin-bottom:0.6rem"><label>Qu'est-ce qui vous intéresse ? *</label><textarea name="requirements" class="wb-ta" placeholder="Réservation en ligne, menu digital, galerie photos, page contact..." required></textarea></div>
+          <button type="submit" class="wb-btn">Recevoir ma maquette gratuite →</button>
+          <p class="wb-note">100% gratuit · Aucun engagement · Prêt en 48h</p>
+        </form>
+      </div>
+    </div>
+    <div class="wb-ok" id="wbSuccess">
+      <div class="wb-ok-icon">✓</div>
+      <div class="wb-ok-h">C'est parti !</div>
+      <p class="wb-ok-p">On crée votre maquette personnalisée et on vous l'envoie par email sous 48h.</p>
+    </div>
+  </div>
+</div>
+<div class="wb-bar">
+  <span class="wb-bar-txt">Website by <strong>WebsiteBuild</strong> — Want one like this?</span>
+  <button class="wb-bar-btn" onclick="wbOpen()">Get Your Free Demo →</button>
+</div>
+
+</body>
+</html>

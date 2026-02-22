@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Restaurant Demo — Light Elegant | WebsiteBuild</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#faf7f2;--cream-dark:#f0ebe2;--warm:#e8dfd3;--olive:#5c6b4f;--olive-dark:#4a5740;--terra:#b8845c;--brown:#3d2e1e;--brown-light:#6b5a48;--text:#4a4039;--text-light:#8a7e74;--white:#ffffff;--font-display:'Playfair Display',Georgia,serif;--font-body:'Lato',sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:var(--font-body);background:var(--cream);color:var(--text);overflow-x:hidden}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.2rem 5%;display:flex;align-items:center;justify-content:space-between;transition:all 0.4s}
+nav.scrolled{background:rgba(250,247,242,0.97);backdrop-filter:blur(20px);box-shadow:0 1px 0 rgba(0,0,0,0.06)}
+.nav-logo{font-family:var(--font-display);font-size:1.4rem;font-weight:500;color:var(--brown);text-decoration:none;letter-spacing:0.05em}
+.nav-links{display:flex;gap:2.2rem;align-items:center}
+.nav-links a{font-size:0.72rem;font-weight:700;color:var(--text-light);text-decoration:none;letter-spacing:0.12em;text-transform:uppercase;transition:color 0.3s}
+.nav-links a:hover{color:var(--olive)}
+.nav-cta{padding:0.55rem 1.5rem!important;background:var(--olive)!important;color:var(--white)!important;border-radius:2px;transition:all 0.3s!important}
+.nav-cta:hover{background:var(--olive-dark)!important}
+.nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:5px}
+.nav-toggle span{width:22px;height:1.5px;background:var(--brown);transition:all 0.3s}
+@media(max-width:768px){.nav-toggle{display:flex}.nav-links{position:fixed;top:0;right:-100%;width:70%;height:100vh;background:var(--cream);flex-direction:column;justify-content:center;padding:2rem;transition:right 0.4s;border-left:1px solid var(--warm)}.nav-links.open{right:0}}
+
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;overflow:hidden}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:6rem 5% 4rem 8%;position:relative}
+.hero-left::after{content:'';position:absolute;top:15%;right:0;width:1px;height:70%;background:var(--warm)}
+.hero-badge{font-size:0.65rem;font-weight:700;letter-spacing:0.35em;text-transform:uppercase;color:var(--olive);margin-bottom:2rem;display:flex;align-items:center;gap:0.8rem}
+.hero-badge::before{content:'';width:30px;height:1.5px;background:var(--olive)}
+.hero h1{font-family:var(--font-display);font-size:clamp(2.8rem,5.5vw,5rem);font-weight:400;color:var(--brown);line-height:1.15;margin-bottom:1.5rem}
+.hero h1 em{font-style:italic;color:var(--olive)}
+.hero-text{font-size:0.88rem;font-weight:300;line-height:1.9;color:var(--text-light);max-width:420px;margin-bottom:2.5rem}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-primary{display:inline-block;padding:0.9rem 2.2rem;background:var(--olive);color:var(--white);font-size:0.7rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;text-decoration:none;transition:all 0.3s;border:none;cursor:pointer}
+.btn-primary:hover{background:var(--olive-dark);transform:translateY(-1px)}
+.btn-outline{display:inline-block;padding:0.9rem 2.2rem;border:1.5px solid var(--brown);color:var(--brown);font-size:0.7rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;text-decoration:none;transition:all 0.3s}
+.btn-outline:hover{background:var(--brown);color:var(--cream)}
+.hero-right{position:relative;overflow:hidden}
+.hero-right img{width:100%;height:100%;object-fit:cover;transition:transform 8s ease}
+.hero-right:hover img{transform:scale(1.05)}
+.hero-accent{position:absolute;bottom:3rem;left:-2rem;background:var(--white);padding:2rem 2.5rem;box-shadow:0 20px 60px rgba(0,0,0,0.08)}
+.accent-num{font-family:var(--font-display);font-size:2.5rem;font-weight:500;color:var(--olive)}
+.accent-label{font-size:0.65rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-light);margin-top:0.3rem}
+@media(max-width:900px){.hero{grid-template-columns:1fr;min-height:auto}.hero-left{padding:8rem 6% 4rem}.hero-left::after{display:none}.hero-right{height:50vh}.hero-accent{bottom:1.5rem;left:1.5rem;padding:1.2rem 1.5rem}}
+
+section{padding:6rem 6%}
+.section-label{font-size:0.65rem;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--olive);margin-bottom:1rem}
+.section-title{font-family:var(--font-display);font-size:clamp(2.2rem,4vw,3.5rem);font-weight:400;color:var(--brown);line-height:1.2;margin-bottom:1rem}
+.section-title em{font-style:italic;color:var(--olive)}
+.section-text{font-size:0.85rem;font-weight:300;line-height:1.9;color:var(--text-light);max-width:500px}
+.divider{width:40px;height:1.5px;background:var(--olive);margin:1.5rem 0}
+
+.features{background:var(--white)}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3rem;margin-top:3.5rem}
+.feature{text-align:center;padding:2.5rem 1.5rem}
+.feature-icon{font-size:2rem;margin-bottom:1.2rem}
+.feature-title{font-family:var(--font-display);font-size:1.3rem;font-weight:500;color:var(--brown);margin-bottom:0.6rem}
+.feature-desc{font-size:0.8rem;font-weight:300;color:var(--text-light);line-height:1.7}
+@media(max-width:768px){.features-grid{grid-template-columns:1fr}}
+
+.menu-section{background:var(--cream-dark)}
+.menu-header{text-align:center;margin-bottom:4rem}.menu-header .section-text{margin:0 auto}
+.menu-list{max-width:750px;margin:0 auto}
+.menu-item{display:flex;justify-content:space-between;align-items:baseline;padding:1.2rem 0;border-bottom:1px solid var(--warm)}
+.menu-item:last-child{border:none}
+.mi-left{flex:1;padding-right:2rem}
+.mi-name{font-family:var(--font-display);font-size:1.15rem;font-weight:500;color:var(--brown);margin-bottom:0.2rem}
+.mi-desc{font-size:0.75rem;font-weight:300;color:var(--text-light);line-height:1.5}
+.mi-dots{flex:1;border-bottom:1px dotted var(--warm);margin:0 1rem;min-width:40px;align-self:center}
+.mi-price{font-family:var(--font-display);font-size:1.2rem;font-weight:500;color:var(--olive);white-space:nowrap}
+
+.gallery{background:var(--white)}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:3rem}
+.gallery-item{position:relative;overflow:hidden;aspect-ratio:1;cursor:pointer}
+.gallery-item.wide{grid-column:span 2;aspect-ratio:2/1}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease}
+.gallery-item:hover img{transform:scale(1.06)}
+@media(max-width:768px){.gallery-grid{grid-template-columns:1fr 1fr}.gallery-item.wide{grid-column:span 1;aspect-ratio:1}}
+
+.reservation{background:var(--cream-dark)}
+.res-inner{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.res-form{background:var(--white);padding:2.5rem;box-shadow:0 20px 60px rgba(0,0,0,0.04)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.form-group label{display:block;font-size:0.63rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-light);margin-bottom:0.5rem}
+.fi{width:100%;padding:0.85rem 1rem;background:var(--cream);border:1.5px solid transparent;color:var(--brown);font-family:var(--font-body);font-size:0.82rem;font-weight:300;outline:none;transition:border-color 0.3s;-webkit-appearance:none}
+.fi::placeholder{color:var(--text-light);opacity:0.6}.fi:focus{border-color:var(--olive)}
+select.fi{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='%235c6b4f'%3E%3Cpath d='M6 8L0 0h12z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.5rem}
+textarea.fi{resize:vertical;min-height:80px}
+.btn-submit{width:100%;padding:1rem;background:var(--olive);border:none;color:var(--white);font-family:var(--font-body);font-size:0.68rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;transition:all 0.3s;margin-top:0.5rem}
+.btn-submit:hover{background:var(--olive-dark);transform:translateY(-1px)}
+@media(max-width:900px){.res-inner{grid-template-columns:1fr;gap:3rem}.form-row{grid-template-columns:1fr}}
+
+.test-section{background:var(--white)}
+.test-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;max-width:1000px;margin:3rem auto 0}
+.test-card{padding:2rem;border:1px solid var(--warm);background:var(--cream);text-align:left}
+.test-stars{color:var(--terra);font-size:0.8rem;letter-spacing:2px;margin-bottom:1rem}
+.test-text{font-family:var(--font-display);font-size:1rem;font-weight:400;font-style:italic;color:var(--brown);line-height:1.7;margin-bottom:1rem}
+.test-author{font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-light)}
+
+.loc-section{background:var(--cream-dark)}
+.loc-inner{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.loc-map{width:100%;height:400px;border:none;box-shadow:0 10px 40px rgba(0,0,0,0.06)}
+.hours-row{display:flex;justify-content:space-between;padding:0.7rem 0;border-bottom:1px solid var(--warm)}
+.hours-day{font-size:0.78rem;font-weight:400;color:var(--brown)}
+.hours-time{font-size:0.78rem;font-weight:300;color:var(--text-light)}
+.loc-addr{font-family:var(--font-display);font-size:1.1rem;color:var(--brown);line-height:1.6;margin-top:1.5rem}
+.loc-phone{display:inline-block;margin-top:0.8rem;color:var(--olive);font-size:0.8rem;font-weight:700;letter-spacing:0.1em;text-decoration:none}
+@media(max-width:900px){.loc-inner{grid-template-columns:1fr}.loc-map{height:280px}}
+
+footer{background:var(--brown);color:rgba(255,255,255,0.6);padding:3.5rem 6% 2rem}
+.footer-top{display:flex;justify-content:space-between;align-items:start;flex-wrap:wrap;gap:2rem;margin-bottom:2.5rem}
+.footer-logo{font-family:var(--font-display);font-size:1.6rem;font-weight:400;color:var(--white);letter-spacing:0.1em}
+.footer-tag{font-size:0.72rem;color:rgba(255,255,255,0.4);margin-top:0.3rem}
+.footer-social{display:flex;gap:1rem}
+.footer-social a{width:36px;height:36px;border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.5);text-decoration:none;font-size:0.72rem;transition:all 0.3s}
+.footer-social a:hover{border-color:var(--terra);color:var(--terra)}
+.footer-bottom{display:flex;justify-content:space-between;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.08);font-size:0.68rem;flex-wrap:wrap;gap:1rem}
+.footer-bottom a{color:rgba(255,255,255,0.4);text-decoration:none;transition:color 0.3s}
+.footer-bottom a:hover{color:var(--terra)}
+
+
+
+
+
+.fade-in{opacity:0;transform:translateY(25px);transition:opacity 0.8s ease,transform 0.8s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+/* ═══ WEBSITEBUILD MODAL (UNIFIED) ═══ */
+.wb-overlay{position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,0.75);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all 0.4s;padding:1.5rem;font-family:'Montserrat',system-ui,sans-serif}
+.wb-overlay.wb-active{opacity:1;visibility:visible}
+.wb-box{background:#fff;max-width:680px;width:100%;position:relative;transform:translateY(15px);transition:transform 0.4s;max-height:94vh;overflow-y:auto;border-radius:0;box-shadow:0 25px 80px rgba(0,0,0,0.3)}
+.wb-overlay.wb-active .wb-box{transform:translateY(0)}
+.wb-x{position:absolute;top:1rem;right:1.2rem;background:none;border:none;color:#999;font-size:1.6rem;cursor:pointer;line-height:1;transition:color 0.3s;font-family:sans-serif;z-index:2}.wb-x:hover{color:#333}
+.wb-hero{background:#111;padding:2.5rem 2.5rem 2rem;position:relative;overflow:hidden}
+.wb-hero::after{content:'';position:absolute;top:-40%;right:-10%;width:300px;height:300px;background:radial-gradient(circle,rgba(37,99,235,0.08),transparent 70%);border-radius:50%}
+.wb-hero-tag{font-size:0.58rem;font-weight:600;letter-spacing:0.25em;text-transform:uppercase;color:#2563eb;margin-bottom:0.8rem;display:flex;align-items:center;gap:0.5rem;position:relative;z-index:1}
+.wb-hero-tag::before{content:'';width:14px;height:2px;background:#2563eb}
+.wb-hero-h{font-size:clamp(1.4rem,3.5vw,1.9rem);font-weight:700;color:#fff;line-height:1.25;margin-bottom:0.6rem;position:relative;z-index:1}
+.wb-hero-h em{font-style:normal;color:#2563eb}
+.wb-hero-p{font-size:0.8rem;color:rgba(255,255,255,0.55);line-height:1.7;max-width:480px;position:relative;z-index:1}
+.wb-pills{display:flex;gap:0.6rem;margin-top:1.5rem;position:relative;z-index:1;flex-wrap:wrap}
+.wb-pill{display:flex;align-items:center;gap:0.5rem;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);padding:0.5rem 1rem;transition:border-color 0.3s}
+.wb-pill:hover{border-color:rgba(37,99,235,0.4)}
+.wb-pill-icon{font-size:1.1rem}
+.wb-pill-txt{font-size:0.62rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:rgba(255,255,255,0.85)}
+.wb-pill-num{font-size:0.62rem;font-weight:700;color:#2563eb}
+.wb-form-area{padding:2rem 2.5rem 2.5rem}
+.wb-form-title{font-size:0.65rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:#999;margin-bottom:1.2rem}
+.wb-row{display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;margin-bottom:0.8rem}
+.wb-field label{display:block;font-size:0.58rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#999;margin-bottom:0.35rem}
+.wb-inp,.wb-sel{width:100%;padding:0.75rem 0.9rem;background:#f8f8f8;border:1.5px solid #eee;color:#111;font-family:'Montserrat',system-ui,sans-serif;font-size:0.82rem;font-weight:400;outline:none;transition:border-color 0.3s;-webkit-appearance:none;border-radius:0}
+.wb-inp::placeholder{color:#bbb}
+.wb-inp:focus,.wb-sel:focus{border-color:#2563eb}
+.wb-sel{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='%23999'%3E%3Cpath d='M5 6L0 0h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 0.9rem center;padding-right:2.2rem}
+.wb-ta{width:100%;padding:0.75rem 0.9rem;background:#f8f8f8;border:1.5px solid #eee;color:#111;font-family:'Montserrat',system-ui,sans-serif;font-size:0.82rem;font-weight:400;resize:vertical;min-height:70px;outline:none;transition:border-color 0.3s;border-radius:0}
+.wb-ta:focus{border-color:#2563eb}
+.wb-btn{width:100%;padding:1rem;background:#2563eb;border:none;color:#fff;font-family:'Montserrat',system-ui,sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;cursor:pointer;transition:all 0.3s;margin-top:0.3rem;border-radius:0}
+.wb-btn:hover{background:#1d4ed8;transform:translateY(-1px);box-shadow:0 8px 25px rgba(37,99,235,0.25)}
+.wb-note{font-size:0.6rem;color:#aaa;text-align:center;margin-top:0.8rem}
+.wb-ok{display:none;text-align:center;padding:3.5rem 2rem}
+.wb-ok-icon{font-size:3rem;margin-bottom:1rem}
+.wb-ok-h{font-size:1.5rem;font-weight:700;color:#111;margin-bottom:0.5rem}
+.wb-ok-p{font-size:0.85rem;color:#666;line-height:1.7;max-width:380px;margin:0 auto}
+@media(max-width:600px){.wb-hero{padding:2rem 1.5rem 1.5rem}.wb-form-area{padding:1.5rem}.wb-row{grid-template-columns:1fr}.wb-pills{gap:0.4rem}.wb-pill{padding:0.4rem 0.7rem}}
+
+
+/* ═══ WEBSITEBUILD POWERED BAR ═══ */
+.wb-bar{position:fixed;bottom:0;left:0;right:0;z-index:9998;background:#111;border-top:1px solid rgba(255,255,255,0.08);padding:0.7rem 2rem;display:flex;align-items:center;justify-content:center;gap:1.2rem;font-family:'Montserrat',system-ui,sans-serif}
+.wb-bar-txt{font-size:0.72rem;color:rgba(255,255,255,0.5)}.wb-bar-txt strong{color:#fff;font-weight:600}
+.wb-bar-btn{padding:0.4rem 1.3rem;background:#fff;color:#111;font-size:0.6rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;transition:all 0.3s;cursor:pointer;border:none;font-family:'Montserrat',system-ui,sans-serif;border-radius:0}
+.wb-bar-btn:hover{background:#eee;transform:translateY(-1px)}
+
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Your Restaurant</a>
+  <div class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')"><span></span><span></span><span></span></div>
+  <div class="nav-links"><a href="#about">About</a><a href="#menu">Menu</a><a href="#gallery">Gallery</a><a href="#contact">Contact</a><a href="#reserve" class="nav-cta">Reserve</a></div>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-badge">Mediterranean Kitchen</div>
+    <h1>Fresh,<br><em>Seasonal</em><br>& Local</h1>
+    <p class="hero-text">Farm-to-table cuisine celebrating the finest ingredients of the Mediterranean coast, prepared with passion and served with warmth.</p>
+    <div class="hero-btns"><a href="#reserve" class="btn-primary">Book a Table</a><a href="#menu" class="btn-outline">See Menu</a></div>
+  </div>
+  <div class="hero-right">
+    <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?w=1200&q=80" alt="Dish">
+    <div class="hero-accent"><div class="accent-num">4.9</div><div class="accent-label">Google Rating</div></div>
+  </div>
+</section>
+
+<section id="about" class="features">
+  <div style="text-align:center" class="fade-in"><span class="section-label">Why Us</span><h2 class="section-title">A <em>different</em> dining experience</h2></div>
+  <div class="features-grid">
+    <div class="feature fade-in"><div class="feature-icon">🌿</div><div class="feature-title">Farm to Table</div><div class="feature-desc">Every ingredient sourced from local farms and fishermen within 50km of our kitchen.</div></div>
+    <div class="feature fade-in"><div class="feature-icon">👨‍🍳</div><div class="feature-title">Award-Winning Chef</div><div class="feature-desc">Led by a passionate chef with 15 years of experience across Europe's finest kitchens.</div></div>
+    <div class="feature fade-in"><div class="feature-icon">🍷</div><div class="feature-title">Curated Wine List</div><div class="feature-desc">Over 200 carefully selected wines from Spanish bodegas and international vineyards.</div></div>
+  </div>
+</section>
+
+<section id="menu" class="menu-section">
+  <div class="menu-header fade-in"><span class="section-label">Our Menu</span><h2 class="section-title">Seasonal <em>favourites</em></h2><p class="section-text">Our menu changes with the seasons. Here's a taste of what awaits.</p></div>
+  <div class="menu-list">
+    <div class="menu-item fade-in"><div class="mi-left"><div class="mi-name">Gazpacho Andaluz</div><div class="mi-desc">Classic chilled tomato soup, cucumber, croutons</div></div><div class="mi-dots"></div><div class="mi-price">€12</div></div>
+    <div class="menu-item fade-in"><div class="mi-left"><div class="mi-name">Grilled Prawns</div><div class="mi-desc">Garlic butter, lemon, fresh herbs</div></div><div class="mi-dots"></div><div class="mi-price">€22</div></div>
+    <div class="menu-item fade-in"><div class="mi-left"><div class="mi-name">Paella Mixta</div><div class="mi-desc">Seafood, chicken, saffron rice, aioli</div></div><div class="mi-dots"></div><div class="mi-price">€28</div></div>
+    <div class="menu-item fade-in"><div class="mi-left"><div class="mi-name">Grilled Sea Bream</div><div class="mi-desc">Roasted vegetables, olive tapenade</div></div><div class="mi-dots"></div><div class="mi-price">€32</div></div>
+    <div class="menu-item fade-in"><div class="mi-left"><div class="mi-name">Ibérico Pork Secreto</div><div class="mi-desc">Patatas bravas, chimichurri</div></div><div class="mi-dots"></div><div class="mi-price">€34</div></div>
+    <div class="menu-item fade-in"><div class="mi-left"><div class="mi-name">Tarta de Santiago</div><div class="mi-desc">Almond cake, vanilla ice cream</div></div><div class="mi-dots"></div><div class="mi-price">€12</div></div>
+  </div>
+</section>
+
+<section id="gallery" class="gallery">
+  <div style="text-align:center" class="fade-in"><span class="section-label">Gallery</span><h2 class="section-title">Moments at <em>our table</em></h2></div>
+  <div class="gallery-grid fade-in">
+    <div class="gallery-item wide"><img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=900&q=80" alt="Interior"></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=80" alt="Dish"></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=600&q=80" alt="Pasta"></div>
+    <div class="gallery-item wide"><img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=900&q=80" alt="Chef"></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=600&q=80" alt="Wine"></div>
+  </div>
+</section>
+
+<section id="reserve" class="reservation">
+  <div class="res-inner">
+    <div class="fade-in"><span class="section-label">Reservations</span><h2 class="section-title">Book your <em>table</em></h2><div class="divider"></div><p class="section-text">Join us for an unforgettable meal. Reserve online or call us for same-day bookings.</p><br><p class="section-text" style="font-size:0.75rem;color:var(--text-light)">Call us: <a href="tel:+34951000000" style="color:var(--olive);text-decoration:none;font-weight:700">+34 951 000 000</a></p></div>
+    <div class="res-form fade-in">
+      <form onsubmit="event.preventDefault();this.querySelector('.btn-submit').textContent='✓ RESERVED';this.querySelector('.btn-submit').style.background='#5c6b4f'">
+        <div class="form-row"><div class="form-group"><label>Name</label><input type="text" class="fi" placeholder="Full name" required></div><div class="form-group"><label>Email</label><input type="email" class="fi" placeholder="your@email.com" required></div></div>
+        <div class="form-row"><div class="form-group"><label>Date</label><input type="date" class="fi" required></div><div class="form-group"><label>Time</label><select class="fi" required><option value="" disabled selected>Select</option><option>12:00</option><option>12:30</option><option>13:00</option><option>13:30</option><option>14:00</option><option>19:00</option><option>19:30</option><option>20:00</option><option>20:30</option><option>21:00</option><option>21:30</option></select></div></div>
+        <div class="form-row"><div class="form-group"><label>Guests</label><select class="fi" required><option value="" disabled selected>Select</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8+</option></select></div><div class="form-group"><label>Phone</label><input type="tel" class="fi" placeholder="+34 ..."></div></div>
+        <div class="form-group"><label>Special Requests</label><textarea class="fi" placeholder="Allergies, dietary needs, celebrations..."></textarea></div>
+        <button type="submit" class="btn-submit">Confirm Reservation</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="test-section">
+  <div style="text-align:center" class="fade-in"><span class="section-label">Reviews</span><h2 class="section-title">What our <em>guests</em> say</h2></div>
+  <div class="test-grid">
+    <div class="test-card fade-in"><div class="test-stars">★★★★★</div><p class="test-text">"The most authentic Mediterranean food we've had. Fresh, vibrant flavours and the warmest service."</p><div class="test-author">Sarah & Tom K.</div></div>
+    <div class="test-card fade-in"><div class="test-stars">★★★★★</div><p class="test-text">"A hidden gem! The paella alone is worth the visit. Beautiful terrace and incredible sunset views."</p><div class="test-author">Elena M.</div></div>
+    <div class="test-card fade-in"><div class="test-stars">★★★★★</div><p class="test-text">"We dine here every week and it never disappoints. The seasonal menu keeps things fresh and exciting."</p><div class="test-author">Roberto & Ana G.</div></div>
+  </div>
+</section>
+
+<section id="contact" class="loc-section">
+  <div class="loc-inner">
+    <div class="fade-in"><span class="section-label">Visit Us</span><h2 class="section-title">Find <em>us</em></h2><div class="divider"></div>
+      <div><div class="hours-row"><span class="hours-day">Monday – Thursday</span><span class="hours-time">12:30 – 15:00 · 19:00 – 23:00</span></div><div class="hours-row"><span class="hours-day">Friday – Saturday</span><span class="hours-time">12:30 – 15:30 · 19:00 – 00:00</span></div><div class="hours-row"><span class="hours-day">Sunday</span><span class="hours-time">13:00 – 16:00 · 19:00 – 23:00</span></div></div>
+      <p class="loc-addr">Your Address Here<br>Marbella, Málaga</p><a href="tel:+34951000000" class="loc-phone">+34 951 000 000</a>
+    </div>
+    <div class="fade-in"><iframe class="loc-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12900!2d-4.95!3d36.48!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzbCsDI4JzQ4LjAiTiA0wrA1NycwMC4wIlc!5e0!3m2!1sen!2ses!4v1" allowfullscreen loading="lazy"></iframe></div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top"><div><div class="footer-logo">Your Restaurant</div><div class="footer-tag">Mediterranean Kitchen · Marbella</div></div><div class="footer-social"><a href="#">IG</a><a href="#">FB</a><a href="#">TA</a></div></div>
+  <div class="footer-bottom"><span>© 2026 Your Restaurant. All rights reserved.</span><div><a href="#">Privacy</a> · <a href="#">Terms</a></div></div>
+</footer>
+
+
+
+<script>
+window.addEventListener('scroll',()=>{document.querySelector('nav').classList.toggle('scrolled',window.scrollY>60)});
+const obs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('visible')})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',function(e){e.preventDefault();const t=document.querySelector(this.getAttribute('href'));if(t){t.scrollIntoView({behavior:'smooth'});document.querySelector('.nav-links').classList.remove('open')}})});
+</script>
+
+<!-- WEBSITEBUILD LEAD MODAL -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<div class="wb-overlay" id="wbModal">
+  <div class="wb-box">
+    <button class="wb-x" onclick="wbClose()">&times;</button>
+    <div id="wbForm">
+      <div class="wb-hero">
+        <div class="wb-hero-tag">WebsiteBuild</div>
+        <div class="wb-hero-h">Ce site — mais pour <em>votre</em> restaurant</div>
+        <p class="wb-hero-p">On prend ce template, on le personnalise avec vos photos, votre menu, vos infos — et on vous le livre clé en main.</p>
+        <div class="wb-pills">
+          <div class="wb-pill"><span class="wb-pill-icon">⚡</span><span class="wb-pill-txt">Livré en </span><span class="wb-pill-num">&nbsp;48h</span></div>
+          <div class="wb-pill"><span class="wb-pill-icon">🎁</span><span class="wb-pill-txt">Template </span><span class="wb-pill-num">&nbsp;gratuite</span></div>
+          <div class="wb-pill"><span class="wb-pill-icon">🤝</span><span class="wb-pill-txt">Zéro </span><span class="wb-pill-num">&nbsp;engagement</span></div>
+        </div>
+      </div>
+      <div class="wb-form-area">
+        <div class="wb-form-title">Recevez votre maquette gratuite</div>
+        <form action="https://formspree.io/f/mwvnrdgb" method="POST" id="wbLeadForm">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="source_page" value="restaurant-demo-light-elegant">
+          <div class="wb-row">
+            <div class="wb-field"><label>Nom du restaurant *</label><input type="text" name="business_name" class="wb-inp" placeholder="ex: La Terraza" required></div>
+            <div class="wb-field"><label>Votre email *</label><input type="email" name="email" class="wb-inp" placeholder="vous@email.com" required></div>
+          </div>
+          <div class="wb-row">
+            <div class="wb-field"><label>Téléphone</label><input type="tel" name="phone" class="wb-inp" placeholder="+34 ..."></div>
+            <div class="wb-field"><label>Site actuel (optionnel)</label><input type="url" name="current_website" class="wb-inp" placeholder="https://..."></div>
+          </div>
+          <div class="wb-field" style="margin-bottom:0.6rem"><label>Qu'est-ce qui vous intéresse ? *</label><textarea name="requirements" class="wb-ta" placeholder="Réservation en ligne, menu digital, galerie photos, page contact..." required></textarea></div>
+          <button type="submit" class="wb-btn">Recevoir ma maquette gratuite →</button>
+          <p class="wb-note">100% gratuit · Aucun engagement · Prêt en 48h</p>
+        </form>
+      </div>
+    </div>
+    <div class="wb-ok" id="wbSuccess">
+      <div class="wb-ok-icon">✓</div>
+      <div class="wb-ok-h">C'est parti !</div>
+      <p class="wb-ok-p">On crée votre maquette personnalisée et on vous l'envoie par email sous 48h.</p>
+    </div>
+  </div>
+</div>
+<div class="wb-bar">
+  <span class="wb-bar-txt">Website by <strong>WebsiteBuild</strong> — Want one like this?</span>
+  <button class="wb-bar-btn" onclick="wbOpen()">Get Your Free Demo →</button>
+</div>
+
+<script>
+function wbOpen(){document.getElementById('wbModal').classList.add('wb-active');document.body.style.overflow='hidden'}
+function wbClose(){document.getElementById('wbModal').classList.remove('wb-active');document.body.style.overflow=''}
+document.getElementById('wbModal').addEventListener('click',function(e){if(e.target===this)wbClose()});
+document.getElementById('wbLeadForm').addEventListener('submit',function(e){
+  e.preventDefault();var f=this;var d=new FormData(f);
+  fetch(f.action,{method:'POST',body:d,headers:{'Accept':'application/json'}})
+  .then(function(r){if(r.ok){document.getElementById('wbForm').style.display='none';document.getElementById('wbSuccess').style.display='block';setTimeout(function(){wbClose();document.getElementById('wbForm').style.display='block';document.getElementById('wbSuccess').style.display='none';f.reset()},4000)}})
+  .catch(function(){alert('Error — please try again.')});
+});
+</script>
+</body>
+</html>

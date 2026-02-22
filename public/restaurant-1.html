@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Restaurant Demo — Dark Luxury | WebsiteBuild</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #c9a96e;
+  --gold-light: #dfc08a;
+  --dark: #0a0a0a;
+  --dark-card: #111111;
+  --dark-surface: #141414;
+  --cream: #f5f0e8;
+  --text: #c8c0b4;
+  --text-light: #9a9189;
+  --white: #ffffff;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Montserrat', sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--dark);color:var(--text);overflow-x:hidden}
+
+/* PRELOADER */
+.preloader{position:fixed;inset:0;z-index:9999;background:var(--dark);display:flex;align-items:center;justify-content:center;transition:opacity 0.8s ease,visibility 0.8s ease}
+.preloader.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.preloader-text{font-family:var(--font-display);font-size:clamp(1.8rem,4vw,3rem);color:var(--gold);letter-spacing:0.4em;text-transform:uppercase;animation:pulse 1.5s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.5rem 5%;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(to bottom,rgba(10,10,10,0.95),transparent);transition:all 0.4s ease}
+nav.scrolled{background:rgba(10,10,10,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(201,169,110,0.08)}
+.nav-logo{font-family:var(--font-display);font-size:1.5rem;font-weight:300;color:var(--gold);letter-spacing:0.25em;text-decoration:none;text-transform:uppercase}
+.nav-links{display:flex;gap:2.5rem;align-items:center}
+.nav-links a{font-size:0.68rem;font-weight:500;color:var(--text);text-decoration:none;letter-spacing:0.2em;text-transform:uppercase;transition:color 0.3s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--gold);transition:width 0.3s ease}
+.nav-links a:hover{color:var(--gold)}
+.nav-links a:hover::after{width:100%}
+.nav-reserve{padding:0.6rem 1.6rem!important;border:1px solid var(--gold)!important;color:var(--gold)!important;transition:all 0.3s!important}
+.nav-reserve:hover{background:var(--gold)!important;color:var(--dark)!important}
+.nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:5px}
+.nav-toggle span{width:24px;height:1.5px;background:var(--gold);transition:all 0.3s}
+@media(max-width:768px){
+  .nav-toggle{display:flex}
+  .nav-links{position:fixed;top:0;right:-100%;width:75%;height:100vh;background:var(--dark);flex-direction:column;justify-content:center;padding:2rem;transition:right 0.4s ease;border-left:1px solid rgba(201,169,110,0.12)}
+  .nav-links.open{right:0}
+}
+
+/* HERO */
+.hero{height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=80') center/cover}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,10,10,0.5),rgba(10,10,10,0.3) 40%,rgba(10,10,10,0.65) 70%,rgba(10,10,10,0.97) 100%)}
+.hero-content{position:relative;z-index:2;text-align:center;padding:0 2rem;animation:fadeUp 1.2s ease 0.5s both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.hero-badge{font-size:0.65rem;font-weight:500;letter-spacing:0.4em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;display:flex;align-items:center;justify-content:center;gap:1rem}
+.hero-badge::before,.hero-badge::after{content:'';width:40px;height:1px;background:var(--gold);opacity:0.5}
+.hero h1{font-family:var(--font-display);font-size:clamp(3.2rem,9vw,8.5rem);font-weight:300;color:var(--white);line-height:0.95;letter-spacing:0.02em;margin-bottom:1.5rem}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero-sub{font-size:0.8rem;font-weight:300;letter-spacing:0.15em;color:var(--text);margin-bottom:3rem;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.8}
+.btn-hero{display:inline-block;padding:1rem 3rem;border:1px solid var(--gold);color:var(--gold);font-size:0.7rem;font-weight:500;letter-spacing:0.25em;text-transform:uppercase;text-decoration:none;transition:all 0.4s;position:relative;overflow:hidden}
+.btn-hero::before{content:'';position:absolute;inset:0;background:var(--gold);transform:translateY(100%);transition:transform 0.4s}
+.btn-hero:hover{color:var(--dark)}
+.btn-hero:hover::before{transform:translateY(0)}
+.btn-hero span{position:relative;z-index:1}
+.hero-scroll{position:absolute;bottom:3rem;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:0.8rem;color:var(--text-light);font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;animation:fadeUp 1.2s ease 1.2s both}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollAnim 1.5s ease infinite}
+@keyframes scrollAnim{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* SECTIONS */
+section{padding:7rem 6%}
+.section-label{font-size:0.65rem;font-weight:500;letter-spacing:0.35em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem}
+.section-title{font-family:var(--font-display);font-size:clamp(2.4rem,5vw,4.2rem);font-weight:300;color:var(--white);line-height:1.15;margin-bottom:1.2rem}
+.section-title em{font-style:italic;color:var(--gold)}
+.section-text{font-size:0.85rem;font-weight:300;line-height:1.9;color:var(--text);max-width:500px}
+.gold-divider{width:50px;height:1px;background:var(--gold);margin:1.8rem 0}
+
+/* ABOUT */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.about-images{position:relative;height:550px}
+.about-img-1{position:absolute;top:0;left:0;width:62%;height:72%;object-fit:cover;border:1px solid rgba(201,169,110,0.12)}
+.about-img-2{position:absolute;bottom:0;right:0;width:52%;height:52%;object-fit:cover;border:1px solid rgba(201,169,110,0.12);box-shadow:-20px -20px 0 var(--dark)}
+.about-stats{display:flex;gap:2.5rem;margin-top:2.5rem}
+.stat-num{font-family:var(--font-display);font-size:2.8rem;font-weight:300;color:var(--gold);line-height:1}
+.stat-lbl{font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-light);margin-top:0.5rem}
+@media(max-width:900px){.about{grid-template-columns:1fr;gap:3rem}.about-images{height:380px}}
+
+/* MENU */
+.menu-section{background:var(--dark-surface)}
+.menu-header{text-align:center;margin-bottom:4.5rem}
+.menu-header .section-text{margin:0 auto}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;max-width:1100px;margin:0 auto}
+.menu-category{padding:2rem}
+.menu-cat-title{font-family:var(--font-display);font-size:1.7rem;font-weight:400;color:var(--gold);margin-bottom:0.5rem}
+.menu-cat-line{width:30px;height:1px;background:var(--gold);opacity:0.4;margin-bottom:1.8rem}
+.menu-item{display:flex;justify-content:space-between;align-items:baseline;padding:0.9rem 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.menu-item:last-child{border:none}
+.menu-item-info{flex:1;padding-right:1.2rem}
+.menu-item-name{font-family:var(--font-display);font-size:1.1rem;font-weight:500;color:var(--cream);margin-bottom:0.25rem}
+.menu-item-desc{font-size:0.72rem;font-weight:300;color:var(--text-light);line-height:1.5}
+.menu-item-price{font-family:var(--font-display);font-size:1.15rem;color:var(--gold);white-space:nowrap}
+
+/* GALLERY */
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:280px 280px;gap:0.5rem;margin-top:2.5rem}
+.gallery-item{overflow:hidden;position:relative;cursor:pointer}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.8s ease,filter 0.4s ease;filter:brightness(0.75)}
+.gallery-item:hover img{transform:scale(1.08);filter:brightness(1)}
+.gallery-item:nth-child(1){grid-column:span 2}
+.gallery-item:nth-child(4){grid-column:span 2}
+@media(max-width:768px){.gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}.gallery-item{height:180px}.gallery-item:nth-child(1),.gallery-item:nth-child(4){grid-column:span 1}}
+
+/* RESERVATION */
+.reservation{background:linear-gradient(135deg,var(--dark-surface),var(--dark));position:relative;overflow:hidden}
+.reservation::before{content:'';position:absolute;top:-50%;right:-20%;width:600px;height:600px;background:radial-gradient(circle,rgba(201,169,110,0.03),transparent 70%);border-radius:50%}
+.res-inner{display:grid;grid-template-columns:1fr 1.2fr;gap:5rem;align-items:start;position:relative}
+.res-form{background:rgba(255,255,255,0.02);border:1px solid rgba(201,169,110,0.1);padding:2.5rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-bottom:1.2rem}
+.form-group label{display:block;font-size:0.63rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-light);margin-bottom:0.5rem}
+.f-input,.f-select{width:100%;padding:0.85rem 1rem;background:rgba(255,255,255,0.03);border:1px solid rgba(201,169,110,0.1);color:var(--cream);font-family:var(--font-body);font-size:0.82rem;font-weight:300;outline:none;transition:border-color 0.3s;-webkit-appearance:none}
+.f-input::placeholder{color:var(--text-light);opacity:0.5}
+.f-input:focus,.f-select:focus{border-color:var(--gold)}
+.f-select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='%23c9a96e'%3E%3Cpath d='M6 8L0 0h12z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.5rem}
+.f-select option{background:var(--dark);color:var(--cream)}
+.f-textarea{width:100%;padding:0.85rem 1rem;background:rgba(255,255,255,0.03);border:1px solid rgba(201,169,110,0.1);color:var(--cream);font-family:var(--font-body);font-size:0.82rem;font-weight:300;resize:vertical;min-height:90px;outline:none;transition:border-color 0.3s}
+.f-textarea:focus{border-color:var(--gold)}
+.f-submit{width:100%;padding:1rem;background:var(--gold);border:none;color:var(--dark);font-family:var(--font-body);font-size:0.68rem;font-weight:600;letter-spacing:0.25em;text-transform:uppercase;cursor:pointer;transition:all 0.3s;margin-top:0.8rem}
+.f-submit:hover{background:var(--gold-light);transform:translateY(-1px);box-shadow:0 10px 30px rgba(201,169,110,0.15)}
+@media(max-width:900px){.res-inner{grid-template-columns:1fr;gap:3rem}.form-row{grid-template-columns:1fr}}
+
+/* TESTIMONIALS */
+.testimonials{text-align:center}
+.test-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.8rem;max-width:1100px;margin:3.5rem auto 0}
+.test-card{padding:2.2rem;border:1px solid rgba(201,169,110,0.06);background:rgba(255,255,255,0.01);text-align:left;transition:border-color 0.3s}
+.test-card:hover{border-color:rgba(201,169,110,0.2)}
+.test-stars{color:var(--gold);font-size:0.8rem;letter-spacing:2px;margin-bottom:1.2rem}
+.test-text{font-family:var(--font-display);font-size:1.05rem;font-weight:300;font-style:italic;color:var(--cream);line-height:1.7;margin-bottom:1.2rem}
+.test-author{font-size:0.68rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-light)}
+.test-source{font-size:0.62rem;color:var(--gold);opacity:0.6;margin-top:0.25rem}
+
+/* LOCATION */
+.location{background:var(--dark-surface)}
+.loc-inner{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.loc-map{width:100%;height:420px;border:1px solid rgba(201,169,110,0.08);filter:grayscale(0.8) brightness(0.8) contrast(1.1);transition:filter 0.3s}
+.loc-map:hover{filter:grayscale(0.3) brightness(0.9)}
+.hours-grid{display:grid;gap:0.7rem;margin-top:1.8rem}
+.hours-row{display:flex;justify-content:space-between;padding-bottom:0.7rem;border-bottom:1px solid rgba(255,255,255,0.04)}
+.hours-day{font-size:0.78rem;font-weight:400;color:var(--cream)}
+.hours-time{font-size:0.78rem;font-weight:300;color:var(--text-light)}
+.loc-address{font-family:var(--font-display);font-size:1.15rem;color:var(--cream);line-height:1.6;margin-top:1.8rem}
+.loc-phone{display:inline-block;margin-top:0.8rem;color:var(--gold);font-size:0.78rem;letter-spacing:0.1em;text-decoration:none}
+@media(max-width:900px){.loc-inner{grid-template-columns:1fr}.loc-map{height:280px}}
+
+/* FOOTER */
+footer{padding:3.5rem 6% 2rem;border-top:1px solid rgba(201,169,110,0.06)}
+.footer-top{display:flex;justify-content:space-between;align-items:start;margin-bottom:2.5rem;flex-wrap:wrap;gap:2rem}
+.footer-logo{font-family:var(--font-display);font-size:1.8rem;font-weight:300;color:var(--gold);letter-spacing:0.15em}
+.footer-tag{font-size:0.72rem;color:var(--text-light);margin-top:0.4rem;font-weight:300}
+.footer-social{display:flex;gap:1.2rem}
+.footer-social a{width:38px;height:38px;border:1px solid rgba(201,169,110,0.12);display:flex;align-items:center;justify-content:center;color:var(--text-light);text-decoration:none;font-size:0.75rem;transition:all 0.3s}
+.footer-social a:hover{border-color:var(--gold);color:var(--gold)}
+.footer-bottom{display:flex;justify-content:space-between;padding-top:1.8rem;border-top:1px solid rgba(255,255,255,0.03);font-size:0.68rem;color:var(--text-light);flex-wrap:wrap;gap:1rem}
+.footer-bottom a{color:var(--text-light);text-decoration:none;transition:color 0.3s}
+.footer-bottom a:hover{color:var(--gold)}
+
+
+
+
+
+/* FADE */
+.fade-in{opacity:0;transform:translateY(25px);transition:opacity 0.8s ease,transform 0.8s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+/* ═══ WEBSITEBUILD MODAL (UNIFIED) ═══ */
+.wb-overlay{position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,0.75);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all 0.4s;padding:1.5rem;font-family:'Montserrat',system-ui,sans-serif}
+.wb-overlay.wb-active{opacity:1;visibility:visible}
+.wb-box{background:#fff;max-width:680px;width:100%;position:relative;transform:translateY(15px);transition:transform 0.4s;max-height:94vh;overflow-y:auto;border-radius:0;box-shadow:0 25px 80px rgba(0,0,0,0.3)}
+.wb-overlay.wb-active .wb-box{transform:translateY(0)}
+.wb-x{position:absolute;top:1rem;right:1.2rem;background:none;border:none;color:#999;font-size:1.6rem;cursor:pointer;line-height:1;transition:color 0.3s;font-family:sans-serif;z-index:2}.wb-x:hover{color:#333}
+.wb-hero{background:#111;padding:2.5rem 2.5rem 2rem;position:relative;overflow:hidden}
+.wb-hero::after{content:'';position:absolute;top:-40%;right:-10%;width:300px;height:300px;background:radial-gradient(circle,rgba(37,99,235,0.08),transparent 70%);border-radius:50%}
+.wb-hero-tag{font-size:0.58rem;font-weight:600;letter-spacing:0.25em;text-transform:uppercase;color:#2563eb;margin-bottom:0.8rem;display:flex;align-items:center;gap:0.5rem;position:relative;z-index:1}
+.wb-hero-tag::before{content:'';width:14px;height:2px;background:#2563eb}
+.wb-hero-h{font-size:clamp(1.4rem,3.5vw,1.9rem);font-weight:700;color:#fff;line-height:1.25;margin-bottom:0.6rem;position:relative;z-index:1}
+.wb-hero-h em{font-style:normal;color:#2563eb}
+.wb-hero-p{font-size:0.8rem;color:rgba(255,255,255,0.55);line-height:1.7;max-width:480px;position:relative;z-index:1}
+.wb-pills{display:flex;gap:0.6rem;margin-top:1.5rem;position:relative;z-index:1;flex-wrap:wrap}
+.wb-pill{display:flex;align-items:center;gap:0.5rem;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);padding:0.5rem 1rem;transition:border-color 0.3s}
+.wb-pill:hover{border-color:rgba(37,99,235,0.4)}
+.wb-pill-icon{font-size:1.1rem}
+.wb-pill-txt{font-size:0.62rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:rgba(255,255,255,0.85)}
+.wb-pill-num{font-size:0.62rem;font-weight:700;color:#2563eb}
+.wb-form-area{padding:2rem 2.5rem 2.5rem}
+.wb-form-title{font-size:0.65rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:#999;margin-bottom:1.2rem}
+.wb-row{display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;margin-bottom:0.8rem}
+.wb-field label{display:block;font-size:0.58rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#999;margin-bottom:0.35rem}
+.wb-inp,.wb-sel{width:100%;padding:0.75rem 0.9rem;background:#f8f8f8;border:1.5px solid #eee;color:#111;font-family:'Montserrat',system-ui,sans-serif;font-size:0.82rem;font-weight:400;outline:none;transition:border-color 0.3s;-webkit-appearance:none;border-radius:0}
+.wb-inp::placeholder{color:#bbb}
+.wb-inp:focus,.wb-sel:focus{border-color:#2563eb}
+.wb-sel{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='%23999'%3E%3Cpath d='M5 6L0 0h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 0.9rem center;padding-right:2.2rem}
+.wb-ta{width:100%;padding:0.75rem 0.9rem;background:#f8f8f8;border:1.5px solid #eee;color:#111;font-family:'Montserrat',system-ui,sans-serif;font-size:0.82rem;font-weight:400;resize:vertical;min-height:70px;outline:none;transition:border-color 0.3s;border-radius:0}
+.wb-ta:focus{border-color:#2563eb}
+.wb-btn{width:100%;padding:1rem;background:#2563eb;border:none;color:#fff;font-family:'Montserrat',system-ui,sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;cursor:pointer;transition:all 0.3s;margin-top:0.3rem;border-radius:0}
+.wb-btn:hover{background:#1d4ed8;transform:translateY(-1px);box-shadow:0 8px 25px rgba(37,99,235,0.25)}
+.wb-note{font-size:0.6rem;color:#aaa;text-align:center;margin-top:0.8rem}
+.wb-ok{display:none;text-align:center;padding:3.5rem 2rem}
+.wb-ok-icon{font-size:3rem;margin-bottom:1rem}
+.wb-ok-h{font-size:1.5rem;font-weight:700;color:#111;margin-bottom:0.5rem}
+.wb-ok-p{font-size:0.85rem;color:#666;line-height:1.7;max-width:380px;margin:0 auto}
+@media(max-width:600px){.wb-hero{padding:2rem 1.5rem 1.5rem}.wb-form-area{padding:1.5rem}.wb-row{grid-template-columns:1fr}.wb-pills{gap:0.4rem}.wb-pill{padding:0.4rem 0.7rem}}
+
+
+/* ═══ WEBSITEBUILD POWERED BAR ═══ */
+.wb-bar{position:fixed;bottom:0;left:0;right:0;z-index:9998;background:#111;border-top:1px solid rgba(255,255,255,0.08);padding:0.7rem 2rem;display:flex;align-items:center;justify-content:center;gap:1.2rem;font-family:'Montserrat',system-ui,sans-serif}
+.wb-bar-txt{font-size:0.72rem;color:rgba(255,255,255,0.5)}.wb-bar-txt strong{color:#fff;font-weight:600}
+.wb-bar-btn{padding:0.4rem 1.3rem;background:#fff;color:#111;font-size:0.6rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;transition:all 0.3s;cursor:pointer;border:none;font-family:'Montserrat',system-ui,sans-serif;border-radius:0}
+.wb-bar-btn:hover{background:#eee;transform:translateY(-1px)}
+
+</style>
+</head>
+<body>
+
+<div class="preloader"><div class="preloader-text">WebsiteBuild</div></div>
+
+
+
+<nav>
+  <a href="#" class="nav-logo">Your Restaurant</a>
+  <div class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')"><span></span><span></span><span></span></div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#menu">Menu</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#contact">Contact</a>
+    <a href="#reserve" class="nav-reserve">Reserve</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Your Location Here</div>
+    <h1>A Taste of<br><em>Perfection</em></h1>
+    <p class="hero-sub">Mediterranean cuisine reimagined through modern techniques, served in an unforgettable setting.</p>
+    <a href="#reserve" class="btn-hero"><span>Reserve Your Table</span></a>
+  </div>
+  <div class="hero-scroll"><span>Scroll</span><div class="scroll-line"></div></div>
+</section>
+
+<section id="about">
+  <div class="about fade-in">
+    <div class="about-images">
+      <img class="about-img-1" src="https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?w=800&q=80" alt="Chef">
+      <img class="about-img-2" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=80" alt="Interior">
+    </div>
+    <div>
+      <span class="section-label">Our Story</span>
+      <h2 class="section-title">Where <em>tradition</em><br>meets innovation</h2>
+      <div class="gold-divider"></div>
+      <p class="section-text">Born from a passion for exceptional ingredients and artistic presentation. Every dish tells a story of local producers, organic farms, and a team dedicated to creating unforgettable moments.</p>
+      <div class="about-stats">
+        <div><div class="stat-num">12</div><div class="stat-lbl">Years</div></div>
+        <div><div class="stat-num">4.9</div><div class="stat-lbl">Rating</div></div>
+        <div><div class="stat-num">95%</div><div class="stat-lbl">Return Guests</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="menu" class="menu-section">
+  <div class="menu-header fade-in">
+    <span class="section-label">The Menu</span>
+    <h2 class="section-title">Curated for <em>every moment</em></h2>
+    <p class="section-text">A seasonal selection crafted with locally sourced ingredients and global inspiration.</p>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-category fade-in">
+      <h3 class="menu-cat-title">Starters</h3><div class="menu-cat-line"></div>
+      <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Tuna Tartare</div><div class="menu-item-desc">Avocado, sesame, yuzu dressing</div></div><div class="menu-item-price">€24</div></div>
+      <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Burrata</div><div class="menu-item-desc">Heirloom tomatoes, pesto, aged balsamic</div></div><div class="menu-item-price">€19</div></div>
+      <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Grilled Octopus</div><div class="menu-item-desc">Paprika oil, fingerling potatoes</div></div><div class="menu-item-price">€28</div></div>
+      <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Ibérico Croquetas</div><div class="menu-item-desc">Truffle aioli, micro greens</div></div><div class="menu-item-price">€16</div></div>
+    </div>
+    <div class="menu-category fade-in">
+      <h3 class="menu-cat-title">Mains</h3><div class="menu-cat-line"></div>
+      <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Black Cod Miso</div><div class="menu-item-desc">72-hour marinated, bok choy, ginger</div></div><div class="menu-item-price">€42</div></div>
+      <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Wagyu Ribeye</div><div class="menu-item-desc">Bone marrow butter, truffle fries</div></div><div class="menu-item-price">€68</div></div>
+      <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Lobster Risotto</div><div class="menu-item-desc">Saffron, parmesan, bisque reduction</div></div><div class="menu-item-price">€48</div></div>
+      <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Sea Bass</div><div class="menu-item-desc">Roasted vegetables, lemon butter, herbs</div></div><div class="menu-item-price">€38</div></div>
+    </div>
+    <div class="menu-category fade-in">
+      <h3 class="menu-cat-title">Desserts</h3><div class="menu-cat-line"></div>
+      <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Chocolate Fondant</div><div class="menu-item-desc">Valrhona 70%, vanilla ice cream</div></div><div class="menu-item-price">€18</div></div>
+      <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Yuzu Cheesecake</div><div class="menu-item-desc">Matcha crumble, mango coulis</div></div><div class="menu-item-price">€16</div></div>
+      <div class="menu-item"><div class="menu-item-info"><div class="menu-item-name">Crème Brûlée</div><div class="menu-item-desc">Tahitian vanilla, caramelised fig</div></div><div class="menu-item-price">€15</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div style="text-align:center;" class="fade-in">
+    <span class="section-label">Gallery</span>
+    <h2 class="section-title">The <em>experience</em></h2>
+  </div>
+  <div class="gallery-grid fade-in">
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=900&q=80" alt="Dish"></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1550966871-3ed3cdb51f3a?w=600&q=80" alt="Bar"></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=80" alt="Grill"></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1592861956120-e524fc739696?w=900&q=80" alt="Terrace"></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=600&q=80" alt="Plate"></div>
+    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=600&q=80" alt="Wine"></div>
+  </div>
+</section>
+
+<section id="reserve" class="reservation">
+  <div class="res-inner">
+    <div class="fade-in">
+      <span class="section-label">Reservations</span>
+      <h2 class="section-title">Reserve your <em>table</em></h2>
+      <div class="gold-divider"></div>
+      <p class="section-text">Secure your table and let us craft an unforgettable evening. For parties of 8+, contact us directly.</p>
+      <br><p class="section-text" style="font-size:0.75rem;color:var(--text-light);">Same-day reservations:<br><a href="tel:+34951000000" style="color:var(--gold);text-decoration:none;">+34 951 000 000</a></p>
+    </div>
+    <div class="res-form fade-in">
+      <form onsubmit="event.preventDefault();this.querySelector('.f-submit').textContent='✓ RESERVATION SENT';this.querySelector('.f-submit').style.background='#2a7a4f';">
+        <div class="form-row">
+          <div class="form-group"><label>Name</label><input type="text" class="f-input" placeholder="Full name" required></div>
+          <div class="form-group"><label>Email</label><input type="email" class="f-input" placeholder="your@email.com" required></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Date</label><input type="date" class="f-input" required></div>
+          <div class="form-group"><label>Time</label><select class="f-select" required><option value="" disabled selected>Select</option><option>12:00</option><option>12:30</option><option>13:00</option><option>13:30</option><option>14:00</option><option>19:00</option><option>19:30</option><option>20:00</option><option>20:30</option><option>21:00</option><option>21:30</option><option>22:00</option></select></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Guests</label><select class="f-select" required><option value="" disabled selected>Select</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8+</option></select></div>
+          <div class="form-group"><label>Phone</label><input type="tel" class="f-input" placeholder="+34 ..."></div>
+        </div>
+        <div class="form-group"><label>Special Requests</label><textarea class="f-textarea" placeholder="Allergies, celebrations..."></textarea></div>
+        <button type="submit" class="f-submit">Confirm Reservation</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials">
+  <div class="fade-in">
+    <span class="section-label">Reviews</span>
+    <h2 class="section-title">Guest <em>experiences</em></h2>
+  </div>
+  <div class="test-grid">
+    <div class="test-card fade-in"><div class="test-stars">★★★★★</div><p class="test-text">"An extraordinary dining experience. The food was sublime and the atmosphere made it truly magical."</p><div class="test-author">James & Victoria W.</div><div class="test-source">Google Reviews</div></div>
+    <div class="test-card fade-in"><div class="test-stars">★★★★★</div><p class="test-text">"We come back every summer. The quality never drops and the staff remembers us every time."</p><div class="test-author">Marco B.</div><div class="test-source">TripAdvisor</div></div>
+    <div class="test-card fade-in"><div class="test-stars">★★★★★</div><p class="test-text">"Best restaurant in the area without a doubt. Incredible wine list and impeccable service."</p><div class="test-author">Sophie & Laurent D.</div><div class="test-source">Google Reviews</div></div>
+  </div>
+</section>
+
+<section id="contact" class="location">
+  <div class="loc-inner">
+    <div class="fade-in">
+      <span class="section-label">Find Us</span>
+      <h2 class="section-title">Visit <em>us</em></h2>
+      <div class="gold-divider"></div>
+      <div class="hours-grid">
+        <div class="hours-row"><span class="hours-day">Monday – Thursday</span><span class="hours-time">12:30 – 15:00 · 19:00 – 23:00</span></div>
+        <div class="hours-row"><span class="hours-day">Friday – Saturday</span><span class="hours-time">12:30 – 15:30 · 19:00 – 00:00</span></div>
+        <div class="hours-row"><span class="hours-day">Sunday</span><span class="hours-time">13:00 – 16:00 · 19:00 – 23:00</span></div>
+      </div>
+      <p class="loc-address">Your Address Here<br>Marbella, Málaga</p>
+      <a href="tel:+34951000000" class="loc-phone">+34 951 000 000</a>
+    </div>
+    <div class="fade-in">
+      <iframe class="loc-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12900!2d-4.95!3d36.48!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzbCsDI4JzQ4LjAiTiA0wrA1NycwMC4wIlc!5e0!3m2!1sen!2ses!4v1" allowfullscreen loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div><div class="footer-logo">Your Restaurant</div><div class="footer-tag">Fine Dining · Marbella</div></div>
+    <div class="footer-social"><a href="#">IG</a><a href="#">FB</a><a href="#">TA</a></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Your Restaurant. All rights reserved.</span>
+    <div><a href="#">Privacy</a> · <a href="#">Terms</a></div>
+  </div>
+</footer>
+
+
+
+<script>
+// Preloader
+window.addEventListener('load',()=>{setTimeout(()=>document.querySelector('.preloader').classList.add('hidden'),600)});
+
+// Nav scroll
+window.addEventListener('scroll',()=>{document.querySelector('nav').classList.toggle('scrolled',window.scrollY>60)});
+
+// Fade in
+const obs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('visible')})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',function(e){e.preventDefault();const t=document.querySelector(this.getAttribute('href'));if(t){t.scrollIntoView({behavior:'smooth'});document.querySelector('.nav-links').classList.remove('open')}})});
+</script>
+
+<!-- WEBSITEBUILD LEAD MODAL -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<div class="wb-overlay" id="wbModal">
+  <div class="wb-box">
+    <button class="wb-x" onclick="wbClose()">&times;</button>
+    <div id="wbForm">
+      <div class="wb-hero">
+        <div class="wb-hero-tag">WebsiteBuild</div>
+        <div class="wb-hero-h">Ce site — mais pour <em>votre</em> restaurant</div>
+        <p class="wb-hero-p">On prend ce template, on le personnalise avec vos photos, votre menu, vos infos — et on vous le livre clé en main.</p>
+        <div class="wb-pills">
+          <div class="wb-pill"><span class="wb-pill-icon">⚡</span><span class="wb-pill-txt">Livré en </span><span class="wb-pill-num">&nbsp;48h</span></div>
+          <div class="wb-pill"><span class="wb-pill-icon">🎁</span><span class="wb-pill-txt">Template </span><span class="wb-pill-num">&nbsp;gratuite</span></div>
+          <div class="wb-pill"><span class="wb-pill-icon">🤝</span><span class="wb-pill-txt">Zéro </span><span class="wb-pill-num">&nbsp;engagement</span></div>
+        </div>
+      </div>
+      <div class="wb-form-area">
+        <div class="wb-form-title">Recevez votre maquette gratuite</div>
+        <form action="https://formspree.io/f/mwvnrdgb" method="POST" id="wbLeadForm">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="source_page" value="restaurant-demo-dark-luxury">
+          <div class="wb-row">
+            <div class="wb-field"><label>Nom du restaurant *</label><input type="text" name="business_name" class="wb-inp" placeholder="ex: La Terraza" required></div>
+            <div class="wb-field"><label>Votre email *</label><input type="email" name="email" class="wb-inp" placeholder="vous@email.com" required></div>
+          </div>
+          <div class="wb-row">
+            <div class="wb-field"><label>Téléphone</label><input type="tel" name="phone" class="wb-inp" placeholder="+34 ..."></div>
+            <div class="wb-field"><label>Site actuel (optionnel)</label><input type="url" name="current_website" class="wb-inp" placeholder="https://..."></div>
+          </div>
+          <div class="wb-field" style="margin-bottom:0.6rem"><label>Qu'est-ce qui vous intéresse ? *</label><textarea name="requirements" class="wb-ta" placeholder="Réservation en ligne, menu digital, galerie photos, page contact..." required></textarea></div>
+          <button type="submit" class="wb-btn">Recevoir ma maquette gratuite →</button>
+          <p class="wb-note">100% gratuit · Aucun engagement · Prêt en 48h</p>
+        </form>
+      </div>
+    </div>
+    <div class="wb-ok" id="wbSuccess">
+      <div class="wb-ok-icon">✓</div>
+      <div class="wb-ok-h">C'est parti !</div>
+      <p class="wb-ok-p">On crée votre maquette personnalisée et on vous l'envoie par email sous 48h.</p>
+    </div>
+  </div>
+</div>
+<div class="wb-bar">
+  <span class="wb-bar-txt">Website by <strong>WebsiteBuild</strong> — Want one like this?</span>
+  <button class="wb-bar-btn" onclick="wbOpen()">Get Your Free Demo →</button>
+</div>
+
+<script>
+function wbOpen(){document.getElementById('wbModal').classList.add('wb-active');document.body.style.overflow='hidden'}
+function wbClose(){document.getElementById('wbModal').classList.remove('wb-active');document.body.style.overflow=''}
+document.getElementById('wbModal').addEventListener('click',function(e){if(e.target===this)wbClose()});
+document.getElementById('wbLeadForm').addEventListener('submit',function(e){
+  e.preventDefault();var f=this;var d=new FormData(f);
+  fetch(f.action,{method:'POST',body:d,headers:{'Accept':'application/json'}})
+  .then(function(r){if(r.ok){document.getElementById('wbForm').style.display='none';document.getElementById('wbSuccess').style.display='block';setTimeout(function(){wbClose();document.getElementById('wbForm').style.display='block';document.getElementById('wbSuccess').style.display='none';f.reset()},4000)}})
+  .catch(function(){alert('Error — please try again.')});
+});
+</script>
+</body>
+</html>
