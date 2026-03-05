@@ -33,7 +33,7 @@ ul{list-style:none}
 img,svg{max-width:100%;display:block}
 .container{max-width:1200px;margin:0 auto;padding:0 24px}
 .section-spacing{padding:120px 0}
-.door.section-spacing{padding:80px 0}
+.door.section-spacing{padding:70px 0}
 
 /* ===== DOOR/GARAGE SCROLL EFFECT ===== */
 /* GARAGES: position fixed, NEVER move, all stacked. JS toggles .active */
@@ -43,12 +43,21 @@ img,svg{max-width:100%;display:block}
 /* DOORS: normal flow, scroll naturally over garages */
 .doors-layer{position:relative;z-index:10}
 .garage-view{height:100vh;pointer-events:none}
-.door{min-height:auto;display:flex;flex-direction:column;justify-content:center;box-shadow:0 -10px 40px rgba(0,0,0,0.15);transition:filter 0.5s ease;position:relative;margin-top:-80px;padding-top:100px;padding-bottom:80px;z-index:10}
+.door{min-height:auto;display:flex;flex-direction:column;justify-content:center;box-shadow:0 -10px 40px rgba(0,0,0,0.15);transition:filter 0.5s ease;position:relative;margin-top:-50px;padding-top:70px;padding-bottom:70px}
+.door::before{content:'';position:absolute;top:-49px;left:0;right:0;height:50px;background:inherit}
+.door::after{content:'';position:absolute;bottom:-49px;left:0;right:0;height:50px;background:inherit;z-index:2}
+/* Each door gets a unique irregular wave via nth-child */
+.door:nth-child(1)::before,.doors-layer .door:nth-of-type(1)::before{clip-path:url(#waveTop1)}
+.door:nth-child(1)::after,.doors-layer .door:nth-of-type(1)::after{clip-path:url(#waveBot1)}
+.door:nth-of-type(2)::before{clip-path:url(#waveTop2)}
+.door:nth-of-type(2)::after{clip-path:url(#waveBot2)}
+.door:nth-of-type(3)::before{clip-path:url(#waveTop3)}
+.door:nth-of-type(3)::after{clip-path:url(#waveBot3)}
+.door:nth-of-type(4)::before{clip-path:url(#waveTop4)}
+.door:nth-of-type(4)::after{clip-path:url(#waveBot4)}
+.door:nth-of-type(5)::before{clip-path:url(#waveTop5)}
+.door:nth-of-type(5)::after{clip-path:url(#waveBot5)}
 .door.leaving{filter:brightness(0.92)}
-/* Transition SVGs between sections */
-.section-wave{position:relative;z-index:11;margin-top:-1px;display:block;width:100%;pointer-events:none}
-@keyframes waveFloat{0%,100%{transform:translateX(0)}50%{transform:translateX(10px)}}
-.section-wave.animated{animation:waveFloat 8s ease-in-out infinite}
 
 /* ===== SECTION COLORS — 5-color palette ===== */
 /* #3B0764 violet nuit (70%), #7C3AED violet mat, #D9F99D jaune lime, #EA580C orange brûlé, #2DD4BF turquoise */
@@ -589,7 +598,46 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
 </head>
 <body>
 
-<!-- No global SVG defs needed — transitions are inline per door -->
+<!-- SVG wave clip-paths — each door gets unique irregular waves (top + bottom) -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <!-- Door 1: gentle asymmetric wave -->
+    <clipPath id="waveTop1" clipPathUnits="objectBoundingBox">
+      <path d="M0,1 L0,0.65 C0.08,0.15 0.15,0.05 0.25,0.4 C0.33,0.7 0.4,0.85 0.5,0.5 C0.58,0.2 0.65,0.1 0.75,0.55 C0.85,0.9 0.92,0.3 1,0.45 L1,1 Z"/>
+    </clipPath>
+    <clipPath id="waveBot1" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L0,0.4 C0.1,0.85 0.18,0.95 0.28,0.6 C0.38,0.25 0.45,0.15 0.55,0.5 C0.65,0.8 0.72,0.9 0.82,0.55 C0.9,0.3 0.95,0.7 1,0.5 L1,0 Z"/>
+    </clipPath>
+    <!-- Door 2: wider bumps -->
+    <clipPath id="waveTop2" clipPathUnits="objectBoundingBox">
+      <path d="M0,1 L0,0.5 C0.06,0.1 0.14,0.25 0.22,0.55 C0.3,0.8 0.38,0.45 0.48,0.2 C0.56,0 0.65,0.35 0.73,0.65 C0.82,0.9 0.9,0.4 1,0.35 L1,1 Z"/>
+    </clipPath>
+    <clipPath id="waveBot2" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L0,0.55 C0.07,0.9 0.16,0.75 0.24,0.45 C0.34,0.15 0.42,0.6 0.52,0.8 C0.6,0.95 0.7,0.55 0.78,0.35 C0.88,0.1 0.94,0.6 1,0.6 L1,0 Z"/>
+    </clipPath>
+    <!-- Door 3: sharp irregular -->
+    <clipPath id="waveTop3" clipPathUnits="objectBoundingBox">
+      <path d="M0,1 L0,0.7 C0.05,0.2 0.12,0.45 0.2,0.3 C0.28,0.1 0.36,0.6 0.44,0.75 C0.52,0.9 0.6,0.25 0.7,0.15 C0.78,0.05 0.88,0.5 0.94,0.6 L1,0.4 L1,1 Z"/>
+    </clipPath>
+    <clipPath id="waveBot3" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L0,0.35 C0.06,0.8 0.14,0.55 0.22,0.7 C0.3,0.85 0.4,0.4 0.48,0.25 C0.56,0.1 0.66,0.65 0.74,0.85 C0.84,0.95 0.92,0.5 1,0.55 L1,0 Z"/>
+    </clipPath>
+    <!-- Door 4: smooth rolling -->
+    <clipPath id="waveTop4" clipPathUnits="objectBoundingBox">
+      <path d="M0,1 L0,0.55 C0.1,0.3 0.18,0.1 0.28,0.45 C0.36,0.7 0.44,0.9 0.55,0.55 C0.64,0.25 0.74,0.05 0.84,0.4 C0.92,0.65 0.96,0.5 1,0.5 L1,1 Z"/>
+    </clipPath>
+    <clipPath id="waveBot4" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L0,0.5 C0.08,0.8 0.16,0.95 0.26,0.6 C0.36,0.3 0.46,0.1 0.56,0.45 C0.64,0.7 0.76,0.95 0.86,0.55 C0.94,0.25 0.98,0.45 1,0.45 L1,0 Z"/>
+    </clipPath>
+    <!-- Door 5: dramatic peaks -->
+    <clipPath id="waveTop5" clipPathUnits="objectBoundingBox">
+      <path d="M0,1 L0,0.45 C0.07,0 0.13,0.3 0.2,0.6 C0.27,0.85 0.35,0.5 0.42,0.15 C0.5,0 0.58,0.4 0.66,0.7 C0.74,0.9 0.83,0.35 0.9,0.2 C0.96,0.1 1,0.5 1,0.5 L1,1 Z"/>
+    </clipPath>
+    <clipPath id="waveBot5" clipPathUnits="objectBoundingBox">
+      <path d="M0,0 L0,0.5 C0.05,0.9 0.12,0.7 0.2,0.4 C0.28,0.15 0.36,0.55 0.44,0.85 C0.52,0.95 0.6,0.6 0.68,0.3 C0.76,0.1 0.85,0.6 0.92,0.8 C0.97,0.9 1,0.5 1,0.5 L1,0 Z"/>
+    </clipPath>
+  </defs>
+</svg>
 
 <!-- Cursor -->
 <div class="cursor" id="cursor"></div>
@@ -758,9 +806,6 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
 <!-- Spacer: view Hero -->
 <div class="garage-view" data-garage="0"></div>
 
-<!-- Transition 1: VAGUE SIMPLE (Hero → Process) -->
-<svg class="section-wave animated" viewBox="0 0 1440 80" preserveAspectRatio="none" style="height:80px;background:#3B0764"><path d="M0,80 C360,0 720,0 1080,80 L1440,80 L0,80 Z" fill="#7C3AED"/></svg>
-
 <!-- DOOR 1: Process -->
 <section class="section-spacing door sec-process" id="process">
     <div class="container">
@@ -779,14 +824,8 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
     </div>
 </section>
 
-<!-- Transition 2: TRAIT PENCHE (Process → Portfolio) -->
-<svg class="section-wave" viewBox="0 0 1440 60" preserveAspectRatio="none" style="height:60px;background:#7C3AED"><polygon points="0,0 1440,60 1440,60 0,60" fill="#3B0764"/></svg>
-
 <!-- Spacer: view Portfolio -->
 <div class="garage-view" data-garage="1"></div>
-
-<!-- Transition 3: DOUBLE VAGUE (Portfolio → Services) -->
-<svg class="section-wave animated" viewBox="0 0 1440 80" preserveAspectRatio="none" style="height:80px;background:#3B0764"><path d="M0,80 L0,40 C180,0 360,80 540,40 C720,0 900,80 1080,40 C1260,0 1440,40 1440,40 L1440,80 Z" fill="#134E4A"/></svg>
 
 <!-- DOOR 2: Services -->
 <section class="section-spacing door sec-services" id="services">
@@ -803,14 +842,8 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
     </div>
 </section>
 
-<!-- Transition 4: TRAIT PENCHE INVERSE (Services → BA) -->
-<svg class="section-wave" viewBox="0 0 1440 60" preserveAspectRatio="none" style="height:60px;background:#134E4A"><polygon points="0,60 1440,0 1440,60 0,60" fill="#3B0764"/></svg>
-
 <!-- Spacer: view BA -->
 <div class="garage-view" data-garage="2"></div>
-
-<!-- Transition 5: VAGUE EN S (BA → Compare) -->
-<svg class="section-wave animated" viewBox="0 0 1440 100" preserveAspectRatio="none" style="height:100px;background:#3B0764"><path d="M0,100 L0,70 C360,0 720,100 1080,30 L1440,60 L1440,100 Z" fill="#EA580C"/></svg>
 
 <!-- DOOR 3: Compare -->
 <section class="section-spacing door sec-compare" id="compare">
@@ -825,14 +858,8 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
     </div>
 </section>
 
-<!-- Transition 6: TRAIT PENCHE (Compare → Pricing) -->
-<svg class="section-wave" viewBox="0 0 1440 60" preserveAspectRatio="none" style="height:60px;background:#EA580C"><polygon points="0,0 1440,60 1440,60 0,60" fill="#3B0764"/></svg>
-
 <!-- Spacer: view Pricing -->
 <div class="garage-view" data-garage="3"></div>
-
-<!-- Transition 7: VAGUE ASYMETRIQUE (Pricing → Testimonials) -->
-<svg class="section-wave animated" viewBox="0 0 1440 80" preserveAspectRatio="none" style="height:80px;background:#3B0764"><path d="M0,80 L0,60 C200,0 430,0 500,60 C600,80 900,80 1440,70 L1440,80 Z" fill="#7C3AED"/></svg>
 
 <!-- DOOR 4: Testimonials -->
 <section class="section-spacing door sec-testi" id="testi">
@@ -846,14 +873,8 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
     </div>
 </section>
 
-<!-- Transition 8: TRAIT PENCHE INVERSE (Testimonials → FAQ) -->
-<svg class="section-wave" viewBox="0 0 1440 60" preserveAspectRatio="none" style="height:60px;background:#7C3AED"><polygon points="0,60 1440,0 1440,60 0,60" fill="#3B0764"/></svg>
-
 <!-- Spacer: view FAQ -->
 <div class="garage-view" data-garage="4"></div>
-
-<!-- Transition 9: TRIPLE PETITES VAGUES (FAQ → Team) -->
-<svg class="section-wave animated" viewBox="0 0 1440 60" preserveAspectRatio="none" style="height:60px;background:#3B0764"><path d="M0,60 L0,40 C120,15 240,50 360,30 C480,10 600,45 720,25 C840,5 960,40 1080,30 C1200,20 1320,45 1440,35 L1440,60 Z" fill="#164E63"/></svg>
 
 <!-- DOOR 5: Team -->
 <section class="section-spacing door sec-team" id="team">
@@ -866,9 +887,6 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
         <p class="team-quote anim anim-up">« On croit que chaque professionnel mérite un site à la hauteur de son talent. Pas dans 3 mois, pas pour 5 000€. Maintenant, et à un prix juste. »</p>
     </div>
 </section>
-
-<!-- Transition 10: TRAIT PENCHE (Team → CTA) -->
-<svg class="section-wave" viewBox="0 0 1440 60" preserveAspectRatio="none" style="height:60px;background:#164E63"><polygon points="0,0 1440,60 1440,60 0,60" fill="#7C3AED"/></svg>
 
 <!-- Spacer: view CTA -->
 <div class="garage-view" data-garage="5"></div>
