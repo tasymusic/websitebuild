@@ -16,7 +16,7 @@
 /* ===== RESET & VARIABLES ===== */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
---bg-primary:#0a0a0a;--bg-secondary:#111111;--bg-tertiary:#0d0d0d;
+--bg-primary:#120a1e;--bg-secondary:#1a1028;--bg-tertiary:#150d20;
 --accent-purple:#7C3AED;--accent-blue:#3B82F6;
 --accent-gradient:linear-gradient(135deg,#7C3AED,#3B82F6);
 --accent-gradient-hover:linear-gradient(135deg,#6D28D9,#2563EB);
@@ -76,7 +76,7 @@ ul{list-style:none}
 
 /* ===== NAVBAR ===== */
 .nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:72px;display:flex;align-items:center;transition:all 0.3s ease}
-.nav.scrolled{background:rgba(10,10,10,0.8);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--glass-border)}
+.nav.scrolled{background:rgba(18,10,30,0.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--glass-border)}
 .nav-inner{display:flex;justify-content:space-between;align-items:center;width:100%;max-width:1200px;margin:0 auto;padding:0 5%}
 .nav-logo{font-size:20px;font-weight:700}.nav-logo .dot{color:var(--accent-purple)}
 .nav-links{display:flex;align-items:center;gap:32px}
@@ -84,7 +84,7 @@ ul{list-style:none}
 .nav-cta{background:var(--accent-gradient);color:#fff;padding:10px 24px;border-radius:10px;font-size:14px;font-weight:600;transition:all 0.3s}.nav-cta:hover{transform:scale(1.05);box-shadow:0 0 20px var(--glow-purple-strong)}
 .nav-toggle{display:none;flex-direction:column;gap:5px;padding:8px;z-index:1001}
 .nav-toggle span{display:block;width:24px;height:2px;background:#fff;transition:all 0.3s}
-.nav-mobile{display:none;position:fixed;inset:0;background:var(--bg-primary);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:32px}
+.nav-mobile{display:none;position:fixed;inset:0;background:#120a1e;z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:32px}
 .nav-mobile.open{display:flex}
 .nav-mobile a{font-size:28px;font-weight:600;color:var(--text-secondary);transition:color 0.2s}.nav-mobile a:hover{color:#fff}
 
@@ -102,9 +102,9 @@ ul{list-style:none}
 .hero-trust span{display:inline-flex;align-items:center;gap:4px}
 
 /* Mockup */
-.mockup{background:#1a1a1a;border-radius:12px;padding:10px 10px 0;border:1px solid rgba(255,255,255,0.1);box-shadow:0 20px 60px rgba(0,0,0,0.5);position:relative}
+.mockup{background:#1e1430;border-radius:12px;padding:10px 10px 0;border:1px solid rgba(255,255,255,0.1);box-shadow:0 20px 60px rgba(0,0,0,0.5);position:relative}
 .mockup-cam{width:8px;height:8px;background:#333;border-radius:50%;margin:0 auto 8px}
-.mockup-screen{background:#0d0d0d;border-radius:8px 8px 0 0;overflow:hidden;height:260px;position:relative}
+.mockup-screen{background:#0f0a18;border-radius:8px 8px 0 0;overflow:hidden;height:260px;position:relative}
 .mockup-scroll{position:absolute;top:0;left:0;right:0;animation:scrollMockup 15s linear infinite}
 .ms-nav{height:36px;background:linear-gradient(135deg,#7C3AED,#3B82F6);display:flex;align-items:center;padding:0 16px}
 .ms-nav span{width:60px;height:8px;background:rgba(255,255,255,0.4);border-radius:4px}
@@ -116,11 +116,11 @@ ul{list-style:none}
 .ms-card{flex:1;height:70px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:8px}
 .ms-section{padding:14px}
 .ms-block{height:40px;background:rgba(255,255,255,0.02);border-radius:6px;margin-bottom:8px}
-.mockup-base{height:14px;background:#1a1a1a;border-radius:0 0 4px 4px;margin:0 -10px;position:relative}
+.mockup-base{height:14px;background:#1e1430;border-radius:0 0 4px 4px;margin:0 -10px;position:relative}
 .mockup-base::after{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:50px;height:4px;background:#333;border-radius:0 0 4px 4px}
 
 /* Floating elements */
-.float-el{position:absolute;padding:8px 16px;border-radius:12px;font-size:13px;font-weight:600;animation:float 4s ease-in-out infinite;z-index:2;background:rgba(17,17,17,0.8);backdrop-filter:blur(10px);border:1px solid var(--glass-border);white-space:nowrap}
+.float-el{position:absolute;padding:8px 16px;border-radius:12px;font-size:13px;font-weight:600;animation:float 4s ease-in-out infinite;z-index:2;background:rgba(18,10,30,0.85);backdrop-filter:blur(10px);border:1px solid var(--glass-border);white-space:nowrap}
 .float-el:nth-child(1){top:10%;right:-10%;animation-duration:3.5s}
 .float-el:nth-child(2){bottom:25%;right:-5%;animation-delay:1s;animation-duration:4.5s}
 .float-el:nth-child(3){top:30%;left:-8%;animation-delay:0.5s;animation-duration:3.8s}
