@@ -88,7 +88,6 @@ img,svg{max-width:100%;display:block}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 @keyframes scrollInner{0%{transform:translateY(0)}100%{transform:translateY(-50%)}}
 @keyframes carousel{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-@keyframes drawLine{0%{stroke-dashoffset:600}100%{stroke-dashoffset:0}}
 @keyframes particleFloat{
     0%{transform:translate(0,0);opacity:0}
     10%{opacity:var(--po)}
@@ -167,9 +166,11 @@ img,svg{max-width:100%;display:block}
 .p-num{font-size:72px;font-weight:900;line-height:1;opacity:0.12}
 .p-emoji{font-size:44px;margin:12px 0}
 .process-card h3{font-size:20px;font-weight:700;margin-bottom:6px}
-.process-line-svg{position:absolute;top:70px;left:15%;right:15%;height:40px;z-index:0;overflow:visible}
-.process-line-svg path{fill:none;stroke:url(#lineGrad);stroke-width:2;stroke-dasharray:600;stroke-dashoffset:600}
-.process-line-svg.drawn path{animation:drawLine 1.5s ease forwards}
+.process-wrap{position:relative}
+.process-line-svg{position:absolute;top:50%;left:-24px;right:-24px;height:60px;z-index:0;overflow:visible;transform:translateY(-50%);pointer-events:none}
+.process-line-svg path{fill:none;stroke:url(#lineGrad);stroke-width:2.5;stroke-dasharray:1200;stroke-dashoffset:1200;opacity:0.4}
+.process-line-svg.drawn path{animation:drawLine 2s cubic-bezier(0.16,1,0.3,1) forwards}
+@keyframes drawLine{0%{stroke-dashoffset:1200}100%{stroke-dashoffset:0}}
 
 /* ===== CAROUSEL ===== */
 .carousel-wrap{overflow:hidden;margin-top:48px}
@@ -427,11 +428,13 @@ img,svg{max-width:100%;display:block}
             <h2 class="anim anim-blur">Simple comme <span class="gt">bonjour</span></h2>
             <p class="anim anim-up">3 étapes et votre site est en ligne. On s'occupe de tout.</p>
         </div>
-        <div class="process-grid">
-            <svg class="process-line-svg" id="processLine" viewBox="0 0 600 40"><defs><linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#7C3AED"/><stop offset="100%" stop-color="#3B82F6"/></linearGradient></defs><path d="M 0 20 Q 150 0 300 20 Q 450 40 600 20"/></svg>
-            <div class="process-card card anim anim-scale" data-delay="0"><div class="p-num gt">01</div><div class="p-emoji">📩</div><h3>Envoyez vos infos</h3><p class="text-s">Logo, photos, textes... ou rien. On peut tout créer pour vous.</p></div>
-            <div class="process-card card anim anim-scale" data-delay="1"><div class="p-num gt">02</div><div class="p-emoji">🎨</div><h3>On crée le site</h3><p class="text-s">Design moderne sur-mesure, optimisé mobile et SEO. Pensé pour convertir.</p></div>
-            <div class="process-card card anim anim-scale" data-delay="2"><div class="p-num gt">03</div><div class="p-emoji">🚀</div><h3>Vous êtes en ligne</h3><p class="text-s">Livré en 48h max. Hébergement, domaine et mises à jour inclus.</p></div>
+        <div class="process-wrap">
+            <svg class="process-line-svg" id="processLine" viewBox="0 0 1200 60" preserveAspectRatio="none"><defs><linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#7C3AED"/><stop offset="100%" stop-color="#3B82F6"/></linearGradient></defs><path d="M 0 30 C 200 5, 400 55, 600 30 C 800 5, 1000 55, 1200 30"/></svg>
+            <div class="process-grid">
+                <div class="process-card card anim anim-scale" data-delay="0"><div class="p-num gt">01</div><div class="p-emoji">📩</div><h3>Envoyez vos infos</h3><p class="text-s">Logo, photos, textes... ou rien. On peut tout créer pour vous.</p></div>
+                <div class="process-card card anim anim-scale" data-delay="1"><div class="p-num gt">02</div><div class="p-emoji">🎨</div><h3>On crée le site</h3><p class="text-s">Design moderne sur-mesure, optimisé mobile et SEO. Pensé pour convertir.</p></div>
+                <div class="process-card card anim anim-scale" data-delay="2"><div class="p-num gt">03</div><div class="p-emoji">🚀</div><h3>Vous êtes en ligne</h3><p class="text-s">Livré en 48h max. Hébergement, domaine et mises à jour inclus.</p></div>
+            </div>
         </div>
     </div>
 </section>
@@ -661,7 +664,9 @@ navMob.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navMob.cl
 
 /* ===== HERO WORD BY WORD ===== */
 const ht=document.getElementById('heroTitle');
-if(ht){const html=ht.innerHTML;const words=html.split(/(\s+|<[^>]+>)/);let i=0;ht.innerHTML=words.map(w=>{if(w.trim()===''||w.startsWith('<'))return w;const d=i*0.1;i++;return '<span class="word"><span style="--d:'+d+'s">'+w+'</span></span>'}).join(' ')}
+if(ht){const html=ht.innerHTML;const words=html.split(/(\s+|<[^>]+>)/);let i=0;ht.innerHTML=words.map(w=>{if(w.trim()===''||w.startsWith('<'))return w;const d=i*0.1;i++;return '<span class="word"><span class="word-inner" style="--d:'+d+'s">'+w+'</span></span>'}).join(' ')}
+/* Propager .gt sur les word-inner à l'intérieur de .gt */
+document.querySelectorAll('.gt .word-inner').forEach(el=>el.classList.add('gt'));
 
 /* ===== HERO GRADIENT FOLLOW MOUSE ===== */
 const hg=document.getElementById('heroGrad');
