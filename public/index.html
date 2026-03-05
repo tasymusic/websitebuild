@@ -42,8 +42,8 @@ img,svg{max-width:100%;display:block}
 /* DOORS: normal flow, scroll naturally over garages */
 .doors-layer{position:relative;z-index:10}
 .garage-view{height:100vh;pointer-events:none}
-.door{min-height:100vh;display:flex;flex-direction:column;justify-content:center;border-top-left-radius:24px;border-top-right-radius:24px;box-shadow:0 -10px 40px rgba(0,0,0,0.15);transition:transform 0.5s ease,filter 0.5s ease}
-.door.leaving{transform:scale(0.97);filter:brightness(0.95)}
+.door{min-height:100vh;display:flex;flex-direction:column;justify-content:center;border-top-left-radius:24px;border-top-right-radius:24px;box-shadow:0 -10px 40px rgba(0,0,0,0.15);transition:filter 0.5s ease}
+.door.leaving{filter:brightness(0.92)}
 @media(max-width:768px){.door{border-top-left-radius:16px;border-top-right-radius:16px}}
 
 /* ===== SECTION COLORS ===== */
@@ -488,14 +488,14 @@ img,svg{max-width:100%;display:block}
     .c-card{width:260px;height:180px}
 }
 /* ===== QUESTIONNAIRE MODAL ===== */
-.q-modal{position:fixed;inset:0;z-index:100000;background:#0a0a0a;display:none;flex-direction:column;overflow:hidden}
+.q-modal{position:fixed;inset:0;z-index:100000;background:linear-gradient(135deg,#0a0a0a 0%,#1a1a2e 100%);display:none;flex-direction:column;overflow:hidden}
 .q-modal.open{display:flex}
 .q-top{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;border-bottom:1px solid rgba(255,255,255,0.08)}
 .q-back{display:flex;align-items:center;gap:6px;font-size:14px;color:rgba(255,255,255,0.6);cursor:pointer;background:none;border:none;font-family:inherit;padding:4px 8px}
 .q-back:hover{color:#fff}
 .q-progress{flex:1;max-width:300px;margin:0 24px}
 .q-bar{height:4px;background:rgba(255,255,255,0.1);border-radius:4px;overflow:hidden}
-.q-bar-fill{height:100%;background:var(--gradient);border-radius:4px;transition:width 0.4s ease;width:12.5%}
+.q-bar-fill{height:100%;background:var(--gradient);border-radius:4px;transition:width 0.4s ease;width:6%}
 .q-close{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid rgba(255,255,255,0.15);background:none;color:#fff;font-size:18px;cursor:pointer;transition:all 0.2s}
 .q-close:hover{background:rgba(255,255,255,0.1)}
 .q-body{flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
@@ -507,10 +507,10 @@ img,svg{max-width:100%;display:block}
 .q-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;max-width:700px;width:100%}
 .q-grid-2{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
 .q-grid-3{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
-.q-card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:18px;text-align:center;cursor:pointer;transition:all 0.25s ease;color:#fff;font-size:15px;font-weight:500;position:relative}
-.q-card:hover{transform:scale(1.03);border-color:rgba(124,58,237,0.4);box-shadow:0 0 20px rgba(124,58,237,0.15)}
-.q-card.selected{border-color:#7C3AED;background:rgba(124,58,237,0.15);box-shadow:0 0 25px rgba(124,58,237,0.2)}
-.q-card.selected::after{content:'✓';position:absolute;top:8px;right:10px;font-size:14px;color:#7C3AED;font-weight:700}
+.q-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:20px;text-align:center;cursor:pointer;transition:all 0.3s cubic-bezier(0.16,1,0.3,1);color:#fff;font-size:15px;font-weight:500;position:relative;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.q-card:hover{transform:translateY(-2px);border-color:rgba(124,58,237,0.5);box-shadow:0 8px 30px rgba(124,58,237,0.15);background:rgba(255,255,255,0.08)}
+.q-card.selected{border-color:#7C3AED;background:rgba(124,58,237,0.12);box-shadow:0 0 30px rgba(124,58,237,0.25)}
+.q-card.selected::after{content:'✓';position:absolute;top:10px;right:12px;width:22px;height:22px;background:var(--gradient);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;font-weight:700}
 .q-card .q-emoji{font-size:28px;margin-bottom:6px;display:block}
 .q-card .q-price{font-size:28px;font-weight:900;margin:6px 0 2px}
 .q-card .q-price-label{font-size:12px;color:rgba(255,255,255,0.5)}
@@ -520,7 +520,7 @@ img,svg{max-width:100%;display:block}
 .q-input:focus{border-color:#7C3AED}
 .q-input::placeholder{color:rgba(255,255,255,0.3)}
 .q-textarea{min-height:80px;resize:vertical}
-.q-btn{background:var(--gradient);color:#fff;padding:14px 32px;border-radius:12px;font-size:16px;font-weight:600;cursor:pointer;border:none;font-family:inherit;margin-top:16px;transition:all 0.3s}
+.q-btn{background:linear-gradient(135deg,#7C3AED,#EC4899);color:#fff;padding:16px 36px;border-radius:14px;font-size:16px;font-weight:600;cursor:pointer;border:none;font-family:inherit;margin-top:16px;transition:all 0.3s;box-shadow:0 4px 20px rgba(124,58,237,0.3)}
 .q-btn:hover{transform:scale(1.03);box-shadow:0 0 25px rgba(124,58,237,0.3)}
 .q-error{color:#EF4444;font-size:13px;margin-top:8px;min-height:18px}
 .q-contact-form{display:flex;flex-direction:column;gap:12px;max-width:400px;width:100%}
@@ -957,23 +957,48 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
                 <div class="q-card q-style-card q-auto" data-key="style" data-value="Chaleureux & Naturel"><div class="q-style-swatch" style="background:linear-gradient(135deg,#92400E,#10B981)"></div><strong>Chaleureux &amp; Naturel</strong><small style="color:rgba(255,255,255,0.4)">Cafés, bien-être, bio</small></div>
             </div>
         </div>
-        <!-- 10: Couleurs -->
+        <!-- 10: Palettes de couleurs -->
         <div class="q-step" data-step="couleurs">
-            <h2>Quelles couleurs représentent votre marque ?</h2>
-            <p class="q-sub">Choisissez 2-3 couleurs qui vous représentent.</p>
-            <div style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-bottom:16px">
-                <div class="q-color-dot q-multi" data-key="couleurs" data-value="Noir" style="width:52px;height:52px;border-radius:50%;background:#1a1a1a;border:2px solid rgba(255,255,255,0.15);cursor:pointer;transition:all 0.2s"></div>
-                <div class="q-color-dot q-multi" data-key="couleurs" data-value="Blanc" style="width:52px;height:52px;border-radius:50%;background:#FFFFFF;border:2px solid rgba(255,255,255,0.15);cursor:pointer;transition:all 0.2s"></div>
-                <div class="q-color-dot q-multi" data-key="couleurs" data-value="Bleu" style="width:52px;height:52px;border-radius:50%;background:#3B82F6;border:2px solid transparent;cursor:pointer;transition:all 0.2s"></div>
-                <div class="q-color-dot q-multi" data-key="couleurs" data-value="Violet" style="width:52px;height:52px;border-radius:50%;background:#7C3AED;border:2px solid transparent;cursor:pointer;transition:all 0.2s"></div>
-                <div class="q-color-dot q-multi" data-key="couleurs" data-value="Rouge" style="width:52px;height:52px;border-radius:50%;background:#EF4444;border:2px solid transparent;cursor:pointer;transition:all 0.2s"></div>
-                <div class="q-color-dot q-multi" data-key="couleurs" data-value="Vert" style="width:52px;height:52px;border-radius:50%;background:#10B981;border:2px solid transparent;cursor:pointer;transition:all 0.2s"></div>
-                <div class="q-color-dot q-multi" data-key="couleurs" data-value="Orange" style="width:52px;height:52px;border-radius:50%;background:#F97316;border:2px solid transparent;cursor:pointer;transition:all 0.2s"></div>
-                <div class="q-color-dot q-multi" data-key="couleurs" data-value="Rose" style="width:52px;height:52px;border-radius:50%;background:#EC4899;border:2px solid transparent;cursor:pointer;transition:all 0.2s"></div>
+            <h2>Quelle palette vous correspond ?</h2>
+            <p class="q-sub">Choisissez une palette ou entrez vos propres couleurs.</p>
+            <div class="q-grid" style="max-width:750px;grid-template-columns:repeat(2,1fr);gap:14px">
+                <div class="q-card q-auto q-palette-card" data-key="couleurs" data-value="Noir & Blanc — #0a0a0a, #FFFFFF, #6B7280">
+                    <div style="display:flex;gap:6px;justify-content:center;margin-bottom:8px"><span style="width:32px;height:32px;border-radius:8px;background:#0a0a0a;border:1px solid rgba(255,255,255,0.2);display:inline-block"></span><span style="width:32px;height:32px;border-radius:8px;background:#FFFFFF;display:inline-block"></span><span style="width:32px;height:32px;border-radius:8px;background:#6B7280;display:inline-block"></span></div>
+                    <strong>Élégant Minimal</strong><small style="color:rgba(255,255,255,0.4);display:block">Noir, blanc, gris</small>
+                </div>
+                <div class="q-card q-auto q-palette-card" data-key="couleurs" data-value="Violet & Rose — #7C3AED, #EC4899, #F5F3FF">
+                    <div style="display:flex;gap:6px;justify-content:center;margin-bottom:8px"><span style="width:32px;height:32px;border-radius:8px;background:#7C3AED;display:inline-block"></span><span style="width:32px;height:32px;border-radius:8px;background:#EC4899;display:inline-block"></span><span style="width:32px;height:32px;border-radius:8px;background:#F5F3FF;display:inline-block"></span></div>
+                    <strong>Créatif & Moderne</strong><small style="color:rgba(255,255,255,0.4);display:block">Violet, rose, lavande</small>
+                </div>
+                <div class="q-card q-auto q-palette-card" data-key="couleurs" data-value="Bleu Pro — #1E40AF, #3B82F6, #DBEAFE">
+                    <div style="display:flex;gap:6px;justify-content:center;margin-bottom:8px"><span style="width:32px;height:32px;border-radius:8px;background:#1E40AF;display:inline-block"></span><span style="width:32px;height:32px;border-radius:8px;background:#3B82F6;display:inline-block"></span><span style="width:32px;height:32px;border-radius:8px;background:#DBEAFE;display:inline-block"></span></div>
+                    <strong>Confiance & Pro</strong><small style="color:rgba(255,255,255,0.4);display:block">Bleu marine, bleu, ciel</small>
+                </div>
+                <div class="q-card q-auto q-palette-card" data-key="couleurs" data-value="Vert Nature — #065F46, #10B981, #ECFDF5">
+                    <div style="display:flex;gap:6px;justify-content:center;margin-bottom:8px"><span style="width:32px;height:32px;border-radius:8px;background:#065F46;display:inline-block"></span><span style="width:32px;height:32px;border-radius:8px;background:#10B981;display:inline-block"></span><span style="width:32px;height:32px;border-radius:8px;background:#ECFDF5;display:inline-block"></span></div>
+                    <strong>Nature & Bien-être</strong><small style="color:rgba(255,255,255,0.4);display:block">Vert foncé, émeraude, menthe</small>
+                </div>
+                <div class="q-card q-auto q-palette-card" data-key="couleurs" data-value="Luxe Doré — #1a1a2e, #D4AF37, #FEF3C7">
+                    <div style="display:flex;gap:6px;justify-content:center;margin-bottom:8px"><span style="width:32px;height:32px;border-radius:8px;background:#1a1a2e;display:inline-block"></span><span style="width:32px;height:32px;border-radius:8px;background:#D4AF37;display:inline-block"></span><span style="width:32px;height:32px;border-radius:8px;background:#FEF3C7;display:inline-block"></span></div>
+                    <strong>Luxe & Prestige</strong><small style="color:rgba(255,255,255,0.4);display:block">Noir, or, crème</small>
+                </div>
+                <div class="q-card q-auto q-palette-card" data-key="couleurs" data-value="Chaud Terracotta — #92400E, #F97316, #FFF7ED">
+                    <div style="display:flex;gap:6px;justify-content:center;margin-bottom:8px"><span style="width:32px;height:32px;border-radius:8px;background:#92400E;display:inline-block"></span><span style="width:32px;height:32px;border-radius:8px;background:#F97316;display:inline-block"></span><span style="width:32px;height:32px;border-radius:8px;background:#FFF7ED;display:inline-block"></span></div>
+                    <strong>Chaleureux & Gourmand</strong><small style="color:rgba(255,255,255,0.4);display:block">Brun, orange, crème</small>
+                </div>
+                <div class="q-card q-auto q-palette-card" data-key="couleurs" data-value="Rouge Passion — #991B1B, #EF4444, #FEE2E2">
+                    <div style="display:flex;gap:6px;justify-content:center;margin-bottom:8px"><span style="width:32px;height:32px;border-radius:8px;background:#991B1B;display:inline-block"></span><span style="width:32px;height:32px;border-radius:8px;background:#EF4444;display:inline-block"></span><span style="width:32px;height:32px;border-radius:8px;background:#FEE2E2;display:inline-block"></span></div>
+                    <strong>Énergie & Passion</strong><small style="color:rgba(255,255,255,0.4);display:block">Bordeaux, rouge, rosé</small>
+                </div>
+                <div class="q-card q-auto q-palette-card" data-key="couleurs" data-value="Océan — #0C4A6E, #06B6D4, #ECFEFF">
+                    <div style="display:flex;gap:6px;justify-content:center;margin-bottom:8px"><span style="width:32px;height:32px;border-radius:8px;background:#0C4A6E;display:inline-block"></span><span style="width:32px;height:32px;border-radius:8px;background:#06B6D4;display:inline-block"></span><span style="width:32px;height:32px;border-radius:8px;background:#ECFEFF;display:inline-block"></span></div>
+                    <strong>Frais & Océan</strong><small style="color:rgba(255,255,255,0.4);display:block">Bleu nuit, cyan, glace</small>
+                </div>
             </div>
-            <input class="q-input" data-key="couleur_custom" type="text" placeholder="Autre couleur ou code hex..." style="max-width:300px">
-            <p class="q-count"></p>
-            <button class="q-btn q-multi-btn" data-key="couleurs">Continuer →</button>
+            <div style="margin-top:16px;text-align:center">
+                <p style="color:rgba(255,255,255,0.4);font-size:13px;margin-bottom:8px">Aucune palette ne vous convient ?</p>
+                <input class="q-input" data-key="couleur_custom" type="text" placeholder="Entrez vos couleurs ou codes hex (ex: #FF5733, bleu foncé...)" style="max-width:450px">
+            </div>
         </div>
         <!-- 11: Contenus disponibles -->
         <div class="q-step" data-step="contenus_dispo">
@@ -990,7 +1015,30 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
             <p class="q-count"></p>
             <button class="q-btn q-multi-btn" data-key="contenus_dispo">Continuer →</button>
         </div>
-        <!-- 12: Inspiration -->
+        <!-- 12: Photos & Médias -->
+        <div class="q-step" data-step="photos">
+            <h2>Avez-vous des photos à nous envoyer ?</h2>
+            <p class="q-sub">Photos de vos produits, locaux, équipe, réalisations... Plus on a de matière, plus le site sera beau.</p>
+            <div class="q-grid q-grid-2" style="max-width:650px">
+                <div class="q-card q-auto" data-key="photos" data-value="Oui, j'ai des photos pro"><span class="q-emoji">📸</span>Oui, j'ai des photos pro</div>
+                <div class="q-card q-auto" data-key="photos" data-value="J'ai des photos mais pas pro"><span class="q-emoji">📱</span>J'ai des photos (téléphone)</div>
+                <div class="q-card q-auto" data-key="photos" data-value="J'enverrai plus tard"><span class="q-emoji">📤</span>J'enverrai plus tard par WhatsApp</div>
+                <div class="q-card q-auto" data-key="photos" data-value="Pas de photos, utilisez des stocks"><span class="q-emoji">🖼️</span>Pas de photos, trouvez-en pour moi</div>
+            </div>
+            <p style="color:rgba(255,255,255,0.35);font-size:12px;margin-top:12px;text-align:center">Vous pourrez nous envoyer vos fichiers par WhatsApp ou email après le questionnaire</p>
+        </div>
+        <!-- 13: Infos produits (pour e-commerce) -->
+        <div class="q-step" data-step="produits">
+            <h2>Parlez-nous de vos produits / services</h2>
+            <p class="q-sub">Plus on en sait, plus on ira vite. Remplissez ce que vous pouvez.</p>
+            <div style="display:flex;flex-direction:column;gap:12px;max-width:500px;width:100%">
+                <input class="q-input" data-key="nb_produits" type="text" placeholder="Combien de produits/services ? (ex: 15 produits, 5 prestations...)">
+                <input class="q-input" data-key="gamme_prix" type="text" placeholder="Fourchette de prix (ex: 20€ - 150€, à partir de 50€...)">
+                <textarea class="q-input q-textarea" data-key="details_produits" placeholder="Détails : catégories, best-sellers, promos en cours, livraison... Tout ce qui peut nous aider." style="min-height:100px"></textarea>
+            </div>
+            <button class="q-btn q-produits-btn">Continuer →</button>
+        </div>
+        <!-- 14: Inspiration -->
         <div class="q-step" data-step="inspiration">
             <h2>Avez-vous des sites qui vous inspirent ?</h2>
             <p class="q-sub">Collez les liens de 1 à 3 sites dont le style vous plaît. Pas obligatoire.</p>
@@ -1289,7 +1337,7 @@ const qBackBtn=qModal.querySelector('.q-back');
 const qStepLabel=qModal.querySelector('.q-step-label');
 let qCurrent=0;
 const qData={};
-const totalSteps=15;
+const totalSteps=17;
 
 function qShow(){qModal.classList.add('open');document.body.style.overflow='hidden';qGoTo(0)}
 function qHide(){qModal.classList.remove('open');document.body.style.overflow=''}
@@ -1379,6 +1427,17 @@ qModal.querySelectorAll('.q-text-input').forEach(inp=>{
 qModal.querySelector('.q-inspi-btn')?.addEventListener('click',()=>{
     const inputs=qModal.querySelectorAll('.q-inspi-input');
     qData.inspiration=Array.from(inputs).map(i=>i.value.trim()).filter(Boolean);
+    qNext();
+});
+
+/* Produits step */
+qModal.querySelector('.q-produits-btn')?.addEventListener('click',()=>{
+    const nb=qModal.querySelector('[data-key="nb_produits"]');
+    const gp=qModal.querySelector('[data-key="gamme_prix"]');
+    const det=qModal.querySelector('[data-key="details_produits"]');
+    if(nb)qData.nb_produits=nb.value.trim();
+    if(gp)qData.gamme_prix=gp.value.trim();
+    if(det)qData.details_produits=det.value.trim();
     qNext();
 });
 
