@@ -43,16 +43,12 @@ img,svg{max-width:100%;display:block}
 /* DOORS: normal flow, scroll naturally over garages */
 .doors-layer{position:relative;z-index:10}
 .garage-view{height:100vh;pointer-events:none}
-.door{min-height:auto;display:flex;flex-direction:column;justify-content:center;box-shadow:0 -10px 40px rgba(0,0,0,0.15);transition:filter 0.5s ease;position:relative;margin-top:0;padding-top:80px;padding-bottom:80px;overflow:visible}
+.door{min-height:auto;display:flex;flex-direction:column;justify-content:center;box-shadow:0 -10px 40px rgba(0,0,0,0.15);transition:filter 0.5s ease;position:relative;margin-top:-80px;padding-top:100px;padding-bottom:80px;z-index:10}
 .door.leaving{filter:brightness(0.92)}
-/* Wave transition SVGs positioned at bottom of doors */
-.door .wave-transition{position:absolute;bottom:0;left:0;width:100%;transform:translateY(100%);z-index:10;pointer-events:none;display:block}
-@keyframes waveFloat{0%,100%{transform:translateY(100%) translateX(-10px)}50%{transform:translateY(100%) translateX(10px)}}
-.door .wave-transition{animation:waveFloat 8s ease-in-out infinite}
-/* Diagonal clip-path doors (no SVG needed) */
-.door.diagonal-lr{clip-path:polygon(0 0, 100% 0, 100% calc(100% - 60px), 0 100%)}
-.door.diagonal-rl{clip-path:polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 60px))}
-.door.diagonal-lr,.door.diagonal-rl{padding-bottom:140px}
+/* Transition SVGs between sections */
+.section-wave{position:relative;z-index:11;margin-top:-1px;display:block;width:100%;pointer-events:none}
+@keyframes waveFloat{0%,100%{transform:translateX(0)}50%{transform:translateX(10px)}}
+.section-wave.animated{animation:waveFloat 8s ease-in-out infinite}
 
 /* ===== SECTION COLORS — 5-color palette ===== */
 /* #3B0764 violet nuit (70%), #7C3AED violet mat, #D9F99D jaune lime, #EA580C orange brûlé, #2DD4BF turquoise */
@@ -762,8 +758,11 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
 <!-- Spacer: view Hero -->
 <div class="garage-view" data-garage="0"></div>
 
-<!-- DOOR 1: Process — Transition 1: VAGUE SIMPLE at bottom, Transition 2: DIAGONAL LR -->
-<section class="section-spacing door sec-process diagonal-lr" id="process">
+<!-- Transition 1: VAGUE SIMPLE (Hero → Process) -->
+<svg class="section-wave animated" viewBox="0 0 1440 80" preserveAspectRatio="none" style="height:80px;background:#3B0764"><path d="M0,80 C360,0 720,0 1080,80 L1440,80 L0,80 Z" fill="#7C3AED"/></svg>
+
+<!-- DOOR 1: Process -->
+<section class="section-spacing door sec-process" id="process">
     <div class="container">
         <div class="sh">
             <h2 class="anim anim-blur">Simple comme <span class="gt">bonjour</span></h2>
@@ -778,15 +777,19 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
             </div>
         </div>
     </div>
-    <!-- Transition 1: VAGUE SIMPLE (top of this door, over hero) -->
-    <svg class="wave-transition" style="top:0;bottom:auto;transform:translateY(-100%) scaleY(-1)" viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,80 C360,0 720,0 1080,80 L1440,80 L1440,80 L0,80 Z" fill="#7C3AED"/></svg>
 </section>
+
+<!-- Transition 2: TRAIT PENCHE (Process → Portfolio) -->
+<svg class="section-wave" viewBox="0 0 1440 60" preserveAspectRatio="none" style="height:60px;background:#3B0764"><polygon points="0,0 1440,60 1440,60 0,60" fill="#7C3AED"/></svg>
 
 <!-- Spacer: view Portfolio -->
 <div class="garage-view" data-garage="1"></div>
 
-<!-- DOOR 2: Services — Transition 3: DOUBLE VAGUE at top, Transition 4: DIAGONAL RL -->
-<section class="section-spacing door sec-services diagonal-rl" id="services">
+<!-- Transition 3: DOUBLE VAGUE (Portfolio → Services) -->
+<svg class="section-wave animated" viewBox="0 0 1440 80" preserveAspectRatio="none" style="height:80px;background:#3B0764"><path d="M0,80 L0,40 C180,0 360,80 540,40 C720,0 900,80 1080,40 C1260,0 1440,40 1440,40 L1440,80 Z" fill="#134E4A"/></svg>
+
+<!-- DOOR 2: Services -->
+<section class="section-spacing door sec-services" id="services">
     <div class="container">
         <div class="sh"><h2 class="anim anim-blur">Pour tous les <span class="gt">professionnels</span></h2><p class="anim anim-up">Des sites pensés pour votre métier, avec les fonctionnalités qui comptent.</p></div>
         <div class="svc-grid">
@@ -798,15 +801,19 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
             <div class="svc svc-white anim anim-scale" data-delay="5"><h3>Studios Yoga</h3><p>Planning cours, réservation, présentation profs.</p></div>
         </div>
     </div>
-    <!-- Transition 3: DOUBLE VAGUE (top of services, over portfolio) -->
-    <svg class="wave-transition" style="top:0;bottom:auto;transform:translateY(-100%) scaleY(-1)" viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,80 L0,40 C180,0 360,80 540,40 C720,0 900,80 1080,40 C1260,0 1440,40 1440,40 L1440,80 Z" fill="#134E4A"/></svg>
 </section>
+
+<!-- Transition 4: TRAIT PENCHE INVERSE (Services → BA) -->
+<svg class="section-wave" viewBox="0 0 1440 60" preserveAspectRatio="none" style="height:60px;background:#3B0764"><polygon points="0,60 1440,0 1440,60 0,60" fill="#134E4A"/></svg>
 
 <!-- Spacer: view BA -->
 <div class="garage-view" data-garage="2"></div>
 
-<!-- DOOR 3: Compare — Transition 5: VAGUE EN S at top, Transition 6: DIAGONAL LR -->
-<section class="section-spacing door sec-compare diagonal-lr" id="compare">
+<!-- Transition 5: VAGUE EN S (BA → Compare) -->
+<svg class="section-wave animated" viewBox="0 0 1440 100" preserveAspectRatio="none" style="height:100px;background:#3B0764"><path d="M0,100 L0,70 C360,0 720,100 1080,30 L1440,60 L1440,100 Z" fill="#EA580C"/></svg>
+
+<!-- DOOR 3: Compare -->
+<section class="section-spacing door sec-compare" id="compare">
     <div class="container">
         <div class="sh"><h2 class="anim anim-blur">Pourquoi nous <span class="gt">choisir</span> ?</h2></div>
         <div class="cmp-grid">
@@ -816,15 +823,19 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
             <div class="cmp card featured anim anim-scale" data-delay="3"><div class="cmp-badge">RECOMMAND&Eacute;</div><div class="cmp-name gt">WebsiteBuild</div><div class="cmp-row"><strong>199€/mois</strong>Budget</div><div class="cmp-row"><strong>48h</strong>Délai</div><div class="cmp-row"><strong>Qualité agence</strong>Résultat</div><div class="cmp-row"><strong>24/7 WhatsApp</strong>Support</div><div class="cmp-row"><strong>0€ de création</strong></div><div class="cmp-stars">5/5</div></div>
         </div>
     </div>
-    <!-- Transition 5: VAGUE EN S (top of compare, over BA) -->
-    <svg class="wave-transition" style="top:0;bottom:auto;transform:translateY(-100%) scaleY(-1)" viewBox="0 0 1440 100" preserveAspectRatio="none"><path d="M0,100 L0,70 C360,0 720,100 1080,30 L1440,60 L1440,100 Z" fill="#EA580C"/></svg>
 </section>
+
+<!-- Transition 6: TRAIT PENCHE (Compare → Pricing) -->
+<svg class="section-wave" viewBox="0 0 1440 60" preserveAspectRatio="none" style="height:60px;background:#3B0764"><polygon points="0,0 1440,60 1440,60 0,60" fill="#EA580C"/></svg>
 
 <!-- Spacer: view Pricing -->
 <div class="garage-view" data-garage="3"></div>
 
-<!-- DOOR 4: Testimonials — Transition 7: VAGUE ASYMETRIQUE at top, Transition 8: DIAGONAL RL -->
-<section class="section-spacing door sec-testi diagonal-rl"
+<!-- Transition 7: VAGUE ASYMETRIQUE (Pricing → Testimonials) -->
+<svg class="section-wave animated" viewBox="0 0 1440 80" preserveAspectRatio="none" style="height:80px;background:#3B0764"><path d="M0,80 L0,60 C200,0 430,0 500,60 C600,80 900,80 1440,70 L1440,80 Z" fill="#7C3AED"/></svg>
+
+<!-- DOOR 4: Testimonials -->
+<section class="section-spacing door sec-testi" id="testi">
     <div class="container">
         <div class="sh" style="margin-bottom:36px"><h2 class="anim anim-blur">Ce que disent nos <span class="gt">clients</span></h2></div>
         <div class="testi-grid">
@@ -833,15 +844,19 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
             <div class="testi anim anim-rotate" data-delay="2"><div class="testi-q">"</div><p class="testi-text">Envoyé mes infos lundi, site en ligne mercredi. Le support est incroyable, ils répondent en 5 min sur WhatsApp.</p><div class="testi-sep"></div><div class="testi-author"><div class="testi-av">TR</div><div><div class="testi-nm">Thomas R.</div><div class="testi-role">Coach sportif à Paris</div><div class="testi-stars">5/5</div></div></div></div>
         </div>
     </div>
-    <!-- Transition 7: VAGUE ASYMETRIQUE (top of testi, crête à 30%) -->
-    <svg class="wave-transition" style="top:0;bottom:auto;transform:translateY(-100%) scaleY(-1)" viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,80 L0,60 C200,0 430,0 500,60 C600,80 900,80 1440,70 L1440,80 Z" fill="#7C3AED"/></svg>
 </section>
+
+<!-- Transition 8: TRAIT PENCHE INVERSE (Testimonials → FAQ) -->
+<svg class="section-wave" viewBox="0 0 1440 60" preserveAspectRatio="none" style="height:60px;background:#3B0764"><polygon points="0,60 1440,0 1440,60 0,60" fill="#7C3AED"/></svg>
 
 <!-- Spacer: view FAQ -->
 <div class="garage-view" data-garage="4"></div>
 
-<!-- DOOR 5: Team — Transition 9: TRIPLE VAGUES at top, Transition 10: DIAGONAL LR -->
-<section class="section-spacing door sec-team diagonal-lr" id="team">
+<!-- Transition 9: TRIPLE PETITES VAGUES (FAQ → Team) -->
+<svg class="section-wave animated" viewBox="0 0 1440 60" preserveAspectRatio="none" style="height:60px;background:#3B0764"><path d="M0,60 L0,40 C120,15 240,50 360,30 C480,10 600,45 720,25 C840,5 960,40 1080,30 C1200,20 1320,45 1440,35 L1440,60 Z" fill="#164E63"/></svg>
+
+<!-- DOOR 5: Team -->
+<section class="section-spacing door sec-team" id="team">
     <div class="container">
         <div class="sh"><h2 class="anim anim-blur">L'équipe derrière <span class="gt">WebsiteBuild</span></h2></div>
         <div class="team-grid">
@@ -850,9 +865,10 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
         </div>
         <p class="team-quote anim anim-up">« On croit que chaque professionnel mérite un site à la hauteur de son talent. Pas dans 3 mois, pas pour 5 000€. Maintenant, et à un prix juste. »</p>
     </div>
-    <!-- Transition 9: TRIPLE PETITES VAGUES (top of team, over FAQ) -->
-    <svg class="wave-transition" style="top:0;bottom:auto;transform:translateY(-100%) scaleY(-1)" viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,60 L0,40 C120,15 240,50 360,30 C480,10 600,45 720,25 C840,5 960,40 1080,30 C1200,20 1320,45 1440,35 L1440,60 Z" fill="#164E63"/></svg>
 </section>
+
+<!-- Transition 10: TRAIT PENCHE (Team → CTA) -->
+<svg class="section-wave" viewBox="0 0 1440 60" preserveAspectRatio="none" style="height:60px;background:#7C3AED"><polygon points="0,0 1440,60 1440,60 0,60" fill="#164E63"/></svg>
 
 <!-- Spacer: view CTA -->
 <div class="garage-view" data-garage="5"></div>
