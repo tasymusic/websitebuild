@@ -63,26 +63,27 @@ img,svg{max-width:100%;display:block}
 /* Palette: #D9F99D (lime), #2DD4BF (turquoise), #F472B6 (rose), #93C5FD (bleu clair), #06D6A0 (vert menthe), #FFB4A2 (pêche saumon) */
 /* Backgrounds: #3B0764 (violet nuit), #7C3AED (violet mat) */
 
-/* --- HERO: dominant #D9F99D (lime) --- */
-.sec-hero{background:#3B0764!important;color:#fff}
-.sec-hero .badge{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.1);color:#2DD4BF}
-.sec-hero h1{color:#fff}
-.sec-hero .gt{color:#D9F99D;-webkit-text-fill-color:#D9F99D;background:none}
-.sec-hero .hero-sub{color:rgba(255,255,255,0.6)}
-.sec-hero .hero-trust{color:rgba(255,255,255,0.5)}
-.sec-hero .btn-primary{background:#F472B6;color:#fff}
-.sec-hero .btn-primary:hover{box-shadow:0 0 30px rgba(244,114,182,0.4);transform:scale(1.05)}
-.sec-hero .btn-secondary{border-color:#F472B6;color:#F472B6}
-.sec-hero .btn-secondary:hover{border-color:#fff;color:#fff}
-.sec-hero .card{background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.1)}
-.sec-hero .nav-logo,.sec-hero .text-dark{color:#fff}
+/* --- HERO: dominant #FF8EC4 (rose pink) on #3D0A2E (bordeaux prune) --- */
+.sec-hero{background:#3D0A2E!important;color:#F4D2E0}
+.sec-hero .badge{background:rgba(255,142,196,0.15);border-color:rgba(255,142,196,0.2);color:#FF8EC4}
+.sec-hero h1{color:#F4D2E0}
+.sec-hero .gt{color:#FF8EC4;-webkit-text-fill-color:#FF8EC4;background:none}
+.sec-hero .hero-sub{color:rgba(244,210,224,0.6)}
+.sec-hero .hero-trust{color:rgba(244,210,224,0.5)}
+.sec-hero .hero-trust span::before{color:#FF8EC4}
+.sec-hero .btn-primary{background:#FF8EC4;color:#3D0A2E}
+.sec-hero .btn-primary:hover{box-shadow:0 0 30px rgba(255,142,196,0.4);transform:scale(1.05)}
+.sec-hero .btn-secondary{border-color:#F4D2E0;color:#F4D2E0}
+.sec-hero .btn-secondary:hover{border-color:#FF8EC4;color:#FF8EC4}
+.sec-hero .card{background:rgba(255,142,196,0.08);border-color:rgba(255,142,196,0.15)}
+.sec-hero .nav-logo,.sec-hero .text-dark{color:#F4D2E0}
 
 /* Hero inline stats */
 .hero-stats{display:flex;align-items:center;justify-content:center;gap:0;margin-top:28px;flex-wrap:wrap}
 .hs{display:flex;flex-direction:column;align-items:center;padding:0 20px}
-.hs-num{font-size:28px;font-weight:800;line-height:1.2;color:#2DD4BF}
-.hs-label{font-size:13px;color:rgba(255,255,255,0.5);margin-top:1px}
-.hs-sep{width:1px;height:28px;background:rgba(255,255,255,0.15)}
+.hs-num{font-size:28px;font-weight:800;line-height:1.2;color:#FF8EC4}
+.hs-label{font-size:13px;color:rgba(244,210,224,0.5);margin-top:1px}
+.hs-sep{width:1px;height:28px;background:rgba(244,210,224,0.15)}
 @media(max-width:480px){.hero-stats{gap:8px}.hs{padding:0 12px}.hs-num{font-size:22px}.hs-sep{height:20px}}
 
 /* --- PROCESS (porte): dominant #2DD4BF (turquoise) --- */
@@ -298,15 +299,15 @@ img,svg{max-width:100%;display:block}
 
 /* ===== NAV ===== */
 .nav{position:fixed;top:0;left:0;right:0;z-index:9999;height:64px;display:flex;align-items:center;transition:all 0.3s}
-.nav.scrolled{background:rgba(59,7,100,0.9);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06)}
 .nav-inner{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto;padding:0 24px;width:100%}
-.nav-logo{font-size:18px;font-weight:700;color:#fff;transition:color 0.3s}.nav-logo .dot{color:var(--purple)}
+.nav-logo{font-size:18px;font-weight:700;color:#F4D2E0;transition:color 0.3s}.nav-logo .dot{color:#FF8EC4}
 .nav-links{display:flex;align-items:center;gap:28px}
-.nav-link{font-size:14px;font-weight:500;color:rgba(255,255,255,0.7);transition:color 0.3s}.nav-link:hover{color:#D9F99D}
-.nav.scrolled .nav-logo{color:#fff}
-.nav.scrolled .nav-link{color:rgba(255,255,255,0.7)}.nav.scrolled .nav-link:hover{color:#D9F99D}
-.nav-cta{background:#F472B6;color:#fff;padding:8px 20px;border-radius:var(--radius-xs);font-size:13px;font-weight:600;transition:all 0.3s}
-.nav-cta:hover{transform:scale(1.05);box-shadow:0 0 20px rgba(244,114,182,0.3)}
+.nav-link{font-size:14px;font-weight:500;color:#F4D2E0;transition:color 0.3s}.nav-link:hover{color:#FF8EC4}
+.nav.scrolled{background:rgba(61,10,46,0.9);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,142,196,0.1)}
+.nav.scrolled .nav-logo{color:#F4D2E0}
+.nav.scrolled .nav-link{color:#F4D2E0}.nav.scrolled .nav-link:hover{color:#FF8EC4}
+.nav-cta{background:#FF8EC4;color:#3D0A2E;padding:8px 20px;border-radius:var(--radius-xs);font-size:13px;font-weight:600;transition:all 0.3s}
+.nav-cta:hover{transform:scale(1.05);box-shadow:0 0 20px rgba(255,142,196,0.3)}
 .nav-toggle{display:none;flex-direction:column;gap:5px;padding:8px}
 .nav-toggle span{display:block;width:22px;height:2px;background:#fff;transition:all 0.3s}
 .nav-mob{display:none;position:fixed;inset:0;background:rgba(59,7,100,0.97);backdrop-filter:blur(20px);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:28px}
@@ -1282,11 +1283,11 @@ navMob.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navMob.cl
 
 /* ===== HERO GRADIENT FOLLOW MOUSE ===== */
 const hg=document.getElementById('heroGrad');
-document.addEventListener('mousemove',e=>{const x=(e.clientX/innerWidth*100).toFixed(1),y=(e.clientY/innerHeight*100).toFixed(1);hg.style.background='radial-gradient(600px circle at '+x+'% '+y+'%,rgba(124,58,237,0.15),transparent 60%)'});
+document.addEventListener('mousemove',e=>{const x=(e.clientX/innerWidth*100).toFixed(1),y=(e.clientY/innerHeight*100).toFixed(1);hg.style.background='radial-gradient(600px circle at '+x+'% '+y+'%,rgba(107,29,78,0.2),transparent 60%)'});
 
 /* ===== PARTICLES ===== */
 const pc=document.getElementById('particles');
-var pColors=['rgba(217,249,157,0.15)','rgba(45,212,191,0.15)','rgba(244,114,182,0.15)'];
+var pColors=['rgba(255,142,196,0.15)','rgba(244,210,224,0.15)','rgba(255,142,196,0.15)'];
 for(let i=0;i<18;i++){const p=document.createElement('div');p.className='particle';const s=3+Math.random()*4;const c=pColors[i%3];p.style.cssText='width:'+s+'px;height:'+s+'px;background:'+c+';left:'+Math.random()*100+'%;top:'+Math.random()*100+'%;--po:'+(0.1+Math.random()*0.2)+';--dx:'+(Math.random()*100-50)+'px;--dy:'+(Math.random()*100-50)+'px;--dur:'+(8+Math.random()*12)+'s;--del:'+(Math.random()*8)+'s';pc.appendChild(p)}
 
 /* ===== TILT 3D (lerp + rAF) ===== */
