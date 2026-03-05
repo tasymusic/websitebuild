@@ -42,6 +42,12 @@ img,svg{max-width:100%;display:block}
 .stack-section.covered{transform:scale(0.95);filter:brightness(0.85)}
 @media(max-width:768px){.stack-section:not(:first-child){border-top-left-radius:16px;border-top-right-radius:16px}}
 
+/* ===== DIAGONAL CLIP ===== */
+.diag-up,.diag-down{position:relative}
+.diag-up::before,.diag-down::before{content:'';position:absolute;top:-80px;left:0;width:100%;height:80px;z-index:1;filter:drop-shadow(0 -4px 10px rgba(0,0,0,0.08))}
+.diag-up::before{background:inherit;clip-path:polygon(0 100%,100% 0,100% 100%)}
+.diag-down::before{background:inherit;clip-path:polygon(0 0,0 100%,100% 100%)}
+
 /* ===== CURSOR ===== */
 .cursor{position:fixed;width:20px;height:20px;border-radius:50%;background:rgba(124,58,237,0.3);pointer-events:none;z-index:99999;transition:width 0.3s ease,height 0.3s ease,opacity 0.3s ease;transform:translate(-50%,-50%);will-change:transform,width,height,opacity;opacity:0.3}
 .cursor.hover{width:50px;height:50px;opacity:0.15}
@@ -126,9 +132,8 @@ img,svg{max-width:100%;display:block}
 .particle{position:absolute;border-radius:50%;animation:particleFloat var(--dur) linear infinite;animation-delay:var(--del)}
 .hero-content{position:relative;z-index:1}
 .hero h1{font-size:clamp(44px,7vw,86px);font-weight:900;line-height:1.05;letter-spacing:-0.03em;margin:20px 0 0;color:var(--text-dark)}
-.hero h1 .word{display:inline-block;overflow:hidden;vertical-align:bottom}
-.hero h1 .word span{display:inline-block;transform:translateY(110%);animation:wordIn 0.6s forwards;animation-delay:var(--d)}
-@keyframes wordIn{to{transform:translateY(0)}}
+/* Split text handles hero title animation */
+.split-text{overflow:visible}
 .hero-sub{font-size:19px;color:var(--text-med);max-width:560px;margin:24px auto 0;line-height:1.7}
 .hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:36px}
 .hero-trust{font-size:14px;color:var(--text-light);margin-top:20px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
@@ -348,7 +353,7 @@ img,svg{max-width:100%;display:block}
 @media(prefers-reduced-motion:reduce){
     *,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important}
     html{scroll-behavior:auto}
-    .hero h1 .word span{transform:none;animation:none}
+    .split-char{opacity:1!important;transform:none!important}
 }
     </style>
 </head>
@@ -366,7 +371,7 @@ img,svg{max-width:100%;display:block}
             <a href="#services" class="nav-link">Services</a>
             <a href="#pricing" class="nav-link">Tarifs</a>
             <a href="#faq" class="nav-link">FAQ</a>
-            <a href="#contact" class="nav-cta">Démarrer</a>
+            <a href="#contact" class="nav-cta magnetic">Démarrer</a>
         </div>
         <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
         <div class="nav-mob" id="navMob"><a href="#portfolio">Réalisations</a><a href="#services">Services</a><a href="#pricing">Tarifs</a><a href="#faq">FAQ</a><a href="#contact">Démarrer</a></div>
@@ -384,8 +389,8 @@ img,svg{max-width:100%;display:block}
         <h1 id="heroTitle">Des sites web qui <span class="shimmer gt">impressionnent</span></h1>
         <p class="hero-sub anim anim-up" style="--d:0.4s">On crée votre site professionnel pendant que vous vous concentrez sur votre métier. Livré en 48h, sans effort.</p>
         <div class="hero-btns anim anim-up" style="--d:0.5s">
-            <a href="#portfolio" class="btn btn-primary">Voir nos réalisations →</a>
-            <a href="#pricing" class="btn btn-secondary">Découvrir les tarifs</a>
+            <a href="#portfolio" class="btn btn-primary magnetic">Voir nos réalisations →</a>
+            <a href="#pricing" class="btn btn-secondary magnetic">Découvrir les tarifs</a>
         </div>
         <div class="hero-trust anim anim-up" style="--d:0.6s"><span>✓ 0€ de création</span><span>✓ Sans engagement</span><span>✓ Support 24/7</span></div>
 
@@ -419,7 +424,7 @@ img,svg{max-width:100%;display:block}
 </section>
 
 <!-- ===== STATS ===== -->
-<section class="section-spacing stack-section" data-bg="#161529" style="z-index:2;background:#161529">
+<section class="section-spacing stack-section diag-up" data-bg="#161529" style="z-index:2;background:#161529">
     <div class="container">
         <div class="card anim anim-up" style="padding:48px 24px">
             <div class="stats-row">
@@ -487,7 +492,7 @@ img,svg{max-width:100%;display:block}
 </section>
 
 <!-- ===== AVANT/APRÈS ===== -->
-<section class="section-spacing stack-section" data-bg="#141220" style="z-index:6;background:#141220">
+<section class="section-spacing stack-section diag-down" data-bg="#141220" style="z-index:6;background:#141220">
     <div class="container">
         <div class="ba-outer card-black anim anim-left">
             <div class="sh" style="margin-bottom:0"><h2 class="anim anim-blur">La différence <span class="gt">WebsiteBuild</span></h2></div>
@@ -572,7 +577,7 @@ img,svg{max-width:100%;display:block}
 </section>
 
 <!-- ===== FAQ ===== -->
-<section class="section-spacing stack-section" id="faq" data-bg="#1a1a2e" style="z-index:10;background:#1a1a2e">
+<section class="section-spacing stack-section diag-up" id="faq" data-bg="#1a1a2e" style="z-index:10;background:#1a1a2e">
     <div class="container" style="max-width:800px">
         <div class="card anim anim-scale" style="padding:48px 40px">
             <div class="sh" style="margin-bottom:24px"><h2>Questions <span class="gt">fréquentes</span></h2></div>
@@ -675,11 +680,7 @@ const navToggle=document.getElementById('navToggle'),navMob=document.getElementB
 navToggle.addEventListener('click',()=>navMob.classList.toggle('open'));
 navMob.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navMob.classList.remove('open')));
 
-/* ===== HERO WORD BY WORD ===== */
-const ht=document.getElementById('heroTitle');
-if(ht){const html=ht.innerHTML;const words=html.split(/(\s+|<[^>]+>)/);let i=0;ht.innerHTML=words.map(w=>{if(w.trim()===''||w.startsWith('<'))return w;const d=i*0.1;i++;return '<span class="word"><span class="word-inner" style="--d:'+d+'s">'+w+'</span></span>'}).join(' ')}
-/* Propager .gt sur les word-inner à l'intérieur de .gt */
-document.querySelectorAll('.gt .word-inner').forEach(el=>el.classList.add('gt'));
+/* Word-by-word removed — replaced by split text below */
 
 /* ===== HERO GRADIENT FOLLOW MOUSE ===== */
 const hg=document.getElementById('heroGrad');
@@ -736,6 +737,91 @@ const baCont=document.getElementById('baContainer'),baBef=document.getElementByI
 if(baCont){let d=false;function upd(x){const r=baCont.getBoundingClientRect();let p=((x-r.left)/r.width)*100;p=Math.max(5,Math.min(95,p));baBef.style.width=p+'%';baSl.style.left=p+'%'}
 baCont.addEventListener('mousedown',e=>{d=true;upd(e.clientX)});window.addEventListener('mousemove',e=>{if(d){e.preventDefault();upd(e.clientX)}});window.addEventListener('mouseup',()=>d=false);
 baCont.addEventListener('touchstart',e=>{d=true;upd(e.touches[0].clientX)},{passive:true});window.addEventListener('touchmove',e=>{if(d)upd(e.touches[0].clientX)},{passive:true});window.addEventListener('touchend',()=>d=false)}
+
+/* ===== MAGNETIC BUTTONS ===== */
+if(window.innerWidth>768){
+    document.querySelectorAll('.magnetic').forEach(btn=>{
+        document.addEventListener('mousemove',e=>{
+            const r=btn.getBoundingClientRect();
+            const cx=r.left+r.width/2,cy=r.top+r.height/2;
+            const dx=e.clientX-cx,dy=e.clientY-cy;
+            const dist=Math.sqrt(dx*dx+dy*dy);
+            if(dist<100){
+                const tx=Math.max(-15,Math.min(15,dx*0.3));
+                const ty=Math.max(-15,Math.min(15,dy*0.3));
+                const s=dist<r.width/2?'scale(1.05)':'';
+                btn.style.transform='translate('+tx+'px,'+ty+'px) '+s;
+                btn.style.transition='transform 0.2s ease';
+            }else{
+                btn.style.transform='';
+                btn.style.transition='transform 0.4s cubic-bezier(0.16,1,0.3,1)';
+            }
+        });
+    });
+}
+
+/* ===== SPLIT TEXT ===== */
+function splitText(el,delay){
+    const nodes=[];
+    el.childNodes.forEach(n=>{
+        if(n.nodeType===3){
+            n.textContent.split('').forEach(ch=>{
+                const s=document.createElement('span');
+                if(ch===' '){s.innerHTML='&nbsp;';s.style.display='inline-block';s.style.width='0.3em'}
+                else{s.textContent=ch;s.style.display='inline-block';s.style.opacity='0';s.style.transform='translateY(80px) rotate(10deg)';s.style.transition='opacity 0.6s cubic-bezier(0.16,1,0.3,1),transform 0.6s cubic-bezier(0.16,1,0.3,1)';s.classList.add('split-char')}
+                nodes.push(s);
+            });
+        }else{
+            const clone=n.cloneNode(true);
+            /* Split text inside child elements like .shimmer.gt */
+            if(clone.textContent){
+                const inner=[];
+                clone.textContent.split('').forEach(ch=>{
+                    const s=document.createElement('span');
+                    if(ch===' '){s.innerHTML='&nbsp;';s.style.display='inline-block';s.style.width='0.3em'}
+                    else{s.textContent=ch;s.style.display='inline-block';s.style.opacity='0';s.style.transform='translateY(80px) rotate(10deg)';s.style.transition='opacity 0.6s cubic-bezier(0.16,1,0.3,1),transform 0.6s cubic-bezier(0.16,1,0.3,1)';s.classList.add('split-char')}
+                    inner.push(s);
+                });
+                clone.textContent='';
+                inner.forEach(s=>clone.appendChild(s));
+            }
+            nodes.push(clone);
+        }
+    });
+    el.textContent='';
+    nodes.forEach(n=>el.appendChild(n));
+    function animate(){
+        const chars=el.querySelectorAll('.split-char');
+        chars.forEach((c,i)=>{
+            setTimeout(()=>{c.style.opacity='1';c.style.transform='translateY(0) rotate(0)'},delay+i*30);
+        });
+    }
+    return animate;
+}
+/* Hero title — animate after 0.5s */
+const heroSplit=document.getElementById('heroTitle');
+if(heroSplit){
+    heroSplit.classList.add('split-text');
+    /* Remove word-by-word animation, replace with split */
+    const animFn=splitText(heroSplit,500);
+    animFn();
+    /* Re-propagate .gt on split chars inside .gt */
+    heroSplit.querySelectorAll('.gt .split-char').forEach(c=>c.classList.add('gt'));
+    heroSplit.querySelectorAll('.shimmer .split-char').forEach(c=>{
+        c.style.background=getComputedStyle(document.documentElement).getPropertyValue('--gradient');
+        c.style.webkitBackgroundClip='text';
+        c.style.webkitTextFillColor='transparent';
+        c.style.backgroundClip='text';
+    });
+}
+/* CTA title — animate on scroll */
+const ctaTitle=document.querySelector('.cta-final h2');
+if(ctaTitle){
+    ctaTitle.classList.add('split-text');
+    const ctaAnimFn=splitText(ctaTitle,0);
+    const ctaSplitObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){ctaAnimFn();ctaSplitObs.unobserve(e.target)}})},{threshold:0.2});
+    ctaSplitObs.observe(ctaTitle);
+}
 </script>
 </body>
 </html>
