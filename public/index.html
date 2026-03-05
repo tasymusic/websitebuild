@@ -43,159 +43,183 @@ img,svg{max-width:100%;display:block}
 /* DOORS: normal flow, scroll naturally over garages */
 .doors-layer{position:relative;z-index:10}
 .garage-view{height:100vh;pointer-events:none}
-.door{min-height:auto;display:flex;flex-direction:column;justify-content:center;box-shadow:0 -10px 40px rgba(0,0,0,0.15);transition:filter 0.5s ease;position:relative;margin-top:-50px;padding-top:70px;padding-bottom:70px}
-.door::before{content:'';position:absolute;top:-49px;left:0;right:0;height:50px;background:inherit}
-.door::after{content:'';position:absolute;bottom:-49px;left:0;right:0;height:50px;background:inherit;z-index:2}
-/* Each door gets a unique irregular wave via nth-child */
-.door:nth-child(1)::before,.doors-layer .door:nth-of-type(1)::before{clip-path:url(#waveTop1)}
-.door:nth-child(1)::after,.doors-layer .door:nth-of-type(1)::after{clip-path:url(#waveBot1)}
-.door:nth-of-type(2)::before{clip-path:url(#waveTop2)}
-.door:nth-of-type(2)::after{clip-path:url(#waveBot2)}
-.door:nth-of-type(3)::before{clip-path:url(#waveTop3)}
-.door:nth-of-type(3)::after{clip-path:url(#waveBot3)}
-.door:nth-of-type(4)::before{clip-path:url(#waveTop4)}
-.door:nth-of-type(4)::after{clip-path:url(#waveBot4)}
-.door:nth-of-type(5)::before{clip-path:url(#waveTop5)}
-.door:nth-of-type(5)::after{clip-path:url(#waveBot5)}
+.door{min-height:auto;display:flex;flex-direction:column;justify-content:center;box-shadow:0 -10px 40px rgba(0,0,0,0.15);transition:filter 0.5s ease;position:relative;margin-top:0;padding-top:80px;padding-bottom:80px;overflow:visible}
 .door.leaving{filter:brightness(0.92)}
+/* Wave transition SVGs positioned at bottom of doors */
+.door .wave-transition{position:absolute;bottom:0;left:0;width:100%;transform:translateY(100%);z-index:10;pointer-events:none;display:block}
+@keyframes waveFloat{0%,100%{transform:translateY(100%) translateX(-10px)}50%{transform:translateY(100%) translateX(10px)}}
+.door .wave-transition{animation:waveFloat 8s ease-in-out infinite}
+/* Diagonal clip-path doors (no SVG needed) */
+.door.diagonal-lr{clip-path:polygon(0 0, 100% 0, 100% calc(100% - 60px), 0 100%)}
+.door.diagonal-rl{clip-path:polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 60px))}
+.door.diagonal-lr,.door.diagonal-rl{padding-bottom:140px}
 
-/* ===== SECTION COLORS ===== */
-/* Hero - dégradé violet pâle → bleu pâle */
-.sec-hero{background:linear-gradient(135deg,#7C3AED 0%,#A855F7 40%,#EC4899 100%)!important;color:#fff}
-.sec-hero .badge{background:rgba(255,255,255,0.15);border-color:rgba(255,255,255,0.25);color:#fff}
+/* ===== SECTION COLORS — 5-color palette ===== */
+/* #3B0764 violet nuit (70%), #7C3AED violet mat, #D9F99D jaune lime, #EA580C orange brûlé, #2DD4BF turquoise */
+
+/* --- HERO: #3B0764 violet nuit --- */
+.sec-hero{background:#3B0764!important;color:#fff}
+.sec-hero .badge{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.1);color:#2DD4BF}
 .sec-hero h1{color:#fff}
-.sec-hero .hero-sub{color:rgba(255,255,255,0.85)}
-.sec-hero .hero-trust{color:rgba(255,255,255,0.7)}
-.sec-hero .btn-primary{background:#fff;color:#7C3AED}
-.sec-hero .btn-primary:hover{box-shadow:0 0 30px rgba(255,255,255,0.3)}
+.sec-hero .gt{color:#D9F99D;-webkit-text-fill-color:#D9F99D;background:none}
+.sec-hero .hero-sub{color:rgba(255,255,255,0.6)}
+.sec-hero .hero-trust{color:rgba(255,255,255,0.5)}
+.sec-hero .btn-primary{background:#EA580C;color:#fff}
+.sec-hero .btn-primary:hover{box-shadow:0 0 30px rgba(234,88,12,0.4);transform:scale(1.05)}
 .sec-hero .btn-secondary{border-color:rgba(255,255,255,0.3);color:#fff}
 .sec-hero .btn-secondary:hover{border-color:#fff;color:#fff}
-.sec-hero .float-badge{background:rgba(255,255,255,0.2);color:#fff;border-color:rgba(255,255,255,0.15)}
-.sec-hero .card{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.15)}
-.sec-hero .hb-card{color:#fff}
+.sec-hero .card{background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.1)}
 .sec-hero .nav-logo,.sec-hero .text-dark{color:#fff}
-.sec-hero .gt{background:linear-gradient(135deg,#FDE68A,#F59E0B);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 
 /* Hero inline stats */
 .hero-stats{display:flex;align-items:center;justify-content:center;gap:0;margin-top:28px;flex-wrap:wrap}
 .hs{display:flex;flex-direction:column;align-items:center;padding:0 20px}
-.hs-num{font-size:28px;font-weight:800;line-height:1.2}
-.hs-label{font-size:13px;color:rgba(255,255,255,0.7);margin-top:1px}
-.hs-sep{width:1px;height:28px;background:rgba(255,255,255,0.25)}
+.hs-num{font-size:28px;font-weight:800;line-height:1.2;color:#2DD4BF}
+.hs-label{font-size:13px;color:rgba(255,255,255,0.5);margin-top:1px}
+.hs-sep{width:1px;height:28px;background:rgba(255,255,255,0.15)}
 @media(max-width:480px){.hero-stats{gap:8px}.hs{padding:0 12px}.hs-num{font-size:22px}.hs-sep{height:20px}}
 
-/* Process - blanc */
-.sec-process{background:#FFFFFF!important;color:#1a1a1a}
-.sec-process .sh h2{color:#1a1a1a}
-.sec-process .sh p{color:#4a4a5a}
-.sec-process .card{background:#f8f8fc;border-color:rgba(0,0,0,0.08)}
-.sec-process .process-card h3{color:#1a1a1a}
-.sec-process .text-s{color:#4a4a5a}
+/* --- PROCESS (porte): #7C3AED violet mat --- */
+.sec-process{background:#7C3AED!important;color:#fff}
+.sec-process .sh h2{color:#D9F99D}
+.sec-process .sh p{color:rgba(255,255,255,0.7)}
+.sec-process .gt{color:#D9F99D;-webkit-text-fill-color:#D9F99D;background:none}
+.sec-process .card{background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-color:rgba(255,255,255,0.15);color:#fff}
+.sec-process .process-card h3{color:#fff}
+.sec-process .text-s{color:rgba(255,255,255,0.8)}
+.sec-process .p-num{color:#D9F99D!important;-webkit-text-fill-color:#D9F99D!important;opacity:0.2}
 
-/* Portfolio - violet profond */
-.sec-portfolio{background:#4C1D95!important;color:#fff}
-.sec-portfolio .sh h2{color:#fff}
-.sec-portfolio .sh p{color:rgba(255,255,255,0.8)}
-.sec-portfolio .gt{background:linear-gradient(135deg,#C4B5FD,#A78BFA);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+/* --- PORTFOLIO (garage): #3B0764 violet nuit --- */
+.sec-portfolio{background:#3B0764!important;color:#fff}
+.sec-portfolio .sh h2{color:#D9F99D}
+.sec-portfolio .sh p{color:rgba(255,255,255,0.6)}
+.sec-portfolio .gt{color:#D9F99D;-webkit-text-fill-color:#D9F99D;background:none}
+.sec-portfolio .c-badge{background:#2DD4BF!important;color:#3B0764!important;font-weight:700}
+.sec-portfolio .c-link{color:#fff;background:#EA580C;padding:4px 12px;border-radius:8px;font-size:12px}
 
-/* Services - peche chaud */
-.sec-services{background:#FFF7ED!important;color:#1a1a1a}
-.sec-services .sh h2{color:#1a1a1a}
-.sec-services .sh p{color:#4a4a5a}
-.sec-services .svc-dark{background:#fff;border-color:rgba(0,0,0,0.08);color:#1a1a1a}
-.sec-services .svc-dark h3{color:#1a1a1a}
-.sec-services .svc-dark p{color:#4a4a5a}
-.sec-services .svc-white{background:#fff;border-color:rgba(0,0,0,0.08);color:#1a1a1a}
-.sec-services .svc-white h3{color:#1a1a1a}
-.sec-services .svc-white p{color:#4a4a5a}
-.sec-services .svc-grad{color:#fff}
+/* --- SERVICES (porte): #134E4A vert émeraude foncé --- */
+.sec-services{background:#134E4A!important;color:#fff}
+.sec-services .sh h2{color:#D9F99D}
+.sec-services .sh p{color:rgba(255,255,255,0.7)}
+.sec-services .gt{color:#D9F99D;-webkit-text-fill-color:#D9F99D;background:none}
+.sec-services .svc{border:1px solid rgba(255,255,255,0.1)}
+.sec-services .svc:nth-child(odd){background:rgba(255,255,255,0.08);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#fff}
+.sec-services .svc:nth-child(odd) h3{color:#fff}
+.sec-services .svc:nth-child(odd) p{color:rgba(255,255,255,0.8)}
+.sec-services .svc:nth-child(even){background:#D9F99D;color:#134E4A;border-color:#D9F99D}
+.sec-services .svc:nth-child(even) h3{color:#134E4A}
+.sec-services .svc:nth-child(even) p{color:rgba(19,78,74,0.8)}
 
-/* Avant/Apres - noir */
-.sec-ba{background:#0a0a0a!important;color:#fff}
-.sec-ba .sh h2{color:#fff}
-.sec-ba .card-black{background:#12101e}
+/* --- BA (garage): #3B0764 violet nuit --- */
+.sec-ba{background:#3B0764!important;color:#fff}
+.sec-ba .sh h2{color:#D9F99D}
+.sec-ba .gt{color:#D9F99D;-webkit-text-fill-color:#D9F99D;background:none}
+.sec-ba .card-black{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1)}
 .sec-ba .ba-checks{color:rgba(255,255,255,0.7)}
+.sec-ba .ba-checks span::before{color:#2DD4BF}
+.sec-ba .ba-label-b{background:#EA580C!important;color:#fff!important;font-weight:700}
+.sec-ba .ba-label-a{background:#2DD4BF!important;color:#3B0764!important;font-weight:700}
 
-/* Comparatif - bleu roi */
-.sec-compare{background:#1E40AF!important;color:#fff}
+/* --- COMPARE (porte): #EA580C orange brûlé --- */
+.sec-compare{background:#EA580C!important;color:#fff}
 .sec-compare .sh h2{color:#fff}
 .sec-compare .sh p{color:rgba(255,255,255,0.8)}
-.sec-compare .cmp{background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.15);color:#fff}
+.sec-compare .gt{color:#fff;-webkit-text-fill-color:#fff;background:none}
+.sec-compare .cmp{background:rgba(255,255,255,0.15);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.2);color:#fff}
 .sec-compare .cmp-name{color:#fff}
 .sec-compare .cmp-row{color:rgba(255,255,255,0.7);border-color:rgba(255,255,255,0.1)}
 .sec-compare .cmp-row strong{color:#fff}
-.sec-compare .cmp.featured{background:rgba(255,255,255,0.18);border-color:rgba(255,255,255,0.3)}
-.sec-compare .gt{background:linear-gradient(135deg,#93C5FD,#60A5FA);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.sec-compare .cmp-name.gt{-webkit-text-fill-color:#fff}
+.sec-compare .cmp.featured{background:#D9F99D!important;border:none!important;color:#3B0764}
+.sec-compare .cmp.featured .cmp-name{color:#3B0764}
+.sec-compare .cmp.featured .cmp-name.gt{-webkit-text-fill-color:#3B0764}
+.sec-compare .cmp.featured .cmp-row{color:rgba(59,7,100,0.6);border-color:rgba(59,7,100,0.1)}
+.sec-compare .cmp.featured .cmp-row strong{color:#3B0764}
+.sec-compare .cmp-badge{background:#3B0764!important;color:#D9F99D!important}
+.sec-compare .cmp-stars{color:rgba(255,255,255,0.5)}
+.sec-compare .cmp.featured .cmp-stars{color:#3B0764}
 
-/* Pricing - blanc */
-.sec-pricing{background:#FFFFFF!important;color:#1a1a1a}
-.sec-pricing .sh h2{color:#1a1a1a}
-.sec-pricing .sh p{color:#4a4a5a}
-.sec-pricing .card{background:#f8f8fc;border-color:rgba(0,0,0,0.08)}
-.sec-pricing .price-name{color:#1a1a1a}
-.sec-pricing .price-amount{color:#1a1a1a}
-.sec-pricing .price-desc{color:#4a4a5a}
-.sec-pricing .price-period{color:#4a4a5a}
-.sec-pricing .price-features li{color:#4a4a5a}
-.sec-pricing .btn-secondary{border-color:rgba(0,0,0,0.15);color:#1a1a1a}
-.sec-pricing .btn-secondary:hover{border-color:var(--purple);color:var(--purple)}
-.sec-pricing .card-gradient{color:#fff}
-.sec-pricing .card-gradient .price-name,.sec-pricing .card-gradient .price-amount{color:#fff}
-.sec-pricing > .container > p{color:#6E6C80!important}
+/* --- PRICING (garage): #3B0764 violet nuit --- */
+.sec-pricing{background:#3B0764!important;color:#fff}
+.sec-pricing .sh h2{color:#D9F99D}
+.sec-pricing .sh p{color:rgba(255,255,255,0.6)}
+.sec-pricing .gt{color:#D9F99D;-webkit-text-fill-color:#D9F99D;background:none}
+.sec-pricing .card{background:rgba(255,255,255,0.06);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-color:rgba(255,255,255,0.1);color:#fff}
+.sec-pricing .price-name{color:#fff}
+.sec-pricing .price-amount{color:#fff}
+.sec-pricing .price-desc{color:rgba(255,255,255,0.6)}
+.sec-pricing .price-period{color:rgba(255,255,255,0.6)}
+.sec-pricing .price-features li{color:rgba(255,255,255,0.8)}
+.sec-pricing .price-features li::before{color:#2DD4BF}
+.sec-pricing .btn-secondary{border-color:rgba(255,255,255,0.2);color:#fff}
+.sec-pricing .btn-secondary:hover{border-color:#fff;color:#fff}
+.sec-pricing .card-gradient{background:#D9F99D!important;color:#3B0764;transform:scale(1.05)}
+.sec-pricing .card-gradient .price-name,.sec-pricing .card-gradient .price-amount{color:#3B0764}
+.sec-pricing .card-gradient .price-desc,.sec-pricing .card-gradient .price-period{color:rgba(59,7,100,0.6)}
+.sec-pricing .card-gradient .price-features li{color:rgba(59,7,100,0.8)}
+.sec-pricing .card-gradient .price-features li::before{color:#3B0764}
+.sec-pricing .price-badge{background:#EA580C!important;color:#fff!important}
+.sec-pricing .card-gradient .btn-white{background:#3B0764!important;color:#D9F99D!important}
+.sec-pricing .price-note{color:#2DD4BF}
+.sec-pricing > .container > p{color:rgba(255,255,255,0.5)!important}
 
-/* Temoignages - orange corail */
-.sec-testi{background:#FF6B35!important;color:#fff}
-.sec-testi .sh h2{color:#fff}
-.sec-testi .card-black{background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.15);color:#fff}
-.sec-testi .testi{background:rgba(255,255,255,0.12);border-color:rgba(255,255,255,0.2)}
-.sec-testi .testi-text{color:rgba(255,255,255,0.9)}
-.sec-testi .testi-nm{color:#fff}
-.sec-testi .testi-role{color:rgba(255,255,255,0.7)}
-.sec-testi .testi-sep{background:rgba(255,255,255,0.2)}
-.sec-testi .testi-q{color:rgba(255,255,255,0.3)}
-.sec-testi .gt{background:linear-gradient(135deg,#fff,#FDE68A);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+/* --- TESTI (porte): #7C3AED violet mat --- */
+.sec-testi{background:#7C3AED!important;color:#fff}
+.sec-testi .sh h2{color:#D9F99D}
+.sec-testi .gt{color:#D9F99D;-webkit-text-fill-color:#D9F99D;background:none}
+.sec-testi .testi{background:rgba(255,255,255,0.08);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-color:rgba(255,255,255,0.1);color:#fff}
+.sec-testi .testi-text{color:#fff;font-style:italic}
+.sec-testi .testi-nm{color:#fff;font-weight:700}
+.sec-testi .testi-role{color:rgba(255,255,255,0.6)}
+.sec-testi .testi-sep{background:rgba(255,255,255,0.1)}
+.sec-testi .testi-q{color:#D9F99D;opacity:0.3}
+.sec-testi .testi-stars{color:#D9F99D}
+.sec-testi .testi-av{background:linear-gradient(135deg,#EA580C,#D9F99D)!important;color:#fff}
 
-/* FAQ - jaune lime doux */
-.sec-faq{background:#F7FEE7!important;color:#1a1a1a}
-.sec-faq .sh h2{color:#1a1a1a}
-.sec-faq .card{background:#fff;border-color:rgba(0,0,0,0.08);box-shadow:0 4px 24px rgba(0,0,0,0.06)}
-.sec-faq .faq-q{color:#1a1a1a}
-.sec-faq .faq-a p{color:#4a4a5a}
-.sec-faq .faq-item{border-color:rgba(0,0,0,0.08)}
+/* --- FAQ (garage): #3B0764 violet nuit --- */
+.sec-faq{background:#3B0764!important;color:#fff}
+.sec-faq .sh h2{color:#D9F99D}
+.sec-faq .gt{color:#D9F99D;-webkit-text-fill-color:#D9F99D;background:none}
+.sec-faq .card{background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.1);box-shadow:none;color:#fff}
+.sec-faq .faq-q{color:#fff}
+.sec-faq .faq-a p{color:rgba(255,255,255,0.6)}
+.sec-faq .faq-item{border-color:rgba(255,255,255,0.08)}
+.sec-faq .faq-icon{color:#2DD4BF}
 
-/* Equipe - blanc */
-.sec-team{background:#FFFFFF!important;color:#1a1a1a}
-.sec-team .sh h2{color:#1a1a1a}
-.sec-team .card{background:#f8f8fc;border-color:rgba(0,0,0,0.08)}
-.sec-team .team-card h3{color:#1a1a1a}
-.sec-team .team-card .role{color:var(--purple)}
-.sec-team .team-card p{color:#4a4a5a}
-.sec-team .team-quote{color:#4a4a5a}
+/* --- TEAM (porte): #164E63 bleu pétrole --- */
+.sec-team{background:#164E63!important;color:#fff}
+.sec-team .sh h2{color:#D9F99D}
+.sec-team .gt{color:#D9F99D;-webkit-text-fill-color:#D9F99D;background:none}
+.sec-team .card{background:rgba(255,255,255,0.08);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-color:rgba(255,255,255,0.1);color:#fff}
+.sec-team .team-card h3{color:#fff}
+.sec-team .team-card .role{color:#2DD4BF}
+.sec-team .team-card p{color:rgba(255,255,255,0.8)}
+.sec-team .team-av{background:linear-gradient(135deg,#7C3AED,#2DD4BF)!important;color:#fff}
+.sec-team .team-quote{color:rgba(255,255,255,0.7);font-style:italic}
 
-/* CTA - violet vif style Wix */
+/* --- CTA (garage): #7C3AED violet mat --- */
 .sec-cta{background:#7C3AED!important;color:#fff}
 .sec-cta .cta-final{background:transparent!important;border-radius:0;padding:0;box-shadow:none}
 .sec-cta .cta-final h2{color:#D9F99D!important;font-size:clamp(40px,5vw,72px)!important;font-weight:800!important;line-height:1.1!important;margin-bottom:24px!important;word-break:keep-all;overflow-wrap:normal}
 .sec-cta .cta-final h2 .split-char{color:#D9F99D!important;-webkit-text-fill-color:#D9F99D!important;background:none!important}
-.sec-cta .cta-final>p{color:rgba(255,255,255,0.85);font-size:18px;margin-bottom:36px}
-.sec-cta .cta-final .btn{background:#D9F99D!important;color:#7C3AED!important;font-weight:700;padding:16px 36px;border-radius:12px;font-size:17px;box-shadow:none;transition:all 0.3s ease}
-.sec-cta .cta-final .btn:hover{transform:scale(1.05);box-shadow:0 10px 30px rgba(0,0,0,0.2)}
-.sec-cta .cta-email{color:rgba(255,255,255,0.7)}
+.sec-cta .cta-final>p{color:rgba(255,255,255,0.7);font-size:18px;margin-bottom:36px}
+.sec-cta .cta-final .btn{background:#D9F99D!important;color:#3B0764!important;font-weight:700;padding:16px 36px;border-radius:12px;font-size:17px;box-shadow:none;transition:all 0.3s ease}
+.sec-cta .cta-final .btn:hover{transform:scale(1.05);box-shadow:0 10px 30px rgba(0,0,0,0.3)}
+.sec-cta .cta-email{color:rgba(255,255,255,0.5)}
 .sec-cta .cta-email a{color:#D9F99D;font-weight:600}
 
-/* Footer */
-.footer-styled{background:#F9FAFB!important;color:#1a1a1a;border-top:none}
-.footer-styled .nav-logo{color:#1a1a1a}
-.footer-styled .footer-brand p{color:#6E6C80}
-.footer-styled .footer-col h4{color:#1a1a1a}
-.footer-styled .footer-col a{color:#6E6C80}
-.footer-styled .footer-col a:hover{color:#1a1a1a}
-.footer-styled .footer-bottom{color:#6E6C80;border-color:rgba(0,0,0,0.08)}
-.footer-styled .footer-legal a{color:#6E6C80}
-.footer-styled .footer-legal a:hover{color:#1a1a1a}
-.footer-styled .footer-social a{border-color:rgba(0,0,0,0.1)}
-.footer-styled .footer-social a:hover{border-color:var(--purple);background:rgba(124,58,237,0.08)}
+/* --- FOOTER: #3B0764 violet nuit --- */
+.footer-styled{background:#3B0764!important;color:rgba(255,255,255,0.4);border-top:none}
+.footer-styled .nav-logo{color:#fff}
+.footer-styled .nav-logo .dot{color:#7C3AED}
+.footer-styled .footer-brand p{color:rgba(255,255,255,0.4)}
+.footer-styled .footer-col h4{color:#fff}
+.footer-styled .footer-col a{color:rgba(255,255,255,0.5)}
+.footer-styled .footer-col a:hover{color:#D9F99D}
+.footer-styled .footer-bottom{color:rgba(255,255,255,0.3);border-color:rgba(255,255,255,0.06)}
+.footer-styled .footer-legal a{color:rgba(255,255,255,0.5)}
+.footer-styled .footer-legal a:hover{color:#D9F99D}
+.footer-styled .footer-social a{border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.4)}
+.footer-styled .footer-social a:hover{border-color:#EA580C;color:#EA580C;background:rgba(234,88,12,0.1)}
 
 /* ===== CURSOR ===== */
 .cursor{position:fixed;width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,0.6);pointer-events:none;z-index:99999;transition:width 0.3s ease,height 0.3s ease,opacity 0.3s ease;transform:translate(-50%,-50%);will-change:transform,width,height,opacity;opacity:0.6}
@@ -261,20 +285,20 @@ img,svg{max-width:100%;display:block}
 
 /* ===== NAV ===== */
 .nav{position:fixed;top:0;left:0;right:0;z-index:9999;height:64px;display:flex;align-items:center;transition:all 0.3s}
-.nav.scrolled{background:rgba(255,255,255,0.9);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 1px 0 rgba(0,0,0,0.06)}
+.nav.scrolled{background:rgba(59,7,100,0.9);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06)}
 .nav-inner{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto;padding:0 24px;width:100%}
 .nav-logo{font-size:18px;font-weight:700;color:#fff;transition:color 0.3s}.nav-logo .dot{color:var(--purple)}
 .nav-links{display:flex;align-items:center;gap:28px}
-.nav-link{font-size:14px;font-weight:500;color:rgba(255,255,255,0.85);transition:color 0.3s}.nav-link:hover{color:#fff}
-.nav.scrolled .nav-logo{color:var(--text-dark)}
-.nav.scrolled .nav-link{color:#4a4a5a}.nav.scrolled .nav-link:hover{color:#1a1a1a}
-.nav-cta{background:var(--gradient);color:#fff;padding:8px 20px;border-radius:var(--radius-xs);font-size:13px;font-weight:600;transition:all 0.3s}
-.nav-cta:hover{transform:scale(1.05);box-shadow:0 0 20px rgba(124,58,237,0.3)}
+.nav-link{font-size:14px;font-weight:500;color:rgba(255,255,255,0.7);transition:color 0.3s}.nav-link:hover{color:#D9F99D}
+.nav.scrolled .nav-logo{color:#fff}
+.nav.scrolled .nav-link{color:rgba(255,255,255,0.7)}.nav.scrolled .nav-link:hover{color:#D9F99D}
+.nav-cta{background:#EA580C;color:#fff;padding:8px 20px;border-radius:var(--radius-xs);font-size:13px;font-weight:600;transition:all 0.3s}
+.nav-cta:hover{transform:scale(1.05);box-shadow:0 0 20px rgba(234,88,12,0.3)}
 .nav-toggle{display:none;flex-direction:column;gap:5px;padding:8px}
-.nav-toggle span{display:block;width:22px;height:2px;background:#1a1a1a;transition:all 0.3s}
-.nav-mob{display:none;position:fixed;inset:0;background:rgba(255,255,255,0.97);backdrop-filter:blur(20px);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:28px}
+.nav-toggle span{display:block;width:22px;height:2px;background:#fff;transition:all 0.3s}
+.nav-mob{display:none;position:fixed;inset:0;background:rgba(59,7,100,0.97);backdrop-filter:blur(20px);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:28px}
 .nav-mob.open{display:flex}
-.nav-mob a{font-size:24px;font-weight:600;color:#1a1a1a}
+.nav-mob a{font-size:24px;font-weight:600;color:#fff}
 
 /* ===== HERO ===== */
 .hero{padding:120px 0 60px;min-height:100vh;overflow:visible;text-align:center}
@@ -501,29 +525,29 @@ img,svg{max-width:100%;display:block}
     .c-card{width:260px;height:180px}
 }
 /* ===== QUESTIONNAIRE MODAL ===== */
-.q-modal{position:fixed;inset:0;z-index:100000;background:linear-gradient(135deg,#0a0a0a 0%,#1a1a2e 100%);display:none;flex-direction:column;overflow:hidden}
+.q-modal{position:fixed;inset:0;z-index:100000;background:#3B0764;display:none;flex-direction:column;overflow:hidden}
 .q-modal.open{display:flex}
 .q-top{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;border-bottom:1px solid rgba(255,255,255,0.08)}
 .q-back{display:flex;align-items:center;gap:6px;font-size:14px;color:rgba(255,255,255,0.6);cursor:pointer;background:none;border:none;font-family:inherit;padding:4px 8px}
 .q-back:hover{color:#fff}
 .q-progress{flex:1;max-width:300px;margin:0 24px}
 .q-bar{height:4px;background:rgba(255,255,255,0.1);border-radius:4px;overflow:hidden}
-.q-bar-fill{height:100%;background:var(--gradient);border-radius:4px;transition:width 0.4s ease;width:6%}
+.q-bar-fill{height:100%;background:linear-gradient(90deg,#7C3AED,#EA580C);border-radius:4px;transition:width 0.4s ease;width:6%}
 .q-close{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid rgba(255,255,255,0.15);background:none;color:#fff;font-size:18px;cursor:pointer;transition:all 0.2s}
 .q-close:hover{background:rgba(255,255,255,0.1)}
 .q-body{flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
 .q-step{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;opacity:0;transform:translateX(60px);transition:all 0.4s cubic-bezier(0.16,1,0.3,1);pointer-events:none}
 .q-step.q-active{opacity:1;transform:translateX(0);pointer-events:auto}
 .q-step.q-left{opacity:0;transform:translateX(-60px)}
-.q-step h2{font-size:clamp(24px,4vw,36px);font-weight:800;color:#fff;margin-bottom:24px;text-align:center}
-.q-step p.q-sub{font-size:15px;color:rgba(255,255,255,0.6);margin-bottom:20px;text-align:center}
+.q-step h2{font-size:clamp(24px,4vw,36px);font-weight:800;color:#D9F99D;margin-bottom:24px;text-align:center}
+.q-step p.q-sub{font-size:15px;color:rgba(255,255,255,0.5);margin-bottom:20px;text-align:center}
 .q-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;max-width:700px;width:100%}
 .q-grid-2{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
 .q-grid-3{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
-.q-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:20px;text-align:center;cursor:pointer;transition:all 0.3s cubic-bezier(0.16,1,0.3,1);color:#fff;font-size:15px;font-weight:500;position:relative;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
-.q-card:hover{transform:translateY(-2px);border-color:rgba(124,58,237,0.5);box-shadow:0 8px 30px rgba(124,58,237,0.15);background:rgba(255,255,255,0.08)}
-.q-card.selected{border-color:#7C3AED;background:rgba(124,58,237,0.12);box-shadow:0 0 30px rgba(124,58,237,0.25)}
-.q-card.selected::after{content:'✓';position:absolute;top:10px;right:12px;width:22px;height:22px;background:var(--gradient);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;font-weight:700}
+.q-card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:20px;text-align:center;cursor:pointer;transition:all 0.3s cubic-bezier(0.16,1,0.3,1);color:#fff;font-size:15px;font-weight:500;position:relative;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.q-card:hover{transform:translateY(-2px);border-color:rgba(124,58,237,0.6);box-shadow:0 8px 30px rgba(124,58,237,0.25);background:rgba(255,255,255,0.08)}
+.q-card.selected{border-color:#2DD4BF;background:rgba(45,212,191,0.1);box-shadow:0 0 30px rgba(45,212,191,0.2)}
+.q-card.selected::after{content:'✓';position:absolute;top:10px;right:12px;width:22px;height:22px;background:#2DD4BF;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;color:#3B0764;font-weight:700}
 .q-card .q-emoji{font-size:28px;margin-bottom:6px;display:block}
 .q-card .q-price{font-size:28px;font-weight:900;margin:6px 0 2px}
 .q-card .q-price-label{font-size:12px;color:rgba(255,255,255,0.5)}
@@ -533,8 +557,9 @@ img,svg{max-width:100%;display:block}
 .q-input:focus{border-color:#7C3AED}
 .q-input::placeholder{color:rgba(255,255,255,0.3)}
 .q-textarea{min-height:80px;resize:vertical}
-.q-btn{background:linear-gradient(135deg,#7C3AED,#EC4899);color:#fff;padding:16px 36px;border-radius:14px;font-size:16px;font-weight:600;cursor:pointer;border:none;font-family:inherit;margin-top:16px;transition:all 0.3s;box-shadow:0 4px 20px rgba(124,58,237,0.3)}
-.q-btn:hover{transform:scale(1.03);box-shadow:0 0 25px rgba(124,58,237,0.3)}
+.q-btn{background:#EA580C;color:#fff;padding:16px 36px;border-radius:14px;font-size:16px;font-weight:600;cursor:pointer;border:none;font-family:inherit;margin-top:16px;transition:all 0.3s;box-shadow:0 4px 20px rgba(234,88,12,0.3)}
+.q-btn:hover{transform:scale(1.03);box-shadow:0 0 25px rgba(234,88,12,0.4)}
+.q-submit-btn{background:#D9F99D!important;color:#3B0764!important}
 .q-error{color:#EF4444;font-size:13px;margin-top:8px;min-height:18px}
 .q-contact-form{display:flex;flex-direction:column;gap:12px;max-width:400px;width:100%}
 .q-contact-form .q-input{max-width:100%}
@@ -550,6 +575,15 @@ img,svg{max-width:100%;display:block}
 select.q-input{appearance:auto;-webkit-appearance:auto}
 @media(max-width:600px){.q-grid{grid-template-columns:1fr 1fr}.q-grid-2{grid-template-columns:1fr}.q-grid-3{grid-template-columns:1fr}.q-card{padding:14px}}
 
+/* ===== SPLIT REVEAL ===== */
+.split-reveal{position:relative;overflow:hidden}
+.split-mask{position:absolute;top:0;height:100%;z-index:20;transition:transform 1s cubic-bezier(0.16,1,0.3,1)}
+.split-mask-left{left:0;width:50%;transform:translateX(0);box-shadow:inset -20px 0 30px rgba(0,0,0,0.1)}
+.split-mask-right{right:0;width:50%;transform:translateX(0);box-shadow:inset 20px 0 30px rgba(0,0,0,0.1)}
+.split-reveal.revealed .split-mask-left{transform:translateX(-100%)}
+.split-reveal.revealed .split-mask-right{transform:translateX(100%);transition-delay:0.1s}
+@media(max-width:768px){.split-mask{transition-duration:0.6s}}
+
 @media(prefers-reduced-motion:reduce){
     *,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important}
     html{scroll-behavior:auto}
@@ -559,46 +593,7 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
 </head>
 <body>
 
-<!-- SVG wave clip-paths — each door gets unique irregular waves (top + bottom) -->
-<svg width="0" height="0" style="position:absolute">
-  <defs>
-    <!-- Door 1: gentle asymmetric wave -->
-    <clipPath id="waveTop1" clipPathUnits="objectBoundingBox">
-      <path d="M0,1 L0,0.65 C0.08,0.15 0.15,0.05 0.25,0.4 C0.33,0.7 0.4,0.85 0.5,0.5 C0.58,0.2 0.65,0.1 0.75,0.55 C0.85,0.9 0.92,0.3 1,0.45 L1,1 Z"/>
-    </clipPath>
-    <clipPath id="waveBot1" clipPathUnits="objectBoundingBox">
-      <path d="M0,0 L0,0.4 C0.1,0.85 0.18,0.95 0.28,0.6 C0.38,0.25 0.45,0.15 0.55,0.5 C0.65,0.8 0.72,0.9 0.82,0.55 C0.9,0.3 0.95,0.7 1,0.5 L1,0 Z"/>
-    </clipPath>
-    <!-- Door 2: wider bumps -->
-    <clipPath id="waveTop2" clipPathUnits="objectBoundingBox">
-      <path d="M0,1 L0,0.5 C0.06,0.1 0.14,0.25 0.22,0.55 C0.3,0.8 0.38,0.45 0.48,0.2 C0.56,0 0.65,0.35 0.73,0.65 C0.82,0.9 0.9,0.4 1,0.35 L1,1 Z"/>
-    </clipPath>
-    <clipPath id="waveBot2" clipPathUnits="objectBoundingBox">
-      <path d="M0,0 L0,0.55 C0.07,0.9 0.16,0.75 0.24,0.45 C0.34,0.15 0.42,0.6 0.52,0.8 C0.6,0.95 0.7,0.55 0.78,0.35 C0.88,0.1 0.94,0.6 1,0.6 L1,0 Z"/>
-    </clipPath>
-    <!-- Door 3: sharp irregular -->
-    <clipPath id="waveTop3" clipPathUnits="objectBoundingBox">
-      <path d="M0,1 L0,0.7 C0.05,0.2 0.12,0.45 0.2,0.3 C0.28,0.1 0.36,0.6 0.44,0.75 C0.52,0.9 0.6,0.25 0.7,0.15 C0.78,0.05 0.88,0.5 0.94,0.6 L1,0.4 L1,1 Z"/>
-    </clipPath>
-    <clipPath id="waveBot3" clipPathUnits="objectBoundingBox">
-      <path d="M0,0 L0,0.35 C0.06,0.8 0.14,0.55 0.22,0.7 C0.3,0.85 0.4,0.4 0.48,0.25 C0.56,0.1 0.66,0.65 0.74,0.85 C0.84,0.95 0.92,0.5 1,0.55 L1,0 Z"/>
-    </clipPath>
-    <!-- Door 4: smooth rolling -->
-    <clipPath id="waveTop4" clipPathUnits="objectBoundingBox">
-      <path d="M0,1 L0,0.55 C0.1,0.3 0.18,0.1 0.28,0.45 C0.36,0.7 0.44,0.9 0.55,0.55 C0.64,0.25 0.74,0.05 0.84,0.4 C0.92,0.65 0.96,0.5 1,0.5 L1,1 Z"/>
-    </clipPath>
-    <clipPath id="waveBot4" clipPathUnits="objectBoundingBox">
-      <path d="M0,0 L0,0.5 C0.08,0.8 0.16,0.95 0.26,0.6 C0.36,0.3 0.46,0.1 0.56,0.45 C0.64,0.7 0.76,0.95 0.86,0.55 C0.94,0.25 0.98,0.45 1,0.45 L1,0 Z"/>
-    </clipPath>
-    <!-- Door 5: dramatic peaks -->
-    <clipPath id="waveTop5" clipPathUnits="objectBoundingBox">
-      <path d="M0,1 L0,0.45 C0.07,0 0.13,0.3 0.2,0.6 C0.27,0.85 0.35,0.5 0.42,0.15 C0.5,0 0.58,0.4 0.66,0.7 C0.74,0.9 0.83,0.35 0.9,0.2 C0.96,0.1 1,0.5 1,0.5 L1,1 Z"/>
-    </clipPath>
-    <clipPath id="waveBot5" clipPathUnits="objectBoundingBox">
-      <path d="M0,0 L0,0.5 C0.05,0.9 0.12,0.7 0.2,0.4 C0.28,0.15 0.36,0.55 0.44,0.85 C0.52,0.95 0.6,0.6 0.68,0.3 C0.76,0.1 0.85,0.6 0.92,0.8 C0.97,0.9 1,0.5 1,0.5 L1,0 Z"/>
-    </clipPath>
-  </defs>
-</svg>
+<!-- No global SVG defs needed — transitions are inline per door -->
 
 <!-- Cursor -->
 <div class="cursor" id="cursor"></div>
@@ -636,19 +631,21 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
         </div>
         <div class="hero-trust anim anim-up" style="--d:0.6s"><span>0€ de création</span><span>Sans engagement</span><span>Support 24/7</span></div>
         <div class="hero-stats anim anim-up" style="--d:0.7s">
-            <div class="hs"><span class="hs-num gt" data-target="50" data-suffix="+">0</span><span class="hs-label">Sites livrés</span></div>
+            <div class="hs"><span class="hs-num" data-target="50" data-suffix="+">0</span><span class="hs-label">Sites livrés</span></div>
             <div class="hs-sep"></div>
-            <div class="hs"><span class="hs-num gt" data-target="100" data-suffix="%">0</span><span class="hs-label">Satisfaits</span></div>
+            <div class="hs"><span class="hs-num" data-target="100" data-suffix="%">0</span><span class="hs-label">Satisfaits</span></div>
             <div class="hs-sep"></div>
-            <div class="hs"><span class="hs-num gt" data-target="48" data-suffix="h">0</span><span class="hs-label">Délai moyen</span></div>
+            <div class="hs"><span class="hs-num" data-target="48" data-suffix="h">0</span><span class="hs-label">Délai moyen</span></div>
             <div class="hs-sep"></div>
-            <div class="hs"><span class="hs-num gt" data-target="24" data-suffix="/7">0</span><span class="hs-label">Support</span></div>
+            <div class="hs"><span class="hs-num" data-target="24" data-suffix="/7">0</span><span class="hs-label">Support</span></div>
         </div>
     </div>
 </section>
 
-<!-- GARAGE 1: Portfolio -->
-<section class="garage section-spacing sec-portfolio" id="portfolio">
+<!-- GARAGE 1: Portfolio (split reveal) -->
+<section class="garage section-spacing sec-portfolio split-reveal" id="portfolio">
+    <div class="split-mask split-mask-left" style="background:#7C3AED"></div>
+    <div class="split-mask split-mask-right" style="background:#7C3AED"></div>
     <div class="container"><div class="sh"><h2>Nos dernières <span class="gt">réalisations</span></h2><p>Chaque site est unique, conçu sur-mesure pour le métier de nos clients.</p></div></div>
     <div class="carousel-wrap">
         <div class="carousel-track" id="carouselTrack">
@@ -697,8 +694,10 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
     </div>
 </section>
 
-<!-- GARAGE 3: Pricing -->
-<section class="garage section-spacing sec-pricing" id="pricing">
+<!-- GARAGE 3: Pricing (split reveal) -->
+<section class="garage section-spacing sec-pricing split-reveal" id="pricing">
+    <div class="split-mask split-mask-left" style="background:#EA580C"></div>
+    <div class="split-mask split-mask-right" style="background:#EA580C"></div>
     <div class="container">
         <div class="sh"><h2>Tarifs <span class="gt">transparents</span></h2><p>Pas de surprise, pas de frais cachés.</p></div>
         <div class="price-grid">
@@ -710,9 +709,9 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
             </div>
             <div class="price card card-gradient featured" data-delay="1">
                 <div class="price-badge">POPULAIRE</div>
-                <div class="price-name">Pro</div><div class="price-desc" style="color:rgba(255,255,255,0.8)">Tout pour convertir</div>
-                <div class="price-amount" style="color:#fff">199€ <span style="color:rgba(255,255,255,0.7)">/mois</span></div><div class="price-period" style="color:rgba(255,255,255,0.7)">Sans engagement</div><div class="price-note" style="color:rgba(255,255,255,0.9)">0€ de création</div>
-                <ul class="price-features" style="color:rgba(255,255,255,0.9)"><li>Tout Essentiel</li><li>Domaine inclus</li><li>SEO</li><li>Modifs illimitées</li><li>WhatsApp 7j/7</li><li>Statistiques</li></ul>
+                <div class="price-name">Pro</div><div class="price-desc">Tout pour convertir</div>
+                <div class="price-amount">199€ <span>/mois</span></div><div class="price-period">Sans engagement</div><div class="price-note" style="color:#3B0764">0€ de création</div>
+                <ul class="price-features"><li>Tout Essentiel</li><li>Domaine inclus</li><li>SEO</li><li>Modifs illimitées</li><li>WhatsApp 7j/7</li><li>Statistiques</li></ul>
                 <a href="#contact" class="btn btn-white" style="width:100%">Choisir →</a>
             </div>
             <div class="price card" data-delay="2">
@@ -763,29 +762,31 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
 <!-- Spacer: view Hero -->
 <div class="garage-view" data-garage="0"></div>
 
-<!-- DOOR 1: Process -->
-<section class="section-spacing door sec-process" id="process">
+<!-- DOOR 1: Process — Transition 1: VAGUE SIMPLE at bottom, Transition 2: DIAGONAL LR -->
+<section class="section-spacing door sec-process diagonal-lr" id="process">
     <div class="container">
         <div class="sh">
             <h2 class="anim anim-blur">Simple comme <span class="gt">bonjour</span></h2>
             <p class="anim anim-up">3 étapes et votre site est en ligne. On s'occupe de tout.</p>
         </div>
         <div class="process-wrap">
-            <svg class="process-line-svg" id="processLine" viewBox="0 0 1200 60" preserveAspectRatio="none"><defs><linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#7C3AED"/><stop offset="100%" stop-color="#3B82F6"/></linearGradient></defs><path d="M 0 30 C 200 5, 400 55, 600 30 C 800 5, 1000 55, 1200 30"/></svg>
+            <svg class="process-line-svg" id="processLine" viewBox="0 0 1200 60" preserveAspectRatio="none"><defs><linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#D9F99D"/><stop offset="100%" stop-color="#2DD4BF"/></linearGradient></defs><path d="M 0 30 C 200 5, 400 55, 600 30 C 800 5, 1000 55, 1200 30"/></svg>
             <div class="process-grid">
-                <div class="process-card card anim anim-scale" data-delay="0"><div class="p-num gt">01</div><h3>Envoyez vos infos</h3><p class="text-s">Logo, photos, textes... ou rien. On peut tout créer pour vous.</p></div>
-                <div class="process-card card anim anim-scale" data-delay="1"><div class="p-num gt">02</div><h3>On crée le site</h3><p class="text-s">Design moderne sur-mesure, optimisé mobile et SEO. Pensé pour convertir.</p></div>
-                <div class="process-card card anim anim-scale" data-delay="2"><div class="p-num gt">03</div><h3>Vous êtes en ligne</h3><p class="text-s">Livré en 48h max. Hébergement, domaine et mises à jour inclus.</p></div>
+                <div class="process-card card anim anim-scale" data-delay="0"><div class="p-num">01</div><h3>Envoyez vos infos</h3><p class="text-s">Logo, photos, textes... ou rien. On peut tout créer pour vous.</p></div>
+                <div class="process-card card anim anim-scale" data-delay="1"><div class="p-num">02</div><h3>On crée le site</h3><p class="text-s">Design moderne sur-mesure, optimisé mobile et SEO. Pensé pour convertir.</p></div>
+                <div class="process-card card anim anim-scale" data-delay="2"><div class="p-num">03</div><h3>Vous êtes en ligne</h3><p class="text-s">Livré en 48h max. Hébergement, domaine et mises à jour inclus.</p></div>
             </div>
         </div>
     </div>
+    <!-- Transition 1: VAGUE SIMPLE (top of this door, over hero) -->
+    <svg class="wave-transition" style="top:0;bottom:auto;transform:translateY(-100%) scaleY(-1)" viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,80 C360,0 720,0 1080,80 L1440,80 L1440,80 L0,80 Z" fill="#7C3AED"/></svg>
 </section>
 
 <!-- Spacer: view Portfolio -->
 <div class="garage-view" data-garage="1"></div>
 
-<!-- DOOR 2: Services -->
-<section class="section-spacing door sec-services" id="services">
+<!-- DOOR 2: Services — Transition 3: DOUBLE VAGUE at top, Transition 4: DIAGONAL RL -->
+<section class="section-spacing door sec-services diagonal-rl" id="services">
     <div class="container">
         <div class="sh"><h2 class="anim anim-blur">Pour tous les <span class="gt">professionnels</span></h2><p class="anim anim-up">Des sites pensés pour votre métier, avec les fonctionnalités qui comptent.</p></div>
         <div class="svc-grid">
@@ -797,13 +798,15 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
             <div class="svc svc-white anim anim-scale" data-delay="5"><h3>Studios Yoga</h3><p>Planning cours, réservation, présentation profs.</p></div>
         </div>
     </div>
+    <!-- Transition 3: DOUBLE VAGUE (top of services, over portfolio) -->
+    <svg class="wave-transition" style="top:0;bottom:auto;transform:translateY(-100%) scaleY(-1)" viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,80 L0,40 C180,0 360,80 540,40 C720,0 900,80 1080,40 C1260,0 1440,40 1440,40 L1440,80 Z" fill="#134E4A"/></svg>
 </section>
 
 <!-- Spacer: view BA -->
 <div class="garage-view" data-garage="2"></div>
 
-<!-- DOOR 3: Compare -->
-<section class="section-spacing door sec-compare" id="compare">
+<!-- DOOR 3: Compare — Transition 5: VAGUE EN S at top, Transition 6: DIAGONAL LR -->
+<section class="section-spacing door sec-compare diagonal-lr" id="compare">
     <div class="container">
         <div class="sh"><h2 class="anim anim-blur">Pourquoi nous <span class="gt">choisir</span> ?</h2></div>
         <div class="cmp-grid">
@@ -813,13 +816,15 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
             <div class="cmp card featured anim anim-scale" data-delay="3"><div class="cmp-badge">RECOMMAND&Eacute;</div><div class="cmp-name gt">WebsiteBuild</div><div class="cmp-row"><strong>199€/mois</strong>Budget</div><div class="cmp-row"><strong>48h</strong>Délai</div><div class="cmp-row"><strong>Qualité agence</strong>Résultat</div><div class="cmp-row"><strong>24/7 WhatsApp</strong>Support</div><div class="cmp-row"><strong>0€ de création</strong></div><div class="cmp-stars">5/5</div></div>
         </div>
     </div>
+    <!-- Transition 5: VAGUE EN S (top of compare, over BA) -->
+    <svg class="wave-transition" style="top:0;bottom:auto;transform:translateY(-100%) scaleY(-1)" viewBox="0 0 1440 100" preserveAspectRatio="none"><path d="M0,100 L0,70 C360,0 720,100 1080,30 L1440,60 L1440,100 Z" fill="#EA580C"/></svg>
 </section>
 
 <!-- Spacer: view Pricing -->
 <div class="garage-view" data-garage="3"></div>
 
-<!-- DOOR 4: Testimonials -->
-<section class="section-spacing door sec-testi">
+<!-- DOOR 4: Testimonials — Transition 7: VAGUE ASYMETRIQUE at top, Transition 8: DIAGONAL RL -->
+<section class="section-spacing door sec-testi diagonal-rl"
     <div class="container">
         <div class="sh" style="margin-bottom:36px"><h2 class="anim anim-blur">Ce que disent nos <span class="gt">clients</span></h2></div>
         <div class="testi-grid">
@@ -828,13 +833,15 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
             <div class="testi anim anim-rotate" data-delay="2"><div class="testi-q">"</div><p class="testi-text">Envoyé mes infos lundi, site en ligne mercredi. Le support est incroyable, ils répondent en 5 min sur WhatsApp.</p><div class="testi-sep"></div><div class="testi-author"><div class="testi-av">TR</div><div><div class="testi-nm">Thomas R.</div><div class="testi-role">Coach sportif à Paris</div><div class="testi-stars">5/5</div></div></div></div>
         </div>
     </div>
+    <!-- Transition 7: VAGUE ASYMETRIQUE (top of testi, crête à 30%) -->
+    <svg class="wave-transition" style="top:0;bottom:auto;transform:translateY(-100%) scaleY(-1)" viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,80 L0,60 C200,0 430,0 500,60 C600,80 900,80 1440,70 L1440,80 Z" fill="#7C3AED"/></svg>
 </section>
 
 <!-- Spacer: view FAQ -->
 <div class="garage-view" data-garage="4"></div>
 
-<!-- DOOR 5: Team -->
-<section class="section-spacing door sec-team" id="team">
+<!-- DOOR 5: Team — Transition 9: TRIPLE VAGUES at top, Transition 10: DIAGONAL LR -->
+<section class="section-spacing door sec-team diagonal-lr" id="team">
     <div class="container">
         <div class="sh"><h2 class="anim anim-blur">L'équipe derrière <span class="gt">WebsiteBuild</span></h2></div>
         <div class="team-grid">
@@ -843,6 +850,8 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
         </div>
         <p class="team-quote anim anim-up">« On croit que chaque professionnel mérite un site à la hauteur de son talent. Pas dans 3 mois, pas pour 5 000€. Maintenant, et à un prix juste. »</p>
     </div>
+    <!-- Transition 9: TRIPLE PETITES VAGUES (top of team, over FAQ) -->
+    <svg class="wave-transition" style="top:0;bottom:auto;transform:translateY(-100%) scaleY(-1)" viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,60 L0,40 C120,15 240,50 360,30 C480,10 600,45 720,25 C840,5 960,40 1080,30 C1200,20 1320,45 1440,35 L1440,60 Z" fill="#164E63"/></svg>
 </section>
 
 <!-- Spacer: view CTA -->
@@ -851,7 +860,7 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
 </div><!-- /doors-layer -->
 
 <!-- ===== FOOTER ===== -->
-<footer class="footer footer-styled" style="position:relative;z-index:15;background:#F9FAFB">
+<footer class="footer footer-styled" style="position:relative;z-index:15">
     <div class="container">
         <div class="footer-top">
             <div class="footer-brand"><div class="nav-logo">websitebuild<span class="dot">.</span></div><p>Sites web professionnels livrés en 48h. On s'occupe de tout.</p><div class="footer-social"><a href="#" aria-label="Instagram">IG</a><a href="#" aria-label="TikTok">TK</a></div></div>
@@ -1215,7 +1224,7 @@ document.addEventListener('mousemove',e=>{const x=(e.clientX/innerWidth*100).toF
 
 /* ===== PARTICLES ===== */
 const pc=document.getElementById('particles');
-for(let i=0;i<18;i++){const p=document.createElement('div');p.className='particle';const s=3+Math.random()*4;const c=Math.random()>0.5?'rgba(255,255,255,0.5)':'rgba(255,255,255,0.3)';p.style.cssText='width:'+s+'px;height:'+s+'px;background:'+c+';left:'+Math.random()*100+'%;top:'+Math.random()*100+'%;--po:'+(0.1+Math.random()*0.2)+';--dx:'+(Math.random()*100-50)+'px;--dy:'+(Math.random()*100-50)+'px;--dur:'+(8+Math.random()*12)+'s;--del:'+(Math.random()*8)+'s';pc.appendChild(p)}
+for(let i=0;i<18;i++){const p=document.createElement('div');p.className='particle';const s=3+Math.random()*4;const c=Math.random()>0.5?'rgba(124,58,237,0.2)':'rgba(45,212,191,0.2)';p.style.cssText='width:'+s+'px;height:'+s+'px;background:'+c+';left:'+Math.random()*100+'%;top:'+Math.random()*100+'%;--po:'+(0.1+Math.random()*0.2)+';--dx:'+(Math.random()*100-50)+'px;--dy:'+(Math.random()*100-50)+'px;--dur:'+(8+Math.random()*12)+'s;--del:'+(Math.random()*8)+'s';pc.appendChild(p)}
 
 /* ===== TILT 3D (lerp + rAF) ===== */
 if(window.innerWidth>768){
@@ -1264,6 +1273,10 @@ if(window.innerWidth>768){
         if(active!==currentGarage){
             garages[currentGarage].classList.remove('active');
             garages[active].classList.add('active');
+            /* Split reveal: trigger when garage becomes active */
+            if(garages[active].classList.contains('split-reveal')&&!garages[active].classList.contains('revealed')){
+                setTimeout(function(){garages[active].classList.add('revealed')},100);
+            }
             currentGarage=active;
         }
         /* Door leaving effect */
@@ -1534,7 +1547,7 @@ function launchConfetti(){
     canvas.width=window.innerWidth;canvas.height=window.innerHeight;
     document.body.appendChild(canvas);
     const ctx=canvas.getContext('2d');
-    const colors=['#7C3AED','#3B82F6','#D9F99D','#FF6B35','#22C55E','#F59E0B','#EC4899'];
+    const colors=['#D9F99D','#EA580C','#2DD4BF','#7C3AED'];
     const particles=[];
     for(let i=0;i<150;i++){particles.push({x:Math.random()*canvas.width,y:-Math.random()*canvas.height*0.5,vx:(Math.random()-0.5)*8,vy:Math.random()*4+2,w:Math.random()*8+4,h:Math.random()*6+3,color:colors[Math.floor(Math.random()*colors.length)],rot:Math.random()*360,rotV:(Math.random()-0.5)*10,opacity:1})}
     let start=performance.now();
