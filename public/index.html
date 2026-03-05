@@ -580,14 +580,19 @@ img,svg{max-width:100%;display:block}
 select.q-input{appearance:auto;-webkit-appearance:auto}
 @media(max-width:600px){.q-grid{grid-template-columns:1fr 1fr}.q-grid-2{grid-template-columns:1fr}.q-grid-3{grid-template-columns:1fr}.q-card{padding:14px}}
 
-/* ===== SPLIT REVEAL ===== */
-.split-reveal{position:relative;overflow:hidden}
-.split-mask{position:absolute;top:0;height:100%;z-index:20;transition:transform 1s cubic-bezier(0.16,1,0.3,1)}
-.split-mask-left{left:0;width:50%;transform:translateX(0);box-shadow:inset -20px 0 30px rgba(0,0,0,0.1)}
-.split-mask-right{right:0;width:50%;transform:translateX(0);box-shadow:inset 20px 0 30px rgba(0,0,0,0.1)}
-.split-reveal.revealed .split-mask-left{transform:translateX(-100%)}
-.split-reveal.revealed .split-mask-right{transform:translateX(100%);transition-delay:0.1s}
-@media(max-width:768px){.split-mask{transition-duration:0.6s}}
+/* ===== SPLIT REVEAL (content deploys from sides) ===== */
+.split-reveal{position:relative;overflow-x:hidden}
+.split-reveal [data-sr]{opacity:0;transition:opacity 0.9s cubic-bezier(0.16,1,0.3,1),transform 0.9s cubic-bezier(0.16,1,0.3,1)}
+.split-reveal [data-sr="left"]{transform:translateX(-100px)}
+.split-reveal [data-sr="right"]{transform:translateX(100px)}
+.split-reveal [data-sr="up"]{transform:translateY(60px)}
+.split-reveal.revealed [data-sr]{opacity:1;transform:translateX(0) translateY(0)}
+.split-reveal.revealed [data-sr][data-sr-d="1"]{transition-delay:0.1s}
+.split-reveal.revealed [data-sr][data-sr-d="2"]{transition-delay:0.2s}
+.split-reveal.revealed [data-sr][data-sr-d="3"]{transition-delay:0.3s}
+.split-reveal.revealed [data-sr][data-sr-d="4"]{transition-delay:0.4s}
+.split-reveal.revealed [data-sr][data-sr-d="5"]{transition-delay:0.5s}
+@media(max-width:768px){.split-reveal [data-sr="left"]{transform:translateX(-50px)}.split-reveal [data-sr="right"]{transform:translateX(50px)}}
 
 @media(prefers-reduced-motion:reduce){
     *,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important}
@@ -688,10 +693,8 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
 
 <!-- GARAGE 1: Portfolio (split reveal) -->
 <section class="garage section-spacing sec-portfolio split-reveal" id="portfolio">
-    <div class="split-mask split-mask-left" style="background:#7C3AED"></div>
-    <div class="split-mask split-mask-right" style="background:#7C3AED"></div>
-    <div class="container"><div class="sh"><h2>Nos dernières <span class="gt">réalisations</span></h2><p>Chaque site est unique, conçu sur-mesure pour le métier de nos clients.</p></div></div>
-    <div class="carousel-wrap">
+    <div class="container"><div class="sh" data-sr="left"><h2>Nos dernières <span class="gt">réalisations</span></h2><p>Chaque site est unique, conçu sur-mesure pour le métier de nos clients.</p></div></div>
+    <div class="carousel-wrap" data-sr="right" data-sr-d="2">
         <div class="carousel-track" id="carouselTrack">
             <div class="c-card" style="background:linear-gradient(135deg,#D97706,#F59E0B)"><div class="c-overlay"></div><span class="c-badge">Restaurant</span><div class="c-info"><h3>La Table d'Or</h3><p>Restaurant gastronomique</p></div><span class="c-link">Voir →</span></div>
             <div class="c-card" style="background:linear-gradient(135deg,#1a1a2e,#DC2626)"><div class="c-overlay"></div><span class="c-badge">Tatoueur</span><div class="c-info"><h3>Studio Ink</h3><p>Salon de tatouage</p></div><span class="c-link">Voir →</span></div>
@@ -740,32 +743,30 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
 
 <!-- GARAGE 3: Pricing (split reveal) -->
 <section class="garage section-spacing sec-pricing split-reveal" id="pricing">
-    <div class="split-mask split-mask-left" style="background:#EA580C"></div>
-    <div class="split-mask split-mask-right" style="background:#EA580C"></div>
     <div class="container">
-        <div class="sh"><h2>Tarifs <span class="gt">transparents</span></h2><p>Pas de surprise, pas de frais cachés.</p></div>
+        <div class="sh" data-sr="left"><h2>Tarifs <span class="gt">transparents</span></h2><p>Pas de surprise, pas de frais cachés.</p></div>
         <div class="price-grid">
-            <div class="price card" data-delay="0">
+            <div class="price card" data-sr="left" data-sr-d="1">
                 <div class="price-name">Essentiel</div><div class="price-desc text-s">Pour démarrer</div>
                 <div class="price-amount">149€ <span>/mois</span></div><div class="price-period text-s">Sans engagement</div><div class="price-note" style="color:var(--purple)">0€ de création</div>
                 <ul class="price-features"><li>Site vitrine</li><li>Responsive</li><li>Hébergement</li><li>SSL</li><li>Support email</li></ul>
                 <a href="#contact" class="btn btn-secondary" style="width:100%">Choisir</a>
             </div>
-            <div class="price card card-gradient featured" data-delay="1">
+            <div class="price card card-gradient featured" data-sr="up" data-sr-d="2">
                 <div class="price-badge">POPULAIRE</div>
                 <div class="price-name">Pro</div><div class="price-desc">Tout pour convertir</div>
                 <div class="price-amount">199€ <span>/mois</span></div><div class="price-period">Sans engagement</div><div class="price-note" style="color:#3B0764">0€ de création</div>
                 <ul class="price-features"><li>Tout Essentiel</li><li>Domaine inclus</li><li>SEO</li><li>Modifs illimitées</li><li>WhatsApp 7j/7</li><li>Statistiques</li></ul>
                 <a href="#contact" class="btn btn-white" style="width:100%">Choisir →</a>
             </div>
-            <div class="price card" data-delay="2">
+            <div class="price card" data-sr="right" data-sr-d="3">
                 <div class="price-name">Premium</div><div class="price-desc text-s">Pour les ambitieux</div>
                 <div class="price-amount">299€ <span>/mois</span></div><div class="price-period text-s">Sans engagement</div><div class="price-note" style="color:var(--purple)">0€ de création</div>
                 <ul class="price-features"><li>Tout Pro</li><li>Boutique en ligne</li><li>Stripe</li><li>Google Ads</li><li>Manager dédié</li><li>Rapport mensuel</li></ul>
                 <a href="#contact" class="btn btn-secondary" style="width:100%">Choisir</a>
             </div>
         </div>
-        <p style="text-align:center;font-size:13px;color:var(--text-light);margin-top:24px">Sans engagement — Résiliez quand vous voulez</p>
+        <p data-sr="up" data-sr-d="4" style="text-align:center;font-size:13px;color:var(--text-light);margin-top:24px">Sans engagement — Résiliez quand vous voulez</p>
     </div>
 </section>
 
