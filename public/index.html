@@ -34,8 +34,16 @@ img,svg{max-width:100%;display:block}
 .container{max-width:1200px;margin:0 auto;padding:0 24px}
 .section-spacing{padding:80px 0}
 
+/* ===== STICKY STACKING ===== */
+.stack-wrapper{position:relative}
+.stack-section{position:sticky;top:0;min-height:100vh;display:flex;flex-direction:column;justify-content:center;box-shadow:0 -10px 40px rgba(0,0,0,0.2);transition:transform 0.5s ease,filter 0.5s ease;will-change:transform,filter;transform-origin:center top;overflow:hidden}
+.stack-section:first-child{box-shadow:none}
+.stack-section:not(:first-child){border-top-left-radius:24px;border-top-right-radius:24px}
+.stack-section.covered{transform:scale(0.95);filter:brightness(0.85)}
+@media(max-width:768px){.stack-section:not(:first-child){border-top-left-radius:16px;border-top-right-radius:16px}}
+
 /* ===== CURSOR ===== */
-.cursor{position:fixed;width:20px;height:20px;border-radius:50%;background:rgba(124,58,237,0.3);pointer-events:none;z-index:9999;transition:width 0.3s ease,height 0.3s ease,opacity 0.3s ease;transform:translate(-50%,-50%);will-change:transform,width,height,opacity;opacity:0.3}
+.cursor{position:fixed;width:20px;height:20px;border-radius:50%;background:rgba(124,58,237,0.3);pointer-events:none;z-index:99999;transition:width 0.3s ease,height 0.3s ease,opacity 0.3s ease;transform:translate(-50%,-50%);will-change:transform,width,height,opacity;opacity:0.3}
 .cursor.hover{width:50px;height:50px;opacity:0.15}
 @media(max-width:768px){.cursor{display:none!important}}
 
@@ -97,7 +105,7 @@ img,svg{max-width:100%;display:block}
 }
 
 /* ===== NAV ===== */
-.nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:64px;display:flex;align-items:center;transition:all 0.3s}
+.nav{position:fixed;top:0;left:0;right:0;z-index:9999;height:64px;display:flex;align-items:center;transition:all 0.3s}
 .nav.scrolled{background:rgba(26,26,46,0.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 1px 0 rgba(255,255,255,0.04)}
 .nav-inner{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto;padding:0 24px;width:100%}
 .nav-logo{font-size:18px;font-weight:700;color:var(--text-dark)}.nav-logo .dot{color:var(--purple)}
@@ -365,8 +373,10 @@ img,svg{max-width:100%;display:block}
     </div>
 </nav>
 
+<div class="stack-wrapper">
+
 <!-- ===== HERO ===== -->
-<section class="hero" id="hero" data-bg="#1a1a2e">
+<section class="hero stack-section" id="hero" data-bg="#1a1a2e" style="z-index:1;background:#1a1a2e">
     <div class="hero-gradient" id="heroGrad"></div>
     <div class="particles" id="particles"></div>
     <div class="hero-content container">
@@ -409,7 +419,7 @@ img,svg{max-width:100%;display:block}
 </section>
 
 <!-- ===== STATS ===== -->
-<section class="section-spacing" data-bg="#161529">
+<section class="section-spacing stack-section" data-bg="#161529" style="z-index:2;background:#161529">
     <div class="container">
         <div class="card anim anim-up" style="padding:48px 24px">
             <div class="stats-row">
@@ -423,7 +433,7 @@ img,svg{max-width:100%;display:block}
 </section>
 
 <!-- ===== PROCESS ===== -->
-<section class="section-spacing" id="process" data-bg="#1e1a35">
+<section class="section-spacing stack-section" id="process" data-bg="#1e1a35" style="z-index:3;background:#1e1a35">
     <div class="container">
         <div class="sh">
             <h2 class="anim anim-blur">Simple comme <span class="gt">bonjour</span></h2>
@@ -441,7 +451,7 @@ img,svg{max-width:100%;display:block}
 </section>
 
 <!-- ===== PORTFOLIO ===== -->
-<section class="section-spacing" id="portfolio" data-bg="#191530">
+<section class="section-spacing stack-section" id="portfolio" data-bg="#191530" style="z-index:4;background:#191530">
     <div class="container"><div class="sh"><h2 class="anim anim-blur">Nos dernières <span class="gt">réalisations</span></h2><p class="anim anim-up">Chaque site est unique, conçu sur-mesure pour le métier de nos clients.</p></div></div>
     <div class="carousel-wrap">
         <div class="carousel-track" id="carouselTrack">
@@ -462,7 +472,7 @@ img,svg{max-width:100%;display:block}
 </section>
 
 <!-- ===== SERVICES ===== -->
-<section class="section-spacing" id="services" data-bg="#1c1832">
+<section class="section-spacing stack-section" id="services" data-bg="#1c1832" style="z-index:5;background:#1c1832">
     <div class="container">
         <div class="sh"><h2 class="anim anim-blur">Pour tous les <span class="gt">professionnels</span></h2><p class="anim anim-up">Des sites pensés pour votre métier, avec les fonctionnalités qui comptent.</p></div>
         <div class="svc-grid">
@@ -477,7 +487,7 @@ img,svg{max-width:100%;display:block}
 </section>
 
 <!-- ===== AVANT/APRÈS ===== -->
-<section class="section-spacing" data-bg="#141220">
+<section class="section-spacing stack-section" data-bg="#141220" style="z-index:6;background:#141220">
     <div class="container">
         <div class="ba-outer card-black anim anim-left">
             <div class="sh" style="margin-bottom:0"><h2 class="anim anim-blur">La différence <span class="gt">WebsiteBuild</span></h2></div>
@@ -506,7 +516,7 @@ img,svg{max-width:100%;display:block}
 </section>
 
 <!-- ===== COMPARE ===== -->
-<section class="section-spacing" id="compare" data-bg="#1b162e">
+<section class="section-spacing stack-section" id="compare" data-bg="#1b162e" style="z-index:7;background:#1b162e">
     <div class="container">
         <div class="sh"><h2 class="anim anim-blur">Pourquoi nous <span class="gt">choisir</span> ?</h2></div>
         <div class="cmp-grid">
@@ -519,7 +529,7 @@ img,svg{max-width:100%;display:block}
 </section>
 
 <!-- ===== PRICING ===== -->
-<section class="section-spacing" id="pricing" data-bg="#201a38">
+<section class="section-spacing stack-section" id="pricing" data-bg="#201a38" style="z-index:8;background:#201a38">
     <div class="container">
         <div class="sh"><h2 class="anim anim-blur">Tarifs <span class="gt">transparents</span></h2><p class="anim anim-up">Pas de surprise, pas de frais cachés.</p></div>
         <div class="price-grid">
@@ -548,7 +558,7 @@ img,svg{max-width:100%;display:block}
 </section>
 
 <!-- ===== TESTIMONIALS ===== -->
-<section class="section-spacing" data-bg="#141220">
+<section class="section-spacing stack-section" data-bg="#141220" style="z-index:9;background:#141220">
     <div class="container">
         <div class="card-black anim anim-right" style="border-radius:var(--radius);padding:60px 40px">
             <div class="sh" style="margin-bottom:36px"><h2 class="anim anim-blur">Ce que disent nos <span class="gt">clients</span></h2></div>
@@ -562,7 +572,7 @@ img,svg{max-width:100%;display:block}
 </section>
 
 <!-- ===== FAQ ===== -->
-<section class="section-spacing" id="faq" data-bg="#1a1a2e">
+<section class="section-spacing stack-section" id="faq" data-bg="#1a1a2e" style="z-index:10;background:#1a1a2e">
     <div class="container" style="max-width:800px">
         <div class="card anim anim-scale" style="padding:48px 40px">
             <div class="sh" style="margin-bottom:24px"><h2>Questions <span class="gt">fréquentes</span></h2></div>
@@ -579,7 +589,7 @@ img,svg{max-width:100%;display:block}
 </section>
 
 <!-- ===== TEAM ===== -->
-<section class="section-spacing" id="team" data-bg="#1e1a35">
+<section class="section-spacing stack-section" id="team" data-bg="#1e1a35" style="z-index:11;background:#1e1a35">
     <div class="container">
         <div class="sh"><h2 class="anim anim-blur">L'équipe derrière <span class="gt">WebsiteBuild</span></h2></div>
         <div class="team-grid">
@@ -591,7 +601,7 @@ img,svg{max-width:100%;display:block}
 </section>
 
 <!-- ===== CTA ===== -->
-<section class="section-spacing" id="contact" data-bg="#161529">
+<section class="section-spacing stack-section" id="contact" data-bg="#161529" style="z-index:12;background:#161529">
     <div class="container">
         <div class="cta-final anim anim-scale">
             <h2>Prêt à lancer votre site ?</h2>
@@ -602,8 +612,10 @@ img,svg{max-width:100%;display:block}
     </div>
 </section>
 
+</div><!-- /stack-wrapper -->
+
 <!-- ===== FOOTER ===== -->
-<footer class="footer">
+<footer class="footer" style="position:relative;z-index:13;background:#161529">
     <div class="container">
         <div class="footer-top">
             <div class="footer-brand"><div class="nav-logo">websitebuild<span class="dot">.</span></div><p>Sites web professionnels livrés en 48h. On s'occupe de tout.</p><div class="footer-social"><a href="#" aria-label="Instagram">📷</a><a href="#" aria-label="TikTok">🎵</a></div></div>
@@ -694,6 +706,22 @@ const bgObs=new IntersectionObserver(entries=>{
     });
 },{threshold:[0,0.25,0.5,0.75,1]});
 bgSections.forEach(s=>bgObs.observe(s));
+
+/* ===== STICKY STACKING COVER EFFECT ===== */
+const stackSections=document.querySelectorAll('.stack-section');
+const stackObs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+        const idx=Array.from(stackSections).indexOf(e.target);
+        const prev=idx>0?stackSections[idx-1]:null;
+        if(e.isIntersecting&&e.intersectionRatio>0.1&&prev){
+            prev.classList.add('covered');
+        }
+        if(!e.isIntersecting&&prev){
+            prev.classList.remove('covered');
+        }
+    });
+},{threshold:[0,0.1,0.25,0.5,0.75,1]});
+stackSections.forEach(s=>stackObs.observe(s));
 
 /* ===== PROCESS LINE ===== */
 const pl=document.getElementById('processLine');
