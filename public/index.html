@@ -34,13 +34,21 @@ img,svg{max-width:100%;display:block}
 .container{max-width:1200px;margin:0 auto;padding:0 24px}
 .section-spacing{padding:120px 0}
 
-/* ===== STICKY STACKING ===== */
-.stack-wrapper{position:relative}
-.stack-section{position:sticky;top:0;display:flex;flex-direction:column;justify-content:center;will-change:auto;box-shadow:0 -10px 40px rgba(0,0,0,0.12)}
+/* ===== DOOR/GARAGE STACKING ===== */
+/* Each .dg-pair wraps a DOOR (sticky) + GARAGE (static) */
+.dg-pair{position:relative}
+/* DOOR: sticky, opaque, covers the garage behind it */
+.door{position:sticky;top:0;z-index:10;box-shadow:0 -10px 40px rgba(0,0,0,0.15);border-top-left-radius:24px;border-top-right-radius:24px;transition:transform 0.5s ease,filter 0.5s ease}
+.door.leaving{transform:scale(0.97);filter:brightness(0.95)}
+/* GARAGE: static, never moves, just sits there */
+.garage{position:relative;z-index:1}
+/* Hero is neither door nor garage, just normal flow */
+.sec-hero{position:relative;z-index:0}
+@media(max-width:768px){.door{border-top-left-radius:16px;border-top-right-radius:16px}}
 
 /* ===== SECTION COLORS ===== */
 /* Hero - dégradé violet pâle → bleu pâle */
-.sec-hero{background:linear-gradient(135deg,#7C3AED 0%,#6366F1 50%,#3B82F6 100%)!important;color:#fff}
+.sec-hero{background:linear-gradient(135deg,#1e1b4b 0%,#312e81 50%,#3730a3 100%)!important;color:#fff}
 .sec-hero .badge{background:rgba(255,255,255,0.15);border-color:rgba(255,255,255,0.25);color:#fff}
 .sec-hero h1{color:#fff}
 .sec-hero .hero-sub{color:rgba(255,255,255,0.85)}
@@ -557,10 +565,8 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
     </div>
 </nav>
 
-<div class="stack-wrapper">
-
-<!-- ===== HERO ===== -->
-<section class="hero stack-section sec-hero" id="hero" style="z-index:1">
+<!-- ===== HERO (normal flow, first thing you see) ===== -->
+<section class="hero sec-hero" id="hero">
     <div class="hero-gradient" id="heroGrad"></div>
     <div class="particles" id="particles"></div>
     <div class="hero-content container">
@@ -614,8 +620,10 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
 
 </section>
 
-<!-- ===== PROCESS ===== -->
-<section class="section-spacing stack-section sec-process" id="process" style="z-index:2">
+<!-- ===== PAIR 1: Process (DOOR) + Portfolio (GARAGE) ===== -->
+<div class="dg-pair">
+<!-- DOOR: Process -->
+<section class="section-spacing door sec-process" id="process">
     <div class="container">
         <div class="sh">
             <h2 class="anim anim-blur">Simple comme <span class="gt">bonjour</span></h2>
@@ -633,8 +641,8 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
 
 </section>
 
-<!-- ===== PORTFOLIO ===== -->
-<section class="section-spacing stack-section sec-portfolio" id="portfolio" style="z-index:3">
+<!-- GARAGE: Portfolio -->
+<section class="section-spacing garage sec-portfolio" id="portfolio">
     <div class="container"><div class="sh"><h2 class="anim anim-blur">Nos dernières <span class="gt">réalisations</span></h2><p class="anim anim-up">Chaque site est unique, conçu sur-mesure pour le métier de nos clients.</p></div></div>
     <div class="carousel-wrap">
         <div class="carousel-track" id="carouselTrack">
@@ -655,8 +663,12 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
 
 </section>
 
-<!-- ===== SERVICES ===== -->
-<section class="section-spacing stack-section sec-services" id="services" style="z-index:4">
+</div><!-- /dg-pair 1 -->
+
+<!-- ===== PAIR 2: Services (DOOR) + BA (GARAGE) ===== -->
+<div class="dg-pair">
+<!-- DOOR: Services -->
+<section class="section-spacing door sec-services" id="services">
     <div class="container">
         <div class="sh"><h2 class="anim anim-blur">Pour tous les <span class="gt">professionnels</span></h2><p class="anim anim-up">Des sites pensés pour votre métier, avec les fonctionnalités qui comptent.</p></div>
         <div class="svc-grid">
@@ -671,8 +683,8 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
 
 </section>
 
-<!-- ===== AVANT/APRÈS ===== -->
-<section class="section-spacing stack-section sec-ba" style="z-index:5">
+<!-- GARAGE: Avant/Après -->
+<section class="section-spacing garage sec-ba">
     <div class="container">
         <div class="ba-outer card-black anim anim-left">
             <div class="sh" style="margin-bottom:0"><h2 class="anim anim-blur">La différence <span class="gt">WebsiteBuild</span></h2></div>
@@ -701,8 +713,12 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
 
 </section>
 
-<!-- ===== COMPARE ===== -->
-<section class="section-spacing stack-section sec-compare" id="compare" style="z-index:6">
+</div><!-- /dg-pair 2 -->
+
+<!-- ===== PAIR 3: Compare (DOOR) + Pricing (GARAGE) ===== -->
+<div class="dg-pair">
+<!-- DOOR: Compare -->
+<section class="section-spacing door sec-compare" id="compare">
     <div class="container">
         <div class="sh"><h2 class="anim anim-blur">Pourquoi nous <span class="gt">choisir</span> ?</h2></div>
         <div class="cmp-grid">
@@ -715,8 +731,8 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
 
 </section>
 
-<!-- ===== PRICING ===== -->
-<section class="section-spacing stack-section sec-pricing" id="pricing" style="z-index:7">
+<!-- GARAGE: Pricing -->
+<section class="section-spacing garage sec-pricing" id="pricing">
     <div class="container">
         <div class="sh"><h2 class="anim anim-blur">Tarifs <span class="gt">transparents</span></h2><p class="anim anim-up">Pas de surprise, pas de frais cachés.</p></div>
         <div class="price-grid">
@@ -745,8 +761,12 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
 
 </section>
 
-<!-- ===== TESTIMONIALS ===== -->
-<section class="section-spacing stack-section sec-testi" style="z-index:8">
+</div><!-- /dg-pair 3 -->
+
+<!-- ===== PAIR 4: Testi (DOOR) + FAQ (GARAGE) ===== -->
+<div class="dg-pair">
+<!-- DOOR: Testimonials -->
+<section class="section-spacing door sec-testi">
     <div class="container">
         <div class="sh" style="margin-bottom:36px"><h2 class="anim anim-blur">Ce que disent nos <span class="gt">clients</span></h2></div>
         <div class="testi-grid">
@@ -758,8 +778,8 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
 
 </section>
 
-<!-- ===== FAQ ===== -->
-<section class="section-spacing stack-section sec-faq" id="faq" style="z-index:9">
+<!-- GARAGE: FAQ -->
+<section class="section-spacing garage sec-faq" id="faq">
     <div class="container" style="max-width:800px">
         <div class="card anim anim-scale" style="padding:48px 40px">
             <div class="sh" style="margin-bottom:24px"><h2>Questions <span class="gt">fréquentes</span></h2></div>
@@ -776,8 +796,12 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
 
 </section>
 
-<!-- ===== TEAM ===== -->
-<section class="section-spacing stack-section sec-team" id="team" style="z-index:10">
+</div><!-- /dg-pair 4 -->
+
+<!-- ===== PAIR 5: Team (DOOR) + CTA (GARAGE) ===== -->
+<div class="dg-pair">
+<!-- DOOR: Team -->
+<section class="section-spacing door sec-team" id="team">
     <div class="container">
         <div class="sh"><h2 class="anim anim-blur">L'équipe derrière <span class="gt">WebsiteBuild</span></h2></div>
         <div class="team-grid">
@@ -789,8 +813,8 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
 
 </section>
 
-<!-- ===== CTA ===== -->
-<section class="section-spacing stack-section sec-cta" id="contact" style="z-index:11">
+<!-- GARAGE: CTA -->
+<section class="section-spacing garage sec-cta" id="contact">
     <div class="container">
         <div class="cta-final anim anim-scale">
             <h2>L'avenir de votre site commence ici.</h2>
@@ -801,7 +825,7 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
     </div>
 </section>
 
-</div><!-- /stack-wrapper -->
+</div><!-- /dg-pair 5 -->
 
 <!-- ===== FOOTER ===== -->
 <footer class="footer footer-styled" style="position:relative;z-index:15;background:#F9FAFB">
@@ -1154,7 +1178,24 @@ if(window.innerWidth>768){
 
 /* ===== DYNAMIC BACKGROUND COLOR (disabled - sections have fixed colors) ===== */
 
-/* ===== STICKY STACKING (simple: each section sticks, next slides over) ===== */
+/* ===== DOOR LEAVING EFFECT ===== */
+(function(){
+    const doors=document.querySelectorAll('.door');
+    function checkDoors(){
+        doors.forEach(door=>{
+            const r=door.getBoundingClientRect();
+            /* When the door's bottom approaches the top of viewport, it's leaving */
+            const ratio=r.bottom/window.innerHeight;
+            if(ratio<0.85&&ratio>0){
+                door.classList.add('leaving');
+            }else{
+                door.classList.remove('leaving');
+            }
+        });
+        requestAnimationFrame(checkDoors);
+    }
+    checkDoors();
+})();
 
 /* ===== PROCESS LINE ===== */
 const pl=document.getElementById('processLine');
