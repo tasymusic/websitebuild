@@ -1299,20 +1299,25 @@ if(window.innerWidth>768){
     const spacers=document.querySelectorAll('.garage-view');
     const doors=document.querySelectorAll('.door');
     let currentGarage=0;
+
+    /* Build a map: for each garage index, find the door ABOVE its spacer.
+       When that door's bottom leaves the viewport, we should already show
+       the correct garage — not the previous one. */
     function onScroll(){
-        /* Determine which garage to show: switch when spacer reaches mid-viewport
-           (prevents wrong garage flashing through door wave gaps at top) */
+        /* Switch garage as soon as its spacer enters the viewport (top <= 90% of vh).
+           This ensures the garage is ready BEFORE the door above finishes scrolling away,
+           eliminating the flash of the previous garage. */
         let active=0;
-        var midPoint=window.innerHeight*0.5;
+        var threshold=window.innerHeight*0.9;
         spacers.forEach(function(sp,i){
-            if(sp.getBoundingClientRect().top<=midPoint) active=i;
+            if(sp.getBoundingClientRect().top<=threshold) active=i;
         });
         if(active!==currentGarage){
             garages[currentGarage].classList.remove('active');
             garages[active].classList.add('active');
-            /* Split reveal: trigger when garage becomes active */
+            /* Split reveal: trigger immediately when garage becomes active */
             if(garages[active].classList.contains('split-reveal')&&!garages[active].classList.contains('revealed')){
-                setTimeout(function(){garages[active].classList.add('revealed')},100);
+                garages[active].classList.add('revealed');
             }
             currentGarage=active;
         }
