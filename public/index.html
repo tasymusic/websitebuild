@@ -16,15 +16,15 @@
 /* ===== RESET & VARIABLES ===== */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-    --bg-page:#1a1a2e;--bg-card:rgba(255,255,255,0.06);--bg-dark:#151528;--bg-black:#0e0e1a;
+    --bg-page:#F5F3FF;--bg-card:rgba(255,255,255,0.06);--bg-dark:#151528;--bg-black:#0e0e1a;
     --purple:#7C3AED;--blue:#3B82F6;--gradient:linear-gradient(135deg,#7C3AED,#3B82F6);
-    --text-dark:#E8E6F0;--text-med:#9896A8;--text-light:#6E6C80;
+    --text-dark:#1a1a1a;--text-med:#4a4a5a;--text-light:#6E6C80;
     --radius:24px;--radius-sm:16px;--radius-xs:12px;
-    --shadow:0 4px 24px rgba(0,0,0,0.2);--shadow-hover:0 12px 48px rgba(124,58,237,0.15);
-    --glass-border:rgba(255,255,255,0.08);
+    --shadow:0 4px 24px rgba(0,0,0,0.08);--shadow-hover:0 12px 48px rgba(124,58,237,0.15);
+    --glass-border:rgba(0,0,0,0.08);
 }
 html{scroll-behavior:smooth}
-body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg-page);color:var(--text-dark);line-height:1.6;overflow-x:hidden;cursor:none;transition:background-color 0.8s ease}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg-page);color:var(--text-dark);line-height:1.6;overflow-x:hidden;cursor:none}
 @media(max-width:768px){body{cursor:auto}}
 a{color:inherit;text-decoration:none}
 button{font-family:inherit;cursor:none;border:none;background:none}
@@ -36,17 +36,163 @@ img,svg{max-width:100%;display:block}
 
 /* ===== STICKY STACKING ===== */
 .stack-wrapper{position:relative}
-.stack-section{position:sticky;top:0;min-height:100vh;display:flex;flex-direction:column;justify-content:center;box-shadow:0 -10px 40px rgba(0,0,0,0.2);transition:transform 0.5s ease,filter 0.5s ease;will-change:transform,filter;transform-origin:center top;overflow:hidden}
+.stack-section{position:sticky;top:0;min-height:100vh;display:flex;flex-direction:column;justify-content:center;box-shadow:0 -10px 40px rgba(0,0,0,0.1);transition:transform 0.5s ease,filter 0.5s ease;will-change:transform,filter;transform-origin:center top;overflow:visible}
 .stack-section:first-child{box-shadow:none}
 .stack-section:not(:first-child){border-top-left-radius:24px;border-top-right-radius:24px}
 .stack-section.covered{transform:scale(0.95);filter:brightness(0.85)}
 @media(max-width:768px){.stack-section:not(:first-child){border-top-left-radius:16px;border-top-right-radius:16px}}
 
-/* ===== DIAGONAL CLIP ===== */
-.diag-up,.diag-down{position:relative}
-.diag-up::before,.diag-down::before{content:'';position:absolute;top:-80px;left:0;width:100%;height:80px;z-index:1;filter:drop-shadow(0 -4px 10px rgba(0,0,0,0.08))}
-.diag-up::before{background:inherit;clip-path:polygon(0 100%,100% 0,100% 100%)}
-.diag-down::before{background:inherit;clip-path:polygon(0 0,0 100%,100% 100%)}
+/* ===== CURVED TRANSITIONS ===== */
+.stack-section{position:sticky;top:0;overflow:visible!important;padding-bottom:80px}
+.stack-section::after{content:'';position:absolute;bottom:-60px;left:0;width:100%;height:60px;background:inherit;z-index:2;box-shadow:0 10px 30px rgba(0,0,0,0.08)}
+.stack-section:nth-child(odd)::after{border-radius:0 0 50% 50%}
+.stack-section:nth-child(even)::after{border-radius:0 0 50% 50%}
+.stack-section:last-child::after{display:none}
+
+/* ===== SECTION COLORS ===== */
+/* Hero - lavande pale */
+.sec-hero{background:#F5F3FF!important;color:#1a1a1a}
+.sec-hero .badge{background:rgba(124,58,237,0.1);border-color:rgba(124,58,237,0.2);color:#7C3AED}
+.sec-hero h1{color:#1a1a1a}
+.sec-hero .hero-sub{color:#4a4a5a}
+.sec-hero .hero-trust{color:#6E6C80}
+.sec-hero .btn-secondary{border-color:rgba(0,0,0,0.15);color:#1a1a1a}
+.sec-hero .btn-secondary:hover{border-color:var(--purple);color:var(--purple)}
+.sec-hero .float-badge{background:rgba(255,255,255,0.8);color:#1a1a1a;border-color:rgba(0,0,0,0.08)}
+.sec-hero .card{background:rgba(0,0,0,0.04);border-color:rgba(0,0,0,0.08)}
+.sec-hero .hb-card{color:#fff}
+.sec-hero .nav-logo,.sec-hero .text-dark{color:#1a1a1a}
+.sec-hero::after{background:#F5F3FF}
+
+/* Stats - vert menthe */
+.sec-stats{background:#ECFDF5!important;color:#1a1a1a}
+.sec-stats .card{background:#fff;border-color:rgba(0,0,0,0.08);box-shadow:0 4px 24px rgba(0,0,0,0.06)}
+.sec-stats .st-num{-webkit-text-fill-color:#1a1a1a;background:linear-gradient(135deg,#059669,#10B981);-webkit-background-clip:text;background-clip:text}
+.sec-stats .st-label{color:#4a4a5a}
+.sec-stats::after{background:#ECFDF5}
+
+/* Process - blanc */
+.sec-process{background:#FFFFFF!important;color:#1a1a1a}
+.sec-process .sh h2{color:#1a1a1a}
+.sec-process .sh p{color:#4a4a5a}
+.sec-process .card{background:#f8f8fc;border-color:rgba(0,0,0,0.08)}
+.sec-process .process-card h3{color:#1a1a1a}
+.sec-process .text-s{color:#4a4a5a}
+.sec-process::after{background:#FFFFFF}
+
+/* Portfolio - violet profond */
+.sec-portfolio{background:#4C1D95!important;color:#fff}
+.sec-portfolio .sh h2{color:#fff}
+.sec-portfolio .sh p{color:rgba(255,255,255,0.8)}
+.sec-portfolio .gt{background:linear-gradient(135deg,#C4B5FD,#A78BFA);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.sec-portfolio::after{background:#4C1D95}
+
+/* Services - peche chaud */
+.sec-services{background:#FFF7ED!important;color:#1a1a1a}
+.sec-services .sh h2{color:#1a1a1a}
+.sec-services .sh p{color:#4a4a5a}
+.sec-services .svc-dark{background:#fff;border-color:rgba(0,0,0,0.08);color:#1a1a1a}
+.sec-services .svc-dark h3{color:#1a1a1a}
+.sec-services .svc-dark p{color:#4a4a5a}
+.sec-services .svc-white{background:#fff;border-color:rgba(0,0,0,0.08);color:#1a1a1a}
+.sec-services .svc-white h3{color:#1a1a1a}
+.sec-services .svc-white p{color:#4a4a5a}
+.sec-services .svc-grad{color:#fff}
+.sec-services::after{background:#FFF7ED}
+
+/* Avant/Apres - noir */
+.sec-ba{background:#0a0a0a!important;color:#fff}
+.sec-ba .sh h2{color:#fff}
+.sec-ba .card-black{background:#12101e}
+.sec-ba .ba-checks{color:rgba(255,255,255,0.7)}
+.sec-ba::after{background:#0a0a0a}
+
+/* Comparatif - bleu roi */
+.sec-compare{background:#1E40AF!important;color:#fff}
+.sec-compare .sh h2{color:#fff}
+.sec-compare .sh p{color:rgba(255,255,255,0.8)}
+.sec-compare .cmp{background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.15);color:#fff}
+.sec-compare .cmp-name{color:#fff}
+.sec-compare .cmp-row{color:rgba(255,255,255,0.7);border-color:rgba(255,255,255,0.1)}
+.sec-compare .cmp-row strong{color:#fff}
+.sec-compare .cmp.featured{background:rgba(255,255,255,0.18);border-color:rgba(255,255,255,0.3)}
+.sec-compare .gt{background:linear-gradient(135deg,#93C5FD,#60A5FA);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.sec-compare .cmp-name.gt{-webkit-text-fill-color:#fff}
+.sec-compare::after{background:#1E40AF}
+
+/* Pricing - blanc */
+.sec-pricing{background:#FFFFFF!important;color:#1a1a1a}
+.sec-pricing .sh h2{color:#1a1a1a}
+.sec-pricing .sh p{color:#4a4a5a}
+.sec-pricing .card{background:#f8f8fc;border-color:rgba(0,0,0,0.08)}
+.sec-pricing .price-name{color:#1a1a1a}
+.sec-pricing .price-amount{color:#1a1a1a}
+.sec-pricing .price-desc{color:#4a4a5a}
+.sec-pricing .price-period{color:#4a4a5a}
+.sec-pricing .price-features li{color:#4a4a5a}
+.sec-pricing .btn-secondary{border-color:rgba(0,0,0,0.15);color:#1a1a1a}
+.sec-pricing .btn-secondary:hover{border-color:var(--purple);color:var(--purple)}
+.sec-pricing .card-gradient{color:#fff}
+.sec-pricing .card-gradient .price-name,.sec-pricing .card-gradient .price-amount{color:#fff}
+.sec-pricing > .container > p{color:#6E6C80!important}
+.sec-pricing::after{background:#FFFFFF}
+
+/* Temoignages - orange corail */
+.sec-testi{background:#FF6B35!important;color:#fff}
+.sec-testi .sh h2{color:#fff}
+.sec-testi .card-black{background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.15);color:#fff}
+.sec-testi .testi{background:rgba(255,255,255,0.12);border-color:rgba(255,255,255,0.2)}
+.sec-testi .testi-text{color:rgba(255,255,255,0.9)}
+.sec-testi .testi-nm{color:#fff}
+.sec-testi .testi-role{color:rgba(255,255,255,0.7)}
+.sec-testi .testi-sep{background:rgba(255,255,255,0.2)}
+.sec-testi .testi-q{color:rgba(255,255,255,0.3)}
+.sec-testi .gt{background:linear-gradient(135deg,#fff,#FDE68A);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.sec-testi::after{background:#FF6B35}
+
+/* FAQ - jaune lime doux */
+.sec-faq{background:#F7FEE7!important;color:#1a1a1a}
+.sec-faq .sh h2{color:#1a1a1a}
+.sec-faq .card{background:#fff;border-color:rgba(0,0,0,0.08);box-shadow:0 4px 24px rgba(0,0,0,0.06)}
+.sec-faq .faq-q{color:#1a1a1a}
+.sec-faq .faq-a p{color:#4a4a5a}
+.sec-faq .faq-item{border-color:rgba(0,0,0,0.08)}
+.sec-faq::after{background:#F7FEE7}
+
+/* Equipe - blanc */
+.sec-team{background:#FFFFFF!important;color:#1a1a1a}
+.sec-team .sh h2{color:#1a1a1a}
+.sec-team .card{background:#f8f8fc;border-color:rgba(0,0,0,0.08)}
+.sec-team .team-card h3{color:#1a1a1a}
+.sec-team .team-card .role{color:var(--purple)}
+.sec-team .team-card p{color:#4a4a5a}
+.sec-team .team-quote{color:#4a4a5a}
+.sec-team::after{background:#FFFFFF}
+
+/* CTA - violet vif style Wix */
+.sec-cta{background:#7C3AED!important;color:#fff}
+.sec-cta .cta-final{background:transparent!important;border-radius:0;padding:0;box-shadow:none}
+.sec-cta .cta-final h2{color:#D9F99D!important;font-size:clamp(40px,5vw,72px)!important;font-weight:800!important;line-height:1.1!important;margin-bottom:24px!important}
+.sec-cta .cta-final h2 .split-char{color:#D9F99D!important;-webkit-text-fill-color:#D9F99D!important;background:none!important}
+.sec-cta .cta-final>p{color:rgba(255,255,255,0.85);font-size:18px;margin-bottom:36px}
+.sec-cta .cta-final .btn{background:#D9F99D!important;color:#7C3AED!important;font-weight:700;padding:16px 36px;border-radius:12px;font-size:17px;box-shadow:none;transition:all 0.3s ease}
+.sec-cta .cta-final .btn:hover{transform:scale(1.05);box-shadow:0 10px 30px rgba(0,0,0,0.2)}
+.sec-cta .cta-email{color:rgba(255,255,255,0.7)}
+.sec-cta .cta-email a{color:#D9F99D;font-weight:600}
+.sec-cta::after{background:#7C3AED}
+
+/* Footer */
+.footer-styled{background:#F9FAFB!important;color:#1a1a1a;border-top:none}
+.footer-styled .nav-logo{color:#1a1a1a}
+.footer-styled .footer-brand p{color:#6E6C80}
+.footer-styled .footer-col h4{color:#1a1a1a}
+.footer-styled .footer-col a{color:#6E6C80}
+.footer-styled .footer-col a:hover{color:#1a1a1a}
+.footer-styled .footer-bottom{color:#6E6C80;border-color:rgba(0,0,0,0.08)}
+.footer-styled .footer-legal a{color:#6E6C80}
+.footer-styled .footer-legal a:hover{color:#1a1a1a}
+.footer-styled .footer-social a{border-color:rgba(0,0,0,0.1)}
+.footer-styled .footer-social a:hover{border-color:var(--purple);background:rgba(124,58,237,0.08)}
 
 /* ===== CURSOR ===== */
 .cursor{position:fixed;width:20px;height:20px;border-radius:50%;background:rgba(124,58,237,0.3);pointer-events:none;z-index:99999;transition:width 0.3s ease,height 0.3s ease,opacity 0.3s ease;transform:translate(-50%,-50%);will-change:transform,width,height,opacity;opacity:0.3}
@@ -112,21 +258,21 @@ img,svg{max-width:100%;display:block}
 
 /* ===== NAV ===== */
 .nav{position:fixed;top:0;left:0;right:0;z-index:9999;height:64px;display:flex;align-items:center;transition:all 0.3s}
-.nav.scrolled{background:rgba(26,26,46,0.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 1px 0 rgba(255,255,255,0.04)}
+.nav.scrolled{background:rgba(255,255,255,0.9);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 1px 0 rgba(0,0,0,0.06)}
 .nav-inner{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto;padding:0 24px;width:100%}
 .nav-logo{font-size:18px;font-weight:700;color:var(--text-dark)}.nav-logo .dot{color:var(--purple)}
 .nav-links{display:flex;align-items:center;gap:28px}
-.nav-link{font-size:14px;font-weight:500;color:var(--text-med);transition:color 0.2s}.nav-link:hover{color:var(--text-dark)}
+.nav-link{font-size:14px;font-weight:500;color:#4a4a5a;transition:color 0.2s}.nav-link:hover{color:#1a1a1a}
 .nav-cta{background:var(--gradient);color:#fff;padding:8px 20px;border-radius:var(--radius-xs);font-size:13px;font-weight:600;transition:all 0.3s}
 .nav-cta:hover{transform:scale(1.05);box-shadow:0 0 20px rgba(124,58,237,0.3)}
 .nav-toggle{display:none;flex-direction:column;gap:5px;padding:8px}
-.nav-toggle span{display:block;width:22px;height:2px;background:var(--text-dark);transition:all 0.3s}
-.nav-mob{display:none;position:fixed;inset:0;background:rgba(26,26,46,0.97);backdrop-filter:blur(20px);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:28px}
+.nav-toggle span{display:block;width:22px;height:2px;background:#1a1a1a;transition:all 0.3s}
+.nav-mob{display:none;position:fixed;inset:0;background:rgba(255,255,255,0.97);backdrop-filter:blur(20px);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:28px}
 .nav-mob.open{display:flex}
-.nav-mob a{font-size:24px;font-weight:600;color:var(--text-dark)}
+.nav-mob a{font-size:24px;font-weight:600;color:#1a1a1a}
 
 /* ===== HERO ===== */
-.hero{padding:140px 0 80px;position:relative;overflow:hidden;text-align:center}
+.hero{padding:140px 0 80px;position:relative;overflow:visible;text-align:center}
 .hero-gradient{position:absolute;inset:0;pointer-events:none;z-index:0;opacity:0.5;transition:background 0.3s}
 .particles{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
 .particle{position:absolute;border-radius:50%;animation:particleFloat var(--dur) linear infinite;animation-delay:var(--del)}
@@ -381,7 +527,7 @@ img,svg{max-width:100%;display:block}
 <div class="stack-wrapper">
 
 <!-- ===== HERO ===== -->
-<section class="hero stack-section" id="hero" data-bg="#1a1a2e" style="z-index:1;background:#1a1a2e">
+<section class="hero stack-section sec-hero" id="hero" style="z-index:1;background:#F5F3FF">
     <div class="hero-gradient" id="heroGrad"></div>
     <div class="particles" id="particles"></div>
     <div class="hero-content container">
@@ -424,7 +570,7 @@ img,svg{max-width:100%;display:block}
 </section>
 
 <!-- ===== STATS ===== -->
-<section class="section-spacing stack-section diag-up" data-bg="#161529" style="z-index:2;background:#161529">
+<section class="section-spacing stack-section sec-stats" style="z-index:2;background:#ECFDF5">
     <div class="container">
         <div class="card anim anim-up" style="padding:48px 24px">
             <div class="stats-row">
@@ -438,7 +584,7 @@ img,svg{max-width:100%;display:block}
 </section>
 
 <!-- ===== PROCESS ===== -->
-<section class="section-spacing stack-section" id="process" data-bg="#1e1a35" style="z-index:3;background:#1e1a35">
+<section class="section-spacing stack-section sec-process" id="process" style="z-index:3;background:#FFFFFF">
     <div class="container">
         <div class="sh">
             <h2 class="anim anim-blur">Simple comme <span class="gt">bonjour</span></h2>
@@ -456,7 +602,7 @@ img,svg{max-width:100%;display:block}
 </section>
 
 <!-- ===== PORTFOLIO ===== -->
-<section class="section-spacing stack-section" id="portfolio" data-bg="#191530" style="z-index:4;background:#191530">
+<section class="section-spacing stack-section sec-portfolio" id="portfolio" style="z-index:4;background:#4C1D95">
     <div class="container"><div class="sh"><h2 class="anim anim-blur">Nos dernières <span class="gt">réalisations</span></h2><p class="anim anim-up">Chaque site est unique, conçu sur-mesure pour le métier de nos clients.</p></div></div>
     <div class="carousel-wrap">
         <div class="carousel-track" id="carouselTrack">
@@ -477,7 +623,7 @@ img,svg{max-width:100%;display:block}
 </section>
 
 <!-- ===== SERVICES ===== -->
-<section class="section-spacing stack-section" id="services" data-bg="#1c1832" style="z-index:5;background:#1c1832">
+<section class="section-spacing stack-section sec-services" id="services" style="z-index:5;background:#FFF7ED">
     <div class="container">
         <div class="sh"><h2 class="anim anim-blur">Pour tous les <span class="gt">professionnels</span></h2><p class="anim anim-up">Des sites pensés pour votre métier, avec les fonctionnalités qui comptent.</p></div>
         <div class="svc-grid">
@@ -492,7 +638,7 @@ img,svg{max-width:100%;display:block}
 </section>
 
 <!-- ===== AVANT/APRÈS ===== -->
-<section class="section-spacing stack-section diag-down" data-bg="#141220" style="z-index:6;background:#141220">
+<section class="section-spacing stack-section sec-ba" style="z-index:6;background:#0a0a0a">
     <div class="container">
         <div class="ba-outer card-black anim anim-left">
             <div class="sh" style="margin-bottom:0"><h2 class="anim anim-blur">La différence <span class="gt">WebsiteBuild</span></h2></div>
@@ -521,7 +667,7 @@ img,svg{max-width:100%;display:block}
 </section>
 
 <!-- ===== COMPARE ===== -->
-<section class="section-spacing stack-section" id="compare" data-bg="#1b162e" style="z-index:7;background:#1b162e">
+<section class="section-spacing stack-section sec-compare" id="compare" style="z-index:7;background:#1E40AF">
     <div class="container">
         <div class="sh"><h2 class="anim anim-blur">Pourquoi nous <span class="gt">choisir</span> ?</h2></div>
         <div class="cmp-grid">
@@ -534,7 +680,7 @@ img,svg{max-width:100%;display:block}
 </section>
 
 <!-- ===== PRICING ===== -->
-<section class="section-spacing stack-section" id="pricing" data-bg="#201a38" style="z-index:8;background:#201a38">
+<section class="section-spacing stack-section sec-pricing" id="pricing" style="z-index:8;background:#FFFFFF">
     <div class="container">
         <div class="sh"><h2 class="anim anim-blur">Tarifs <span class="gt">transparents</span></h2><p class="anim anim-up">Pas de surprise, pas de frais cachés.</p></div>
         <div class="price-grid">
@@ -563,21 +709,19 @@ img,svg{max-width:100%;display:block}
 </section>
 
 <!-- ===== TESTIMONIALS ===== -->
-<section class="section-spacing stack-section" data-bg="#141220" style="z-index:9;background:#141220">
+<section class="section-spacing stack-section sec-testi" style="z-index:9;background:#FF6B35">
     <div class="container">
-        <div class="card-black anim anim-right" style="border-radius:var(--radius);padding:60px 40px">
-            <div class="sh" style="margin-bottom:36px"><h2 class="anim anim-blur">Ce que disent nos <span class="gt">clients</span></h2></div>
-            <div class="testi-grid">
-                <div class="testi anim anim-rotate" data-delay="0"><div class="testi-q">"</div><p class="testi-text">Mon site était prêt en 2 jours. Mes réservations ont augmenté de 40%. Je recommande les yeux fermés.</p><div class="testi-sep"></div><div class="testi-author"><div class="testi-av">MD</div><div><div class="testi-nm">Marc D.</div><div class="testi-role">Restaurateur à Lyon</div><div class="testi-stars">⭐⭐⭐⭐⭐</div></div></div></div>
-                <div class="testi anim anim-rotate" data-delay="1"><div class="testi-q">"</div><p class="testi-text">Le portfolio est magnifique. Mes clients me disent que c'est ce qui les a convaincus de prendre rendez-vous.</p><div class="testi-sep"></div><div class="testi-author"><div class="testi-av">SL</div><div><div class="testi-nm">Sophie L.</div><div class="testi-role">Tatoueuse à Bordeaux</div><div class="testi-stars">⭐⭐⭐⭐⭐</div></div></div></div>
-                <div class="testi anim anim-rotate" data-delay="2"><div class="testi-q">"</div><p class="testi-text">Envoyé mes infos lundi, site en ligne mercredi. Le support est incroyable, ils répondent en 5 min sur WhatsApp.</p><div class="testi-sep"></div><div class="testi-author"><div class="testi-av">TR</div><div><div class="testi-nm">Thomas R.</div><div class="testi-role">Coach sportif à Paris</div><div class="testi-stars">⭐⭐⭐⭐⭐</div></div></div></div>
-            </div>
+        <div class="sh" style="margin-bottom:36px"><h2 class="anim anim-blur">Ce que disent nos <span class="gt">clients</span></h2></div>
+        <div class="testi-grid">
+            <div class="testi anim anim-rotate" data-delay="0"><div class="testi-q">"</div><p class="testi-text">Mon site était prêt en 2 jours. Mes réservations ont augmenté de 40%. Je recommande les yeux fermés.</p><div class="testi-sep"></div><div class="testi-author"><div class="testi-av">MD</div><div><div class="testi-nm">Marc D.</div><div class="testi-role">Restaurateur à Lyon</div><div class="testi-stars">⭐⭐⭐⭐⭐</div></div></div></div>
+            <div class="testi anim anim-rotate" data-delay="1"><div class="testi-q">"</div><p class="testi-text">Le portfolio est magnifique. Mes clients me disent que c'est ce qui les a convaincus de prendre rendez-vous.</p><div class="testi-sep"></div><div class="testi-author"><div class="testi-av">SL</div><div><div class="testi-nm">Sophie L.</div><div class="testi-role">Tatoueuse à Bordeaux</div><div class="testi-stars">⭐⭐⭐⭐⭐</div></div></div></div>
+            <div class="testi anim anim-rotate" data-delay="2"><div class="testi-q">"</div><p class="testi-text">Envoyé mes infos lundi, site en ligne mercredi. Le support est incroyable, ils répondent en 5 min sur WhatsApp.</p><div class="testi-sep"></div><div class="testi-author"><div class="testi-av">TR</div><div><div class="testi-nm">Thomas R.</div><div class="testi-role">Coach sportif à Paris</div><div class="testi-stars">⭐⭐⭐⭐⭐</div></div></div></div>
         </div>
     </div>
 </section>
 
 <!-- ===== FAQ ===== -->
-<section class="section-spacing stack-section diag-up" id="faq" data-bg="#1a1a2e" style="z-index:10;background:#1a1a2e">
+<section class="section-spacing stack-section sec-faq" id="faq" style="z-index:10;background:#F7FEE7">
     <div class="container" style="max-width:800px">
         <div class="card anim anim-scale" style="padding:48px 40px">
             <div class="sh" style="margin-bottom:24px"><h2>Questions <span class="gt">fréquentes</span></h2></div>
@@ -594,7 +738,7 @@ img,svg{max-width:100%;display:block}
 </section>
 
 <!-- ===== TEAM ===== -->
-<section class="section-spacing stack-section" id="team" data-bg="#1e1a35" style="z-index:11;background:#1e1a35">
+<section class="section-spacing stack-section sec-team" id="team" style="z-index:11;background:#FFFFFF">
     <div class="container">
         <div class="sh"><h2 class="anim anim-blur">L'équipe derrière <span class="gt">WebsiteBuild</span></h2></div>
         <div class="team-grid">
@@ -606,10 +750,10 @@ img,svg{max-width:100%;display:block}
 </section>
 
 <!-- ===== CTA ===== -->
-<section class="section-spacing stack-section" id="contact" data-bg="#161529" style="z-index:12;background:#161529">
+<section class="section-spacing stack-section sec-cta" id="contact" style="z-index:12;background:#7C3AED">
     <div class="container">
         <div class="cta-final anim anim-scale">
-            <h2>Prêt à lancer votre site ?</h2>
+            <h2>L'avenir de votre site commence ici.</h2>
             <p>Recevez une maquette gratuite de votre futur site sous 24h.</p>
             <a href="https://wa.me/33XXXXXXXXX" class="btn btn-white" target="_blank" rel="noopener">Nous écrire sur WhatsApp →</a>
             <div class="cta-email">Ou par email : <a href="mailto:contact@websitebuild.store">contact@websitebuild.store</a></div>
@@ -620,7 +764,7 @@ img,svg{max-width:100%;display:block}
 </div><!-- /stack-wrapper -->
 
 <!-- ===== FOOTER ===== -->
-<footer class="footer" style="position:relative;z-index:13;background:#161529">
+<footer class="footer footer-styled" style="position:relative;z-index:13;background:#F9FAFB">
     <div class="container">
         <div class="footer-top">
             <div class="footer-brand"><div class="nav-logo">websitebuild<span class="dot">.</span></div><p>Sites web professionnels livrés en 48h. On s'occupe de tout.</p><div class="footer-social"><a href="#" aria-label="Instagram">📷</a><a href="#" aria-label="TikTok">🎵</a></div></div>
@@ -697,16 +841,7 @@ document.querySelectorAll('.card,.svc,.hb-card').forEach(el=>{
     el.addEventListener('mouseleave',()=>{el.style.transform='';el.style.transition='transform 0.4s cubic-bezier(0.16,1,0.3,1)'});
 });
 
-/* ===== DYNAMIC BACKGROUND COLOR ===== */
-const bgSections=document.querySelectorAll('[data-bg]');
-const bgObs=new IntersectionObserver(entries=>{
-    entries.forEach(e=>{
-        if(e.isIntersecting&&e.intersectionRatio>0.5){
-            document.body.style.backgroundColor=e.target.dataset.bg;
-        }
-    });
-},{threshold:[0,0.25,0.5,0.75,1]});
-bgSections.forEach(s=>bgObs.observe(s));
+/* ===== DYNAMIC BACKGROUND COLOR (disabled - sections have fixed colors) ===== */
 
 /* ===== STICKY STACKING COVER EFFECT ===== */
 const stackSections=document.querySelectorAll('.stack-section');
@@ -819,7 +954,10 @@ const ctaTitle=document.querySelector('.cta-final h2');
 if(ctaTitle){
     ctaTitle.classList.add('split-text');
     const ctaAnimFn=splitText(ctaTitle,0);
-    const ctaSplitObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){ctaAnimFn();ctaSplitObs.unobserve(e.target)}})},{threshold:0.2});
+    const ctaSplitObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){ctaAnimFn();
+    /* Force lime color on CTA split chars */
+    ctaTitle.querySelectorAll('.split-char').forEach(c=>{c.style.color='#D9F99D';c.style.webkitTextFillColor='#D9F99D';c.style.background='none'});
+    ctaSplitObs.unobserve(e.target)}})},{threshold:0.2});
     ctaSplitObs.observe(ctaTitle);
 }
 </script>
