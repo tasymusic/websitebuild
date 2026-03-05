@@ -78,12 +78,11 @@ img,svg{max-width:100%;display:block}
 /* ===== ANIMATIONS ===== */
 .anim{opacity:0;transition:all 0.8s cubic-bezier(0.16,1,0.3,1)}
 .anim-up{transform:translateY(60px)}
-.anim-down{transform:translateY(-60px)}
 .anim-left{transform:translateX(-80px)}
 .anim-right{transform:translateX(80px)}
-.anim-scale{transform:scale(0.8)}
-.anim-blur{filter:blur(20px)}
-.anim-flip{transform:perspective(800px) rotateY(90deg)}
+.anim-scale{transform:scale(0.85)}
+.anim-rotate{transform:rotate(-5deg) scale(0.9)}
+.anim-blur{filter:blur(15px)}
 .anim.visible{opacity:1;transform:none;filter:none}
 
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
@@ -425,21 +424,21 @@ img,svg{max-width:100%;display:block}
 <section class="section-spacing" id="process">
     <div class="container">
         <div class="sh">
-            <h2 class="anim anim-up">Simple comme <span class="gt">bonjour</span></h2>
+            <h2 class="anim anim-blur">Simple comme <span class="gt">bonjour</span></h2>
             <p class="anim anim-up">3 étapes et votre site est en ligne. On s'occupe de tout.</p>
         </div>
         <div class="process-grid">
             <svg class="process-line-svg" id="processLine" viewBox="0 0 600 40"><defs><linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#7C3AED"/><stop offset="100%" stop-color="#3B82F6"/></linearGradient></defs><path d="M 0 20 Q 150 0 300 20 Q 450 40 600 20"/></svg>
-            <div class="process-card card anim anim-up"><div class="p-num gt">01</div><div class="p-emoji">📩</div><h3>Envoyez vos infos</h3><p class="text-s">Logo, photos, textes... ou rien. On peut tout créer pour vous.</p></div>
-            <div class="process-card card anim anim-up" style="transition-delay:.1s"><div class="p-num gt">02</div><div class="p-emoji">🎨</div><h3>On crée le site</h3><p class="text-s">Design moderne sur-mesure, optimisé mobile et SEO. Pensé pour convertir.</p></div>
-            <div class="process-card card anim anim-up" style="transition-delay:.2s"><div class="p-num gt">03</div><div class="p-emoji">🚀</div><h3>Vous êtes en ligne</h3><p class="text-s">Livré en 48h max. Hébergement, domaine et mises à jour inclus.</p></div>
+            <div class="process-card card anim anim-scale" data-delay="0"><div class="p-num gt">01</div><div class="p-emoji">📩</div><h3>Envoyez vos infos</h3><p class="text-s">Logo, photos, textes... ou rien. On peut tout créer pour vous.</p></div>
+            <div class="process-card card anim anim-scale" data-delay="1"><div class="p-num gt">02</div><div class="p-emoji">🎨</div><h3>On crée le site</h3><p class="text-s">Design moderne sur-mesure, optimisé mobile et SEO. Pensé pour convertir.</p></div>
+            <div class="process-card card anim anim-scale" data-delay="2"><div class="p-num gt">03</div><div class="p-emoji">🚀</div><h3>Vous êtes en ligne</h3><p class="text-s">Livré en 48h max. Hébergement, domaine et mises à jour inclus.</p></div>
         </div>
     </div>
 </section>
 
 <!-- ===== PORTFOLIO ===== -->
 <section class="section-spacing" id="portfolio">
-    <div class="container"><div class="sh"><h2 class="anim anim-up">Nos dernières <span class="gt">réalisations</span></h2><p class="anim anim-up">Chaque site est unique, conçu sur-mesure pour le métier de nos clients.</p></div></div>
+    <div class="container"><div class="sh"><h2 class="anim anim-blur">Nos dernières <span class="gt">réalisations</span></h2><p class="anim anim-up">Chaque site est unique, conçu sur-mesure pour le métier de nos clients.</p></div></div>
     <div class="carousel-wrap">
         <div class="carousel-track" id="carouselTrack">
             <div class="c-card" style="background:linear-gradient(135deg,#D97706,#F59E0B)"><div class="c-overlay"></div><span class="c-badge">Restaurant</span><div class="c-info"><h3>La Table d'Or</h3><p>Restaurant gastronomique</p></div><span class="c-link">Voir →</span></div>
@@ -461,14 +460,14 @@ img,svg{max-width:100%;display:block}
 <!-- ===== SERVICES ===== -->
 <section class="section-spacing" id="services">
     <div class="container">
-        <div class="sh"><h2 class="anim anim-up">Pour tous les <span class="gt">professionnels</span></h2><p class="anim anim-up">Des sites pensés pour votre métier, avec les fonctionnalités qui comptent.</p></div>
+        <div class="sh"><h2 class="anim anim-blur">Pour tous les <span class="gt">professionnels</span></h2><p class="anim anim-up">Des sites pensés pour votre métier, avec les fonctionnalités qui comptent.</p></div>
         <div class="svc-grid">
-            <div class="svc svc-dark anim anim-scale"><div class="svc-icon">🎨</div><h3>Tatoueurs</h3><p>Portfolio élégant, galerie, prise de RDV intégrée.</p></div>
-            <div class="svc svc-white anim anim-scale" style="transition-delay:.1s"><div class="svc-icon">🏡</div><h3>Locations &amp; Villas</h3><p>Réservation directe, calendrier synchronisé. Fini les 15% Airbnb.</p></div>
-            <div class="svc svc-grad anim anim-scale" style="transition-delay:.2s"><div class="svc-icon">🍽️</div><h3>Restaurants</h3><p>Menu digital, réservation en ligne. Plus de commissions.</p></div>
-            <div class="svc svc-white anim anim-scale" style="transition-delay:.1s"><div class="svc-icon">💅</div><h3>Salons de beauté</h3><p>RDV automatisé, galerie avant/après, tarifs.</p></div>
-            <div class="svc svc-dark anim anim-scale" style="transition-delay:.2s"><div class="svc-icon">💒</div><h3>Wedding Planners</h3><p>Portfolio mariages, témoignages, formulaire qualifié.</p></div>
-            <div class="svc svc-white anim anim-scale" style="transition-delay:.3s"><div class="svc-icon">🧘</div><h3>Studios Yoga</h3><p>Planning cours, réservation, présentation profs.</p></div>
+            <div class="svc svc-dark anim anim-scale" data-delay="0"><div class="svc-icon">🎨</div><h3>Tatoueurs</h3><p>Portfolio élégant, galerie, prise de RDV intégrée.</p></div>
+            <div class="svc svc-white anim anim-scale" data-delay="1"><div class="svc-icon">🏡</div><h3>Locations &amp; Villas</h3><p>Réservation directe, calendrier synchronisé. Fini les 15% Airbnb.</p></div>
+            <div class="svc svc-grad anim anim-scale" data-delay="2"><div class="svc-icon">🍽️</div><h3>Restaurants</h3><p>Menu digital, réservation en ligne. Plus de commissions.</p></div>
+            <div class="svc svc-white anim anim-scale" data-delay="3"><div class="svc-icon">💅</div><h3>Salons de beauté</h3><p>RDV automatisé, galerie avant/après, tarifs.</p></div>
+            <div class="svc svc-dark anim anim-scale" data-delay="4"><div class="svc-icon">💒</div><h3>Wedding Planners</h3><p>Portfolio mariages, témoignages, formulaire qualifié.</p></div>
+            <div class="svc svc-white anim anim-scale" data-delay="5"><div class="svc-icon">🧘</div><h3>Studios Yoga</h3><p>Planning cours, réservation, présentation profs.</p></div>
         </div>
     </div>
 </section>
@@ -476,8 +475,8 @@ img,svg{max-width:100%;display:block}
 <!-- ===== AVANT/APRÈS ===== -->
 <section class="section-spacing">
     <div class="container">
-        <div class="ba-outer card-black anim anim-scale">
-            <div class="sh" style="margin-bottom:0"><h2 style="color:#fff" class="anim anim-up">La différence <span class="gt">WebsiteBuild</span></h2></div>
+        <div class="ba-outer card-black anim anim-left">
+            <div class="sh" style="margin-bottom:0"><h2 style="color:#fff" class="anim anim-blur">La différence <span class="gt">WebsiteBuild</span></h2></div>
             <div class="ba-container" id="baContainer">
                 <span class="ba-label ba-label-b">Avant</span><span class="ba-label ba-label-a">Après</span>
                 <div class="ba-side ba-before" id="baBefore">
@@ -505,12 +504,12 @@ img,svg{max-width:100%;display:block}
 <!-- ===== COMPARE ===== -->
 <section class="section-spacing" id="compare">
     <div class="container">
-        <div class="sh"><h2 class="anim anim-up">Pourquoi nous <span class="gt">choisir</span> ?</h2></div>
+        <div class="sh"><h2 class="anim anim-blur">Pourquoi nous <span class="gt">choisir</span> ?</h2></div>
         <div class="cmp-grid">
-            <div class="cmp card anim anim-up"><div class="cmp-name">Wix / Webador</div><div class="cmp-row"><strong>15-20€/mois</strong>Budget</div><div class="cmp-row"><strong>Vous faites tout</strong>Réalisation</div><div class="cmp-row"><strong>Template</strong>Résultat</div><div class="cmp-row"><strong>Chatbot</strong>Support</div><div class="cmp-stars">⭐⭐</div></div>
-            <div class="cmp card anim anim-up" style="transition-delay:.1s"><div class="cmp-name">Freelance</div><div class="cmp-row"><strong>2 000-5 000€</strong>Budget</div><div class="cmp-row"><strong>2-4 semaines</strong>Délai</div><div class="cmp-row"><strong>Variable</strong>Qualité</div><div class="cmp-row"><strong>Limité</strong>Support</div><div class="cmp-stars">⭐⭐⭐</div></div>
-            <div class="cmp card anim anim-up" style="transition-delay:.2s"><div class="cmp-name">Agence web</div><div class="cmp-row"><strong>5 000-15 000€</strong>Budget</div><div class="cmp-row"><strong>1-3 mois</strong>Délai</div><div class="cmp-row"><strong>Haute qualité</strong>Résultat</div><div class="cmp-row"><strong>Pro</strong>Support</div><div class="cmp-stars">⭐⭐⭐⭐</div></div>
-            <div class="cmp card featured anim anim-up" style="transition-delay:.3s"><div class="cmp-badge">⭐ RECOMMANDÉ</div><div class="cmp-name gt">WebsiteBuild</div><div class="cmp-row"><strong>199€/mois</strong>Budget</div><div class="cmp-row"><strong>48h</strong>Délai</div><div class="cmp-row"><strong>Qualité agence</strong>Résultat</div><div class="cmp-row"><strong>24/7 WhatsApp</strong>Support</div><div class="cmp-row"><strong>0€ de création</strong></div><div class="cmp-stars">⭐⭐⭐⭐⭐</div></div>
+            <div class="cmp card anim anim-scale" data-delay="0"><div class="cmp-name">Wix / Webador</div><div class="cmp-row"><strong>15-20€/mois</strong>Budget</div><div class="cmp-row"><strong>Vous faites tout</strong>Réalisation</div><div class="cmp-row"><strong>Template</strong>Résultat</div><div class="cmp-row"><strong>Chatbot</strong>Support</div><div class="cmp-stars">⭐⭐</div></div>
+            <div class="cmp card anim anim-scale" data-delay="1"><div class="cmp-name">Freelance</div><div class="cmp-row"><strong>2 000-5 000€</strong>Budget</div><div class="cmp-row"><strong>2-4 semaines</strong>Délai</div><div class="cmp-row"><strong>Variable</strong>Qualité</div><div class="cmp-row"><strong>Limité</strong>Support</div><div class="cmp-stars">⭐⭐⭐</div></div>
+            <div class="cmp card anim anim-scale" data-delay="2"><div class="cmp-name">Agence web</div><div class="cmp-row"><strong>5 000-15 000€</strong>Budget</div><div class="cmp-row"><strong>1-3 mois</strong>Délai</div><div class="cmp-row"><strong>Haute qualité</strong>Résultat</div><div class="cmp-row"><strong>Pro</strong>Support</div><div class="cmp-stars">⭐⭐⭐⭐</div></div>
+            <div class="cmp card featured anim anim-scale" data-delay="3"><div class="cmp-badge">⭐ RECOMMANDÉ</div><div class="cmp-name gt">WebsiteBuild</div><div class="cmp-row"><strong>199€/mois</strong>Budget</div><div class="cmp-row"><strong>48h</strong>Délai</div><div class="cmp-row"><strong>Qualité agence</strong>Résultat</div><div class="cmp-row"><strong>24/7 WhatsApp</strong>Support</div><div class="cmp-row"><strong>0€ de création</strong></div><div class="cmp-stars">⭐⭐⭐⭐⭐</div></div>
         </div>
     </div>
 </section>
@@ -518,22 +517,22 @@ img,svg{max-width:100%;display:block}
 <!-- ===== PRICING ===== -->
 <section class="section-spacing" id="pricing">
     <div class="container">
-        <div class="sh"><h2 class="anim anim-up">Tarifs <span class="gt">transparents</span></h2><p class="anim anim-up">Pas de surprise, pas de frais cachés.</p></div>
+        <div class="sh"><h2 class="anim anim-blur">Tarifs <span class="gt">transparents</span></h2><p class="anim anim-up">Pas de surprise, pas de frais cachés.</p></div>
         <div class="price-grid">
-            <div class="price card anim anim-up">
+            <div class="price card anim anim-left" data-delay="0">
                 <div class="price-name">Essentiel</div><div class="price-desc text-s">Pour démarrer</div>
                 <div class="price-amount">149€ <span>/mois</span></div><div class="price-period text-s">Sans engagement</div><div class="price-note" style="color:var(--purple)">0€ de création</div>
                 <ul class="price-features"><li>Site vitrine</li><li>Responsive</li><li>Hébergement</li><li>SSL</li><li>Support email</li></ul>
                 <a href="#contact" class="btn btn-secondary" style="width:100%">Choisir</a>
             </div>
-            <div class="price card card-gradient featured anim anim-scale" style="transition-delay:.1s">
+            <div class="price card card-gradient featured anim anim-scale" data-delay="1">
                 <div class="price-badge">⭐ POPULAIRE</div>
                 <div class="price-name">Pro</div><div class="price-desc" style="color:rgba(255,255,255,0.8)">Tout pour convertir</div>
                 <div class="price-amount" style="color:#fff">199€ <span style="color:rgba(255,255,255,0.7)">/mois</span></div><div class="price-period" style="color:rgba(255,255,255,0.7)">Sans engagement</div><div class="price-note" style="color:rgba(255,255,255,0.9)">0€ de création</div>
                 <ul class="price-features" style="color:rgba(255,255,255,0.9)"><li>Tout Essentiel</li><li>Domaine inclus</li><li>SEO</li><li>Modifs illimitées</li><li>WhatsApp 7j/7</li><li>Statistiques</li></ul>
                 <a href="#contact" class="btn btn-white" style="width:100%">Choisir →</a>
             </div>
-            <div class="price card anim anim-up" style="transition-delay:.2s">
+            <div class="price card anim anim-right" data-delay="2">
                 <div class="price-name">Premium</div><div class="price-desc text-s">Pour les ambitieux</div>
                 <div class="price-amount">299€ <span>/mois</span></div><div class="price-period text-s">Sans engagement</div><div class="price-note" style="color:var(--purple)">0€ de création</div>
                 <ul class="price-features"><li>Tout Pro</li><li>Boutique en ligne</li><li>Stripe</li><li>Google Ads</li><li>Manager dédié</li><li>Rapport mensuel</li></ul>
@@ -547,12 +546,12 @@ img,svg{max-width:100%;display:block}
 <!-- ===== TESTIMONIALS ===== -->
 <section class="section-spacing">
     <div class="container">
-        <div class="card-black anim anim-up" style="border-radius:var(--radius);padding:60px 40px">
-            <div class="sh" style="margin-bottom:36px"><h2 style="color:#fff" class="anim anim-up">Ce que disent nos <span class="gt">clients</span></h2></div>
+        <div class="card-black anim anim-right" style="border-radius:var(--radius);padding:60px 40px">
+            <div class="sh" style="margin-bottom:36px"><h2 style="color:#fff" class="anim anim-blur">Ce que disent nos <span class="gt">clients</span></h2></div>
             <div class="testi-grid">
-                <div class="testi anim anim-flip"><div class="testi-q">"</div><p class="testi-text">Mon site était prêt en 2 jours. Mes réservations ont augmenté de 40%. Je recommande les yeux fermés.</p><div class="testi-sep"></div><div class="testi-author"><div class="testi-av">MD</div><div><div class="testi-nm">Marc D.</div><div class="testi-role">Restaurateur à Lyon</div><div class="testi-stars">⭐⭐⭐⭐⭐</div></div></div></div>
-                <div class="testi anim anim-flip" style="transition-delay:.1s"><div class="testi-q">"</div><p class="testi-text">Le portfolio est magnifique. Mes clients me disent que c'est ce qui les a convaincus de prendre rendez-vous.</p><div class="testi-sep"></div><div class="testi-author"><div class="testi-av">SL</div><div><div class="testi-nm">Sophie L.</div><div class="testi-role">Tatoueuse à Bordeaux</div><div class="testi-stars">⭐⭐⭐⭐⭐</div></div></div></div>
-                <div class="testi anim anim-flip" style="transition-delay:.2s"><div class="testi-q">"</div><p class="testi-text">Envoyé mes infos lundi, site en ligne mercredi. Le support est incroyable, ils répondent en 5 min sur WhatsApp.</p><div class="testi-sep"></div><div class="testi-author"><div class="testi-av">TR</div><div><div class="testi-nm">Thomas R.</div><div class="testi-role">Coach sportif à Paris</div><div class="testi-stars">⭐⭐⭐⭐⭐</div></div></div></div>
+                <div class="testi anim anim-rotate" data-delay="0"><div class="testi-q">"</div><p class="testi-text">Mon site était prêt en 2 jours. Mes réservations ont augmenté de 40%. Je recommande les yeux fermés.</p><div class="testi-sep"></div><div class="testi-author"><div class="testi-av">MD</div><div><div class="testi-nm">Marc D.</div><div class="testi-role">Restaurateur à Lyon</div><div class="testi-stars">⭐⭐⭐⭐⭐</div></div></div></div>
+                <div class="testi anim anim-rotate" data-delay="1"><div class="testi-q">"</div><p class="testi-text">Le portfolio est magnifique. Mes clients me disent que c'est ce qui les a convaincus de prendre rendez-vous.</p><div class="testi-sep"></div><div class="testi-author"><div class="testi-av">SL</div><div><div class="testi-nm">Sophie L.</div><div class="testi-role">Tatoueuse à Bordeaux</div><div class="testi-stars">⭐⭐⭐⭐⭐</div></div></div></div>
+                <div class="testi anim anim-rotate" data-delay="2"><div class="testi-q">"</div><p class="testi-text">Envoyé mes infos lundi, site en ligne mercredi. Le support est incroyable, ils répondent en 5 min sur WhatsApp.</p><div class="testi-sep"></div><div class="testi-author"><div class="testi-av">TR</div><div><div class="testi-nm">Thomas R.</div><div class="testi-role">Coach sportif à Paris</div><div class="testi-stars">⭐⭐⭐⭐⭐</div></div></div></div>
             </div>
         </div>
     </div>
@@ -561,7 +560,7 @@ img,svg{max-width:100%;display:block}
 <!-- ===== FAQ ===== -->
 <section class="section-spacing" id="faq">
     <div class="container" style="max-width:800px">
-        <div class="card anim anim-up" style="padding:48px 40px">
+        <div class="card anim anim-scale" style="padding:48px 40px">
             <div class="sh" style="margin-bottom:24px"><h2>Questions <span class="gt">fréquentes</span></h2></div>
             <div class="faq-list">
                 <div class="faq-item"><button class="faq-q">Et si j'arrête, je perds mon site ?<span class="faq-icon">+</span></button><div class="faq-a"><p>Non, votre site vous appartient. On vous transmet tous les fichiers source.</p></div></div>
@@ -578,7 +577,7 @@ img,svg{max-width:100%;display:block}
 <!-- ===== TEAM ===== -->
 <section class="section-spacing" id="team">
     <div class="container">
-        <div class="sh"><h2 class="anim anim-up">L'équipe derrière <span class="gt">WebsiteBuild</span></h2></div>
+        <div class="sh"><h2 class="anim anim-blur">L'équipe derrière <span class="gt">WebsiteBuild</span></h2></div>
         <div class="team-grid">
             <div class="team-card card anim anim-left"><div class="team-av">T</div><h3>Tim</h3><div class="role">Co-fondateur</div><p>Passionné de tech et design. Convaincu que chaque pro mérite un site à la hauteur.</p></div>
             <div class="team-card card anim anim-right"><div class="team-av">A</div><h3>Alex</h3><div class="role">Co-fondateur</div><p>Expert développement web. Obsédé par la performance et l'expérience utilisateur.</p></div>
@@ -641,7 +640,11 @@ document.querySelectorAll('.hover-grow').forEach(el=>{
 });
 
 /* ===== ANIMATIONS OBSERVER ===== */
-const ao=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ao.unobserve(e.target)}})},{threshold:0.1,rootMargin:'0px 0px -50px 0px'});
+/* Convertir data-delay en transition-delay (0→0ms, 1→100ms, 2→200ms, etc.) */
+document.querySelectorAll('[data-delay]').forEach(el=>{
+    el.style.transitionDelay=(parseInt(el.dataset.delay)*100)+'ms';
+});
+const ao=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ao.unobserve(e.target)}})},{threshold:0.1});
 document.querySelectorAll('.anim').forEach(el=>ao.observe(el));
 
 /* ===== COUNTERS ===== */
