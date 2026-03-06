@@ -245,7 +245,7 @@ img,svg{max-width:100%;display:block}
 .gt{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 
 /* ===== SHIMMER ===== */
-.shimmer{position:relative;display:inline}
+.shimmer{position:relative;display:inline;white-space:nowrap}
 .shimmer::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent);animation:shimmer 3s infinite;pointer-events:none;mix-blend-mode:overlay}
 @keyframes shimmer{0%{left:-100%}100%{left:200%}}
 
@@ -1353,29 +1353,29 @@ if(window.innerWidth>768){
     const doors=document.querySelectorAll('.door');
     let currentGarage=0;
 
-    /* Build a map: for each garage index, find the door ABOVE its spacer.
-       When that door's bottom leaves the viewport, we should already show
-       the correct garage — not the previous one. */
     function onScroll(){
-        /* Two-pass detection for smooth garage switching:
-           1. Check spacers (standard trigger)
-           2. Check doors — if a door's bottom is above 95% of vh,
-              the garage AFTER it should already be visible */
-        let active=0;
         var vh=window.innerHeight;
+        var active=0;
+        var bestVisible=0;
 
-        /* Pass 1: spacer-based (triggers when spacer top enters viewport) */
+        /* Find which spacer has the most visible area in the viewport.
+           That spacer's garage should be active — works perfectly
+           for both scroll directions. */
         spacers.forEach(function(sp,i){
-            if(sp.getBoundingClientRect().top<=vh) active=i;
+            var r=sp.getBoundingClientRect();
+            var visTop=Math.max(r.top,0);
+            var visBot=Math.min(r.bottom,vh);
+            var visible=Math.max(0,visBot-visTop);
+            if(visible>bestVisible){bestVisible=visible;active=i}
         });
 
-        /* Pass 2: door-based early switch — if a door's bottom is within
-           the viewport, the garage below it (= next spacer) should be active */
+        /* Early switch: if a door's bottom is inside the viewport,
+           we're peeking below it — the NEXT garage should already show */
         doors.forEach(function(door,i){
             var r=door.getBoundingClientRect();
-            if(r.bottom<vh*0.95&&r.bottom>0){
-                var nextGarage=i+1;
-                if(nextGarage<garages.length&&nextGarage>active) active=nextGarage;
+            if(r.bottom>0&&r.bottom<vh){
+                var next=i+1;
+                if(next<garages.length&&next>active) active=next;
             }
         });
 
