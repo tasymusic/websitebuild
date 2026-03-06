@@ -246,8 +246,8 @@ img,svg{max-width:100%;display:block}
 
 /* ===== SHIMMER ===== */
 .shimmer{position:relative;display:inline;white-space:nowrap}
-.shimmer::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent);animation:shimmer 3s infinite;pointer-events:none;mix-blend-mode:overlay}
-@keyframes shimmer{0%{left:-100%}100%{left:200%}}
+.shimmer-active{background:linear-gradient(90deg,#FF8EC4 35%,rgba(255,255,255,0.85) 50%,#FF8EC4 65%)!important;background-size:250% 100%!important;-webkit-background-clip:text!important;-webkit-text-fill-color:transparent!important;background-clip:text!important;animation:shimmerText 3s infinite!important}
+@keyframes shimmerText{0%{background-position:200% center}100%{background-position:-200% center}}
 
 /* ===== CARDS ===== */
 .card{background:var(--bg-card);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--glass-border);border-radius:var(--radius);box-shadow:var(--shadow);transition:all 0.4s cubic-bezier(0.16,1,0.3,1);will-change:transform;overflow:hidden;color:var(--text-dark)}
@@ -367,16 +367,15 @@ img,svg{max-width:100%;display:block}
 
 /* ===== PROCESS ===== */
 .process-grid{display:flex;gap:32px;position:relative}
-.process-card{flex:1;padding:32px;text-align:center;position:relative;z-index:1}
-.process-card:nth-child(3){transform:translateY(-10px)}
+.process-card{flex:1;padding:32px;text-align:center;position:relative;z-index:1;opacity:0;transform:scale(0.85);transition:opacity 0.6s cubic-bezier(0.16,1,0.3,1),transform 0.6s cubic-bezier(0.16,1,0.3,1)}
+.process-card.card-visible{opacity:1;transform:none}
+.process-card:nth-child(3).card-visible{transform:translateY(-10px)}
 .p-num{font-size:72px;font-weight:900;line-height:1;opacity:0.12}
 .p-emoji{font-size:44px;margin:12px 0}
 .process-card h3{font-size:20px;font-weight:700;margin-bottom:6px;color:var(--text-dark)}
 .process-wrap{position:relative}
-.process-line-svg{position:absolute;top:50%;left:-24px;right:-24px;height:60px;z-index:0;overflow:visible;transform:translateY(-50%);pointer-events:none}
-.process-line-svg path{fill:none;stroke:url(#lineGrad);stroke-width:2.5;stroke-dasharray:1200;stroke-dashoffset:1200;opacity:0.25}
-.process-line-svg.drawn path{animation:drawLine 2s cubic-bezier(0.16,1,0.3,1) forwards}
-@keyframes drawLine{0%{stroke-dashoffset:1200}100%{stroke-dashoffset:0}}
+.process-line-svg{position:absolute;top:50%;left:50%;width:100vw;height:60px;z-index:0;overflow:visible;transform:translate(-50%,-50%);pointer-events:none}
+.process-line-svg path{fill:none;stroke:url(#lineGrad);stroke-width:2.5;opacity:0.4}
 
 /* ===== CAROUSEL ===== */
 .carousel-wrap{overflow:hidden;margin-top:48px}
@@ -867,11 +866,11 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
             <p class="anim anim-up">3 étapes et votre site est en ligne. On s'occupe de tout.</p>
         </div>
         <div class="process-wrap">
-            <svg class="process-line-svg" id="processLine" viewBox="0 0 1200 60" preserveAspectRatio="none"><defs><linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#D9F99D"/><stop offset="100%" stop-color="#2DD4BF"/></linearGradient></defs><path d="M 0 30 C 200 5, 400 55, 600 30 C 800 5, 1000 55, 1200 30"/></svg>
+            <svg class="process-line-svg" id="processLine" viewBox="0 0 1600 60" preserveAspectRatio="none"><defs><linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#D9F99D"/><stop offset="100%" stop-color="#2DD4BF"/></linearGradient></defs><path d="M 0 30 C 80 5, 160 55, 240 30 C 320 5, 400 55, 480 30 C 560 5, 640 55, 720 30 C 800 5, 880 55, 960 30 C 1040 5, 1120 55, 1200 30 C 1280 5, 1360 55, 1440 30 C 1520 5, 1600 55, 1600 30"/></svg>
             <div class="process-grid">
-                <div class="process-card card anim anim-scale" data-delay="0"><div class="p-num">01</div><h3>Envoyez vos infos</h3><p class="text-s">Logo, photos, textes... ou rien. On peut tout créer pour vous.</p></div>
-                <div class="process-card card anim anim-scale" data-delay="1"><div class="p-num">02</div><h3>On crée le site</h3><p class="text-s">Design moderne sur-mesure, optimisé mobile et SEO. Pensé pour convertir.</p></div>
-                <div class="process-card card anim anim-scale" data-delay="2"><div class="p-num">03</div><h3>Vous êtes en ligne</h3><p class="text-s">Livré en 48h max. Hébergement, domaine et mises à jour inclus.</p></div>
+                <div class="process-card card"><div class="p-num">01</div><h3>Envoyez vos infos</h3><p class="text-s">Logo, photos, textes... ou rien. On peut tout créer pour vous.</p></div>
+                <div class="process-card card"><div class="p-num">02</div><h3>On crée le site</h3><p class="text-s">Design moderne sur-mesure, optimisé mobile et SEO. Pensé pour convertir.</p></div>
+                <div class="process-card card"><div class="p-num">03</div><h3>Vous êtes en ligne</h3><p class="text-s">Livré en 48h max. Hébergement, domaine et mises à jour inclus.</p></div>
             </div>
         </div>
     </div>
@@ -935,7 +934,7 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
         <div class="sh"><h2 class="anim anim-blur">L'équipe derrière <span class="gt">WebsiteBuild</span></h2></div>
         <div class="team-grid">
             <div class="team-card card anim anim-left"><div class="team-av">T</div><h3>Tim</h3><div class="role">Co-fondateur</div><p>Passionné de tech et design. Convaincu que chaque pro mérite un site à la hauteur.</p></div>
-            <div class="team-card card anim anim-right"><div class="team-av">A</div><h3>Alex</h3><div class="role">Co-fondateur</div><p>Expert développement web. Obsédé par la performance et l'expérience utilisateur.</p></div>
+            <div class="team-card card anim anim-right"><div class="team-av">A</div><h3>Anthony</h3><div class="role">Co-fondateur</div><p>Expert développement web. Obsédé par la performance et l'expérience utilisateur.</p></div>
         </div>
         <p class="team-quote anim anim-up">« On croit que chaque professionnel mérite un site à la hauteur de son talent. Pas dans 3 mois, pas pour 5 000€. Maintenant, et à un prix juste. »</p>
     </div>
@@ -1429,10 +1428,49 @@ if(window.innerWidth>768){
     onScroll();
 })();
 
-/* ===== PROCESS LINE ===== */
-const pl=document.getElementById('processLine');
-const plObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('drawn');plObs.unobserve(e.target)}})},{threshold:0.3});
-if(pl)plObs.observe(pl);
+/* ===== PROCESS LINE + CARD SYNC ===== */
+(function(){
+    var pl=document.getElementById('processLine');
+    if(!pl)return;
+    var path=pl.querySelector('path');
+    var totalLen=path.getTotalLength();
+    path.style.strokeDasharray=totalLen;
+    path.style.strokeDashoffset=totalLen;
+    var cards=document.querySelectorAll('.process-card');
+    /* Card trigger thresholds: 25%, 50%, 75% of path length */
+    var thresholds=[0.25,0.50,0.75];
+    var revealed=[false,false,false];
+    var started=false,done=false;
+    var startTime=0,duration=2500;
+
+    function animateFrame(ts){
+        if(!startTime)startTime=ts;
+        var progress=Math.min((ts-startTime)/duration,1);
+        /* ease-out cubic */
+        var eased=1-Math.pow(1-progress,3);
+        path.style.strokeDashoffset=totalLen*(1-eased);
+        /* Reveal cards when trail reaches their position */
+        for(var i=0;i<3;i++){
+            if(!revealed[i]&&eased>=thresholds[i]){
+                cards[i].classList.add('card-visible');
+                revealed[i]=true;
+            }
+        }
+        if(progress<1)requestAnimationFrame(animateFrame);
+        else done=true;
+    }
+
+    var obs=new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+            if(e.isIntersecting&&!started){
+                started=true;
+                requestAnimationFrame(animateFrame);
+                obs.unobserve(e.target);
+            }
+        });
+    },{threshold:0.3});
+    obs.observe(pl);
+})();
 
 /* ===== FAQ ===== */
 document.querySelectorAll('.faq-q').forEach(b=>{b.addEventListener('click',()=>{const item=b.parentElement;const wasOpen=item.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));if(!wasOpen)item.classList.add('open')})});
@@ -1522,17 +1560,32 @@ function splitText(el,delay){
 const heroSplit=document.getElementById('heroTitle');
 if(heroSplit){
     heroSplit.classList.add('split-text');
-    /* Remove word-by-word animation, replace with split */
     const animFn=splitText(heroSplit,500);
     animFn();
     /* Re-propagate .gt on split chars inside .gt */
     heroSplit.querySelectorAll('.gt .split-char').forEach(c=>c.classList.add('gt'));
+    /* Apply pink color to shimmer chars during entrance */
     heroSplit.querySelectorAll('.shimmer .split-char').forEach(c=>{
-        c.style.background=getComputedStyle(document.documentElement).getPropertyValue('--gradient');
-        c.style.webkitBackgroundClip='text';
-        c.style.webkitTextFillColor='transparent';
-        c.style.backgroundClip='text';
+        c.style.color='#FF8EC4';
+        c.style.webkitTextFillColor='#FF8EC4';
     });
+    /* After entrance animation completes, activate text-only shimmer on the parent span */
+    var shimmerSpan=heroSplit.querySelector('.shimmer');
+    if(shimmerSpan){
+        var charCount=shimmerSpan.querySelectorAll('.split-char').length;
+        var totalDelay=500+charCount*30+600;
+        setTimeout(function(){
+            /* Clear individual char styles so parent shimmer takes over */
+            shimmerSpan.querySelectorAll('.split-char').forEach(function(c){
+                c.style.background='none';
+                c.style.webkitBackgroundClip='';
+                c.style.webkitTextFillColor='inherit';
+                c.style.backgroundClip='';
+                c.style.color='inherit';
+            });
+            shimmerSpan.classList.add('shimmer-active');
+        },totalDelay);
+    }
 }
 /* ===== QUESTIONNAIRE MODAL (15 steps) ===== */
 const qModal=document.getElementById('quizModal');
