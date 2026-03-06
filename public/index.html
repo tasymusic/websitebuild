@@ -38,7 +38,7 @@ img,svg{max-width:100%;display:block}
 /* ===== DOOR/GARAGE SCROLL EFFECT ===== */
 /* GARAGES: position fixed, NEVER move, all stacked. JS toggles .active */
 .garages-layer{position:fixed;top:0;left:0;right:0;height:100vh;z-index:1;pointer-events:none}
-.garage{position:absolute;top:0;left:0;right:0;height:100vh;opacity:0;pointer-events:none;overflow-y:auto;overflow-x:hidden;display:flex;flex-direction:column;justify-content:flex-start}
+.garage{position:absolute;top:0;left:0;right:0;height:100vh;opacity:0;pointer-events:none;overflow-y:auto;overflow-x:hidden;display:flex;flex-direction:column;justify-content:flex-start;transition:opacity 0.4s ease}
 .garage.active{opacity:1;pointer-events:auto}
 /* DOORS: normal flow, scroll naturally over garages */
 .doors-layer{position:relative;z-index:10}
@@ -624,10 +624,10 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
 @media(max-width:768px){.split-reveal [data-sr="left"]{transform:translateX(-80px)}.split-reveal [data-sr="right"]{transform:translateX(80px)}}
 
 /* ===== ANIMATED WAVES — DOOR 1 TOP ONLY ===== */
-.door1-waves{position:absolute;top:-150px;left:-60%;width:220%;height:200px;z-index:5;pointer-events:none;overflow:visible}
+.door1-waves{position:absolute;top:-80px;left:-60%;width:220%;height:120px;z-index:5;pointer-events:none;overflow:visible}
 .door1-waves .dw{position:absolute;bottom:0;left:0;width:100%;height:100%}
 .door1-waves .dw svg{width:100%;height:100%;display:block}
-.door1-waves .dw1{z-index:1;animation:dw1 6s ease-in-out infinite alternate}
+.door1-waves .dw1{z-index:1;opacity:0.5;animation:dw1 6s ease-in-out infinite alternate}
 .door1-waves .dw2{z-index:2;animation:dw2 4.5s ease-in-out infinite alternate}
 .door1-waves .dw3{z-index:3;animation:dw3 8s ease-in-out infinite alternate}
 .door1-waves .dw4{z-index:4;animation:dw4 5s ease-in-out infinite alternate}
@@ -855,11 +855,11 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
 <section class="section-spacing door sec-process" id="process">
     <!-- Animated multi-waves top edge -->
     <div class="door1-waves">
-        <div class="dw dw1"><svg viewBox="0 0 1440 200" preserveAspectRatio="none"><path d="M0,200 L0,100 C60,40 120,10 200,60 C280,110 340,140 440,80 C540,20 620,0 720,50 C820,100 880,130 960,70 C1040,10 1120,0 1200,55 C1280,110 1360,90 1440,70 L1440,200 Z" fill="rgba(217,249,157,0.3)"/></svg></div>
-        <div class="dw dw2"><svg viewBox="0 0 1440 200" preserveAspectRatio="none"><path d="M0,200 L0,120 C80,50 160,20 260,80 C360,140 420,120 500,60 C580,0 680,30 780,90 C880,150 940,110 1020,50 C1100,0 1200,40 1300,80 C1380,110 1420,90 1440,85 L1440,200 Z" fill="rgba(45,212,191,0.4)"/></svg></div>
-        <div class="dw dw3"><svg viewBox="0 0 1440 200" preserveAspectRatio="none"><path d="M0,200 L0,90 C100,30 180,10 280,70 C380,130 460,150 560,90 C660,30 740,0 840,60 C940,120 1020,140 1120,80 C1220,20 1320,10 1440,60 L1440,200 Z" fill="rgba(244,114,182,0.35)"/></svg></div>
-        <div class="dw dw4"><svg viewBox="0 0 1440 200" preserveAspectRatio="none"><path d="M0,200 L0,110 C100,40 200,15 320,75 C440,135 520,100 620,45 C720,0 820,25 940,85 C1060,145 1140,100 1240,55 C1340,10 1400,40 1440,50 L1440,200 Z" fill="rgba(147,197,253,0.45)"/></svg></div>
-        <div class="dw dw5"><svg viewBox="0 0 1440 200" preserveAspectRatio="none"><path d="M0,200 L0,130 C120,60 240,30 380,85 C520,140 620,120 740,65 C860,10 980,40 1100,90 C1220,140 1340,100 1440,80 L1440,200 Z" fill="#7C3AED"/></svg></div>
+        <div class="dw dw1"><svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0,120 L0,70 C60,30 120,15 200,45 C280,75 340,90 440,55 C540,20 620,5 720,40 C820,70 880,85 960,50 C1040,15 1120,5 1200,38 C1280,70 1360,60 1440,48 L1440,120 Z" fill="rgba(217,249,157,0.3)"/></svg></div>
+        <div class="dw dw2"><svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0,120 L0,78 C80,35 160,15 260,55 C360,95 420,80 500,42 C580,5 680,22 780,60 C880,98 940,72 1020,35 C1100,5 1200,28 1300,55 C1380,72 1420,60 1440,55 L1440,120 Z" fill="rgba(45,212,191,0.4)"/></svg></div>
+        <div class="dw dw3"><svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0,120 L0,60 C100,22 180,10 280,48 C380,85 460,98 560,60 C660,22 740,5 840,42 C940,78 1020,90 1120,55 C1220,18 1320,8 1440,42 L1440,120 Z" fill="rgba(244,114,182,0.35)"/></svg></div>
+        <div class="dw dw4"><svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0,120 L0,72 C100,28 200,12 320,50 C440,88 520,68 620,32 C720,2 820,18 940,58 C1060,95 1140,68 1240,38 C1340,10 1400,28 1440,35 L1440,120 Z" fill="rgba(147,197,253,0.45)"/></svg></div>
+        <div class="dw dw5"><svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0,120 L0,85 C120,42 240,22 380,58 C520,92 620,78 740,45 C860,10 980,28 1100,62 C1220,92 1340,68 1440,55 L1440,120 Z" fill="#7C3AED"/></svg></div>
     </div>
     <div class="container">
         <div class="sh">
@@ -1357,18 +1357,31 @@ if(window.innerWidth>768){
        When that door's bottom leaves the viewport, we should already show
        the correct garage — not the previous one. */
     function onScroll(){
-        /* Switch garage as soon as its spacer enters the viewport (top <= 90% of vh).
-           This ensures the garage is ready BEFORE the door above finishes scrolling away,
-           eliminating the flash of the previous garage. */
+        /* Two-pass detection for smooth garage switching:
+           1. Check spacers (standard trigger)
+           2. Check doors — if a door's bottom is above 95% of vh,
+              the garage AFTER it should already be visible */
         let active=0;
-        var threshold=window.innerHeight*0.9;
+        var vh=window.innerHeight;
+
+        /* Pass 1: spacer-based (triggers when spacer top enters viewport) */
         spacers.forEach(function(sp,i){
-            if(sp.getBoundingClientRect().top<=threshold) active=i;
+            if(sp.getBoundingClientRect().top<=vh) active=i;
         });
+
+        /* Pass 2: door-based early switch — if a door's bottom is within
+           the viewport, the garage below it (= next spacer) should be active */
+        doors.forEach(function(door,i){
+            var r=door.getBoundingClientRect();
+            if(r.bottom<vh*0.95&&r.bottom>0){
+                var nextGarage=i+1;
+                if(nextGarage<garages.length&&nextGarage>active) active=nextGarage;
+            }
+        });
+
         if(active!==currentGarage){
             garages[currentGarage].classList.remove('active');
             garages[active].classList.add('active');
-            /* Split reveal: trigger immediately when garage becomes active */
             if(garages[active].classList.contains('split-reveal')&&!garages[active].classList.contains('revealed')){
                 garages[active].classList.add('revealed');
             }
@@ -1377,7 +1390,7 @@ if(window.innerWidth>768){
         /* Door leaving effect */
         doors.forEach(function(door){
             var r=door.getBoundingClientRect();
-            var ratio=r.bottom/window.innerHeight;
+            var ratio=r.bottom/vh;
             if(ratio<0.85&&ratio>0) door.classList.add('leaving');
             else door.classList.remove('leaving');
         });
