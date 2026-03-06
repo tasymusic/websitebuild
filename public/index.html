@@ -47,7 +47,8 @@ img,svg{max-width:100%;display:block}
 .door::before{content:'';position:absolute;top:-49px;left:0;right:0;height:50px;background:inherit}
 .door::after{content:'';position:absolute;bottom:-49px;left:0;right:0;height:50px;background:inherit;z-index:2}
 /* Each door gets a unique irregular wave via nth-child */
-.door:nth-child(1)::before,.doors-layer .door:nth-of-type(1)::before{clip-path:url(#waveTop1)}
+/* Door 1 top: replaced by animated multi-waves (.door1-waves) */
+.door:nth-child(1)::before,.doors-layer .door:nth-of-type(1)::before{clip-path:none}
 .door:nth-child(1)::after,.doors-layer .door:nth-of-type(1)::after{clip-path:url(#waveBot1)}
 .door:nth-of-type(2)::before{clip-path:url(#waveTop2)}
 .door:nth-of-type(2)::after{clip-path:url(#waveBot2)}
@@ -622,6 +623,21 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
 .split-reveal.revealed [data-sr][data-sr-d="5"]{transition-delay:0.6s}
 @media(max-width:768px){.split-reveal [data-sr="left"]{transform:translateX(-80px)}.split-reveal [data-sr="right"]{transform:translateX(80px)}}
 
+/* ===== ANIMATED WAVES — DOOR 1 TOP ONLY ===== */
+.door1-waves{position:absolute;top:-70px;left:0;width:100%;height:120px;overflow:hidden;z-index:5;pointer-events:none}
+.door1-waves .dw{position:absolute;bottom:0;left:0;width:200%;height:100%}
+.door1-waves .dw svg{width:100%;height:100%;display:block}
+.door1-waves .dw1{z-index:1;animation:dw1 8s ease-in-out infinite alternate}
+.door1-waves .dw2{z-index:2;animation:dw2 6s ease-in-out infinite alternate}
+.door1-waves .dw3{z-index:3;animation:dw3 10s ease-in-out infinite alternate}
+.door1-waves .dw4{z-index:4;animation:dw4 7s ease-in-out infinite alternate}
+.door1-waves .dw5{z-index:5;animation:dw5 9s ease-in-out infinite alternate}
+@keyframes dw1{0%{transform:translateX(0)}100%{transform:translateX(-50px)}}
+@keyframes dw2{0%{transform:translateX(0)}100%{transform:translateX(40px)}}
+@keyframes dw3{0%{transform:translateX(0)}100%{transform:translateX(-30px)}}
+@keyframes dw4{0%{transform:translateX(0)}100%{transform:translateX(35px)}}
+@keyframes dw5{0%{transform:translateX(0)}100%{transform:translateX(-25px)}}
+
 @media(prefers-reduced-motion:reduce){
     *,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important}
     html{scroll-behavior:auto}
@@ -837,6 +853,14 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
 
 <!-- DOOR 1: Process -->
 <section class="section-spacing door sec-process" id="process">
+    <!-- Animated multi-waves top edge -->
+    <div class="door1-waves">
+        <div class="dw dw1"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,65 C150,25 350,85 600,55 C850,25 1050,75 1200,45 L1200,120 Z" fill="rgba(217,249,157,0.25)"/></svg></div>
+        <div class="dw dw2"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,75 C100,50 250,90 420,60 C550,35 700,80 850,52 C960,30 1100,68 1200,55 L1200,120 Z" fill="rgba(45,212,191,0.35)"/></svg></div>
+        <div class="dw dw3"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,80 C200,40 500,95 750,58 C900,35 1050,72 1200,60 L1200,120 Z" fill="rgba(244,114,182,0.3)"/></svg></div>
+        <div class="dw dw4"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,70 C130,38 310,82 500,48 C650,22 820,74 980,44 C1080,28 1160,62 1200,52 L1200,120 Z" fill="rgba(147,197,253,0.4)"/></svg></div>
+        <div class="dw dw5"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,85 C300,50 650,100 950,65 C1080,52 1160,75 1200,68 L1200,120 Z" fill="#7C3AED"/></svg></div>
+    </div>
     <div class="container">
         <div class="sh">
             <h2 class="anim anim-blur">Simple comme <span class="gt">bonjour</span></h2>
