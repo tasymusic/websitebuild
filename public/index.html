@@ -38,7 +38,7 @@ img,svg{max-width:100%;display:block}
 /* ===== DOOR/GARAGE SCROLL EFFECT ===== */
 /* GARAGES: position fixed, NEVER move, all stacked. JS toggles .active */
 .garages-layer{position:fixed;top:0;left:0;right:0;height:100vh;z-index:1;pointer-events:none}
-.garage{position:absolute;top:0;left:0;right:0;height:100vh;opacity:0;pointer-events:none;overflow-y:auto;overflow-x:hidden;display:flex;flex-direction:column;justify-content:flex-start;transition:opacity 0.4s ease}
+.garage{position:absolute;top:0;left:0;right:0;height:100vh;opacity:0;pointer-events:none;overflow-y:auto;overflow-x:hidden;display:flex;flex-direction:column;justify-content:flex-start}
 .garage.active{opacity:1;pointer-events:auto}
 /* DOORS: normal flow, scroll naturally over garages */
 .doors-layer{position:relative;z-index:10}
@@ -1347,46 +1347,76 @@ if(window.innerWidth>768){
 /* ===== DYNAMIC BACKGROUND COLOR (disabled - sections have fixed colors) ===== */
 
 /* ===== GARAGE SWITCHING + DOOR LEAVING EFFECT ===== */
+/* Shows OLD garage above a door and NEW garage below it simultaneously */
 (function(){
     const garages=document.querySelectorAll('.garage');
     const spacers=document.querySelectorAll('.garage-view');
     const doors=document.querySelectorAll('.door');
-    let currentGarage=0;
 
     function onScroll(){
         var vh=window.innerHeight;
-        var active=0;
-        var bestVisible=0;
 
-        /* Find which spacer has the most visible area in the viewport.
-           That spacer's garage should be active — works perfectly
-           for both scroll directions. */
-        spacers.forEach(function(sp,i){
-            var r=sp.getBoundingClientRect();
-            var visTop=Math.max(r.top,0);
-            var visBot=Math.min(r.bottom,vh);
-            var visible=Math.max(0,visBot-visTop);
-            if(visible>bestVisible){bestVisible=visible;active=i}
-        });
-
-        /* Early switch: if a door's bottom is inside the viewport,
-           we're peeking below it — the NEXT garage should already show */
-        doors.forEach(function(door,i){
-            var r=door.getBoundingClientRect();
-            if(r.bottom>0&&r.bottom<vh){
-                var next=i+1;
-                if(next<garages.length&&next>active) active=next;
-            }
-        });
-
-        if(active!==currentGarage){
-            garages[currentGarage].classList.remove('active');
-            garages[active].classList.add('active');
-            if(garages[active].classList.contains('split-reveal')&&!garages[active].classList.contains('revealed')){
-                garages[active].classList.add('revealed');
-            }
-            currentGarage=active;
+        /* Reset all garages */
+        for(var g=0;g<garages.length;g++){
+            garages[g].style.opacity='0';
+            garages[g].style.clipPath='';
+            garages[g].style.pointerEvents='none';
         }
+
+        /* Find a door currently in the viewport */
+        var doorIdx=-1, dTop=0, dBot=100;
+        for(var i=0;i<doors.length;i++){
+            var r=doors[i].getBoundingClientRect();
+            if(r.top<vh&&r.bottom>0){
+                doorIdx=i;
+                dTop=(Math.max(0,Math.min(vh,r.top))/vh)*100;
+                dBot=(Math.max(0,Math.min(vh,r.bottom))/vh)*100;
+            }
+        }
+
+        if(doorIdx>=0){
+            /* Door is on screen — show OLD garage above, NEW garage below */
+            var prevG=doorIdx;
+            var nextG=doorIdx+1;
+
+            /* Previous garage: clip to area ABOVE the door */
+            if(prevG<garages.length&&dTop>0.5){
+                garages[prevG].style.opacity='1';
+                garages[prevG].style.clipPath='inset(0 0 '+(100-dTop)+'% 0)';
+                garages[prevG].style.pointerEvents='auto';
+            }
+
+            /* Next garage: clip to area BELOW the door */
+            if(nextG<garages.length&&dBot<99.5){
+                garages[nextG].style.opacity='1';
+                garages[nextG].style.clipPath='inset('+dBot+'% 0 0 0)';
+                garages[nextG].style.pointerEvents='auto';
+                /* Trigger split-reveal on first appearance */
+                if(garages[nextG].classList.contains('split-reveal')&&
+                   !garages[nextG].classList.contains('revealed')){
+                    garages[nextG].classList.add('revealed');
+                }
+            }
+        } else {
+            /* No door visible — find which spacer owns the viewport */
+            var active=0, best=0;
+            spacers.forEach(function(sp,i){
+                var r=sp.getBoundingClientRect();
+                var visTop=Math.max(r.top,0);
+                var visBot=Math.min(r.bottom,vh);
+                var vis=Math.max(0,visBot-visTop);
+                if(vis>best){best=vis;active=i}
+            });
+            if(active<garages.length){
+                garages[active].style.opacity='1';
+                garages[active].style.pointerEvents='auto';
+                if(garages[active].classList.contains('split-reveal')&&
+                   !garages[active].classList.contains('revealed')){
+                    garages[active].classList.add('revealed');
+                }
+            }
+        }
+
         /* Door leaving effect */
         doors.forEach(function(door){
             var r=door.getBoundingClientRect();
