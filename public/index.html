@@ -38,7 +38,7 @@ img,svg{max-width:100%;display:block}
 /* ===== DOOR/GARAGE SCROLL EFFECT ===== */
 /* GARAGES: position fixed, NEVER move, all stacked. JS toggles .active */
 .garages-layer{position:fixed;top:0;left:0;right:0;height:100vh;z-index:1;pointer-events:none}
-.garage{position:absolute;top:0;left:0;right:0;height:100vh;opacity:0;pointer-events:none;overflow-y:auto;overflow-x:hidden;display:flex;flex-direction:column;justify-content:flex-start;transition:opacity 0.4s ease}
+.garage{position:absolute;top:0;left:0;right:0;height:100vh;opacity:0;pointer-events:none;overflow-y:auto;overflow-x:hidden;display:flex;flex-direction:column;justify-content:flex-start}
 .garage.active{opacity:1;pointer-events:auto}
 /* DOORS: normal flow, scroll naturally over garages */
 .doors-layer{position:relative;z-index:10}
@@ -1351,42 +1351,57 @@ if(window.innerWidth>768){
     const garages=document.querySelectorAll('.garage');
     const spacers=document.querySelectorAll('.garage-view');
     const doors=document.querySelectorAll('.door');
-    let currentGarage=0;
 
     function onScroll(){
         var vh=window.innerHeight;
-        var active=0;
-        var bestVisible=0;
+        /* For each visible door, figure out which garages peek above/below it.
+           Structure: spacer[i] → door[i] → spacer[i+1] → door[i+1] → …
+           Above door[i] → garage[i].  Below door[i] → garage[i+1]. */
+        var show={}; /* garageIdx → {clipTop, clipBot} in px */
 
-        /* Find which spacer has the most visible area in the viewport.
-           That spacer's garage should be active — works perfectly
-           for both scroll directions. */
-        spacers.forEach(function(sp,i){
-            var r=sp.getBoundingClientRect();
-            var visTop=Math.max(r.top,0);
-            var visBot=Math.min(r.bottom,vh);
-            var visible=Math.max(0,visBot-visTop);
-            if(visible>bestVisible){bestVisible=visible;active=i}
-        });
+        for(var i=0;i<doors.length;i++){
+            var r=doors[i].getBoundingClientRect();
+            if(r.bottom<=0||r.top>=vh) continue;
 
-        /* Early switch: if a door's bottom is inside the viewport,
-           we're peeking below it — the NEXT garage should already show */
-        doors.forEach(function(door,i){
-            var r=door.getBoundingClientRect();
-            if(r.bottom>0&&r.bottom<vh){
-                var next=i+1;
-                if(next<garages.length&&next>active) active=next;
+            /* Gap above this door → show garage[i] clipped to above door top */
+            if(r.top>0&&i<garages.length){
+                if(!show[i]) show[i]={t:0,b:0};
+                show[i].b=Math.max(show[i].b,vh-r.top);
             }
-        });
-
-        if(active!==currentGarage){
-            garages[currentGarage].classList.remove('active');
-            garages[active].classList.add('active');
-            if(garages[active].classList.contains('split-reveal')&&!garages[active].classList.contains('revealed')){
-                garages[active].classList.add('revealed');
+            /* Gap below this door → show garage[i+1] clipped to below door bottom */
+            if(r.bottom<vh&&i+1<garages.length){
+                if(!show[i+1]) show[i+1]={t:0,b:0};
+                show[i+1].t=Math.max(show[i+1].t,r.bottom);
             }
-            currentGarage=active;
         }
+
+        var hasAny=Object.keys(show).length>0;
+
+        /* If no door is in viewport, show whichever spacer is most visible */
+        if(!hasAny){
+            var best=0,bestVis=0;
+            spacers.forEach(function(sp,i){
+                var r=sp.getBoundingClientRect();
+                var v=Math.max(0,Math.min(r.bottom,vh)-Math.max(r.top,0));
+                if(v>bestVis){bestVis=v;best=i}
+            });
+            show[best]={t:0,b:0};
+        }
+
+        garages.forEach(function(g,i){
+            if(show[i]){
+                g.classList.add('active');
+                if(show[i].t>0||show[i].b>0)
+                    g.style.clipPath='inset('+Math.round(show[i].t)+'px 0 '+Math.round(show[i].b)+'px 0)';
+                else g.style.clipPath='';
+                if(g.classList.contains('split-reveal')&&!g.classList.contains('revealed'))
+                    g.classList.add('revealed');
+            }else{
+                g.classList.remove('active');
+                g.style.clipPath='';
+            }
+        });
+
         /* Door leaving effect */
         doors.forEach(function(door){
             var r=door.getBoundingClientRect();
