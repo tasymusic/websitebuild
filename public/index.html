@@ -541,168 +541,73 @@ img,svg{max-width:100%;display:block}
     .footer-bottom{flex-direction:column;text-align:center}.footer-legal{justify-content:center}
     .c-card{width:260px;height:180px}
 }
-/* ===== QUESTIONNAIRE MODAL — PREMIUM REDESIGN ===== */
-@keyframes q-bg-drift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
-@keyframes q-particle-float{0%{transform:translate(0,0) scale(1);opacity:0.08}25%{opacity:0.12}50%{transform:translate(30px,-40px) scale(1.2);opacity:0.06}75%{opacity:0.1}100%{transform:translate(-20px,20px) scale(0.9);opacity:0.08}}
-@keyframes q-check-pop{0%{transform:scale(0)}60%{transform:scale(1.2)}100%{transform:scale(1)}}
-@keyframes q-emoji-bounce{0%{transform:translateY(-30px);opacity:0}60%{transform:translateY(5px);opacity:1}80%{transform:translateY(-3px)}100%{transform:translateY(0)}}
-@keyframes q-emoji-float{0%,100%{transform:translateY(-3px)}50%{transform:translateY(3px)}}
-@keyframes q-typing-cursor{0%,100%{opacity:1}50%{opacity:0}}
-@keyframes q-step-enter{0%{opacity:0;filter:blur(10px)}100%{opacity:1;filter:blur(0)}}
-@keyframes q-step-exit{0%{opacity:1;filter:blur(0)}100%{opacity:0;filter:blur(5px)}}
-@keyframes q-stagger-in{0%{opacity:0;transform:translateY(20px)}100%{opacity:1;transform:translateY(0)}}
-@keyframes q-shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-10px)}40%{transform:translateX(10px)}60%{transform:translateX(-10px)}80%{transform:translateX(10px)}}
-@keyframes q-success-flash{0%{opacity:0}20%{opacity:1}100%{opacity:0}}
-@keyframes q-glow-pulse{0%,100%{box-shadow:0 0 20px rgba(217,249,157,0.2),0 4px 20px rgba(217,249,157,0.15)}50%{box-shadow:0 0 40px rgba(217,249,157,0.4),0 4px 30px rgba(217,249,157,0.25)}}
-@keyframes q-shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
-@keyframes q-progress-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
-@keyframes q-ripple{0%{transform:scale(0);opacity:0.4}100%{transform:scale(4);opacity:0}}
-
-.q-modal{position:fixed;inset:0;z-index:100000;background:#1a1028;display:none;flex-direction:column;overflow:hidden}
-.q-modal::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 40%,rgba(124,58,237,0.1),transparent 60%),radial-gradient(ellipse at 70% 60%,rgba(255,142,196,0.05),transparent 50%);background-size:200% 200%;animation:q-bg-drift 15s ease infinite;z-index:0;pointer-events:none}
-.q-modal::after{content:'';position:absolute;inset:0;background:radial-gradient(circle,rgba(255,255,255,0.03) 1px,transparent 1px);background-size:30px 30px;z-index:0;pointer-events:none}
+/* ===== QUESTIONNAIRE MODAL ===== */
+.q-modal{position:fixed;inset:0;z-index:100000;background:#3B0764;display:none;flex-direction:column;overflow:hidden}
 .q-modal.open{display:flex}
-
-/* Floating particles */
-.q-particle{position:absolute;width:3px;height:3px;border-radius:50%;opacity:0.08;pointer-events:none;z-index:0}
-.q-particle:nth-child(1){background:#FF8EC4;top:15%;left:10%;animation:q-particle-float 12s ease-in-out infinite}
-.q-particle:nth-child(2){background:#D9F99D;top:70%;left:85%;animation:q-particle-float 14s ease-in-out infinite 2s}
-.q-particle:nth-child(3){background:#FF8EC4;top:40%;left:60%;animation:q-particle-float 10s ease-in-out infinite 4s}
-.q-particle:nth-child(4){background:#D9F99D;top:80%;left:25%;animation:q-particle-float 16s ease-in-out infinite 1s}
-.q-particle:nth-child(5){background:#FF8EC4;top:25%;left:75%;animation:q-particle-float 13s ease-in-out infinite 3s}
-.q-particle:nth-child(6){background:#D9F99D;top:55%;left:40%;animation:q-particle-float 11s ease-in-out infinite 5s}
-
-/* Parallax background layer */
-.q-parallax-bg{position:absolute;inset:0;z-index:0;pointer-events:none;transition:transform 0.3s ease-out}
-
-/* Top bar */
-.q-top{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;border-bottom:1px solid rgba(255,255,255,0.06);position:relative;z-index:2}
-.q-back{display:flex;align-items:center;gap:6px;font-size:15px;color:rgba(255,255,255,0.5);cursor:pointer;background:none;border:none;font-family:inherit;padding:4px 8px;transition:all 0.2s}
-.q-back:hover{color:#FF8EC4}
-.q-back .q-back-arrow{display:inline-block;transition:transform 0.2s}
-.q-back:hover .q-back-arrow{transform:translateX(-3px)}
+.q-top{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;border-bottom:1px solid rgba(255,255,255,0.08)}
+.q-back{display:flex;align-items:center;gap:6px;font-size:14px;color:rgba(255,255,255,0.6);cursor:pointer;background:none;border:none;font-family:inherit;padding:4px 8px}
+.q-back:hover{color:#fff}
 .q-progress{flex:1;max-width:300px;margin:0 24px}
-.q-bar{height:6px;background:rgba(255,255,255,0.1);border-radius:6px;overflow:hidden}
-.q-bar-fill{height:100%;background:linear-gradient(90deg,#FF8EC4,#D9F99D);border-radius:6px;transition:width 0.4s ease;width:8%;box-shadow:0 0 10px rgba(255,142,196,0.3)}
-.q-close{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.5);font-size:18px;cursor:pointer;transition:all 0.2s}
-.q-close:hover{background:rgba(255,255,255,0.1);color:#fff}
-
-/* Body */
-.q-body{flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;z-index:1}
-
-/* Steps — blur transitions */
-.q-step{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;opacity:0;filter:blur(10px);transition:opacity 0.4s cubic-bezier(0.16,1,0.3,1),filter 0.4s cubic-bezier(0.16,1,0.3,1);pointer-events:none}
-.q-step.q-active{opacity:1;filter:blur(0);pointer-events:auto}
-.q-step.q-left{opacity:0;filter:blur(5px)}
-
-/* Step emoji */
-.q-step-emoji{font-size:64px;display:block;margin-bottom:12px;animation:q-emoji-bounce 0.6s cubic-bezier(0.34,1.56,0.64,1) both}
-.q-step.q-active .q-step-emoji{animation:q-emoji-bounce 0.6s cubic-bezier(0.34,1.56,0.64,1) both,q-emoji-float 3s ease-in-out 0.8s infinite}
-
-/* Step title */
-.q-step h2{font-size:32px;font-weight:800;color:#FFFFFF;margin-bottom:8px;text-align:center;position:relative}
-.q-typing-cursor{display:inline-block;width:2px;height:0.9em;background:#FF8EC4;margin-left:2px;vertical-align:text-bottom;animation:q-typing-cursor 0.6s step-end infinite}
-
-/* Step subtitle */
-.q-step p.q-sub{font-size:16px;color:rgba(255,255,255,0.5);margin-bottom:24px;text-align:center;max-width:500px}
-.q-step-label{font-size:14px;color:rgba(255,255,255,0.5);display:block;margin-bottom:4px;text-align:center}
-
-/* Grid */
-.q-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:750px;width:100%}
-.q-grid-2{grid-template-columns:repeat(3,1fr)}
-.q-grid-3{grid-template-columns:repeat(3,1fr)}
-
-/* Cards */
-.q-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:16px 18px;text-align:left;cursor:pointer;transition:all 0.3s cubic-bezier(0.16,1,0.3,1);color:#fff;font-size:15px;font-weight:500;position:relative;overflow:hidden;display:flex;align-items:center;gap:12px;will-change:transform}
-.q-card .q-emoji{font-size:28px;flex-shrink:0;transition:transform 0.2s;display:block;margin:0}
-.q-card:hover{transform:scale(1.03);border-color:rgba(255,255,255,0.16);box-shadow:0 8px 30px rgba(0,0,0,0.2);background:rgba(255,255,255,0.06)}
-.q-card:hover .q-emoji{transform:translateY(-3px)}
-
-/* Popular cards — highlighted */
-.q-card[data-value*="Restaurant"]{background:rgba(255,107,53,0.08);border-color:rgba(255,107,53,0.15)}
-.q-card[data-value*="Restaurant"]:hover{border-color:rgba(255,107,53,0.3)}
-.q-card[data-value*="Coiffeur"]{background:rgba(255,142,196,0.08);border-color:rgba(255,142,196,0.15)}
-.q-card[data-value*="Coiffeur"]:hover{border-color:rgba(255,142,196,0.3)}
-.q-card[data-value*="Tatoueur"]{background:rgba(124,58,237,0.08);border-color:rgba(124,58,237,0.15)}
-.q-card[data-value*="Tatoueur"]:hover{border-color:rgba(124,58,237,0.3)}
-.q-card[data-value*="beauté"],.q-card[data-value*="Salon"]{background:rgba(217,249,157,0.08);border-color:rgba(217,249,157,0.15)}
-.q-card[data-value*="beauté"]:hover,.q-card[data-value*="Salon"]:hover{border-color:rgba(217,249,157,0.3)}
-
-/* Selected card */
-.q-card.selected{border:2px solid #FF8EC4!important;background:rgba(255,142,196,0.1)!important;box-shadow:0 0 30px rgba(255,142,196,0.15)}
-.q-card.selected::after{content:'✓';position:absolute;top:8px;right:10px;width:24px;height:24px;background:#FF8EC4;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;font-weight:700;animation:q-check-pop 0.3s cubic-bezier(0.34,1.56,0.64,1) both}
-
-/* Morphing: when a card is selected, others dim */
-.q-step.q-has-selection .q-card:not(.selected){transform:scale(0.95);opacity:0.5;filter:blur(1px)}
-.q-step.q-has-selection .q-card.selected{transform:scale(1.05)}
-
-/* Stagger animation */
-.q-card.q-stagger{opacity:0;transform:translateY(20px);animation:q-stagger-in 0.3s cubic-bezier(0.16,1,0.3,1) forwards}
-
-/* Price cards (forfait) */
+.q-bar{height:4px;background:rgba(255,255,255,0.1);border-radius:4px;overflow:hidden}
+.q-bar-fill{height:100%;background:linear-gradient(90deg,#F472B6,#2DD4BF,#D9F99D);border-radius:4px;transition:width 0.4s ease;width:6%}
+.q-close{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid rgba(255,255,255,0.15);background:none;color:#fff;font-size:18px;cursor:pointer;transition:all 0.2s}
+.q-close:hover{background:rgba(255,255,255,0.1)}
+.q-body{flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.q-step{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;opacity:0;transform:translateX(60px);transition:all 0.4s cubic-bezier(0.16,1,0.3,1);pointer-events:none}
+.q-step.q-active{opacity:1;transform:translateX(0);pointer-events:auto}
+.q-step.q-left{opacity:0;transform:translateX(-60px)}
+.q-step h2{font-size:clamp(24px,4vw,36px);font-weight:800;color:#D9F99D;margin-bottom:24px;text-align:center}
+/* Rainbow step titles: each step gets a different color */
+.q-step:nth-child(1) h2{color:#D9F99D}
+.q-step:nth-child(2) h2{color:#2DD4BF}
+.q-step:nth-child(3) h2{color:#F472B6}
+.q-step:nth-child(4) h2{color:#93C5FD}
+.q-step:nth-child(5) h2{color:#06D6A0}
+.q-step:nth-child(6) h2{color:#FFB4A2}
+.q-step:nth-child(7) h2{color:#D9F99D}
+.q-step:nth-child(8) h2{color:#2DD4BF}
+.q-step:nth-child(9) h2{color:#F472B6}
+.q-step:nth-child(10) h2{color:#93C5FD}
+.q-step:nth-child(11) h2{color:#06D6A0}
+.q-step:nth-child(12) h2{color:#FFB4A2}
+.q-step:nth-child(13) h2{color:#D9F99D}
+.q-step:nth-child(14) h2{color:#2DD4BF}
+.q-step:nth-child(15) h2{color:#F472B6}
+.q-step:nth-child(16) h2{color:#D9F99D}
+.q-step p.q-sub{font-size:15px;color:rgba(255,255,255,0.5);margin-bottom:20px;text-align:center}
+.q-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;max-width:700px;width:100%}
+.q-grid-2{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+.q-grid-3{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+.q-card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:20px;text-align:center;cursor:pointer;transition:all 0.3s cubic-bezier(0.16,1,0.3,1);color:#fff;font-size:15px;font-weight:500;position:relative;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.q-card:hover{transform:translateY(-2px);border-color:rgba(124,58,237,0.6);box-shadow:0 8px 30px rgba(124,58,237,0.25);background:rgba(255,255,255,0.08)}
+.q-card.selected{border-color:#F472B6;background:rgba(244,114,182,0.1);box-shadow:0 0 30px rgba(244,114,182,0.2)}
+.q-card.selected::after{content:'✓';position:absolute;top:10px;right:12px;width:22px;height:22px;background:#F472B6;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;font-weight:700}
+.q-card .q-emoji{font-size:28px;margin-bottom:6px;display:block}
 .q-card .q-price{font-size:28px;font-weight:900;margin:6px 0 2px}
 .q-card .q-price-label{font-size:12px;color:rgba(255,255,255,0.5)}
 .q-card.q-recommended{border-color:rgba(124,58,237,0.4);position:relative}
-.q-card.q-recommended .q-rec-badge{position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#FF8EC4,#D9F99D);color:#1a1028;padding:2px 12px;border-radius:10px;font-size:11px;font-weight:700;white-space:nowrap}
-
-/* Ripple effect */
-.q-ripple{position:absolute;border-radius:50%;background:rgba(255,142,196,0.3);transform:scale(0);animation:q-ripple 0.6s ease-out forwards;pointer-events:none;z-index:0}
-
-/* Inputs */
-.q-input{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:18px 20px;font-size:17px;color:#fff;width:100%;max-width:400px;font-family:inherit;outline:none;transition:all 0.2s}
-.q-input:focus{border-color:#FF8EC4;box-shadow:0 0 15px rgba(255,142,196,0.2)}
-.q-input::placeholder{color:rgba(255,255,255,0.25)}
+.q-card.q-recommended .q-rec-badge{position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--gradient);color:#fff;padding:2px 12px;border-radius:10px;font-size:11px;font-weight:700;white-space:nowrap}
+.q-input{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:12px;padding:14px 18px;font-size:16px;color:#fff;width:100%;max-width:400px;font-family:inherit;outline:none;transition:border-color 0.2s}
+.q-input:focus{border-color:#7C3AED}
+.q-input::placeholder{color:rgba(255,255,255,0.3)}
 .q-textarea{min-height:80px;resize:vertical}
-.q-input.q-shake{animation:q-shake 0.4s ease;border-color:#EF4444!important;box-shadow:0 0 15px rgba(239,68,68,0.3)!important}
-.q-input option{background:#1a1a1a;color:#fff}
-select.q-input{appearance:auto;-webkit-appearance:auto}
-
-/* Buttons */
-.q-btn{background:linear-gradient(135deg,#FF8EC4,#D9F99D);color:#1a1028;padding:16px 36px;border-radius:14px;font-size:16px;font-weight:700;cursor:pointer;border:none;font-family:inherit;margin-top:16px;transition:all 0.3s;box-shadow:0 4px 20px rgba(255,142,196,0.3);position:relative;overflow:hidden}
-.q-btn:hover{transform:scale(1.03);box-shadow:0 0 30px rgba(255,142,196,0.4)}
-.q-submit-btn{background:linear-gradient(135deg,#D9F99D,#06D6A0)!important;color:#1a1028!important;animation:q-glow-pulse 2s ease-in-out infinite}
-.q-submit-btn:hover{box-shadow:0 0 50px rgba(217,249,157,0.5)!important}
-.q-error{color:#EF4444;font-size:13px;margin-top:8px;min-height:18px;transition:opacity 0.3s}
-
-/* Contact form */
+.q-btn{background:#F472B6;color:#fff;padding:16px 36px;border-radius:14px;font-size:16px;font-weight:600;cursor:pointer;border:none;font-family:inherit;margin-top:16px;transition:all 0.3s;box-shadow:0 4px 20px rgba(244,114,182,0.3)}
+.q-btn:hover{transform:scale(1.03);box-shadow:0 0 25px rgba(244,114,182,0.4)}
+.q-submit-btn{background:#D9F99D!important;color:#3B0764!important}
+.q-error{color:#EF4444;font-size:13px;margin-top:8px;min-height:18px}
 .q-contact-form{display:flex;flex-direction:column;gap:12px;max-width:400px;width:100%}
 .q-contact-form .q-input{max-width:100%}
-
-/* Style cards */
 .q-style-card{min-height:80px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}
 .q-style-swatch{width:48px;height:32px;border-radius:8px;margin-bottom:2px}
-
-/* Color palette cards */
-.q-palette-card{flex-direction:column;text-align:center;align-items:center}
-
-/* Color dots */
-.q-color-dot{width:50px;height:50px;transition:all 0.2s}
-.q-color-dot:hover{transform:scale(1.15)}
-.q-color-dot.selected{border:3px solid #fff!important;box-shadow:0 0 15px currentColor;transform:scale(1.15)}
-
-/* Confirmation */
 .q-confirm{text-align:center}
-.q-confirm-emoji{font-size:80px;display:block;margin-bottom:16px;animation:q-emoji-bounce 0.8s cubic-bezier(0.34,1.56,0.64,1) both}
-.q-confirm h2{font-size:clamp(28px,5vw,44px);margin-bottom:16px;background:linear-gradient(90deg,#FF8EC4,#D9F99D,#FF8EC4);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:q-shimmer 3s linear infinite}
+.q-confirm h2{font-size:clamp(28px,5vw,44px);margin-bottom:16px}
 .q-confirm p{color:rgba(255,255,255,0.7);font-size:16px;line-height:1.7;max-width:500px}
-
-/* Step count */
+.q-step-label{font-size:12px;color:rgba(255,255,255,0.5);display:block;margin-bottom:4px;text-align:center}
 .q-count{font-size:13px;color:rgba(255,255,255,0.4);margin-top:8px;text-align:center}
-
-/* Success flash bar */
-.q-success-flash{position:fixed;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,#06D6A0,transparent);z-index:100002;opacity:0;animation:q-success-flash 0.5s ease forwards;pointer-events:none}
-
-/* Circular progress indicator */
-.q-circle-progress{position:fixed;bottom:24px;right:24px;width:50px;height:50px;z-index:100001;transition:transform 0.3s}
-.q-circle-progress svg{width:50px;height:50px;transform:rotate(-90deg)}
-.q-circle-progress circle{fill:none;stroke-width:3}
-.q-circle-progress .q-circle-bg{stroke:rgba(255,255,255,0.05)}
-.q-circle-progress .q-circle-fill{stroke:url(#q-circle-gradient);stroke-linecap:round;transition:stroke-dashoffset 0.4s ease}
-.q-circle-progress .q-circle-text{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:rgba(255,255,255,0.7)}
-
-/* Responsive */
-@media(max-width:900px){.q-grid,.q-grid-2,.q-grid-3{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:600px){.q-grid,.q-grid-2,.q-grid-3{grid-template-columns:1fr}.q-card{padding:14px}.q-step h2{font-size:24px}.q-step-emoji{font-size:48px}.q-circle-progress{bottom:16px;right:16px;width:40px;height:40px}.q-circle-progress svg{width:40px;height:40px}}
+.q-color-dot.selected{border-color:#7C3AED!important;box-shadow:0 0 15px rgba(124,58,237,0.4);transform:scale(1.15)}
+.q-input option{background:#1a1a1a;color:#fff}
+select.q-input{appearance:auto;-webkit-appearance:auto}
+@media(max-width:600px){.q-grid{grid-template-columns:1fr 1fr}.q-grid-2{grid-template-columns:1fr}.q-grid-3{grid-template-columns:1fr}.q-card{padding:14px}}
 
 /* ===== SPLIT REVEAL (content deploys from sides) ===== */
 /* IMPORTANT: no position:relative here — .garage needs position:absolute */
@@ -738,38 +643,6 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
     html{scroll-behavior:auto}
     .split-char{opacity:1!important;transform:none!important}
 }
-
-/* ===== SITE-WIDE MOTIFS & TEXTURES ===== */
-
-/* MOTIF 1 — Dot grid on dark sections */
-.sec-portfolio::before,.sec-ba::before,.sec-faq::before,.sec-pricing::before,.sec-process::before,.sec-cta::before,.sec-hero::before{
-    content:'';position:absolute;inset:0;background:radial-gradient(circle,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:25px 25px;z-index:0;pointer-events:none}
-.sec-portfolio,.sec-ba,.sec-faq,.sec-pricing,.sec-process,.sec-cta,.sec-hero{position:relative}
-.sec-portfolio>.container,.sec-ba>.container,.sec-faq>.container,.sec-pricing>.container,.sec-process>.container,.sec-cta>.container,.sec-hero>.container{position:relative;z-index:1}
-
-/* MOTIF 2 — Grain/noise overlay (site-wide) */
-.grain-overlay{position:fixed;inset:0;z-index:9998;pointer-events:none;mix-blend-mode:overlay;opacity:0.015;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")}
-
-/* MOTIF 3 — Diagonal lines on services & compare */
-.sec-services::before,.sec-compare::before{
-    content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(255,255,255,0.02) 0px,rgba(255,255,255,0.02) 1px,transparent 1px,transparent 20px);z-index:0;pointer-events:none}
-.sec-services,.sec-compare{position:relative}
-.sec-services>.container,.sec-compare>.container{position:relative;z-index:1}
-
-/* MOTIF 4 — Glowing blurred circles (CSS only, per section) */
-@keyframes motif-float{0%,100%{transform:translate(0,0)}50%{transform:translate(20px,-15px)}}
-.sec-portfolio::after,.sec-pricing::after,.sec-hero::after,.sec-process::after,.sec-testi::after,.sec-cta::after{
-    content:'';position:absolute;width:300px;height:300px;border-radius:50%;opacity:0.06;filter:blur(80px);pointer-events:none;z-index:0;animation:motif-float 15s ease-in-out infinite}
-.sec-hero::after{background:#FF8EC4;top:-50px;right:-100px}
-.sec-process::after{background:#2DD4BF;bottom:-80px;left:-60px}
-.sec-portfolio::after{background:#F472B6;top:20%;right:10%}
-.sec-pricing::after{background:#FFB4A2;bottom:10%;left:5%;width:400px;height:400px}
-.sec-testi::after{background:#D9F99D;top:-40px;left:30%}
-.sec-cta::after{background:#D9F99D;bottom:-60px;right:20%}
-
-/* MOTIF 5 — Glow-follow border on cards (site-wide) - CSS hover glow */
-.card:hover,.svc:hover,.cmp:hover,.testi:hover,.faq-item:hover{box-shadow:0 0 30px rgba(255,142,196,0.08),0 8px 30px rgba(0,0,0,0.1);border-color:rgba(255,142,196,0.15)!important}
-
     </style>
 </head>
 <body>
@@ -1086,122 +959,156 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
     </div>
 </footer>
 
-<!-- ===== QUESTIONNAIRE MODAL (12 steps) — PREMIUM REDESIGN ===== -->
+<!-- ===== QUESTIONNAIRE MODAL (15 steps) ===== -->
 <div class="q-modal" id="quizModal">
-    <!-- Parallax background container -->
-    <div class="q-parallax-bg">
-        <div class="q-particle"></div><div class="q-particle"></div><div class="q-particle"></div>
-        <div class="q-particle"></div><div class="q-particle"></div><div class="q-particle"></div>
-    </div>
     <div class="q-top">
-        <button class="q-back" style="display:none"><span class="q-back-arrow">&larr;</span> Retour</button>
-        <div class="q-progress"><span class="q-step-label">Étape 1/12</span><div class="q-bar"><div class="q-bar-fill"></div></div></div>
-        <button class="q-close">&#x2715;</button>
+        <button class="q-back" style="display:none">← Retour</button>
+        <div class="q-progress"><span class="q-step-label">Étape 1/15</span><div class="q-bar"><div class="q-bar-fill"></div></div></div>
+        <button class="q-close">✕</button>
     </div>
     <div class="q-body">
         <!-- 1: Type de projet -->
-        <div class="q-step q-active" data-step="type_projet" data-emoji="💻" data-subtitle="Ça nous aide à choisir le meilleur format pour vous.">
-            <span class="q-step-emoji">💻</span>
+        <div class="q-step q-active" data-step="type_projet">
             <h2>Quel type de site recherchez-vous ?</h2>
-            <p class="q-sub">Ça nous aide à choisir le meilleur format pour vous.</p>
-            <div class="q-grid q-grid-2" style="max-width:750px">
-                <div class="q-card q-auto" data-key="type_projet" data-value="Site vitrine"><span class="q-emoji">🌐</span> Site vitrine</div>
-                <div class="q-card q-auto" data-key="type_projet" data-value="Site e-commerce"><span class="q-emoji">🛒</span> Site e-commerce</div>
-                <div class="q-card q-auto" data-key="type_projet" data-value="Portfolio"><span class="q-emoji">🎨</span> Portfolio</div>
-                <div class="q-card q-auto" data-key="type_projet" data-value="Site de réservation"><span class="q-emoji">📅</span> Site de réservation</div>
-                <div class="q-card q-auto" data-key="type_projet" data-value="Landing page"><span class="q-emoji">🚀</span> Landing page</div>
-                <div class="q-card q-auto" data-key="type_projet" data-value="Blog / Magazine"><span class="q-emoji">📝</span> Blog / Magazine</div>
-                <div class="q-card q-other-trigger" data-key="type_projet"><span class="q-emoji">✏️</span> Autre</div>
+            <div class="q-grid q-grid-2" style="max-width:700px">
+                <div class="q-card q-auto" data-key="type_projet" data-value="Site vitrine">Site vitrine</div>
+                <div class="q-card q-auto" data-key="type_projet" data-value="Site e-commerce">Site e-commerce</div>
+                <div class="q-card q-auto" data-key="type_projet" data-value="Portfolio">Portfolio</div>
+                <div class="q-card q-auto" data-key="type_projet" data-value="Site de réservation">Site de réservation</div>
+                <div class="q-card q-auto" data-key="type_projet" data-value="Landing page">Landing page</div>
+                <div class="q-card q-auto" data-key="type_projet" data-value="Blog / Magazine">Blog / Magazine</div>
+                <div class="q-card q-other-trigger" data-key="type_projet">Autre</div>
             </div>
             <input class="q-input q-other-input" type="text" placeholder="Précisez..." style="display:none;margin-top:12px">
-            <button class="q-btn q-other-continue" style="display:none">Continuer &rarr;</button>
+            <button class="q-btn q-other-continue" style="display:none">Continuer →</button>
         </div>
         <!-- 2: Secteur -->
-        <div class="q-step" data-step="secteur" data-emoji="💼" data-subtitle="Ça nous aide à créer un site parfaitement adapté à votre métier.">
-            <span class="q-step-emoji">💼</span>
+        <div class="q-step" data-step="secteur">
             <h2>Dans quel domaine travaillez-vous ?</h2>
-            <p class="q-sub">Ça nous aide à créer un site parfaitement adapté à votre métier.</p>
-            <div class="q-grid" style="max-width:750px;max-height:50vh;overflow-y:auto;padding-right:8px">
-                <div class="q-card q-auto" data-key="secteur" data-value="Restaurant / Bar / Café"><span class="q-emoji">🍽️</span> Restaurant / Bar</div>
-                <div class="q-card q-auto" data-key="secteur" data-value="Coiffeur / Barbier"><span class="q-emoji">✂️</span> Coiffeur / Barbier</div>
-                <div class="q-card q-auto" data-key="secteur" data-value="Tatoueur / Pierceur"><span class="q-emoji">🎨</span> Tatoueur</div>
-                <div class="q-card q-auto" data-key="secteur" data-value="Salon de beauté"><span class="q-emoji">💅</span> Beauté / Esthétique</div>
-                <div class="q-card q-auto" data-key="secteur" data-value="Coach sportif"><span class="q-emoji">🏋️</span> Coach / Salle de sport</div>
-                <div class="q-card q-auto" data-key="secteur" data-value="Yoga / Bien-être"><span class="q-emoji">🧘</span> Yoga / Bien-être</div>
-                <div class="q-card q-auto" data-key="secteur" data-value="Location / Immobilier"><span class="q-emoji">🏡</span> Location / Immobilier</div>
-                <div class="q-card q-auto" data-key="secteur" data-value="Wedding Planner"><span class="q-emoji">💒</span> Wedding Planner</div>
-                <div class="q-card q-auto" data-key="secteur" data-value="Artisan / BTP"><span class="q-emoji">🔧</span> Artisan / BTP</div>
-                <div class="q-card q-auto" data-key="secteur" data-value="Photographe / Vidéaste"><span class="q-emoji">📸</span> Photographe</div>
-                <div class="q-card q-auto" data-key="secteur" data-value="Musicien / DJ"><span class="q-emoji">🎵</span> Musicien / DJ</div>
-                <div class="q-card q-auto" data-key="secteur" data-value="Consultant / Freelance"><span class="q-emoji">👔</span> Consultant</div>
-                <div class="q-card q-auto" data-key="secteur" data-value="Santé / Thérapeute"><span class="q-emoji">🏥</span> Santé / Thérapeute</div>
-                <div class="q-card q-auto" data-key="secteur" data-value="Formation / Coaching"><span class="q-emoji">🎓</span> Formation / Cours</div>
-                <div class="q-card q-auto" data-key="secteur" data-value="Boutique / Commerce"><span class="q-emoji">🛍️</span> Boutique / Commerce</div>
-                <div class="q-card q-auto" data-key="secteur" data-value="Auto / Moto / Garage"><span class="q-emoji">🚗</span> Auto / Garage</div>
-                <div class="q-card q-auto" data-key="secteur" data-value="Animaux / Vétérinaire"><span class="q-emoji">🐕</span> Animaux / Véto</div>
-                <div class="q-card q-auto" data-key="secteur" data-value="Agence / Startup / Tech"><span class="q-emoji">💻</span> Agence / Tech</div>
-                <div class="q-card q-other-trigger" data-key="secteur"><span class="q-emoji">✏️</span> Autre</div>
+            <div class="q-grid" style="max-width:750px;max-height:55vh;overflow-y:auto;padding-right:8px">
+                <div class="q-card q-auto" data-key="secteur" data-value="Restaurant / Bar / Café">Restaurant / Bar</div>
+                <div class="q-card q-auto" data-key="secteur" data-value="Coiffeur / Barbier">Coiffeur / Barbier</div>
+                <div class="q-card q-auto" data-key="secteur" data-value="Tatoueur / Pierceur">Tatoueur</div>
+                <div class="q-card q-auto" data-key="secteur" data-value="Salon de beauté">Beauté / Esthétique</div>
+                <div class="q-card q-auto" data-key="secteur" data-value="Coach sportif">Coach / Salle de sport</div>
+                <div class="q-card q-auto" data-key="secteur" data-value="Yoga / Bien-être">Yoga / Bien-être</div>
+                <div class="q-card q-auto" data-key="secteur" data-value="Location / Immobilier">Location / Immobilier</div>
+                <div class="q-card q-auto" data-key="secteur" data-value="Wedding Planner">Wedding Planner</div>
+                <div class="q-card q-auto" data-key="secteur" data-value="Artisan / BTP">Artisan / BTP</div>
+                <div class="q-card q-auto" data-key="secteur" data-value="Photographe / Vidéaste">Photographe</div>
+                <div class="q-card q-auto" data-key="secteur" data-value="Musicien / DJ">Musicien / DJ</div>
+                <div class="q-card q-auto" data-key="secteur" data-value="Consultant / Freelance">Consultant</div>
+                <div class="q-card q-auto" data-key="secteur" data-value="Santé / Thérapeute">Santé / Thérapeute</div>
+                <div class="q-card q-auto" data-key="secteur" data-value="Formation / Coaching">Formation / Cours</div>
+                <div class="q-card q-auto" data-key="secteur" data-value="Boutique / Commerce">Boutique / Commerce</div>
+                <div class="q-card q-auto" data-key="secteur" data-value="Auto / Moto / Garage">Auto / Garage</div>
+                <div class="q-card q-auto" data-key="secteur" data-value="Animaux / Vétérinaire">Animaux / Véto</div>
+                <div class="q-card q-auto" data-key="secteur" data-value="Agence / Startup / Tech">Agence / Tech</div>
+                <div class="q-card q-other-trigger" data-key="secteur">Autre</div>
             </div>
             <input class="q-input q-other-input" type="text" placeholder="Précisez votre secteur..." style="display:none;margin-top:12px">
-            <button class="q-btn q-other-continue" style="display:none">Continuer &rarr;</button>
+            <button class="q-btn q-other-continue" style="display:none">Continuer →</button>
         </div>
-        <!-- 3: Nom entreprise + Localisation (fusionné) -->
-        <div class="q-step" data-step="entreprise" data-emoji="🏢" data-subtitle="On a besoin de ces infos pour personnaliser votre site.">
-            <span class="q-step-emoji">🏢</span>
-            <h2>Parlez-nous de votre entreprise</h2>
-            <p class="q-sub">On a besoin de ces infos pour personnaliser votre site.</p>
-            <div style="display:flex;flex-direction:column;gap:12px;max-width:450px;width:100%">
-                <input class="q-input q-text-input" data-key="entreprise" type="text" placeholder="Nom de votre entreprise (ou prénom/nom)">
-                <input class="q-input" data-key="localisation" type="text" placeholder="Ville (ex: Lyon, Paris 11ème...)">
-            </div>
-            <button class="q-btn q-entreprise-btn">Continuer &rarr;</button>
+        <!-- 3: Nom entreprise -->
+        <div class="q-step" data-step="entreprise">
+            <h2>Comment s'appelle votre entreprise ?</h2>
+            <p class="q-sub">Si vous n'avez pas encore de nom, écrivez votre nom/prénom.</p>
+            <input class="q-input q-text-input" data-key="entreprise" type="text" placeholder="Ex: La Table d'Or, Studio Ink, Belle & Zen...">
+            <button class="q-btn q-text-btn">Continuer →</button>
         </div>
-        <!-- 4: Situation actuelle -->
-        <div class="q-step" data-step="situation" data-emoji="📊" data-subtitle="Pour adapter notre approche à votre point de départ.">
-            <span class="q-step-emoji">📊</span>
+        <!-- 4: Localisation -->
+        <div class="q-step" data-step="localisation">
+            <h2>Où êtes-vous situé ?</h2>
+            <p class="q-sub">Pour optimiser votre référencement local sur Google.</p>
+            <input class="q-input q-text-input" data-key="localisation" type="text" placeholder="Ex: Lyon, Paris 11ème, Bordeaux centre...">
+            <button class="q-btn q-text-btn">Continuer →</button>
+        </div>
+        <!-- 5: Situation actuelle -->
+        <div class="q-step" data-step="situation">
             <h2>Quelle est votre situation actuelle ?</h2>
-            <p class="q-sub">Pour adapter notre approche à votre point de départ.</p>
-            <div class="q-grid q-grid-2" style="max-width:750px">
-                <div class="q-card q-auto" data-key="situation" data-value="Aucun site, c'est mon premier"><span class="q-emoji">🆕</span> C'est mon premier site</div>
-                <div class="q-card q-auto" data-key="situation" data-value="Site ancien et moche"><span class="q-emoji">👴</span> J'ai un site ancien et moche</div>
-                <div class="q-card q-auto" data-key="situation" data-value="Site Wix/WordPress à refaire"><span class="q-emoji">🔄</span> Site Wix/WordPress, je veux mieux</div>
-                <div class="q-card q-auto" data-key="situation" data-value="Site fait par quelqu'un, pas satisfait"><span class="q-emoji">😤</span> Pas satisfait de mon site actuel</div>
-                <div class="q-card q-auto" data-key="situation" data-value="Juste Instagram/Facebook"><span class="q-emoji">📱</span> Juste une page Instagram/Facebook</div>
+            <div class="q-grid q-grid-2" style="max-width:650px">
+                <div class="q-card q-auto" data-key="situation" data-value="Aucun site, c'est mon premier">Aucun site, c'est mon premier</div>
+                <div class="q-card q-auto" data-key="situation" data-value="Site ancien et moche">J'ai un site très ancien et moche</div>
+                <div class="q-card q-auto" data-key="situation" data-value="Site Wix/WordPress à refaire">Site Wix/WordPress, je veux mieux</div>
+                <div class="q-card q-auto" data-key="situation" data-value="Site fait par quelqu'un, pas satisfait">Site fait par quelqu'un, pas satisfait</div>
+                <div class="q-card q-auto" data-key="situation" data-value="Juste Instagram/Facebook">Juste une page Instagram/Facebook</div>
             </div>
         </div>
-        <!-- 5: Objectifs + Fonctionnalités (fusionné) -->
-        <div class="q-step" data-step="objectifs" data-emoji="🎯" data-subtitle="Sélectionnez tout ce qui s'applique — on s'occupe du reste.">
-            <span class="q-step-emoji">🎯</span>
-            <h2>Quels sont vos objectifs ?</h2>
-            <p class="q-sub">Sélectionnez tout ce qui s'applique — on s'occupe du reste.</p>
-            <div class="q-grid" style="max-width:750px;max-height:45vh;overflow-y:auto;padding-right:8px">
-                <div class="q-card q-multi" data-key="objectifs" data-value="Être trouvé sur Google"><span class="q-emoji">🔍</span> Être trouvé sur Google</div>
-                <div class="q-card q-multi" data-key="objectifs" data-value="Montrer mon travail"><span class="q-emoji">💼</span> Montrer mon travail</div>
-                <div class="q-card q-multi" data-key="objectifs" data-value="Réservations / RDV en ligne"><span class="q-emoji">📅</span> Prendre des RDV en ligne</div>
-                <div class="q-card q-multi" data-key="objectifs" data-value="Vendre en ligne"><span class="q-emoji">💰</span> Vendre en ligne</div>
-                <div class="q-card q-multi" data-key="objectifs" data-value="Recevoir des devis"><span class="q-emoji">📩</span> Recevoir des demandes</div>
-                <div class="q-card q-multi" data-key="objectifs" data-value="Image professionnelle"><span class="q-emoji">✨</span> Image plus professionnelle</div>
-                <div class="q-card q-multi" data-key="objectifs" data-value="Informer clients"><span class="q-emoji">📋</span> Informer mes clients</div>
-                <div class="q-card q-multi" data-key="objectifs" data-value="Fidéliser"><span class="q-emoji">❤️</span> Fidéliser ma clientèle</div>
+        <!-- 6: Objectif principal -->
+        <div class="q-step" data-step="objectifs">
+            <h2>Quel est votre objectif principal ?</h2>
+            <p class="q-sub">Sélectionnez tout ce qui s'applique</p>
+            <div class="q-grid q-grid-2" style="max-width:700px">
+                <div class="q-card q-multi" data-key="objectifs" data-value="Être trouvé sur Google">Être trouvé sur Google</div>
+                <div class="q-card q-multi" data-key="objectifs" data-value="Montrer mon travail">Montrer mon travail / réalisations</div>
+                <div class="q-card q-multi" data-key="objectifs" data-value="Réservations / RDV en ligne">Prendre des réservations / RDV</div>
+                <div class="q-card q-multi" data-key="objectifs" data-value="Vendre en ligne">Vendre des produits en ligne</div>
+                <div class="q-card q-multi" data-key="objectifs" data-value="Recevoir des devis">Recevoir des demandes de devis</div>
+                <div class="q-card q-multi" data-key="objectifs" data-value="Image professionnelle">Plus de crédibilité / image pro</div>
+                <div class="q-card q-multi" data-key="objectifs" data-value="Réduire plateformes">Réduire dépendance aux plateformes</div>
+                <div class="q-card q-multi" data-key="objectifs" data-value="Informer clients">Informer (horaires, menu, tarifs...)</div>
+                <div class="q-card q-multi" data-key="objectifs" data-value="Fidéliser">Créer une communauté / fidéliser</div>
             </div>
             <p class="q-count"></p>
-            <button class="q-btn q-multi-btn" data-key="objectifs">Continuer &rarr;</button>
+            <button class="q-btn q-multi-btn" data-key="objectifs">Continuer →</button>
         </div>
-        <!-- 6: Style visuel -->
-        <div class="q-step" data-step="style" data-emoji="🎨" data-subtitle="On adaptera le design à votre goût.">
-            <span class="q-step-emoji">🎨</span>
+        <!-- 7: Pages souhaitées -->
+        <div class="q-step" data-step="pages">
+            <h2>Quelles pages voulez-vous ?</h2>
+            <p class="q-sub">Sélectionnez tout ce qui vous intéresse</p>
+            <div class="q-grid q-grid-2" style="max-width:700px;max-height:45vh;overflow-y:auto;padding-right:8px">
+                <div class="q-card q-multi" data-key="pages" data-value="Accueil">Page d'accueil</div>
+                <div class="q-card q-multi" data-key="pages" data-value="À propos">À propos / Notre histoire</div>
+                <div class="q-card q-multi" data-key="pages" data-value="Services">Services / Prestations</div>
+                <div class="q-card q-multi" data-key="pages" data-value="Tarifs">Tarifs / Prix</div>
+                <div class="q-card q-multi" data-key="pages" data-value="Galerie">Galerie / Portfolio</div>
+                <div class="q-card q-multi" data-key="pages" data-value="Contact">Contact</div>
+                <div class="q-card q-multi" data-key="pages" data-value="Témoignages">Témoignages / Avis</div>
+                <div class="q-card q-multi" data-key="pages" data-value="Blog">Blog / Actualités</div>
+                <div class="q-card q-multi" data-key="pages" data-value="FAQ">FAQ</div>
+                <div class="q-card q-multi" data-key="pages" data-value="Réservation">Réservation / RDV</div>
+                <div class="q-card q-multi" data-key="pages" data-value="Menu / Carte">Menu / Carte</div>
+                <div class="q-card q-multi" data-key="pages" data-value="Boutique">Boutique en ligne</div>
+                <div class="q-card q-multi" data-key="pages" data-value="Équipe">Équipe</div>
+                <div class="q-card q-multi" data-key="pages" data-value="Événements">Événements / Agenda</div>
+            </div>
+            <p class="q-count"></p>
+            <button class="q-btn q-multi-btn" data-key="pages">Continuer →</button>
+        </div>
+        <!-- 8: Fonctionnalités -->
+        <div class="q-step" data-step="fonctionnalites">
+            <h2>Quelles fonctionnalités voulez-vous ?</h2>
+            <div class="q-grid q-grid-2" style="max-width:700px;max-height:45vh;overflow-y:auto;padding-right:8px">
+                <div class="q-card q-multi" data-key="fonctionnalites" data-value="Formulaire contact">Formulaire de contact</div>
+                <div class="q-card q-multi" data-key="fonctionnalites" data-value="RDV en ligne">Prise de rendez-vous</div>
+                <div class="q-card q-multi" data-key="fonctionnalites" data-value="Chat / WhatsApp">Chat en direct / WhatsApp</div>
+                <div class="q-card q-multi" data-key="fonctionnalites" data-value="Réservation table">Réservation de table</div>
+                <div class="q-card q-multi" data-key="fonctionnalites" data-value="Click & Collect">Commande / Click &amp; Collect</div>
+                <div class="q-card q-multi" data-key="fonctionnalites" data-value="Paiement en ligne">Paiement (Stripe / PayPal)</div>
+                <div class="q-card q-multi" data-key="fonctionnalites" data-value="Avis / Témoignages">Système d'avis</div>
+                <div class="q-card q-multi" data-key="fonctionnalites" data-value="Newsletter">Newsletter / Email</div>
+                <div class="q-card q-multi" data-key="fonctionnalites" data-value="Google Maps">Carte Google Maps</div>
+                <div class="q-card q-multi" data-key="fonctionnalites" data-value="Réseaux sociaux">Instagram feed intégré</div>
+                <div class="q-card q-multi" data-key="fonctionnalites" data-value="Calendrier">Calendrier / Planning</div>
+                <div class="q-card q-multi" data-key="fonctionnalites" data-value="Espace client">Espace client / Membres</div>
+                <div class="q-card q-multi" data-key="fonctionnalites" data-value="Multi-langues">Multi-langues</div>
+                <div class="q-card q-multi" data-key="fonctionnalites" data-value="Rien de spécial">Rien de spécial, juste simple</div>
+            </div>
+            <p class="q-count"></p>
+            <button class="q-btn q-multi-btn" data-key="fonctionnalites">Continuer →</button>
+        </div>
+        <!-- 9: Style visuel -->
+        <div class="q-step" data-step="style">
             <h2>Quel style visuel vous plaît ?</h2>
-            <p class="q-sub">On adaptera le design à votre goût.</p>
-            <div class="q-grid" style="max-width:700px;grid-template-columns:repeat(2,1fr)">
+            <div class="q-grid" style="max-width:650px;grid-template-columns:repeat(2,1fr)">
                 <div class="q-card q-style-card q-auto" data-key="style" data-value="Moderne & Minimaliste"><div class="q-style-swatch" style="background:#0a0a0a;border:1px solid rgba(255,255,255,0.2)"></div><strong>Moderne &amp; Minimaliste</strong><small style="color:rgba(255,255,255,0.4)">Apple, Airbnb, Tesla</small></div>
                 <div class="q-card q-style-card q-auto" data-key="style" data-value="Coloré & Vibrant"><div class="q-style-swatch" style="background:linear-gradient(135deg,#EC4899,#F59E0B)"></div><strong>Coloré &amp; Vibrant</strong><small style="color:rgba(255,255,255,0.4)">Spotify, Slack, Mailchimp</small></div>
                 <div class="q-card q-style-card q-auto" data-key="style" data-value="Élégant & Luxe"><div class="q-style-swatch" style="background:linear-gradient(135deg,#1a1a2e,#D4AF37)"></div><strong>Élégant &amp; Luxe</strong><small style="color:rgba(255,255,255,0.4)">Rolex, Chanel, hôtels de luxe</small></div>
                 <div class="q-card q-style-card q-auto" data-key="style" data-value="Chaleureux & Naturel"><div class="q-style-swatch" style="background:linear-gradient(135deg,#92400E,#10B981)"></div><strong>Chaleureux &amp; Naturel</strong><small style="color:rgba(255,255,255,0.4)">Cafés, bien-être, bio</small></div>
             </div>
         </div>
-        <!-- 7: Palettes de couleurs -->
-        <div class="q-step" data-step="couleurs" data-emoji="🌈" data-subtitle="Choisissez une palette ou entrez vos propres couleurs.">
-            <span class="q-step-emoji">🌈</span>
+        <!-- 10: Palettes de couleurs -->
+        <div class="q-step" data-step="couleurs">
             <h2>Quelle palette vous correspond ?</h2>
             <p class="q-sub">Choisissez une palette ou entrez vos propres couleurs.</p>
             <div class="q-grid" style="max-width:750px;grid-template-columns:repeat(2,1fr);gap:14px">
@@ -1211,31 +1118,31 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
                 </div>
                 <div class="q-card q-auto q-palette-card" data-key="couleurs" data-value="Violet & Rose — #7C3AED, #EC4899, #F5F3FF">
                     <div style="display:flex;gap:6px;justify-content:center;margin-bottom:8px"><span style="width:32px;height:32px;border-radius:8px;background:#7C3AED;display:inline-block"></span><span style="width:32px;height:32px;border-radius:8px;background:#EC4899;display:inline-block"></span><span style="width:32px;height:32px;border-radius:8px;background:#F5F3FF;display:inline-block"></span></div>
-                    <strong>Créatif &amp; Moderne</strong><small style="color:rgba(255,255,255,0.4);display:block">Violet, rose, lavande</small>
+                    <strong>Créatif & Moderne</strong><small style="color:rgba(255,255,255,0.4);display:block">Violet, rose, lavande</small>
                 </div>
                 <div class="q-card q-auto q-palette-card" data-key="couleurs" data-value="Bleu Pro — #1E40AF, #3B82F6, #DBEAFE">
                     <div style="display:flex;gap:6px;justify-content:center;margin-bottom:8px"><span style="width:32px;height:32px;border-radius:8px;background:#1E40AF;display:inline-block"></span><span style="width:32px;height:32px;border-radius:8px;background:#3B82F6;display:inline-block"></span><span style="width:32px;height:32px;border-radius:8px;background:#DBEAFE;display:inline-block"></span></div>
-                    <strong>Confiance &amp; Pro</strong><small style="color:rgba(255,255,255,0.4);display:block">Bleu marine, bleu, ciel</small>
+                    <strong>Confiance & Pro</strong><small style="color:rgba(255,255,255,0.4);display:block">Bleu marine, bleu, ciel</small>
                 </div>
                 <div class="q-card q-auto q-palette-card" data-key="couleurs" data-value="Vert Nature — #065F46, #10B981, #ECFDF5">
                     <div style="display:flex;gap:6px;justify-content:center;margin-bottom:8px"><span style="width:32px;height:32px;border-radius:8px;background:#065F46;display:inline-block"></span><span style="width:32px;height:32px;border-radius:8px;background:#10B981;display:inline-block"></span><span style="width:32px;height:32px;border-radius:8px;background:#ECFDF5;display:inline-block"></span></div>
-                    <strong>Nature &amp; Bien-être</strong><small style="color:rgba(255,255,255,0.4);display:block">Vert foncé, émeraude, menthe</small>
+                    <strong>Nature & Bien-être</strong><small style="color:rgba(255,255,255,0.4);display:block">Vert foncé, émeraude, menthe</small>
                 </div>
                 <div class="q-card q-auto q-palette-card" data-key="couleurs" data-value="Luxe Doré — #1a1a2e, #D4AF37, #FEF3C7">
                     <div style="display:flex;gap:6px;justify-content:center;margin-bottom:8px"><span style="width:32px;height:32px;border-radius:8px;background:#1a1a2e;display:inline-block"></span><span style="width:32px;height:32px;border-radius:8px;background:#D4AF37;display:inline-block"></span><span style="width:32px;height:32px;border-radius:8px;background:#FEF3C7;display:inline-block"></span></div>
-                    <strong>Luxe &amp; Prestige</strong><small style="color:rgba(255,255,255,0.4);display:block">Noir, or, crème</small>
+                    <strong>Luxe & Prestige</strong><small style="color:rgba(255,255,255,0.4);display:block">Noir, or, crème</small>
                 </div>
                 <div class="q-card q-auto q-palette-card" data-key="couleurs" data-value="Chaud Terracotta — #92400E, #F97316, #FFF7ED">
                     <div style="display:flex;gap:6px;justify-content:center;margin-bottom:8px"><span style="width:32px;height:32px;border-radius:8px;background:#92400E;display:inline-block"></span><span style="width:32px;height:32px;border-radius:8px;background:#F97316;display:inline-block"></span><span style="width:32px;height:32px;border-radius:8px;background:#FFF7ED;display:inline-block"></span></div>
-                    <strong>Chaleureux &amp; Gourmand</strong><small style="color:rgba(255,255,255,0.4);display:block">Brun, orange, crème</small>
+                    <strong>Chaleureux & Gourmand</strong><small style="color:rgba(255,255,255,0.4);display:block">Brun, orange, crème</small>
                 </div>
                 <div class="q-card q-auto q-palette-card" data-key="couleurs" data-value="Rouge Passion — #991B1B, #EF4444, #FEE2E2">
                     <div style="display:flex;gap:6px;justify-content:center;margin-bottom:8px"><span style="width:32px;height:32px;border-radius:8px;background:#991B1B;display:inline-block"></span><span style="width:32px;height:32px;border-radius:8px;background:#EF4444;display:inline-block"></span><span style="width:32px;height:32px;border-radius:8px;background:#FEE2E2;display:inline-block"></span></div>
-                    <strong>Énergie &amp; Passion</strong><small style="color:rgba(255,255,255,0.4);display:block">Bordeaux, rouge, rosé</small>
+                    <strong>Énergie & Passion</strong><small style="color:rgba(255,255,255,0.4);display:block">Bordeaux, rouge, rosé</small>
                 </div>
                 <div class="q-card q-auto q-palette-card" data-key="couleurs" data-value="Océan — #0C4A6E, #06B6D4, #ECFEFF">
                     <div style="display:flex;gap:6px;justify-content:center;margin-bottom:8px"><span style="width:32px;height:32px;border-radius:8px;background:#0C4A6E;display:inline-block"></span><span style="width:32px;height:32px;border-radius:8px;background:#06B6D4;display:inline-block"></span><span style="width:32px;height:32px;border-radius:8px;background:#ECFEFF;display:inline-block"></span></div>
-                    <strong>Frais &amp; Océan</strong><small style="color:rgba(255,255,255,0.4);display:block">Bleu nuit, cyan, glace</small>
+                    <strong>Frais & Océan</strong><small style="color:rgba(255,255,255,0.4);display:block">Bleu nuit, cyan, glace</small>
                 </div>
             </div>
             <div style="margin-top:16px;text-align:center">
@@ -1243,70 +1150,86 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
                 <input class="q-input" data-key="couleur_custom" type="text" placeholder="Entrez vos couleurs ou codes hex (ex: #FF5733, bleu foncé...)" style="max-width:450px">
             </div>
         </div>
-        <!-- 8: Contenus & Photos (fusionné) -->
-        <div class="q-step" data-step="contenus_dispo" data-emoji="📦" data-subtitle="On s'adapte à ce que vous avez déjà.">
-            <span class="q-step-emoji">📦</span>
-            <h2>Quels contenus avez-vous déjà ?</h2>
-            <p class="q-sub">On s'adapte à ce que vous avez déjà.</p>
-            <div class="q-grid" style="max-width:750px">
-                <div class="q-card q-multi" data-key="contenus_dispo" data-value="Logo pro"><span class="q-emoji">🎯</span> Logo professionnel</div>
-                <div class="q-card q-multi" data-key="contenus_dispo" data-value="Photos pro"><span class="q-emoji">📸</span> Photos professionnelles</div>
-                <div class="q-card q-multi" data-key="contenus_dispo" data-value="Textes rédigés"><span class="q-emoji">📝</span> Textes rédigés</div>
-                <div class="q-card q-multi" data-key="contenus_dispo" data-value="Témoignages"><span class="q-emoji">⭐</span> Témoignages / avis</div>
-                <div class="q-card q-multi" data-key="contenus_dispo" data-value="Charte graphique"><span class="q-emoji">🎨</span> Charte graphique</div>
-                <div class="q-card q-multi" data-key="contenus_dispo" data-value="Rien du tout"><span class="q-emoji">🤷</span> Rien, créez tout pour moi</div>
+        <!-- 11: Contenus disponibles -->
+        <div class="q-step" data-step="contenus_dispo">
+            <h2>Quels contenus avez-vous déjà prêts ?</h2>
+            <div class="q-grid q-grid-2" style="max-width:650px">
+                <div class="q-card q-multi" data-key="contenus_dispo" data-value="Logo pro">J'ai un logo professionnel</div>
+                <div class="q-card q-multi" data-key="contenus_dispo" data-value="Photos pro">Photos professionnelles</div>
+                <div class="q-card q-multi" data-key="contenus_dispo" data-value="Textes rédigés">Textes rédigés</div>
+                <div class="q-card q-multi" data-key="contenus_dispo" data-value="Témoignages">Témoignages / avis clients</div>
+                <div class="q-card q-multi" data-key="contenus_dispo" data-value="Charte graphique">Charte graphique</div>
+                <div class="q-card q-multi" data-key="contenus_dispo" data-value="Rien du tout">J'ai rien, créez tout pour moi</div>
+                <div class="q-card q-multi" data-key="contenus_dispo" data-value="Quelques trucs">Quelques trucs mais pas tout</div>
             </div>
             <p class="q-count"></p>
-            <button class="q-btn q-multi-btn" data-key="contenus_dispo">Continuer &rarr;</button>
+            <button class="q-btn q-multi-btn" data-key="contenus_dispo">Continuer →</button>
         </div>
-        <!-- 9: Inspiration + Détails (fusionné) -->
-        <div class="q-step" data-step="inspiration" data-emoji="✨" data-subtitle="Pas obligatoire, mais ça nous aide énormément.">
-            <span class="q-step-emoji">✨</span>
-            <h2>Des sites qui vous inspirent ?</h2>
-            <p class="q-sub">Pas obligatoire, mais ça nous aide énormément.</p>
-            <div style="display:flex;flex-direction:column;gap:10px;max-width:450px;width:100%">
-                <input class="q-input q-inspi-input" data-idx="0" type="url" placeholder="https://site-qui-me-plait.com">
-                <input class="q-input q-inspi-input" data-idx="1" type="url" placeholder="https://autre-exemple.com (optionnel)">
-                <textarea class="q-input q-textarea" data-key="details_produits" placeholder="Détails supplémentaires : produits, services, promos, infos utiles... (optionnel)" style="min-height:80px"></textarea>
+        <!-- 12: Photos & Médias -->
+        <div class="q-step" data-step="photos">
+            <h2>Avez-vous des photos à nous envoyer ?</h2>
+            <p class="q-sub">Photos de vos produits, locaux, équipe, réalisations... Plus on a de matière, plus le site sera beau.</p>
+            <div class="q-grid q-grid-2" style="max-width:650px">
+                <div class="q-card q-auto" data-key="photos" data-value="Oui, j'ai des photos pro">Oui, j'ai des photos pro</div>
+                <div class="q-card q-auto" data-key="photos" data-value="J'ai des photos mais pas pro">J'ai des photos (téléphone)</div>
+                <div class="q-card q-auto" data-key="photos" data-value="J'enverrai plus tard">J'enverrai plus tard par WhatsApp</div>
+                <div class="q-card q-auto" data-key="photos" data-value="Pas de photos, utilisez des stocks">Pas de photos, trouvez-en pour moi</div>
             </div>
-            <button class="q-btn q-inspi-btn">Continuer &rarr;</button>
+            <p style="color:rgba(255,255,255,0.35);font-size:12px;margin-top:12px;text-align:center">Vous pourrez nous envoyer vos fichiers par WhatsApp ou email après le questionnaire</p>
         </div>
-        <!-- 10: Délai -->
-        <div class="q-step" data-step="delai" data-emoji="⏰" data-subtitle="On fait tout pour respecter vos délais.">
-            <span class="q-step-emoji">⏰</span>
+        <!-- 13: Infos produits (pour e-commerce) -->
+        <div class="q-step" data-step="produits">
+            <h2>Parlez-nous de vos produits / services</h2>
+            <p class="q-sub">Plus on en sait, plus on ira vite. Remplissez ce que vous pouvez.</p>
+            <div style="display:flex;flex-direction:column;gap:12px;max-width:500px;width:100%">
+                <input class="q-input" data-key="nb_produits" type="text" placeholder="Combien de produits/services ? (ex: 15 produits, 5 prestations...)">
+                <input class="q-input" data-key="gamme_prix" type="text" placeholder="Fourchette de prix (ex: 20€ - 150€, à partir de 50€...)">
+                <textarea class="q-input q-textarea" data-key="details_produits" placeholder="Détails : catégories, best-sellers, promos en cours, livraison... Tout ce qui peut nous aider." style="min-height:100px"></textarea>
+            </div>
+            <button class="q-btn q-produits-btn">Continuer →</button>
+        </div>
+        <!-- 14: Inspiration -->
+        <div class="q-step" data-step="inspiration">
+            <h2>Avez-vous des sites qui vous inspirent ?</h2>
+            <p class="q-sub">Collez les liens de 1 à 3 sites dont le style vous plaît. Pas obligatoire.</p>
+            <div style="display:flex;flex-direction:column;gap:10px;max-width:450px;width:100%">
+                <input class="q-input q-inspi-input" data-idx="0" type="url" placeholder="https://...">
+                <input class="q-input q-inspi-input" data-idx="1" type="url" placeholder="https://...">
+                <input class="q-input q-inspi-input" data-idx="2" type="url" placeholder="https://...">
+            </div>
+            <button class="q-btn q-inspi-btn">Continuer →</button>
+        </div>
+        <!-- 13: Délai -->
+        <div class="q-step" data-step="delai">
             <h2>Pour quand voulez-vous votre site ?</h2>
-            <p class="q-sub">On fait tout pour respecter vos délais.</p>
-            <div class="q-grid q-grid-2" style="max-width:750px">
-                <div class="q-card q-auto" data-key="delai" data-value="48h — Le plus vite possible"><span class="q-emoji">⚡</span> Le plus vite possible (48h)</div>
-                <div class="q-card q-auto" data-key="delai" data-value="Dans la semaine"><span class="q-emoji">📆</span> Dans la semaine</div>
-                <div class="q-card q-auto" data-key="delai" data-value="Dans les 2 semaines"><span class="q-emoji">🗓️</span> Dans les 2 semaines</div>
-                <div class="q-card q-auto" data-key="delai" data-value="Pas de rush"><span class="q-emoji">🧘</span> Pas de rush</div>
-                <div class="q-card q-other-trigger" data-key="delai"><span class="q-emoji">📌</span> Date précise</div>
+            <div class="q-grid q-grid-2" style="max-width:600px">
+                <div class="q-card q-auto" data-key="delai" data-value="48h — Le plus vite possible">Le plus vite possible (48h)</div>
+                <div class="q-card q-auto" data-key="delai" data-value="Dans la semaine">Dans la semaine</div>
+                <div class="q-card q-auto" data-key="delai" data-value="Dans les 2 semaines">Dans les 2 semaines</div>
+                <div class="q-card q-auto" data-key="delai" data-value="Pas de rush">Pas de rush</div>
+                <div class="q-card q-other-trigger" data-key="delai">Date précise</div>
             </div>
             <input class="q-input q-other-input" type="text" placeholder="Ex: 15 mars 2026" style="display:none;margin-top:12px">
-            <button class="q-btn q-other-continue" style="display:none">Continuer &rarr;</button>
+            <button class="q-btn q-other-continue" style="display:none">Continuer →</button>
         </div>
-        <!-- 11: Forfait -->
-        <div class="q-step" data-step="forfait" data-emoji="💎" data-subtitle="Choisissez votre formule — sans engagement.">
-            <span class="q-step-emoji">💎</span>
+        <!-- 14: Forfait -->
+        <div class="q-step" data-step="forfait">
             <h2>Quel forfait vous intéresse ?</h2>
-            <p class="q-sub">Choisissez votre formule — sans engagement.</p>
             <div class="q-grid" style="max-width:750px;grid-template-columns:repeat(2,1fr)">
-                <div class="q-card q-auto" data-key="forfait" data-value="Essentiel 149€/mois" style="flex-direction:column;text-align:center;align-items:center"><div class="q-price">149€</div><div class="q-price-label">/mois</div><strong>Essentiel</strong><small style="color:rgba(255,255,255,0.4);display:block;margin-top:4px;font-size:11px">Site vitrine, responsive, hébergement, SSL, support email</small></div>
-                <div class="q-card q-auto q-recommended" data-key="forfait" data-value="Pro 199€/mois" style="flex-direction:column;text-align:center;align-items:center"><div class="q-rec-badge">RECOMMAND&Eacute;</div><div class="q-price">199€</div><div class="q-price-label">/mois</div><strong>Pro</strong><small style="color:rgba(255,255,255,0.4);display:block;margin-top:4px;font-size:11px">+ domaine, SEO, modifs illimitées, WhatsApp 7j/7</small></div>
-                <div class="q-card q-auto" data-key="forfait" data-value="Premium 299€/mois" style="flex-direction:column;text-align:center;align-items:center"><div class="q-price">299€</div><div class="q-price-label">/mois</div><strong>Premium</strong><small style="color:rgba(255,255,255,0.4);display:block;margin-top:4px;font-size:11px">+ boutique, Stripe, Google Ads, manager dédié</small></div>
-                <div class="q-card q-auto" data-key="forfait" data-value="Je sais pas encore" style="flex-direction:column;text-align:center;align-items:center"><span class="q-emoji" style="margin-bottom:4px">🤔</span> Conseillez-moi</div>
+                <div class="q-card q-auto" data-key="forfait" data-value="Essentiel 149€/mois"><div class="q-price">149€</div><div class="q-price-label">/mois</div><strong>Essentiel</strong><small style="color:rgba(255,255,255,0.4);display:block;margin-top:4px;font-size:11px">Site vitrine, responsive, hébergement, SSL, support email</small></div>
+                <div class="q-card q-auto q-recommended" data-key="forfait" data-value="Pro 199€/mois"><div class="q-rec-badge">RECOMMAND&Eacute;</div><div class="q-price">199€</div><div class="q-price-label">/mois</div><strong>Pro</strong><small style="color:rgba(255,255,255,0.4);display:block;margin-top:4px;font-size:11px">+ domaine, SEO, modifs illimitées, WhatsApp 7j/7</small></div>
+                <div class="q-card q-auto" data-key="forfait" data-value="Premium 299€/mois"><div class="q-price">299€</div><div class="q-price-label">/mois</div><strong>Premium</strong><small style="color:rgba(255,255,255,0.4);display:block;margin-top:4px;font-size:11px">+ boutique, Stripe, Google Ads, manager dédié</small></div>
+                <div class="q-card q-auto" data-key="forfait" data-value="Je sais pas encore">Je sais pas, conseillez-moi</div>
             </div>
         </div>
-        <!-- 12: Coordonnées -->
-        <div class="q-step" data-step="coordonnees" data-emoji="📱" data-subtitle="Plus qu'une étape et c'est fini !">
-            <span class="q-step-emoji">📱</span>
-            <h2>Comment on vous contacte ?</h2>
-            <p class="q-sub">Plus qu'une étape et c'est fini !</p>
+        <!-- 15: Coordonnées -->
+        <div class="q-step" data-step="coordonnees">
+            <h2>Dernière étape ! Comment on vous contacte ?</h2>
             <div class="q-contact-form">
                 <div style="display:flex;gap:12px"><input class="q-input" name="prenom" type="text" placeholder="Prénom *" required style="flex:1"><input class="q-input" name="nom" type="text" placeholder="Nom *" required style="flex:1"></div>
                 <input class="q-input" name="email" type="email" placeholder="votre@email.com *" required>
                 <input class="q-input" name="telephone" type="tel" placeholder="06 12 34 56 78 *" required>
+                <input class="q-input" name="ville" type="text" placeholder="Votre ville (optionnel)">
                 <select class="q-input" name="source" style="color:rgba(255,255,255,0.5)">
                     <option value="" disabled selected>Comment nous avez-vous connu ?</option>
                     <option value="Google">Google</option>
@@ -1315,30 +1238,20 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
                     <option value="Bouche à oreille">Bouche à oreille</option>
                     <option value="Autre">Autre</option>
                 </select>
-                <textarea class="q-input q-textarea" name="message" placeholder="Décrivez votre projet en quelques mots (optionnel)"></textarea>
+                <textarea class="q-input q-textarea" name="message" placeholder="Décrivez votre projet en quelques mots, vos attentes, vos contraintes..."></textarea>
                 <div class="q-error"></div>
-                <button class="q-btn q-submit-btn">Envoyer ma demande 🚀</button>
+                <button class="q-btn q-submit-btn">Envoyer ma demande</button>
             </div>
         </div>
-        <!-- 13: Confirmation -->
+        <!-- 16: Confirmation -->
         <div class="q-step" data-step="confirmation">
             <div class="q-confirm">
-                <span class="q-confirm-emoji">🎉</span>
                 <h2>Demande envoyée avec succès !</h2>
                 <p>Merci <strong class="q-confirm-name"></strong> ! Notre équipe a bien reçu votre demande. Vous recevrez une maquette gratuite de votre futur site sous 24h. On vous contacte très vite par WhatsApp ou email.</p>
-                <div class="q-recap" style="background:rgba(255,255,255,0.05);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:20px;margin:20px auto;max-width:400px;text-align:left;font-size:14px;color:rgba(255,255,255,0.7)"></div>
+                <div class="q-recap" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:20px;margin:20px auto;max-width:400px;text-align:left;font-size:14px;color:rgba(255,255,255,0.7)"></div>
                 <button class="q-btn q-confirm-close" style="margin-top:16px">Fermer</button>
             </div>
         </div>
-    </div>
-    <!-- Circular progress indicator -->
-    <div class="q-circle-progress" style="display:none">
-        <svg viewBox="0 0 50 50">
-            <defs><linearGradient id="q-circle-gradient" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FF8EC4"/><stop offset="100%" stop-color="#D9F99D"/></linearGradient></defs>
-            <circle class="q-circle-bg" cx="25" cy="25" r="22"/>
-            <circle class="q-circle-fill" cx="25" cy="25" r="22" stroke-dasharray="138.23" stroke-dashoffset="138.23"/>
-        </svg>
-        <div class="q-circle-text">0%</div>
     </div>
 </div>
 
@@ -1578,176 +1491,44 @@ if(heroSplit){
         c.style.backgroundClip='text';
     });
 }
-/* ===== QUESTIONNAIRE MODAL (12 steps) — PREMIUM REDESIGN ===== */
+/* ===== QUESTIONNAIRE MODAL (15 steps) ===== */
 const qModal=document.getElementById('quizModal');
 const qSteps=qModal.querySelectorAll('.q-step');
 const qBar=qModal.querySelector('.q-bar-fill');
 const qBackBtn=qModal.querySelector('.q-back');
 const qStepLabel=qModal.querySelector('.q-step-label');
-const qCircle=qModal.querySelector('.q-circle-progress');
-const qCircleFill=qModal.querySelector('.q-circle-fill');
-const qCircleText=qModal.querySelector('.q-circle-text');
-const qParallaxBg=qModal.querySelector('.q-parallax-bg');
 let qCurrent=0;
 const qData={};
-const totalSteps=12;
+const totalSteps=17;
 
-/* ---- Typing effect for titles ---- */
-function qTypeTitle(stepEl){
-    const h2=stepEl.querySelector('h2');
-    if(!h2||h2.dataset.typed)return;
-    const fullText=h2.textContent;
-    h2.dataset.typed='1';
-    h2.textContent='';
-    const cursorSpan=document.createElement('span');
-    cursorSpan.className='q-typing-cursor';
-    cursorSpan.textContent='|';
-    h2.appendChild(cursorSpan);
-    let i=0;
-    function typeChar(){
-        if(i<fullText.length){
-            h2.insertBefore(document.createTextNode(fullText[i]),cursorSpan);
-            i++;
-            setTimeout(typeChar,40);
-        } else {
-            let blinks=0;
-            const blinkInterval=setInterval(()=>{
-                cursorSpan.style.opacity=cursorSpan.style.opacity==='0'?'1':'0';
-                blinks++;
-                if(blinks>=6){clearInterval(blinkInterval);cursorSpan.remove()}
-            },300);
-        }
-    }
-    typeChar();
-}
-
-/* ---- Stagger animation for cards ---- */
-function qStaggerCards(stepEl){
-    const cards=stepEl.querySelectorAll('.q-card');
-    cards.forEach((card,i)=>{
-        card.classList.remove('q-stagger');
-        void card.offsetWidth;
-        card.classList.add('q-stagger');
-        card.style.animationDelay=(i*50)+'ms';
-    });
-}
-
-/* ---- Success flash ---- */
-function qFlashSuccess(){
-    const flash=document.createElement('div');
-    flash.className='q-success-flash';
-    document.body.appendChild(flash);
-    setTimeout(()=>flash.remove(),600);
-}
-
-/* ---- Update circular progress ---- */
-function qUpdateCircle(n){
-    if(!qCircle)return;
-    const pct=Math.round(((n+1)/totalSteps)*100);
-    const circumference=2*Math.PI*22;
-    const offset=circumference-(pct/100*circumference);
-    qCircleFill.style.strokeDashoffset=offset;
-    qCircleText.textContent=pct+'%';
-    qCircle.style.transform='scale(1.1)';
-    setTimeout(()=>{qCircle.style.transform='scale(1)'},200);
-}
-
-/* ---- Core navigation ---- */
-function qShow(){
-    qModal.classList.add('open');document.body.style.overflow='hidden';
-    if(qCircle)qCircle.style.display='block';
-    qGoTo(0);
-}
-function qHide(){
-    qModal.classList.remove('open');document.body.style.overflow='';
-    if(qCircle)qCircle.style.display='none';
-}
+function qShow(){qModal.classList.add('open');document.body.style.overflow='hidden';qGoTo(0)}
+function qHide(){qModal.classList.remove('open');document.body.style.overflow=''}
 function qGoTo(n){
-    const prev=qCurrent;
-    qSteps.forEach((s,i)=>{
-        s.classList.remove('q-active','q-left','q-has-selection');
-        if(i<n)s.classList.add('q-left');
-        if(i===n){
-            s.classList.add('q-active');
-            /* Re-trigger emoji bounce */
-            const emoji=s.querySelector('.q-step-emoji');
-            if(emoji){emoji.style.animation='none';void emoji.offsetWidth;emoji.style.animation='';}
-            /* Typing effect */
-            setTimeout(()=>qTypeTitle(s),100);
-            /* Stagger cards */
-            setTimeout(()=>qStaggerCards(s),50);
-        }
-    });
+    qSteps.forEach((s,i)=>{s.classList.remove('q-active','q-left');if(i<n)s.classList.add('q-left');if(i===n)s.classList.add('q-active')});
     qCurrent=n;
     const pct=Math.min(((n+1)/totalSteps*100),100);
     qBar.style.width=pct+'%';
     qStepLabel.textContent=n<totalSteps?'Étape '+(n+1)+'/'+totalSteps:'Terminé !';
-    qBackBtn.style.display=n>0&&n<totalSteps?'flex':'none';
-    qUpdateCircle(n);
-    /* Success flash on forward navigation (not first step) */
-    if(n>prev&&n>0&&n<totalSteps)qFlashSuccess();
+    qBackBtn.style.display=n>0&&n<=totalSteps?'flex':'none';
+    if(n>=totalSteps){qBackBtn.style.display='none'}
 }
-function qNext(){if(qCurrent<totalSteps)qGoTo(qCurrent+1)}
+function qNext(){if(qCurrent<=totalSteps)qGoTo(qCurrent+1)}
 function qPrev(){if(qCurrent>0)qGoTo(qCurrent-1)}
 
-/* ---- Ripple effect on click ---- */
-function qAddRipple(e,el){
-    const ripple=document.createElement('span');
-    ripple.className='q-ripple';
-    const rect=el.getBoundingClientRect();
-    const size=Math.max(rect.width,rect.height)*2;
-    ripple.style.width=ripple.style.height=size+'px';
-    ripple.style.left=(e.clientX-rect.left-size/2)+'px';
-    ripple.style.top=(e.clientY-rect.top-size/2)+'px';
-    el.appendChild(ripple);
-    setTimeout(()=>ripple.remove(),600);
-}
-
-/* ---- Magnetic snap effect ---- */
-qModal.addEventListener('mousemove',e=>{
-    /* Parallax background */
-    if(qParallaxBg){
-        const cx=window.innerWidth/2,cy=window.innerHeight/2;
-        const dx=(e.clientX-cx)*0.02,dy=(e.clientY-cy)*0.02;
-        qParallaxBg.style.transform='translate('+(-dx)+'px,'+(-dy)+'px)';
-    }
-    /* Magnetic cards */
-    const cards=qModal.querySelectorAll('.q-step.q-active .q-card');
-    cards.forEach(card=>{
-        const rect=card.getBoundingClientRect();
-        const cardCx=rect.left+rect.width/2;
-        const cardCy=rect.top+rect.height/2;
-        const dist=Math.sqrt(Math.pow(e.clientX-cardCx,2)+Math.pow(e.clientY-cardCy,2));
-        if(dist<150){
-            const dx=(e.clientX-cardCx)*0.03;
-            const dy=(e.clientY-cardCy)*0.03;
-            card.style.transform='translate('+dx+'px,'+dy+'px)'+(card.classList.contains('selected')?' scale(1.05)':'');
-        } else {
-            if(!card.classList.contains('selected')&&!card.closest('.q-step.q-has-selection')){
-                card.style.transform='';
-            }
-        }
-    });
-});
-
-/* ---- Auto-advance cards (single select) ---- */
+/* Generic: Auto-advance cards (single select) */
 qModal.querySelectorAll('.q-auto').forEach(c=>{
-    c.addEventListener('click',e=>{
-        qAddRipple(e,c);
+    c.addEventListener('click',()=>{
         const key=c.dataset.key;
-        const step=c.closest('.q-step');
-        step.querySelectorAll('.q-auto[data-key="'+key+'"]').forEach(x=>x.classList.remove('selected'));
+        c.closest('.q-step').querySelectorAll('.q-auto[data-key="'+key+'"]').forEach(x=>x.classList.remove('selected'));
         c.classList.add('selected');
-        step.classList.add('q-has-selection');
         qData[key]=c.dataset.value;
-        setTimeout(qNext,400);
+        setTimeout(qNext,300);
     });
 });
 
-/* ---- "Autre" trigger ---- */
+/* Generic: "Autre" trigger (shows text field) */
 qModal.querySelectorAll('.q-other-trigger').forEach(c=>{
-    c.addEventListener('click',e=>{
-        qAddRipple(e,c);
+    c.addEventListener('click',()=>{
         const step=c.closest('.q-step');
         const key=c.dataset.key;
         step.querySelectorAll('.q-auto[data-key="'+key+'"],.q-other-trigger[data-key="'+key+'"]').forEach(x=>x.classList.remove('selected'));
@@ -1760,90 +1541,81 @@ qModal.querySelectorAll('.q-other-trigger').forEach(c=>{
     });
 });
 qModal.querySelectorAll('.q-other-continue').forEach(btn=>{
-    btn.addEventListener('click',e=>{
-        qAddRipple(e,btn);
+    btn.addEventListener('click',()=>{
         const step=btn.closest('.q-step');
         const inp=step.querySelector('.q-other-input');
         const trigger=step.querySelector('.q-other-trigger');
         const key=trigger?trigger.dataset.key:'';
         if(inp&&inp.value.trim()){qData[key]=inp.value.trim();qNext()}
-        else if(inp){inp.classList.add('q-shake');setTimeout(()=>inp.classList.remove('q-shake'),500)}
     });
 });
 
-/* ---- Multi-select cards ---- */
+/* Generic: Multi-select cards */
 qModal.querySelectorAll('.q-multi').forEach(c=>{
-    c.addEventListener('click',e=>{
-        qAddRipple(e,c);
+    c.addEventListener('click',()=>{
         c.classList.toggle('selected');
         const key=c.dataset.key;
-        const step=c.closest('.q-step');
+        const step=c.closest('.q-step')||c.closest('.q-body');
         const selected=step.querySelectorAll('.q-multi.selected[data-key="'+key+'"]');
         qData[key]=Array.from(selected).map(x=>x.dataset.value);
+        /* Update counter */
         const counter=step.querySelector('.q-count');
         if(counter){counter.textContent=selected.length?selected.length+' sélectionné(s)':''}
     });
 });
 qModal.querySelectorAll('.q-multi-btn').forEach(btn=>{
-    btn.addEventListener('click',e=>{
-        qAddRipple(e,btn);
+    btn.addEventListener('click',()=>{
         const key=btn.dataset.key;
         if(qData[key]&&qData[key].length>0)qNext();
     });
 });
 
-/* ---- Entreprise step (combined name + location) ---- */
-qModal.querySelector('.q-entreprise-btn')?.addEventListener('click',e=>{
-    qAddRipple(e,e.target);
-    const step=e.target.closest('.q-step');
-    const nameInp=step.querySelector('[data-key="entreprise"]');
-    const locInp=step.querySelector('[data-key="localisation"]');
-    if(nameInp&&nameInp.value.trim()){
-        qData.entreprise=nameInp.value.trim();
-        if(locInp)qData.localisation=locInp.value.trim();
-        qNext();
-    } else {
-        if(nameInp){nameInp.classList.add('q-shake');setTimeout(()=>nameInp.classList.remove('q-shake'),500)}
-    }
+/* Text inputs (entreprise, localisation) */
+qModal.querySelectorAll('.q-text-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+        const step=btn.closest('.q-step');
+        const inp=step.querySelector('.q-text-input');
+        const key=inp.dataset.key;
+        if(inp.value.trim()){qData[key]=inp.value.trim();qNext()}
+    });
 });
-/* Enter key on entreprise inputs */
-qModal.querySelectorAll('.q-step[data-step="entreprise"] .q-input').forEach(inp=>{
+qModal.querySelectorAll('.q-text-input').forEach(inp=>{
     inp.addEventListener('keydown',e=>{
-        if(e.key==='Enter'){qModal.querySelector('.q-entreprise-btn')?.click()}
+        if(e.key==='Enter'){const key=inp.dataset.key;if(inp.value.trim()){qData[key]=inp.value.trim();qNext()}}
     });
 });
 
-/* ---- Inspiration step ---- */
-qModal.querySelector('.q-inspi-btn')?.addEventListener('click',e=>{
-    qAddRipple(e,e.target);
+/* Inspiration step */
+qModal.querySelector('.q-inspi-btn')?.addEventListener('click',()=>{
     const inputs=qModal.querySelectorAll('.q-inspi-input');
     qData.inspiration=Array.from(inputs).map(i=>i.value.trim()).filter(Boolean);
+    qNext();
+});
+
+/* Produits step */
+qModal.querySelector('.q-produits-btn')?.addEventListener('click',()=>{
+    const nb=qModal.querySelector('[data-key="nb_produits"]');
+    const gp=qModal.querySelector('[data-key="gamme_prix"]');
     const det=qModal.querySelector('[data-key="details_produits"]');
+    if(nb)qData.nb_produits=nb.value.trim();
+    if(gp)qData.gamme_prix=gp.value.trim();
     if(det)qData.details_produits=det.value.trim();
     qNext();
 });
 
-/* ---- Submit ---- */
-qModal.querySelector('.q-submit-btn')?.addEventListener('click',e=>{
-    qAddRipple(e,e.target);
+/* Submit */
+qModal.querySelector('.q-submit-btn')?.addEventListener('click',()=>{
     const f=qModal.querySelector('.q-contact-form');
     const prenom=f.querySelector('[name=prenom]').value.trim();
     const nom=f.querySelector('[name=nom]').value.trim();
     const email=f.querySelector('[name=email]').value.trim();
     const tel=f.querySelector('[name=telephone]').value.trim();
+    const ville=f.querySelector('[name=ville]').value.trim();
     const source=f.querySelector('[name=source]').value;
     const msg=f.querySelector('[name=message]').value.trim();
-    const errEl=f.querySelector('.q-error');
-    if(!prenom||!nom||!email||!tel){
-        errEl.textContent='Veuillez remplir les champs obligatoires.';
-        errEl.style.opacity='1';
-        /* Shake empty required fields */
-        f.querySelectorAll('[required]').forEach(inp=>{
-            if(!inp.value.trim()){inp.classList.add('q-shake');setTimeout(()=>inp.classList.remove('q-shake'),500)}
-        });
-        return;
-    }
-    qData.prenom=prenom;qData.nom=nom;qData.email=email;qData.telephone=tel;qData.source=source;qData.message=msg;
+    if(!prenom||!nom||!email||!tel){f.querySelector('.q-error').textContent='Veuillez remplir les champs obligatoires.';return}
+    qData.prenom=prenom;qData.nom=nom;qData.email=email;qData.telephone=tel;qData.ville=ville;qData.source=source;qData.message=msg;
+    /* Also grab custom color */
     const cc=qModal.querySelector('[data-key="couleur_custom"]');
     if(cc&&cc.value.trim())qData.couleur_custom=cc.value.trim();
     /* Save */
@@ -1863,36 +1635,31 @@ qModal.querySelector('.q-submit-btn')?.addEventListener('click',e=>{
     launchConfetti();
 });
 
-/* ---- Confetti (4 seconds, more particles) ---- */
+/* Confetti */
 function launchConfetti(){
     const canvas=document.createElement('canvas');
     canvas.style.cssText='position:fixed;inset:0;z-index:100001;pointer-events:none';
     canvas.width=window.innerWidth;canvas.height=window.innerHeight;
     document.body.appendChild(canvas);
     const ctx=canvas.getContext('2d');
-    const colors=['#D9F99D','#2DD4BF','#F472B6','#93C5FD','#06D6A0','#FFB4A2','#FF8EC4'];
+    const colors=['#D9F99D','#2DD4BF','#F472B6','#93C5FD','#06D6A0','#FFB4A2'];
     const particles=[];
-    for(let i=0;i<250;i++){particles.push({x:Math.random()*canvas.width,y:-Math.random()*canvas.height*0.5,vx:(Math.random()-0.5)*10,vy:Math.random()*5+2,w:Math.random()*10+4,h:Math.random()*8+3,color:colors[Math.floor(Math.random()*colors.length)],rot:Math.random()*360,rotV:(Math.random()-0.5)*12,opacity:1})}
+    for(let i=0;i<150;i++){particles.push({x:Math.random()*canvas.width,y:-Math.random()*canvas.height*0.5,vx:(Math.random()-0.5)*8,vy:Math.random()*4+2,w:Math.random()*8+4,h:Math.random()*6+3,color:colors[Math.floor(Math.random()*colors.length)],rot:Math.random()*360,rotV:(Math.random()-0.5)*10,opacity:1})}
     let start=performance.now();
     function draw(t){
         const elapsed=t-start;ctx.clearRect(0,0,canvas.width,canvas.height);let alive=false;
-        particles.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=0.12;p.rot+=p.rotV;if(elapsed>2500)p.opacity=Math.max(0,p.opacity-0.015);if(p.opacity<=0)return;alive=true;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot*Math.PI/180);ctx.globalAlpha=p.opacity;ctx.fillStyle=p.color;ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);ctx.restore()});
+        particles.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=0.12;p.rot+=p.rotV;if(elapsed>2000)p.opacity=Math.max(0,p.opacity-0.02);if(p.opacity<=0)return;alive=true;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot*Math.PI/180);ctx.globalAlpha=p.opacity;ctx.fillStyle=p.color;ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);ctx.restore()});
         if(alive&&elapsed<4000)requestAnimationFrame(draw);else canvas.remove();
     }
     requestAnimationFrame(draw);
 }
 
-/* ---- Close & back ---- */
+/* Close & back */
 qModal.querySelector('.q-close')?.addEventListener('click',qHide);
 qModal.querySelector('.q-confirm-close')?.addEventListener('click',qHide);
 qBackBtn?.addEventListener('click',qPrev);
 
-/* ---- Ripple on all buttons/cards in questionnaire ---- */
-qModal.querySelectorAll('.q-btn').forEach(btn=>{
-    btn.addEventListener('click',e=>qAddRipple(e,btn));
-});
-
-/* ---- Intercept CTA buttons ---- */
+/* Intercept CTA buttons */
 document.querySelectorAll('a[href="#contact"],.nav-cta,a[href*="wa.me"]').forEach(btn=>{
     if(btn.closest('#quizModal'))return;
     btn.addEventListener('click',e=>{e.preventDefault();qShow()});
@@ -1917,6 +1684,5 @@ if(ctaTitle){
     ctaSplitObs.observe(ctaTitle);
 }
 </script>
-<div class="grain-overlay"></div>
 </body>
 </html>
