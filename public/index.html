@@ -552,60 +552,124 @@ img,svg{max-width:100%;display:block}
     .footer-bottom{flex-direction:column;text-align:center}.footer-legal{justify-content:center}
     .c-card{width:260px;height:180px}
 }
-/* ===== QUESTIONNAIRE MODAL ===== */
-.q-modal{position:fixed;inset:0;z-index:100000;background:#0F172A;display:none;flex-direction:column;overflow:hidden}
+/* ===== QUESTIONNAIRE MODAL — REDESIGNED ===== */
+.q-modal{position:fixed;inset:0;z-index:100000;background:#1a1028;display:none;flex-direction:column;overflow:hidden}
 .q-modal.open{display:flex}
-.q-top{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;border-bottom:1px solid rgba(255,255,255,0.06)}
-.q-back{display:flex;align-items:center;gap:6px;font-size:14px;color:rgba(255,255,255,0.5);cursor:pointer;background:none;border:none;font-family:inherit;padding:4px 8px}
-.q-back:hover{color:#fff}
+/* Animated gradient background */
+.q-modal::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(255,142,196,0.08),transparent 50%),radial-gradient(ellipse at 80% 20%,rgba(217,249,157,0.06),transparent 50%),radial-gradient(ellipse at 50% 80%,rgba(99,102,241,0.07),transparent 50%);animation:qBgShift 12s ease-in-out infinite alternate;pointer-events:none;z-index:0}
+@keyframes qBgShift{0%{opacity:0.8;transform:scale(1)}100%{opacity:1;transform:scale(1.05)}}
+/* Dot grid pattern */
+.q-modal::after{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,0.07) 1px,transparent 1px);background-size:24px 24px;pointer-events:none;z-index:0}
+/* Floating particles container */
+.q-particles{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.q-particle{position:absolute;border-radius:50%;animation:qParticle var(--qdur,10s) linear infinite;animation-delay:var(--qdel,0s);opacity:0}
+@keyframes qParticle{0%{transform:translateY(100vh) scale(0);opacity:0}10%{opacity:var(--qop,0.3)}90%{opacity:var(--qop,0.3)}100%{transform:translateY(-20vh) scale(1);opacity:0}}
+
+.q-top{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;border-bottom:1px solid rgba(255,255,255,0.06);position:relative;z-index:2}
+.q-back{display:flex;align-items:center;gap:6px;font-size:14px;color:rgba(255,255,255,0.5);cursor:pointer;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:10px;font-family:inherit;padding:8px 16px;transition:all 0.3s}
+.q-back:hover{color:#fff;background:rgba(255,255,255,0.1);transform:translateX(-3px)}
 .q-progress{flex:1;max-width:300px;margin:0 24px}
-.q-bar{height:4px;background:rgba(255,255,255,0.08);border-radius:4px;overflow:hidden}
-.q-bar-fill{height:100%;background:linear-gradient(90deg,#EC4899,#6366F1,#22D3EE);border-radius:4px;transition:width 0.4s ease;width:6%}
-.q-close{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid rgba(255,255,255,0.1);background:none;color:#fff;font-size:18px;cursor:pointer;transition:all 0.2s}
-.q-close:hover{background:rgba(255,255,255,0.08)}
-.q-body{flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
-.q-step{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;opacity:0;transform:translateX(60px);transition:all 0.4s cubic-bezier(0.16,1,0.3,1);pointer-events:none}
-.q-step.q-active{opacity:1;transform:translateX(0);pointer-events:auto}
-.q-step.q-left{opacity:0;transform:translateX(-60px)}
-.q-step h2{font-size:clamp(24px,4vw,36px);font-weight:800;color:#EC4899;margin-bottom:24px;text-align:center}
-/* Alternating step title colors */
-.q-step:nth-child(3n+1) h2{color:#EC4899}
-.q-step:nth-child(3n+2) h2{color:#6366F1}
-.q-step:nth-child(3n+3) h2{color:#22D3EE}
-.q-step p.q-sub{font-size:15px;color:rgba(255,255,255,0.5);margin-bottom:20px;text-align:center}
-.q-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;max-width:700px;width:100%}
+.q-bar{height:6px;background:rgba(255,255,255,0.08);border-radius:6px;overflow:hidden;position:relative}
+.q-bar-fill{height:100%;background:linear-gradient(90deg,#FF8EC4,#D9F99D);border-radius:6px;transition:width 0.5s cubic-bezier(0.16,1,0.3,1);width:8%;box-shadow:0 0 12px rgba(255,142,196,0.4),0 0 24px rgba(255,142,196,0.2)}
+.q-close{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05);color:#fff;font-size:18px;cursor:pointer;transition:all 0.3s}
+.q-close:hover{background:rgba(255,142,196,0.15);border-color:rgba(255,142,196,0.3);transform:rotate(90deg)}
+.q-body{flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;z-index:2}
+.q-step{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;opacity:0;filter:blur(8px);transform:translateX(60px) scale(0.95);transition:all 0.5s cubic-bezier(0.16,1,0.3,1);pointer-events:none}
+.q-step.q-active{opacity:1;filter:blur(0);transform:translateX(0) scale(1);pointer-events:auto}
+.q-step.q-left{opacity:0;filter:blur(8px);transform:translateX(-60px) scale(0.95)}
+/* Emoji above title */
+.q-step-emoji{font-size:64px;display:block;margin-bottom:12px;animation:qEmojiFloat 3s ease-in-out infinite}
+@keyframes qEmojiFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.q-step h2{font-size:clamp(24px,4vw,32px);font-weight:700;color:#fff;margin-bottom:8px;text-align:center}
+.q-step p.q-sub{font-size:15px;color:rgba(255,255,255,0.45);margin-bottom:20px;text-align:center}
+.q-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:750px;width:100%}
 .q-grid-2{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
 .q-grid-3{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
-.q-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:20px;text-align:center;cursor:pointer;transition:all 0.3s cubic-bezier(0.16,1,0.3,1);color:#fff;font-size:15px;font-weight:500;position:relative;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
-.q-card:hover{transform:translateY(-2px);border-color:rgba(99,102,241,0.5);box-shadow:0 8px 30px rgba(99,102,241,0.2);background:rgba(255,255,255,0.05)}
-.q-card.selected{border-color:#EC4899;background:rgba(236,72,153,0.08);box-shadow:0 0 30px rgba(236,72,153,0.15)}
-.q-card.selected::after{content:'✓';position:absolute;top:10px;right:12px;width:22px;height:22px;background:#EC4899;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;font-weight:700}
-.q-card .q-emoji{font-size:28px;margin-bottom:6px;display:block}
+.q-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:20px;text-align:left;cursor:pointer;transition:all 0.3s cubic-bezier(0.16,1,0.3,1);color:#fff;font-size:15px;font-weight:500;position:relative;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:flex;align-items:center;gap:12px}
+.q-card:hover{transform:translateY(-2px) scale(1.03);border-color:rgba(255,142,196,0.4);box-shadow:0 8px 30px rgba(255,142,196,0.15);background:rgba(255,255,255,0.05)}
+.q-card:hover .q-emoji{animation:qEmojiBounce 0.4s ease}
+@keyframes qEmojiBounce{0%{transform:scale(1)}50%{transform:scale(1.3)}100%{transform:scale(1)}}
+.q-card.selected{border-color:#FF8EC4;background:rgba(255,142,196,0.1);box-shadow:0 0 30px rgba(255,142,196,0.2)}
+.q-card.selected::after{content:'✓';position:absolute;top:10px;right:12px;width:24px;height:24px;background:#FF8EC4;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;font-weight:700;animation:qCheckPop 0.3s cubic-bezier(0.34,1.56,0.64,1)}
+@keyframes qCheckPop{0%{transform:scale(0) rotate(-180deg)}100%{transform:scale(1) rotate(0)}}
+/* Popular cards with colored backgrounds */
+.q-card.q-popular-restaurant{background:rgba(249,115,22,0.12);border-color:rgba(249,115,22,0.3)}
+.q-card.q-popular-coiffeur{background:rgba(255,142,196,0.12);border-color:rgba(255,142,196,0.3)}
+.q-card.q-popular-tatoueur{background:rgba(139,92,246,0.12);border-color:rgba(139,92,246,0.3)}
+.q-card.q-popular-beaute{background:rgba(217,249,157,0.12);border-color:rgba(217,249,157,0.3)}
+.q-card .q-emoji{font-size:28px;flex-shrink:0;display:inline-block;line-height:1}
 .q-card .q-price{font-size:28px;font-weight:900;margin:6px 0 2px}
 .q-card .q-price-label{font-size:12px;color:rgba(255,255,255,0.4)}
 .q-card.q-recommended{border-color:rgba(99,102,241,0.4);position:relative}
-.q-card.q-recommended .q-rec-badge{position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--gradient);color:#fff;padding:2px 12px;border-radius:10px;font-size:11px;font-weight:700;white-space:nowrap}
-.q-input{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px 18px;font-size:16px;color:#fff;width:100%;max-width:400px;font-family:inherit;outline:none;transition:border-color 0.2s}
-.q-input:focus{border-color:#6366F1}
+.q-card.q-recommended .q-rec-badge{position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#FF8EC4,#D9F99D);color:#1a1028;padding:2px 12px;border-radius:10px;font-size:11px;font-weight:700;white-space:nowrap}
+/* Glassmorphism inputs */
+.q-input{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px 18px;font-size:16px;color:#fff;width:100%;max-width:400px;font-family:inherit;outline:none;transition:all 0.3s;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.q-input:focus{border-color:#FF8EC4;box-shadow:0 0 20px rgba(255,142,196,0.2),0 0 40px rgba(255,142,196,0.1)}
 .q-input::placeholder{color:rgba(255,255,255,0.25)}
 .q-textarea{min-height:80px;resize:vertical}
-.q-btn{background:#EC4899;color:#fff;padding:16px 36px;border-radius:14px;font-size:16px;font-weight:600;cursor:pointer;border:none;font-family:inherit;margin-top:16px;transition:all 0.3s;box-shadow:0 4px 20px rgba(236,72,153,0.3)}
-.q-btn:hover{transform:scale(1.03);box-shadow:0 0 25px rgba(236,72,153,0.4)}
-.q-submit-btn{background:linear-gradient(135deg,#6366F1,#EC4899)!important;color:#fff!important}
+.q-btn{background:linear-gradient(135deg,#FF8EC4,#D9F99D);color:#1a1028;padding:16px 36px;border-radius:14px;font-size:16px;font-weight:700;cursor:pointer;border:none;font-family:inherit;margin-top:16px;transition:all 0.3s;box-shadow:0 4px 20px rgba(255,142,196,0.3)}
+.q-btn:hover{transform:scale(1.03);box-shadow:0 0 30px rgba(255,142,196,0.4)}
+.q-submit-btn{background:linear-gradient(135deg,#FF8EC4,#D9F99D)!important;color:#1a1028!important;position:relative;overflow:hidden}
+.q-submit-btn::before{content:'';position:absolute;inset:-2px;background:linear-gradient(135deg,#FF8EC4,#D9F99D,#FF8EC4);border-radius:16px;z-index:-1;animation:qPulseGlow 2s ease-in-out infinite}
+@keyframes qPulseGlow{0%,100%{opacity:0.5;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
 .q-error{color:#EF4444;font-size:13px;margin-top:8px;min-height:18px}
 .q-contact-form{display:flex;flex-direction:column;gap:12px;max-width:400px;width:100%}
 .q-contact-form .q-input{max-width:100%}
-.q-style-card{min-height:80px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}
+.q-style-card{min-height:80px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center}
 .q-style-swatch{width:48px;height:32px;border-radius:8px;margin-bottom:2px}
+/* Color step dots */
+.q-color-dot{width:50px;height:50px;border-radius:50%;cursor:pointer;transition:all 0.3s;border:3px solid transparent}
+.q-color-dot:hover{box-shadow:0 0 20px currentColor;transform:scale(1.1)}
+.q-color-dot.selected{border-color:#FF8EC4!important;box-shadow:0 0 20px rgba(255,142,196,0.5),0 0 0 4px rgba(255,142,196,0.2);transform:scale(1.15)}
+/* Confirmation with glassmorphism */
 .q-confirm{text-align:center}
-.q-confirm h2{font-size:clamp(28px,5vw,44px);margin-bottom:16px}
+.q-confirm h2{font-size:clamp(28px,5vw,44px);margin-bottom:16px;background:linear-gradient(135deg,#FF8EC4,#D9F99D);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:qShimmerText 3s ease infinite;background-size:200% 100%}
+@keyframes qShimmerText{0%{background-position:200% center}100%{background-position:-200% center}}
 .q-confirm p{color:rgba(255,255,255,0.7);font-size:16px;line-height:1.7;max-width:500px}
+.q-recap{background:rgba(255,255,255,0.05)!important;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.1)!important;border-radius:14px!important}
 .q-step-label{font-size:12px;color:rgba(255,255,255,0.5);display:block;margin-bottom:4px;text-align:center}
 .q-count{font-size:13px;color:rgba(255,255,255,0.4);margin-top:8px;text-align:center}
-.q-color-dot.selected{border-color:#EC4899!important;box-shadow:0 0 15px rgba(236,72,153,0.4);transform:scale(1.15)}
-.q-input option{background:#1a1a1a;color:#fff}
+.q-input option{background:#1a1028;color:#fff}
 select.q-input{appearance:auto;-webkit-appearance:auto}
-@media(max-width:600px){.q-grid{grid-template-columns:1fr 1fr}.q-grid-2{grid-template-columns:1fr}.q-grid-3{grid-template-columns:1fr}.q-card{padding:14px}}
+/* Stagger animation for cards */
+.q-step.q-active .q-card{animation:qCardStagger 0.4s cubic-bezier(0.16,1,0.3,1) backwards}
+.q-step.q-active .q-card:nth-child(1){animation-delay:0ms}
+.q-step.q-active .q-card:nth-child(2){animation-delay:50ms}
+.q-step.q-active .q-card:nth-child(3){animation-delay:100ms}
+.q-step.q-active .q-card:nth-child(4){animation-delay:150ms}
+.q-step.q-active .q-card:nth-child(5){animation-delay:200ms}
+.q-step.q-active .q-card:nth-child(6){animation-delay:250ms}
+.q-step.q-active .q-card:nth-child(7){animation-delay:300ms}
+.q-step.q-active .q-card:nth-child(8){animation-delay:350ms}
+.q-step.q-active .q-card:nth-child(9){animation-delay:400ms}
+.q-step.q-active .q-card:nth-child(10){animation-delay:450ms}
+.q-step.q-active .q-card:nth-child(11){animation-delay:500ms}
+.q-step.q-active .q-card:nth-child(12){animation-delay:550ms}
+.q-step.q-active .q-card:nth-child(13){animation-delay:600ms}
+.q-step.q-active .q-card:nth-child(14){animation-delay:650ms}
+.q-step.q-active .q-card:nth-child(15){animation-delay:700ms}
+.q-step.q-active .q-card:nth-child(16){animation-delay:750ms}
+.q-step.q-active .q-card:nth-child(17){animation-delay:800ms}
+.q-step.q-active .q-card:nth-child(18){animation-delay:850ms}
+.q-step.q-active .q-card:nth-child(19){animation-delay:900ms}
+@keyframes qCardStagger{0%{opacity:0;transform:translateY(20px) scale(0.9)}100%{opacity:1;transform:translateY(0) scale(1)}}
+/* Success flash bar */
+.q-success-flash{position:fixed;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#22C55E,#D9F99D);z-index:100002;transform:scaleX(0);transform-origin:left;transition:transform 0.4s ease}
+.q-success-flash.active{transform:scaleX(1)}
+/* Shake on error */
+.q-shake{animation:qShake 0.5s ease}
+@keyframes qShake{0%,100%{transform:translateX(0)}10%,30%,50%,70%,90%{transform:translateX(-4px)}20%,40%,60%,80%{transform:translateX(4px)}}
+/* Ripple effect */
+.q-ripple{position:absolute;border-radius:50%;background:rgba(255,142,196,0.3);transform:scale(0);animation:qRipple 0.6s ease-out forwards;pointer-events:none;z-index:0}
+@keyframes qRipple{to{transform:scale(4);opacity:0}}
+/* SVG circular progress (fixed bottom-right) */
+.q-circular-progress{position:fixed;bottom:24px;right:24px;width:48px;height:48px;z-index:100001;opacity:0;transition:opacity 0.3s}
+.q-modal.open~.q-circular-progress,.q-modal.open .q-circular-progress{opacity:1}
+.q-circular-progress circle{fill:none;stroke-width:3;stroke-linecap:round}
+.q-circular-progress .bg{stroke:rgba(255,255,255,0.08)}
+.q-circular-progress .fg{stroke:url(#qCircGrad);transition:stroke-dashoffset 0.5s ease}
+.q-circular-pct{font-size:11px;fill:#fff;text-anchor:middle;dominant-baseline:central;font-weight:700}
+@media(max-width:600px){.q-grid{grid-template-columns:1fr 1fr}.q-grid-2{grid-template-columns:1fr}.q-grid-3{grid-template-columns:1fr}.q-card{padding:14px}.q-circular-progress{display:none}}
 
 /* ===== SPLIT REVEAL (content deploys from sides) ===== */
 /* IMPORTANT: no position:relative here — .garage needs position:absolute */
@@ -636,6 +700,25 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
 @keyframes dw4{0%{transform:translateX(0)}100%{transform:translateX(110px)}}
 @keyframes dw5{0%{transform:translateX(0)}100%{transform:translateX(-90px)}}
 
+/* ===== MOTIF 1: DOT GRID on dark sections ===== */
+.sec-hero::before,.sec-process::before,.sec-services::before,.sec-compare::before,.sec-testi::before,.sec-team::before,.sec-faq::before,.sec-cta::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,0.05) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;z-index:0}
+.sec-hero,.sec-process,.sec-services,.sec-compare,.sec-testi,.sec-team,.sec-faq,.sec-cta{position:relative}
+
+/* ===== MOTIF 2: Noise/grain overlay (global) ===== */
+.noise-overlay{position:fixed;inset:0;pointer-events:none;z-index:99998;opacity:0.015}
+
+/* ===== MOTIF 3: Diagonal lines on services & compare ===== */
+.sec-services::after,.sec-compare::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(255,255,255,0.015) 40px,rgba(255,255,255,0.015) 41px);pointer-events:none;z-index:0}
+
+/* ===== MOTIF 4: Blurry luminous circles ===== */
+.sec-glow{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:0;animation:secGlowPulse 8s ease-in-out infinite alternate}
+@keyframes secGlowPulse{0%{opacity:0.3;transform:scale(1)}100%{opacity:0.5;transform:scale(1.1)}}
+
+/* ===== MOTIF 5: Glow-follow on card borders ===== */
+.card-glow{position:relative;overflow:hidden}
+.card-glow::before{content:'';position:absolute;width:200px;height:200px;background:radial-gradient(circle,rgba(255,142,196,0.15),transparent 70%);border-radius:50%;pointer-events:none;z-index:0;opacity:0;transition:opacity 0.3s;transform:translate(-50%,-50%);left:var(--glow-x,50%);top:var(--glow-y,50%)}
+.card-glow:hover::before{opacity:1}
+
 @media(prefers-reduced-motion:reduce){
     *,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important}
     html{scroll-behavior:auto}
@@ -644,6 +727,11 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
     </style>
 </head>
 <body>
+
+<!-- Noise/Grain overlay -->
+<div class="noise-overlay" id="noiseOverlay">
+<svg width="100%" height="100%"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#noiseFilter)"/></svg>
+</div>
 
 <!-- SVG wave clip-paths — each door gets unique irregular waves (top + bottom) -->
 <svg width="0" height="0" style="position:absolute">
@@ -964,6 +1052,8 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
 
 <!-- ===== QUESTIONNAIRE MODAL (15 steps) ===== -->
 <div class="q-modal" id="quizModal">
+    <div class="q-particles" id="qParticles"></div>
+    <div class="q-success-flash" id="qFlash"></div>
     <div class="q-top">
         <button class="q-back" style="display:none">← Retour</button>
         <div class="q-progress"><span class="q-step-label">Étape 1/15</span><div class="q-bar"><div class="q-bar-fill"></div></div></div>
@@ -972,48 +1062,51 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
     <div class="q-body">
         <!-- 1: Type de projet -->
         <div class="q-step q-active" data-step="type_projet">
+            <span class="q-step-emoji">🌐</span>
             <h2>Quel type de site recherchez-vous ?</h2>
             <div class="q-grid q-grid-2" style="max-width:700px">
-                <div class="q-card q-auto" data-key="type_projet" data-value="Site vitrine">Site vitrine</div>
-                <div class="q-card q-auto" data-key="type_projet" data-value="Site e-commerce">Site e-commerce</div>
-                <div class="q-card q-auto" data-key="type_projet" data-value="Portfolio">Portfolio</div>
-                <div class="q-card q-auto" data-key="type_projet" data-value="Site de réservation">Site de réservation</div>
-                <div class="q-card q-auto" data-key="type_projet" data-value="Landing page">Landing page</div>
-                <div class="q-card q-auto" data-key="type_projet" data-value="Blog / Magazine">Blog / Magazine</div>
-                <div class="q-card q-other-trigger" data-key="type_projet">Autre</div>
+                <div class="q-card q-auto" data-key="type_projet" data-value="Site vitrine"><span class="q-emoji">🏪</span> Site vitrine</div>
+                <div class="q-card q-auto" data-key="type_projet" data-value="Site e-commerce"><span class="q-emoji">🛒</span> Site e-commerce</div>
+                <div class="q-card q-auto" data-key="type_projet" data-value="Portfolio"><span class="q-emoji">🎨</span> Portfolio</div>
+                <div class="q-card q-auto" data-key="type_projet" data-value="Site de réservation"><span class="q-emoji">📅</span> Site de réservation</div>
+                <div class="q-card q-auto" data-key="type_projet" data-value="Landing page"><span class="q-emoji">🚀</span> Landing page</div>
+                <div class="q-card q-auto" data-key="type_projet" data-value="Blog / Magazine"><span class="q-emoji">📝</span> Blog / Magazine</div>
+                <div class="q-card q-other-trigger" data-key="type_projet"><span class="q-emoji">✨</span> Autre</div>
             </div>
             <input class="q-input q-other-input" type="text" placeholder="Précisez..." style="display:none;margin-top:12px">
             <button class="q-btn q-other-continue" style="display:none">Continuer →</button>
         </div>
         <!-- 2: Secteur -->
         <div class="q-step" data-step="secteur">
+            <span class="q-step-emoji">💼</span>
             <h2>Dans quel domaine travaillez-vous ?</h2>
             <div class="q-grid" style="max-width:750px;max-height:55vh;overflow-y:auto;padding-right:8px">
-                <div class="q-card q-auto" data-key="secteur" data-value="Restaurant / Bar / Café">Restaurant / Bar</div>
-                <div class="q-card q-auto" data-key="secteur" data-value="Coiffeur / Barbier">Coiffeur / Barbier</div>
-                <div class="q-card q-auto" data-key="secteur" data-value="Tatoueur / Pierceur">Tatoueur</div>
-                <div class="q-card q-auto" data-key="secteur" data-value="Salon de beauté">Beauté / Esthétique</div>
-                <div class="q-card q-auto" data-key="secteur" data-value="Coach sportif">Coach / Salle de sport</div>
-                <div class="q-card q-auto" data-key="secteur" data-value="Yoga / Bien-être">Yoga / Bien-être</div>
-                <div class="q-card q-auto" data-key="secteur" data-value="Location / Immobilier">Location / Immobilier</div>
-                <div class="q-card q-auto" data-key="secteur" data-value="Wedding Planner">Wedding Planner</div>
-                <div class="q-card q-auto" data-key="secteur" data-value="Artisan / BTP">Artisan / BTP</div>
-                <div class="q-card q-auto" data-key="secteur" data-value="Photographe / Vidéaste">Photographe</div>
-                <div class="q-card q-auto" data-key="secteur" data-value="Musicien / DJ">Musicien / DJ</div>
-                <div class="q-card q-auto" data-key="secteur" data-value="Consultant / Freelance">Consultant</div>
-                <div class="q-card q-auto" data-key="secteur" data-value="Santé / Thérapeute">Santé / Thérapeute</div>
-                <div class="q-card q-auto" data-key="secteur" data-value="Formation / Coaching">Formation / Cours</div>
-                <div class="q-card q-auto" data-key="secteur" data-value="Boutique / Commerce">Boutique / Commerce</div>
-                <div class="q-card q-auto" data-key="secteur" data-value="Auto / Moto / Garage">Auto / Garage</div>
-                <div class="q-card q-auto" data-key="secteur" data-value="Animaux / Vétérinaire">Animaux / Véto</div>
-                <div class="q-card q-auto" data-key="secteur" data-value="Agence / Startup / Tech">Agence / Tech</div>
-                <div class="q-card q-other-trigger" data-key="secteur">Autre</div>
+                <div class="q-card q-auto q-popular-restaurant" data-key="secteur" data-value="Restaurant / Bar / Café"><span class="q-emoji">🍽️</span> Restaurant / Bar</div>
+                <div class="q-card q-auto q-popular-coiffeur" data-key="secteur" data-value="Coiffeur / Barbier"><span class="q-emoji">💇</span> Coiffeur / Barbier</div>
+                <div class="q-card q-auto q-popular-tatoueur" data-key="secteur" data-value="Tatoueur / Pierceur"><span class="q-emoji">🎨</span> Tatoueur</div>
+                <div class="q-card q-auto q-popular-beaute" data-key="secteur" data-value="Salon de beauté"><span class="q-emoji">💅</span> Beauté / Esthétique</div>
+                <div class="q-card q-auto" data-key="secteur" data-value="Coach sportif"><span class="q-emoji">🏋️</span> Coach / Salle de sport</div>
+                <div class="q-card q-auto" data-key="secteur" data-value="Yoga / Bien-être"><span class="q-emoji">🧘</span> Yoga / Bien-être</div>
+                <div class="q-card q-auto" data-key="secteur" data-value="Location / Immobilier"><span class="q-emoji">🏠</span> Location / Immobilier</div>
+                <div class="q-card q-auto" data-key="secteur" data-value="Wedding Planner"><span class="q-emoji">💒</span> Wedding Planner</div>
+                <div class="q-card q-auto" data-key="secteur" data-value="Artisan / BTP"><span class="q-emoji">🔨</span> Artisan / BTP</div>
+                <div class="q-card q-auto" data-key="secteur" data-value="Photographe / Vidéaste"><span class="q-emoji">📸</span> Photographe</div>
+                <div class="q-card q-auto" data-key="secteur" data-value="Musicien / DJ"><span class="q-emoji">🎵</span> Musicien / DJ</div>
+                <div class="q-card q-auto" data-key="secteur" data-value="Consultant / Freelance"><span class="q-emoji">💻</span> Consultant</div>
+                <div class="q-card q-auto" data-key="secteur" data-value="Santé / Thérapeute"><span class="q-emoji">⚕️</span> Santé / Thérapeute</div>
+                <div class="q-card q-auto" data-key="secteur" data-value="Formation / Coaching"><span class="q-emoji">📚</span> Formation / Cours</div>
+                <div class="q-card q-auto" data-key="secteur" data-value="Boutique / Commerce"><span class="q-emoji">🛍️</span> Boutique / Commerce</div>
+                <div class="q-card q-auto" data-key="secteur" data-value="Auto / Moto / Garage"><span class="q-emoji">🚗</span> Auto / Garage</div>
+                <div class="q-card q-auto" data-key="secteur" data-value="Animaux / Vétérinaire"><span class="q-emoji">🐾</span> Animaux / Véto</div>
+                <div class="q-card q-auto" data-key="secteur" data-value="Agence / Startup / Tech"><span class="q-emoji">⚡</span> Agence / Tech</div>
+                <div class="q-card q-other-trigger" data-key="secteur"><span class="q-emoji">✨</span> Autre</div>
             </div>
             <input class="q-input q-other-input" type="text" placeholder="Précisez votre secteur..." style="display:none;margin-top:12px">
             <button class="q-btn q-other-continue" style="display:none">Continuer →</button>
         </div>
         <!-- 3: Nom entreprise -->
         <div class="q-step" data-step="entreprise">
+            <span class="q-step-emoji">🏢</span>
             <h2>Comment s'appelle votre entreprise ?</h2>
             <p class="q-sub">Si vous n'avez pas encore de nom, écrivez votre nom/prénom.</p>
             <input class="q-input q-text-input" data-key="entreprise" type="text" placeholder="Ex: La Table d'Or, Studio Ink, Belle & Zen...">
@@ -1021,6 +1114,7 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
         </div>
         <!-- 4: Localisation -->
         <div class="q-step" data-step="localisation">
+            <span class="q-step-emoji">📍</span>
             <h2>Où êtes-vous situé ?</h2>
             <p class="q-sub">Pour optimiser votre référencement local sur Google.</p>
             <input class="q-input q-text-input" data-key="localisation" type="text" placeholder="Ex: Lyon, Paris 11ème, Bordeaux centre...">
@@ -1028,6 +1122,7 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
         </div>
         <!-- 5: Situation actuelle -->
         <div class="q-step" data-step="situation">
+            <span class="q-step-emoji">🔍</span>
             <h2>Quelle est votre situation actuelle ?</h2>
             <div class="q-grid q-grid-2" style="max-width:650px">
                 <div class="q-card q-auto" data-key="situation" data-value="Aucun site, c'est mon premier">Aucun site, c'est mon premier</div>
@@ -1039,6 +1134,7 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
         </div>
         <!-- 6: Objectif principal -->
         <div class="q-step" data-step="objectifs">
+            <span class="q-step-emoji">🎯</span>
             <h2>Quel est votre objectif principal ?</h2>
             <p class="q-sub">Sélectionnez tout ce qui s'applique</p>
             <div class="q-grid q-grid-2" style="max-width:700px">
@@ -1057,6 +1153,7 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
         </div>
         <!-- 7: Pages souhaitées -->
         <div class="q-step" data-step="pages">
+            <span class="q-step-emoji">📄</span>
             <h2>Quelles pages voulez-vous ?</h2>
             <p class="q-sub">Sélectionnez tout ce qui vous intéresse</p>
             <div class="q-grid q-grid-2" style="max-width:700px;max-height:45vh;overflow-y:auto;padding-right:8px">
@@ -1080,6 +1177,7 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
         </div>
         <!-- 8: Fonctionnalités -->
         <div class="q-step" data-step="fonctionnalites">
+            <span class="q-step-emoji">⚙️</span>
             <h2>Quelles fonctionnalités voulez-vous ?</h2>
             <div class="q-grid q-grid-2" style="max-width:700px;max-height:45vh;overflow-y:auto;padding-right:8px">
                 <div class="q-card q-multi" data-key="fonctionnalites" data-value="Formulaire contact">Formulaire de contact</div>
@@ -1102,6 +1200,7 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
         </div>
         <!-- 9: Style visuel -->
         <div class="q-step" data-step="style">
+            <span class="q-step-emoji">🎭</span>
             <h2>Quel style visuel vous plaît ?</h2>
             <div class="q-grid" style="max-width:650px;grid-template-columns:repeat(2,1fr)">
                 <div class="q-card q-style-card q-auto" data-key="style" data-value="Moderne & Minimaliste"><div class="q-style-swatch" style="background:#0a0a0a;border:1px solid rgba(255,255,255,0.2)"></div><strong>Moderne &amp; Minimaliste</strong><small style="color:rgba(255,255,255,0.4)">Apple, Airbnb, Tesla</small></div>
@@ -1112,6 +1211,7 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
         </div>
         <!-- 10: Palettes de couleurs -->
         <div class="q-step" data-step="couleurs">
+            <span class="q-step-emoji">🎨</span>
             <h2>Quelle palette vous correspond ?</h2>
             <p class="q-sub">Choisissez une palette ou entrez vos propres couleurs.</p>
             <div class="q-grid" style="max-width:750px;grid-template-columns:repeat(2,1fr);gap:14px">
@@ -1155,6 +1255,7 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
         </div>
         <!-- 11: Contenus disponibles -->
         <div class="q-step" data-step="contenus_dispo">
+            <span class="q-step-emoji">📦</span>
             <h2>Quels contenus avez-vous déjà prêts ?</h2>
             <div class="q-grid q-grid-2" style="max-width:650px">
                 <div class="q-card q-multi" data-key="contenus_dispo" data-value="Logo pro">J'ai un logo professionnel</div>
@@ -1170,6 +1271,7 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
         </div>
         <!-- 12: Photos & Médias -->
         <div class="q-step" data-step="photos">
+            <span class="q-step-emoji">📷</span>
             <h2>Avez-vous des photos à nous envoyer ?</h2>
             <p class="q-sub">Photos de vos produits, locaux, équipe, réalisations... Plus on a de matière, plus le site sera beau.</p>
             <div class="q-grid q-grid-2" style="max-width:650px">
@@ -1182,6 +1284,7 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
         </div>
         <!-- 13: Infos produits (pour e-commerce) -->
         <div class="q-step" data-step="produits">
+            <span class="q-step-emoji">🛍️</span>
             <h2>Parlez-nous de vos produits / services</h2>
             <p class="q-sub">Plus on en sait, plus on ira vite. Remplissez ce que vous pouvez.</p>
             <div style="display:flex;flex-direction:column;gap:12px;max-width:500px;width:100%">
@@ -1193,6 +1296,7 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
         </div>
         <!-- 14: Inspiration -->
         <div class="q-step" data-step="inspiration">
+            <span class="q-step-emoji">💡</span>
             <h2>Avez-vous des sites qui vous inspirent ?</h2>
             <p class="q-sub">Collez les liens de 1 à 3 sites dont le style vous plaît. Pas obligatoire.</p>
             <div style="display:flex;flex-direction:column;gap:10px;max-width:450px;width:100%">
@@ -1202,8 +1306,9 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
             </div>
             <button class="q-btn q-inspi-btn">Continuer →</button>
         </div>
-        <!-- 13: Délai -->
+        <!-- 15: Délai -->
         <div class="q-step" data-step="delai">
+            <span class="q-step-emoji">⏰</span>
             <h2>Pour quand voulez-vous votre site ?</h2>
             <div class="q-grid q-grid-2" style="max-width:600px">
                 <div class="q-card q-auto" data-key="delai" data-value="48h — Le plus vite possible">Le plus vite possible (48h)</div>
@@ -1215,8 +1320,9 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
             <input class="q-input q-other-input" type="text" placeholder="Ex: 15 mars 2026" style="display:none;margin-top:12px">
             <button class="q-btn q-other-continue" style="display:none">Continuer →</button>
         </div>
-        <!-- 14: Forfait -->
+        <!-- 16: Forfait -->
         <div class="q-step" data-step="forfait">
+            <span class="q-step-emoji">💎</span>
             <h2>Quel forfait vous intéresse ?</h2>
             <div class="q-grid" style="max-width:750px;grid-template-columns:repeat(2,1fr)">
                 <div class="q-card q-auto" data-key="forfait" data-value="Essentiel 149€/mois"><div class="q-price">149€</div><div class="q-price-label">/mois</div><strong>Essentiel</strong><small style="color:rgba(255,255,255,0.4);display:block;margin-top:4px;font-size:11px">Site vitrine, responsive, hébergement, SSL, support email</small></div>
@@ -1225,8 +1331,9 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
                 <div class="q-card q-auto" data-key="forfait" data-value="Je sais pas encore">Je sais pas, conseillez-moi</div>
             </div>
         </div>
-        <!-- 15: Coordonnées -->
+        <!-- 17: Coordonnées -->
         <div class="q-step" data-step="coordonnees">
+            <span class="q-step-emoji">📞</span>
             <h2>Dernière étape ! Comment on vous contacte ?</h2>
             <div class="q-contact-form">
                 <div style="display:flex;gap:12px"><input class="q-input" name="prenom" type="text" placeholder="Prénom *" required style="flex:1"><input class="q-input" name="nom" type="text" placeholder="Nom *" required style="flex:1"></div>
@@ -1257,6 +1364,13 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
         </div>
     </div>
 </div>
+<!-- SVG Circular Progress -->
+<svg class="q-circular-progress" id="qCircular" viewBox="0 0 48 48">
+    <defs><linearGradient id="qCircGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#FF8EC4"/><stop offset="100%" stop-color="#D9F99D"/></linearGradient></defs>
+    <circle class="bg" cx="24" cy="24" r="20"/>
+    <circle class="fg" cx="24" cy="24" r="20" stroke-dasharray="125.66" stroke-dashoffset="125.66" transform="rotate(-90 24 24)"/>
+    <text class="q-circular-pct" x="24" y="24">0%</text>
+</svg>
 
 <script>
 /* ===== CUSTOM CURSOR ===== */
@@ -1591,29 +1705,93 @@ if(heroSplit){
         },totalDelay);
     }
 }
-/* ===== QUESTIONNAIRE MODAL (15 steps) ===== */
+/* ===== QUESTIONNAIRE MODAL (enhanced) ===== */
 const qModal=document.getElementById('quizModal');
 const qSteps=qModal.querySelectorAll('.q-step');
 const qBar=qModal.querySelector('.q-bar-fill');
 const qBackBtn=qModal.querySelector('.q-back');
 const qStepLabel=qModal.querySelector('.q-step-label');
+const qCirc=document.getElementById('qCircular');
+const qCircFg=qCirc?qCirc.querySelector('.fg'):null;
+const qCircPct=qCirc?qCirc.querySelector('.q-circular-pct'):null;
+const qFlash=document.getElementById('qFlash');
 let qCurrent=0;
 const qData={};
-const totalSteps=17;
+const totalSteps=qSteps.length;
+
+/* Generate questionnaire floating particles */
+(function(){
+    const pc=document.getElementById('qParticles');if(!pc)return;
+    const cols=['rgba(255,142,196,0.3)','rgba(217,249,157,0.3)','rgba(139,92,246,0.2)'];
+    for(let i=0;i<20;i++){
+        const p=document.createElement('div');p.className='q-particle';
+        const s=3+Math.random()*5;
+        p.style.cssText='width:'+s+'px;height:'+s+'px;background:'+cols[i%3]+';left:'+Math.random()*100+'%;--qdur:'+(8+Math.random()*12)+'s;--qdel:'+(Math.random()*10)+'s;--qop:'+(0.15+Math.random()*0.2);
+        pc.appendChild(p);
+    }
+})();
+
+function qUpdateCircular(n){
+    if(!qCircFg)return;
+    const pct=Math.min(((n+1)/totalSteps),1);
+    const circumf=125.66;
+    qCircFg.style.strokeDashoffset=circumf*(1-pct);
+    if(qCircPct)qCircPct.textContent=Math.round(pct*100)+'%';
+}
+function qShowFlash(){
+    if(!qFlash)return;
+    qFlash.classList.add('active');
+    setTimeout(()=>qFlash.classList.remove('active'),600);
+}
 
 function qShow(){qModal.classList.add('open');document.body.style.overflow='hidden';qGoTo(0)}
 function qHide(){qModal.classList.remove('open');document.body.style.overflow=''}
 function qGoTo(n){
+    const prev=qCurrent;
     qSteps.forEach((s,i)=>{s.classList.remove('q-active','q-left');if(i<n)s.classList.add('q-left');if(i===n)s.classList.add('q-active')});
     qCurrent=n;
     const pct=Math.min(((n+1)/totalSteps*100),100);
     qBar.style.width=pct+'%';
     qStepLabel.textContent=n<totalSteps?'Étape '+(n+1)+'/'+totalSteps:'Terminé !';
-    qBackBtn.style.display=n>0&&n<=totalSteps?'flex':'none';
+    qBackBtn.style.display=n>0&&n<totalSteps?'flex':'none';
     if(n>=totalSteps){qBackBtn.style.display='none'}
+    qUpdateCircular(n);
+    /* Green flash on forward progress */
+    if(n>prev&&n<totalSteps)qShowFlash();
+    /* Typing effect on step title */
+    if(n<totalSteps){
+        const activeStep=qSteps[n];
+        const h2=activeStep.querySelector('h2');
+        if(h2&&!h2.dataset.typed){
+            h2.dataset.typed='1';
+            const fullText=h2.textContent;
+            h2.textContent='';
+            let ci=0;
+            function typeChar(){
+                if(ci<fullText.length){h2.textContent+=fullText[ci];ci++;setTimeout(typeChar,40)}
+            }
+            setTimeout(typeChar,200);
+        }
+    }
 }
-function qNext(){if(qCurrent<=totalSteps)qGoTo(qCurrent+1)}
+function qNext(){if(qCurrent<totalSteps)qGoTo(qCurrent+1)}
 function qPrev(){if(qCurrent>0)qGoTo(qCurrent-1)}
+
+/* Ripple effect on card click */
+qModal.addEventListener('click',function(e){
+    const card=e.target.closest('.q-card');
+    if(!card)return;
+    const r=card.getBoundingClientRect();
+    const ripple=document.createElement('span');
+    ripple.className='q-ripple';
+    const size=Math.max(r.width,r.height);
+    ripple.style.width=ripple.style.height=size+'px';
+    ripple.style.left=(e.clientX-r.left-size/2)+'px';
+    ripple.style.top=(e.clientY-r.top-size/2)+'px';
+    card.style.position='relative';card.style.overflow='hidden';
+    card.appendChild(ripple);
+    setTimeout(()=>ripple.remove(),600);
+});
 
 /* Generic: Auto-advance cards (single select) */
 qModal.querySelectorAll('.q-auto').forEach(c=>{
@@ -1731,24 +1909,24 @@ qModal.querySelector('.q-submit-btn')?.addEventListener('click',()=>{
         (qData.entreprise?'Entreprise : '+qData.entreprise+'<br>':'')+
         (qData.forfait?'Forfait : '+qData.forfait:'');
     qModal.querySelector('.q-confirm-name').textContent=prenom;
-    qGoTo(totalSteps);
+    qGoTo(totalSteps-1);
     launchConfetti();
 });
 
-/* Confetti */
+/* Confetti — 4s duration */
 function launchConfetti(){
     const canvas=document.createElement('canvas');
     canvas.style.cssText='position:fixed;inset:0;z-index:100001;pointer-events:none';
     canvas.width=window.innerWidth;canvas.height=window.innerHeight;
     document.body.appendChild(canvas);
     const ctx=canvas.getContext('2d');
-    const colors=['#EC4899','#6366F1','#22D3EE','#A78BFA','#F472B6','#818CF8'];
+    const colors=['#FF8EC4','#D9F99D','#6366F1','#22D3EE','#A78BFA','#F472B6'];
     const particles=[];
-    for(let i=0;i<150;i++){particles.push({x:Math.random()*canvas.width,y:-Math.random()*canvas.height*0.5,vx:(Math.random()-0.5)*8,vy:Math.random()*4+2,w:Math.random()*8+4,h:Math.random()*6+3,color:colors[Math.floor(Math.random()*colors.length)],rot:Math.random()*360,rotV:(Math.random()-0.5)*10,opacity:1})}
+    for(let i=0;i<200;i++){particles.push({x:Math.random()*canvas.width,y:-Math.random()*canvas.height*0.5,vx:(Math.random()-0.5)*10,vy:Math.random()*5+2,w:Math.random()*10+4,h:Math.random()*8+3,color:colors[Math.floor(Math.random()*colors.length)],rot:Math.random()*360,rotV:(Math.random()-0.5)*12,opacity:1})}
     let start=performance.now();
     function draw(t){
         const elapsed=t-start;ctx.clearRect(0,0,canvas.width,canvas.height);let alive=false;
-        particles.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=0.12;p.rot+=p.rotV;if(elapsed>2000)p.opacity=Math.max(0,p.opacity-0.02);if(p.opacity<=0)return;alive=true;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot*Math.PI/180);ctx.globalAlpha=p.opacity;ctx.fillStyle=p.color;ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);ctx.restore()});
+        particles.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=0.1;p.rot+=p.rotV;if(elapsed>2500)p.opacity=Math.max(0,p.opacity-0.015);if(p.opacity<=0)return;alive=true;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot*Math.PI/180);ctx.globalAlpha=p.opacity;ctx.fillStyle=p.color;ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);ctx.restore()});
         if(alive&&elapsed<4000)requestAnimationFrame(draw);else canvas.remove();
     }
     requestAnimationFrame(draw);
@@ -1783,6 +1961,98 @@ if(ctaTitle){
     ctaSplitObs.unobserve(e.target)}})},{threshold:0.2});
     ctaSplitObs.observe(ctaTitle);
 }
+
+/* ===== PART 2: MOTIF 4 — Blurry luminous circles per section ===== */
+(function(){
+    const sections=document.querySelectorAll('.sec-hero,.sec-process,.sec-portfolio,.sec-services,.sec-ba,.sec-compare,.sec-pricing,.sec-testi,.sec-faq,.sec-team,.sec-cta');
+    const glowColors=['rgba(255,142,196,0.15)','rgba(99,102,241,0.12)','rgba(34,211,238,0.1)','rgba(217,249,157,0.1)'];
+    sections.forEach((sec,i)=>{
+        if(sec.style.position!=='relative')sec.style.position='relative';
+        sec.style.overflow='hidden';
+        for(let j=0;j<2;j++){
+            const g=document.createElement('div');g.className='sec-glow';
+            const size=200+Math.random()*200;
+            g.style.width=size+'px';g.style.height=size+'px';
+            g.style.background=glowColors[(i+j)%glowColors.length];
+            g.style.left=(Math.random()*80)+'%';
+            g.style.top=(Math.random()*80)+'%';
+            g.style.animationDelay=(Math.random()*4)+'s';
+            g.style.animationDuration=(6+Math.random()*6)+'s';
+            sec.appendChild(g);
+        }
+    });
+})();
+
+/* ===== PART 2: MOTIF 5 — Glow-follow on card borders ===== */
+(function(){
+    document.querySelectorAll('.card,.svc,.cmp,.price,.testi,.hb-card,.q-card').forEach(el=>{
+        el.classList.add('card-glow');
+        el.addEventListener('mousemove',function(e){
+            const r=el.getBoundingClientRect();
+            el.style.setProperty('--glow-x',(e.clientX-r.left)+'px');
+            el.style.setProperty('--glow-y',(e.clientY-r.top)+'px');
+        });
+    });
+})();
+
+/* ===== PART 3: EFFECT 2 — Circular SVG progress for questionnaire ===== */
+/* Already handled in qUpdateCircular above */
+
+/* ===== PART 3: EFFECT 6 — Shake on error ===== */
+function qShakeError(el){
+    el.classList.add('q-shake');
+    el.style.boxShadow='0 0 20px rgba(239,68,68,0.4)';
+    setTimeout(()=>{el.classList.remove('q-shake');el.style.boxShadow=''},500);
+}
+/* Override submit to show shake on empty required fields */
+var origSubmitBtn=qModal.querySelector('.q-submit-btn');
+if(origSubmitBtn){
+    origSubmitBtn.addEventListener('click',function(e){
+        var f=qModal.querySelector('.q-contact-form');
+        var inputs=f.querySelectorAll('[required]');
+        inputs.forEach(function(inp){
+            if(!inp.value.trim()){qShakeError(inp)}
+        });
+    },true);
+}
+
+/* ===== PART 3: EFFECT 8 — Mouse parallax on background elements ===== */
+(function(){
+    if(window.innerWidth<=768)return;
+    var glows=document.querySelectorAll('.sec-glow');
+    var particles=document.querySelectorAll('.particle');
+    document.addEventListener('mousemove',function(e){
+        var mx=(e.clientX/window.innerWidth-0.5)*2;
+        var my=(e.clientY/window.innerHeight-0.5)*2;
+        glows.forEach(function(g,i){
+            var speed=(i%3+1)*5;
+            g.style.transform='translate('+mx*speed+'px,'+my*speed+'px) scale('+(1+Math.abs(mx)*0.05)+')';
+        });
+    });
+})();
+
+/* ===== PART 3: EFFECT 9 — Magnetic snap on q-cards ===== */
+(function(){
+    if(window.innerWidth<=768)return;
+    qModal.addEventListener('mousemove',function(e){
+        var cards=qModal.querySelectorAll('.q-step.q-active .q-card');
+        cards.forEach(function(card){
+            var r=card.getBoundingClientRect();
+            var cx=r.left+r.width/2;
+            var cy=r.top+r.height/2;
+            var dx=e.clientX-cx;
+            var dy=e.clientY-cy;
+            var dist=Math.sqrt(dx*dx+dy*dy);
+            if(dist<150){
+                var pull=Math.max(0,(150-dist)/150)*4;
+                card.style.transform='translate('+dx/dist*pull+'px,'+dy/dist*pull+'px)';
+            }else{
+                card.style.transform='';
+            }
+        });
+    });
+})();
+
 </script>
 </body>
 </html>
