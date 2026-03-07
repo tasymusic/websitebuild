@@ -46,7 +46,18 @@ img,svg{max-width:100%;display:block}
 .door{min-height:auto;display:flex;flex-direction:column;justify-content:center;box-shadow:0 -10px 40px rgba(0,0,0,0.15);transition:filter 0.5s ease;position:relative;margin-top:-50px;padding-top:70px;padding-bottom:70px}
 .door::before{content:'';position:absolute;top:-49px;left:0;right:0;height:50px;background:inherit}
 .door::after{content:'';position:absolute;bottom:-49px;left:0;right:0;height:50px;background:inherit;z-index:2}
-/* Door edges — animated waves replace old clip-path system */
+/* Each door gets a unique irregular wave via nth-child */
+/* Door 1 top: replaced by animated multi-waves (.door1-waves) */
+.door:nth-child(1)::before,.doors-layer .door:nth-of-type(1)::before{clip-path:none}
+.door:nth-child(1)::after,.doors-layer .door:nth-of-type(1)::after{clip-path:url(#waveBot1)}
+.door:nth-of-type(2)::before{clip-path:url(#waveTop2)}
+.door:nth-of-type(2)::after{clip-path:url(#waveBot2)}
+.door:nth-of-type(3)::before{clip-path:url(#waveTop3)}
+.door:nth-of-type(3)::after{clip-path:url(#waveBot3)}
+.door:nth-of-type(4)::before{clip-path:url(#waveTop4)}
+.door:nth-of-type(4)::after{clip-path:url(#waveBot4)}
+.door:nth-of-type(5)::before{clip-path:url(#waveTop5)}
+.door:nth-of-type(5)::after{clip-path:url(#waveBot5)}
 .door.leaving{filter:brightness(0.92)}
 
 /* ===== SECTION COLORS — 6-color vivid rainbow palette ===== */
@@ -313,7 +324,6 @@ img,svg{max-width:100%;display:block}
 .particle{position:absolute;border-radius:50%;animation:particleFloat var(--dur) linear infinite;animation-delay:var(--del)}
 .hero-content{position:relative;z-index:1}
 .hero h1{font-size:clamp(44px,7vw,86px);font-weight:900;line-height:1.15;letter-spacing:-0.03em;margin:20px 0 0;color:var(--text-dark);overflow:visible}
-.impressionnent-word{display:inline-block;word-break:keep-all;white-space:nowrap;font-size:clamp(32px,7vw,86px)}
 /* Split text handles hero title animation */
 .split-text{overflow:visible}
 .hero-sub{font-size:19px;color:var(--text-med);max-width:560px;margin:24px auto 0;line-height:1.7}
@@ -613,47 +623,20 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
 .split-reveal.revealed [data-sr][data-sr-d="5"]{transition-delay:0.6s}
 @media(max-width:768px){.split-reveal [data-sr="left"]{transform:translateX(-80px)}.split-reveal [data-sr="right"]{transform:translateX(80px)}}
 
-/* ===== ANIMATED WAVES TRANSITION ===== */
-.waves-transition{position:absolute;bottom:0;left:0;width:100%;height:120px;overflow:hidden;z-index:4;pointer-events:none}
-.wave-layer{position:absolute;bottom:0;left:0;width:200%;height:100%}
-.wave-layer svg{width:100%;height:100%;display:block}
-.wave-layer-1{z-index:1;height:120px;animation:waveMove1 8s ease-in-out infinite alternate}
-.wave-layer-2{z-index:2;height:90px;animation:waveMove2 6s ease-in-out infinite alternate}
-.wave-layer-3{z-index:3;height:60px;animation:waveMove3 10s ease-in-out infinite alternate}
-/* Variation speeds for different transitions */
-.waves-v2 .wave-layer-1{animation-duration:7s}
-.waves-v2 .wave-layer-2{animation-duration:9s}
-.waves-v2 .wave-layer-3{animation-duration:5s}
-.waves-v3 .wave-layer-1{animation-duration:10s}
-.waves-v3 .wave-layer-2{animation-duration:5s}
-.waves-v3 .wave-layer-3{animation-duration:8s}
-.waves-v4 .wave-layer-1{animation-duration:6s}
-.waves-v4 .wave-layer-2{animation-duration:11s}
-.waves-v4 .wave-layer-3{animation-duration:7s}
-.waves-v5 .wave-layer-1{animation-duration:9s}
-.waves-v5 .wave-layer-2{animation-duration:7s}
-.waves-v5 .wave-layer-3{animation-duration:12s}
-.waves-v6 .wave-layer-1{animation-duration:11s}
-.waves-v6 .wave-layer-2{animation-duration:8s}
-.waves-v6 .wave-layer-3{animation-duration:6s}
-.waves-v7 .wave-layer-1{animation-duration:5s}
-.waves-v7 .wave-layer-2{animation-duration:10s}
-.waves-v7 .wave-layer-3{animation-duration:9s}
-.waves-v8 .wave-layer-1{animation-duration:12s}
-.waves-v8 .wave-layer-2{animation-duration:6s}
-.waves-v8 .wave-layer-3{animation-duration:11s}
-.waves-v9 .wave-layer-1{animation-duration:8s}
-.waves-v9 .wave-layer-2{animation-duration:12s}
-.waves-v9 .wave-layer-3{animation-duration:5s}
-.waves-v10 .wave-layer-1{animation-duration:10s}
-.waves-v10 .wave-layer-2{animation-duration:5s}
-.waves-v10 .wave-layer-3{animation-duration:7s}
-@keyframes waveMove1{0%{transform:translateX(0)}100%{transform:translateX(-50px)}}
-@keyframes waveMove2{0%{transform:translateX(0)}100%{transform:translateX(40px)}}
-@keyframes waveMove3{0%{transform:translateX(0)}100%{transform:translateX(-30px)}}
-/* Doors need waves visible at top edge too */
-.door .waves-transition-top{position:absolute;top:-50px;left:0;width:100%;height:120px;overflow:hidden;z-index:4;pointer-events:none}
-.door .waves-transition-top .wave-layer{bottom:auto;top:0}
+/* ===== ANIMATED WAVES — DOOR 1 TOP ONLY ===== */
+.door1-waves{position:absolute;top:-70px;left:0;width:100%;height:120px;overflow:hidden;z-index:5;pointer-events:none}
+.door1-waves .dw{position:absolute;bottom:0;left:0;width:200%;height:100%}
+.door1-waves .dw svg{width:100%;height:100%;display:block}
+.door1-waves .dw1{z-index:1;animation:dw1 8s ease-in-out infinite alternate}
+.door1-waves .dw2{z-index:2;animation:dw2 6s ease-in-out infinite alternate}
+.door1-waves .dw3{z-index:3;animation:dw3 10s ease-in-out infinite alternate}
+.door1-waves .dw4{z-index:4;animation:dw4 7s ease-in-out infinite alternate}
+.door1-waves .dw5{z-index:5;animation:dw5 9s ease-in-out infinite alternate}
+@keyframes dw1{0%{transform:translateX(0)}100%{transform:translateX(-50px)}}
+@keyframes dw2{0%{transform:translateX(0)}100%{transform:translateX(40px)}}
+@keyframes dw3{0%{transform:translateX(0)}100%{transform:translateX(-30px)}}
+@keyframes dw4{0%{transform:translateX(0)}100%{transform:translateX(35px)}}
+@keyframes dw5{0%{transform:translateX(0)}100%{transform:translateX(-25px)}}
 
 @media(prefers-reduced-motion:reduce){
     *,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important}
@@ -733,7 +716,7 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
     <div class="particles" id="particles"></div>
     <div class="hero-content container">
         <div class="badge anim anim-up">+50 sites livrés en 2026</div>
-        <h1 id="heroTitle">Des sites web qui<br><span class="shimmer gt impressionnent-word">impressionnent</span></h1>
+        <h1 id="heroTitle">Des sites web qui <span class="shimmer gt">impressionnent</span></h1>
         <p class="hero-sub anim anim-up" style="--d:0.4s">On crée votre site professionnel pendant que vous vous concentrez sur votre métier. Livré en 48h, sans effort.</p>
         <div class="hero-btns anim anim-up" style="--d:0.5s">
             <a href="#portfolio" class="btn btn-primary magnetic">Voir nos réalisations →</a>
@@ -749,12 +732,6 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
             <div class="hs-sep"></div>
             <div class="hs"><span class="hs-num" data-target="24" data-suffix="/7">0</span><span class="hs-label">Support</span></div>
         </div>
-    </div>
-    <!-- Animated waves transition to Process -->
-    <div class="waves-transition waves-v1">
-        <div class="wave-layer wave-layer-1"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,60 C150,20 350,80 600,50 C850,20 1050,70 1200,40 L1200,120 Z" fill="rgba(124,58,237,0.3)"/></svg></div>
-        <div class="wave-layer wave-layer-2"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,70 C100,45 200,85 400,55 C500,35 650,75 800,50 C950,25 1100,65 1200,55 L1200,120 Z" fill="rgba(124,58,237,0.6)"/></svg></div>
-        <div class="wave-layer wave-layer-3"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,80 C300,40 600,90 900,60 C1050,45 1150,70 1200,65 L1200,120 Z" fill="#7C3AED"/></svg></div>
     </div>
 </section>
 
@@ -776,12 +753,6 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
             <div class="c-card" style="background:linear-gradient(135deg,#22C55E,#16A34A)"><div class="c-overlay"></div><span class="c-badge">Coaching</span><div class="c-info"><h3>Coach Vitality</h3><p>Coach sportif</p></div><span class="c-link">Voir →</span></div>
             <div class="c-card" style="background:linear-gradient(135deg,#7C3AED,#6366F1)"><div class="c-overlay"></div><span class="c-badge">Yoga</span><div class="c-info"><h3>Fleur de Lotus</h3><p>Studio yoga</p></div><span class="c-link">Voir →</span></div>
         </div>
-    </div>
-    <!-- Animated waves transition to Services -->
-    <div class="waves-transition waves-v2">
-        <div class="wave-layer wave-layer-1"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,55 C200,30 400,75 650,45 C900,15 1100,65 1200,50 L1200,120 Z" fill="rgba(19,78,74,0.3)"/></svg></div>
-        <div class="wave-layer wave-layer-2"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,65 C120,40 280,80 450,50 C580,30 720,70 880,45 C1000,25 1120,60 1200,50 L1200,120 Z" fill="rgba(19,78,74,0.6)"/></svg></div>
-        <div class="wave-layer wave-layer-3"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,75 C350,35 700,85 1000,55 C1100,45 1170,65 1200,60 L1200,120 Z" fill="#134E4A"/></svg></div>
     </div>
 </section>
 
@@ -812,12 +783,6 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
             <div class="ba-checks"><span>Design premium</span><span>Mobile-first</span><span>Optimisé conversion</span></div>
         </div>
     </div>
-    <!-- Animated waves transition to Compare -->
-    <div class="waves-transition waves-v4">
-        <div class="wave-layer wave-layer-1"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,50 C180,25 380,70 580,40 C780,10 980,65 1200,45 L1200,120 Z" fill="rgba(234,88,12,0.3)"/></svg></div>
-        <div class="wave-layer wave-layer-2"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,60 C140,35 300,75 480,48 C620,28 760,68 920,42 C1040,22 1140,58 1200,48 L1200,120 Z" fill="rgba(234,88,12,0.6)"/></svg></div>
-        <div class="wave-layer wave-layer-3"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,70 C400,30 750,80 1050,52 C1130,44 1180,62 1200,58 L1200,120 Z" fill="#EA580C"/></svg></div>
-    </div>
 </section>
 
 <!-- GARAGE 3: Pricing (split reveal) -->
@@ -847,12 +812,6 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
         </div>
         <p data-sr="up" data-sr-d="4" style="text-align:center;font-size:13px;color:var(--text-light);margin-top:24px">Sans engagement — Résiliez quand vous voulez</p>
     </div>
-    <!-- Animated waves transition to Testimonials -->
-    <div class="waves-transition waves-v6">
-        <div class="wave-layer wave-layer-1"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,58 C160,28 360,72 560,42 C760,12 960,62 1200,48 L1200,120 Z" fill="rgba(124,58,237,0.3)"/></svg></div>
-        <div class="wave-layer wave-layer-2"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,68 C100,42 240,82 400,52 C540,28 680,72 840,46 C960,26 1100,62 1200,52 L1200,120 Z" fill="rgba(124,58,237,0.6)"/></svg></div>
-        <div class="wave-layer wave-layer-3"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,78 C280,38 620,88 920,56 C1060,42 1160,68 1200,62 L1200,120 Z" fill="#7C3AED"/></svg></div>
-    </div>
 </section>
 
 <!-- GARAGE 4: FAQ -->
@@ -869,12 +828,6 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
                 <div class="faq-item"><button class="faq-q">Vous utilisez un template ?<span class="faq-icon">+</span></button><div class="faq-a"><p>Non. 100% sur-mesure. Aucun de nos sites ne se ressemble.</p></div></div>
             </div>
         </div>
-    </div>
-    <!-- Animated waves transition to Team -->
-    <div class="waves-transition waves-v8">
-        <div class="wave-layer wave-layer-1"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,52 C200,22 400,68 620,38 C840,8 1040,58 1200,42 L1200,120 Z" fill="rgba(22,78,99,0.3)"/></svg></div>
-        <div class="wave-layer wave-layer-2"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,62 C130,38 270,78 430,50 C570,28 710,68 870,44 C990,24 1110,58 1200,48 L1200,120 Z" fill="rgba(22,78,99,0.6)"/></svg></div>
-        <div class="wave-layer wave-layer-3"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,72 C320,32 680,82 980,52 C1080,42 1160,66 1200,60 L1200,120 Z" fill="#164E63"/></svg></div>
     </div>
 </section>
 
@@ -900,6 +853,14 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
 
 <!-- DOOR 1: Process -->
 <section class="section-spacing door sec-process" id="process">
+    <!-- Animated multi-waves top edge -->
+    <div class="door1-waves">
+        <div class="dw dw1"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,65 C150,25 350,85 600,55 C850,25 1050,75 1200,45 L1200,120 Z" fill="rgba(217,249,157,0.25)"/></svg></div>
+        <div class="dw dw2"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,75 C100,50 250,90 420,60 C550,35 700,80 850,52 C960,30 1100,68 1200,55 L1200,120 Z" fill="rgba(45,212,191,0.35)"/></svg></div>
+        <div class="dw dw3"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,80 C200,40 500,95 750,58 C900,35 1050,72 1200,60 L1200,120 Z" fill="rgba(244,114,182,0.3)"/></svg></div>
+        <div class="dw dw4"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,70 C130,38 310,82 500,48 C650,22 820,74 980,44 C1080,28 1160,62 1200,52 L1200,120 Z" fill="rgba(147,197,253,0.4)"/></svg></div>
+        <div class="dw dw5"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,85 C300,50 650,100 950,65 C1080,52 1160,75 1200,68 L1200,120 Z" fill="#7C3AED"/></svg></div>
+    </div>
     <div class="container">
         <div class="sh">
             <h2 class="anim anim-blur">Simple comme <span class="gt">bonjour</span></h2>
@@ -913,12 +874,6 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
                 <div class="process-card card anim anim-scale" data-delay="2"><div class="p-num">03</div><h3>Vous êtes en ligne</h3><p class="text-s">Livré en 48h max. Hébergement, domaine et mises à jour inclus.</p></div>
             </div>
         </div>
-    </div>
-    <!-- Animated waves transition to Portfolio -->
-    <div class="waves-transition waves-v3">
-        <div class="wave-layer wave-layer-1"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,62 C170,32 370,76 570,46 C770,16 970,66 1200,52 L1200,120 Z" fill="rgba(59,7,100,0.3)"/></svg></div>
-        <div class="wave-layer wave-layer-2"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,72 C110,46 260,84 420,54 C560,30 700,74 860,48 C980,28 1110,64 1200,54 L1200,120 Z" fill="rgba(59,7,100,0.6)"/></svg></div>
-        <div class="wave-layer wave-layer-3"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,82 C260,42 580,92 860,58 C1020,44 1140,72 1200,66 L1200,120 Z" fill="#3B0764"/></svg></div>
     </div>
 </section>
 
@@ -938,12 +893,6 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
             <div class="svc svc-white anim anim-scale" data-delay="5"><h3>Studios Yoga</h3><p>Planning cours, réservation, présentation profs.</p></div>
         </div>
     </div>
-    <!-- Animated waves transition to BA -->
-    <div class="waves-transition waves-v5">
-        <div class="wave-layer wave-layer-1"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,48 C220,18 420,64 640,34 C860,4 1060,54 1200,38 L1200,120 Z" fill="rgba(59,7,100,0.3)"/></svg></div>
-        <div class="wave-layer wave-layer-2"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,58 C150,32 310,72 490,44 C630,22 770,64 930,40 C1050,20 1130,56 1200,46 L1200,120 Z" fill="rgba(59,7,100,0.6)"/></svg></div>
-        <div class="wave-layer wave-layer-3"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,76 C380,36 720,86 1020,54 C1110,44 1170,68 1200,62 L1200,120 Z" fill="#3B0764"/></svg></div>
-    </div>
 </section>
 
 <!-- Spacer: view BA -->
@@ -960,12 +909,6 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
             <div class="cmp card featured anim anim-scale" data-delay="3"><div class="cmp-badge">RECOMMAND&Eacute;</div><div class="cmp-name gt">WebsiteBuild</div><div class="cmp-row"><strong>199€/mois</strong>Budget</div><div class="cmp-row"><strong>48h</strong>Délai</div><div class="cmp-row"><strong>Qualité agence</strong>Résultat</div><div class="cmp-row"><strong>24/7 WhatsApp</strong>Support</div><div class="cmp-row"><strong>0€ de création</strong></div><div class="cmp-stars">5/5</div></div>
         </div>
     </div>
-    <!-- Animated waves transition to Pricing -->
-    <div class="waves-transition waves-v7">
-        <div class="wave-layer wave-layer-1"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,56 C190,26 390,72 590,42 C790,12 990,62 1200,46 L1200,120 Z" fill="rgba(59,7,100,0.3)"/></svg></div>
-        <div class="wave-layer wave-layer-2"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,66 C120,40 280,80 440,52 C580,28 720,72 880,46 C1000,26 1120,60 1200,50 L1200,120 Z" fill="rgba(59,7,100,0.6)"/></svg></div>
-        <div class="wave-layer wave-layer-3"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,74 C340,34 660,84 960,54 C1070,44 1160,68 1200,62 L1200,120 Z" fill="#3B0764"/></svg></div>
-    </div>
 </section>
 
 <!-- Spacer: view Pricing -->
@@ -981,12 +924,6 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
             <div class="testi anim anim-rotate" data-delay="2"><div class="testi-q">"</div><p class="testi-text">Envoyé mes infos lundi, site en ligne mercredi. Le support est incroyable, ils répondent en 5 min sur WhatsApp.</p><div class="testi-sep"></div><div class="testi-author"><div class="testi-av">TR</div><div><div class="testi-nm">Thomas R.</div><div class="testi-role">Coach sportif à Paris</div><div class="testi-stars">5/5</div></div></div></div>
         </div>
     </div>
-    <!-- Animated waves transition to FAQ -->
-    <div class="waves-transition waves-v9">
-        <div class="wave-layer wave-layer-1"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,54 C210,24 410,70 610,40 C810,10 1010,60 1200,44 L1200,120 Z" fill="rgba(59,7,100,0.3)"/></svg></div>
-        <div class="wave-layer wave-layer-2"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,64 C140,38 300,78 460,50 C600,28 740,68 900,44 C1020,26 1130,58 1200,48 L1200,120 Z" fill="rgba(59,7,100,0.6)"/></svg></div>
-        <div class="wave-layer wave-layer-3"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,76 C300,36 640,86 940,54 C1060,42 1160,66 1200,60 L1200,120 Z" fill="#3B0764"/></svg></div>
-    </div>
 </section>
 
 <!-- Spacer: view FAQ -->
@@ -1001,12 +938,6 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
             <div class="team-card card anim anim-right"><div class="team-av">A</div><h3>Alex</h3><div class="role">Co-fondateur</div><p>Expert développement web. Obsédé par la performance et l'expérience utilisateur.</p></div>
         </div>
         <p class="team-quote anim anim-up">« On croit que chaque professionnel mérite un site à la hauteur de son talent. Pas dans 3 mois, pas pour 5 000€. Maintenant, et à un prix juste. »</p>
-    </div>
-    <!-- Animated waves transition to CTA -->
-    <div class="waves-transition waves-v10">
-        <div class="wave-layer wave-layer-1"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,60 C180,30 380,74 580,44 C780,14 980,64 1200,48 L1200,120 Z" fill="rgba(124,58,237,0.3)"/></svg></div>
-        <div class="wave-layer wave-layer-2"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,70 C130,44 270,82 430,54 C570,30 710,70 870,46 C990,28 1110,62 1200,52 L1200,120 Z" fill="rgba(124,58,237,0.6)"/></svg></div>
-        <div class="wave-layer wave-layer-3"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,80 C320,40 660,88 960,58 C1080,46 1160,70 1200,64 L1200,120 Z" fill="#7C3AED"/></svg></div>
     </div>
 </section>
 
