@@ -66,26 +66,37 @@ img,svg{max-width:100%;display:block}
 
 /* --- HERO: dark navy (#0F172A) --- */
 .sec-hero{background:#0F172A!important;color:#FAFAFA}
-.sec-hero .badge{background:rgba(236,72,153,0.15);border-color:rgba(236,72,153,0.25);color:#EC4899}
-.sec-hero h1{color:#FAFAFA}
-.sec-hero .gt{color:#EC4899;-webkit-text-fill-color:#EC4899;background:none}
-.sec-hero .hero-sub{color:rgba(250,250,250,0.55)}
-.sec-hero .hero-trust{color:rgba(250,250,250,0.45)}
-.sec-hero .hero-trust span::before{color:#22D3EE}
-.sec-hero .btn-primary{background:#EC4899;color:#fff}
-.sec-hero .btn-primary:hover{box-shadow:0 0 30px rgba(236,72,153,0.4);transform:scale(1.05)}
-.sec-hero .btn-secondary{border-color:rgba(250,250,250,0.25);color:#FAFAFA}
-.sec-hero .btn-secondary:hover{border-color:#EC4899;color:#EC4899}
+.sec-hero .badge{background:rgba(255,142,196,0.12);border-color:rgba(255,142,196,0.25);color:#FF8EC4;margin-bottom:24px}
+.sec-hero h1{color:#fff}
+.sec-hero .gt{color:#FF8EC4;-webkit-text-fill-color:#FF8EC4;background:none;display:block}
+.sec-hero .hero-sub{color:rgba(255,255,255,0.75)}
+.sec-hero .hero-trust{color:rgba(255,255,255,0.6)}
+.sec-hero .hero-trust span::before{display:none}
+.sec-hero .btn-primary{background:#FF8EC4;color:#fff;padding:18px 36px;border-radius:14px;font-size:17px;font-weight:600}
+.sec-hero .btn-primary:hover{box-shadow:0 0 30px rgba(255,142,196,0.4);transform:scale(1.05)}
+.sec-hero .btn-secondary{border:2px solid rgba(255,255,255,0.4);color:#fff}
+.sec-hero .btn-secondary:hover{border-color:#FF8EC4;color:#FF8EC4;background:rgba(255,255,255,0.1)}
 .sec-hero .card{background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.08)}
 .sec-hero .nav-logo,.sec-hero .text-dark{color:#FAFAFA}
 
 /* Hero inline stats */
-.hero-stats{display:flex;align-items:center;justify-content:center;gap:0;margin-top:28px;flex-wrap:wrap}
+.hero-stats{display:flex;align-items:center;justify-content:center;gap:0;margin-top:32px;flex-wrap:wrap}
 .hs{display:flex;flex-direction:column;align-items:center;padding:0 20px}
-.hs-num{font-size:28px;font-weight:800;line-height:1.2;color:#EC4899}
-.hs-label{font-size:13px;color:rgba(250,250,250,0.45);margin-top:1px}
-.hs-sep{width:1px;height:28px;background:rgba(255,255,255,0.12)}
-@media(max-width:480px){.hero-stats{gap:8px}.hs{padding:0 12px}.hs-num{font-size:22px}.hs-sep{height:20px}}
+.hs-num{font-size:32px;font-weight:900;line-height:1.2;color:#D9F99D}
+.hs-label{font-size:13px;color:rgba(255,255,255,0.5);margin-top:1px}
+.hs-sep{width:1px;height:28px;background:rgba(255,255,255,0.15)}
+@media(max-width:480px){.hero-stats{gap:8px}.hs{padding:0 12px}.hs-num{font-size:24px}.hs-sep{height:20px}}
+
+/* Hero mini cards */
+.hero-cards{display:flex;justify-content:center;align-items:center;margin-top:48px;gap:-20px;position:relative}
+.hero-mini{width:280px;height:180px;border-radius:16px;position:relative;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,0.3);transition:transform 0.4s ease,box-shadow 0.4s ease;cursor:pointer;flex-shrink:0}
+.hero-mini:hover{transform:scale(1.08)!important;box-shadow:0 20px 60px rgba(0,0,0,0.4);z-index:5!important}
+.hero-mini:nth-child(1){transform:rotate(-3deg);z-index:1;margin-right:-30px}
+.hero-mini:nth-child(2){transform:scale(1.05);z-index:3}
+.hero-mini:nth-child(3){transform:rotate(3deg);z-index:1;margin-left:-30px}
+.hero-mini .hm-overlay{position:absolute;bottom:0;left:0;right:0;padding:14px;background:linear-gradient(transparent,rgba(0,0,0,0.7))}
+.hero-mini .hm-overlay span{font-size:13px;font-weight:600;color:#fff}
+@media(max-width:768px){.hero-cards{flex-direction:row;gap:0}.hero-mini{width:200px;height:130px}}
 
 /* --- PROCESS (door): indigo (#312E81) --- */
 .sec-process{background:#312E81!important;color:#fff}
@@ -237,8 +248,8 @@ img,svg{max-width:100%;display:block}
 .footer-styled .footer-social a:nth-child(2):hover{border-color:#6366F1;color:#6366F1;background:rgba(99,102,241,0.1)}
 
 /* ===== CURSOR ===== */
-.cursor{position:fixed;width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,0.6);pointer-events:none;z-index:99999;transition:width 0.3s ease,height 0.3s ease,opacity 0.3s ease;transform:translate(-50%,-50%);will-change:transform,width,height,opacity;opacity:0.6}
-.cursor.hover{width:50px;height:50px;opacity:0.3}
+.cursor{position:fixed;width:12px;height:12px;border-radius:50%;background:#FF8EC4;pointer-events:none;z-index:99999;transition:width 0.3s ease,height 0.3s ease,opacity 0.3s ease;transform:translate(-50%,-50%);will-change:transform,width,height,opacity;opacity:0.2}
+.cursor.hover{width:40px;height:40px;opacity:0.1}
 @media(max-width:768px){.cursor{display:none!important}}
 
 /* ===== GRADIENT TEXT ===== */
@@ -246,7 +257,7 @@ img,svg{max-width:100%;display:block}
 
 /* ===== SHIMMER ===== */
 .shimmer{position:relative;display:inline;white-space:nowrap}
-.shimmer-active{background:linear-gradient(90deg,#EC4899 35%,rgba(255,255,255,0.85) 50%,#EC4899 65%)!important;background-size:250% 100%!important;-webkit-background-clip:text!important;-webkit-text-fill-color:transparent!important;background-clip:text!important;animation:shimmerText 3s infinite!important}
+.shimmer-active{background:linear-gradient(90deg,#FF8EC4 35%,rgba(255,255,255,0.85) 50%,#FF8EC4 65%)!important;background-size:250% 100%!important;-webkit-background-clip:text!important;-webkit-text-fill-color:transparent!important;background-clip:text!important;animation:shimmerText 3s infinite!important}
 @keyframes shimmerText{0%{background-position:200% center}100%{background-position:-200% center}}
 
 /* ===== CARDS ===== */
@@ -323,12 +334,13 @@ img,svg{max-width:100%;display:block}
 .particles{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
 .particle{position:absolute;border-radius:50%;animation:particleFloat var(--dur) linear infinite;animation-delay:var(--del)}
 .hero-content{position:relative;z-index:1}
-.hero h1{font-size:clamp(44px,7vw,86px);font-weight:900;line-height:1.15;letter-spacing:-0.03em;margin:20px 0 0;color:var(--text-dark);overflow:visible}
+.hero h1{font-size:clamp(52px,7vw,90px);font-weight:900;line-height:1.0;letter-spacing:-0.04em;margin:24px 0 0;color:#fff;overflow:visible}
 /* Split text handles hero title animation */
 .split-text{overflow:visible}
-.hero-sub{font-size:19px;color:var(--text-med);max-width:560px;margin:24px auto 0;line-height:1.7}
-.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:36px}
-.hero-trust{font-size:14px;color:var(--text-light);margin-top:20px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.hero-sub{font-size:20px;color:rgba(255,255,255,0.75);max-width:550px;margin:24px auto 0;line-height:1.6;font-weight:400}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:32px}
+.hero-trust{font-size:15px;color:rgba(255,255,255,0.6);margin-top:24px;display:flex;gap:6px;justify-content:center;flex-wrap:wrap;align-items:center}
+.hero-trust .trust-dot{color:#FF8EC4;font-size:10px}
 
 /* Hero bento */
 .hero-bento{display:grid;grid-template-columns:1.3fr 0.7fr;grid-template-rows:160px 160px;gap:16px;margin-top:56px;max-width:900px;margin-left:auto;margin-right:auto}
@@ -702,13 +714,13 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
     <div class="particles" id="particles"></div>
     <div class="hero-content container">
         <div class="badge anim anim-up">+50 sites livrés en 2026</div>
-        <h1 id="heroTitle">Des sites web qui <span class="shimmer gt">impressionnent</span></h1>
+        <h1 id="heroTitle">Des sites web qui<br><span class="shimmer gt">impressionnent</span></h1>
         <p class="hero-sub anim anim-up" style="--d:0.4s">On crée votre site professionnel pendant que vous vous concentrez sur votre métier. Livré en 48h, sans effort.</p>
         <div class="hero-btns anim anim-up" style="--d:0.5s">
             <a href="#portfolio" class="btn btn-primary magnetic">Voir nos réalisations →</a>
             <a href="#pricing" class="btn btn-secondary magnetic">Découvrir les tarifs</a>
         </div>
-        <div class="hero-trust anim anim-up" style="--d:0.6s"><span>0€ de création</span><span>Sans engagement</span><span>Support 24/7</span></div>
+        <div class="hero-trust anim anim-up" style="--d:0.6s"><span>0€ de création</span><span class="trust-dot">•</span><span>Sans engagement</span><span class="trust-dot">•</span><span>Support 24/7</span></div>
         <div class="hero-stats anim anim-up" style="--d:0.7s">
             <div class="hs"><span class="hs-num" data-target="50" data-suffix="+">0</span><span class="hs-label">Sites livrés</span></div>
             <div class="hs-sep"></div>
@@ -717,6 +729,11 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
             <div class="hs"><span class="hs-num" data-target="48" data-suffix="h">0</span><span class="hs-label">Délai moyen</span></div>
             <div class="hs-sep"></div>
             <div class="hs"><span class="hs-num" data-target="24" data-suffix="/7">0</span><span class="hs-label">Support</span></div>
+        </div>
+        <div class="hero-cards anim anim-up" style="--d:0.8s">
+            <div class="hero-mini anim anim-left" style="background:linear-gradient(135deg,#D97706,#F59E0B)"><div class="hm-overlay"><span>La Table d'Or</span></div></div>
+            <div class="hero-mini anim anim-up" style="background:linear-gradient(135deg,#1a1a2e,#DC2626);--d:0.1s"><div class="hm-overlay"><span>Studio Ink</span></div></div>
+            <div class="hero-mini anim anim-right" style="background:linear-gradient(135deg,#EC4899,#A855F7);--d:0.2s"><div class="hm-overlay"><span>Belle & Zen</span></div></div>
         </div>
     </div>
 </section>
@@ -841,10 +858,10 @@ select.q-input{appearance:auto;-webkit-appearance:auto}
 <section class="section-spacing door sec-process" id="process">
     <!-- Animated multi-waves top edge -->
     <div class="door1-waves">
-        <div class="dw dw1"><svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0,120 L0,70 C60,30 120,15 200,45 C280,75 340,90 440,55 C540,20 620,5 720,40 C820,70 880,85 960,50 C1040,15 1120,5 1200,38 C1280,70 1360,60 1440,48 L1440,120 Z" fill="rgba(99,102,241,0.2)"/></svg></div>
-        <div class="dw dw2"><svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0,120 L0,78 C80,35 160,15 260,55 C360,95 420,80 500,42 C580,5 680,22 780,60 C880,98 940,72 1020,35 C1100,5 1200,28 1300,55 C1380,72 1420,60 1440,55 L1440,120 Z" fill="rgba(236,72,153,0.2)"/></svg></div>
-        <div class="dw dw3"><svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0,120 L0,60 C100,22 180,10 280,48 C380,85 460,98 560,60 C660,22 740,5 840,42 C940,78 1020,90 1120,55 C1220,18 1320,8 1440,42 L1440,120 Z" fill="rgba(34,211,238,0.15)"/></svg></div>
-        <div class="dw dw4"><svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0,120 L0,72 C100,28 200,12 320,50 C440,88 520,68 620,32 C720,2 820,18 940,58 C1060,95 1140,68 1240,38 C1340,10 1400,28 1440,35 L1440,120 Z" fill="rgba(99,102,241,0.15)"/></svg></div>
+        <div class="dw dw1"><svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0,120 L0,70 C60,30 120,15 200,45 C280,75 340,90 440,55 C540,20 620,5 720,40 C820,70 880,85 960,50 C1040,15 1120,5 1200,38 C1280,70 1360,60 1440,48 L1440,120 Z" fill="rgba(124,58,237,0.3)"/></svg></div>
+        <div class="dw dw2"><svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0,120 L0,78 C80,35 160,15 260,55 C360,95 420,80 500,42 C580,5 680,22 780,60 C880,98 940,72 1020,35 C1100,5 1200,28 1300,55 C1380,72 1420,60 1440,55 L1440,120 Z" fill="rgba(255,142,196,0.2)"/></svg></div>
+        <div class="dw dw3"><svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0,120 L0,60 C100,22 180,10 280,48 C380,85 460,98 560,60 C660,22 740,5 840,42 C940,78 1020,90 1120,55 C1220,18 1320,8 1440,42 L1440,120 Z" fill="rgba(124,58,237,0.15)"/></svg></div>
+        <div class="dw dw4"><svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0,120 L0,72 C100,28 200,12 320,50 C440,88 520,68 620,32 C720,2 820,18 940,58 C1060,95 1140,68 1240,38 C1340,10 1400,28 1440,35 L1440,120 Z" fill="rgba(255,142,196,0.1)"/></svg></div>
         <div class="dw dw5"><svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0,120 L0,85 C120,42 240,22 380,58 C520,92 620,78 740,45 C860,10 980,28 1100,62 C1220,92 1340,68 1440,55 L1440,120 Z" fill="#312E81"/></svg></div>
     </div>
     <div class="container">
@@ -1293,12 +1310,12 @@ navMob.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navMob.cl
 
 /* ===== HERO GRADIENT FOLLOW MOUSE ===== */
 const hg=document.getElementById('heroGrad');
-document.addEventListener('mousemove',e=>{const x=(e.clientX/innerWidth*100).toFixed(1),y=(e.clientY/innerHeight*100).toFixed(1);hg.style.background='radial-gradient(600px circle at '+x+'% '+y+'%,rgba(107,29,78,0.2),transparent 60%)'});
+document.addEventListener('mousemove',e=>{const x=(e.clientX/innerWidth*100).toFixed(1),y=(e.clientY/innerHeight*100).toFixed(1);hg.style.background='radial-gradient(600px circle at '+x+'% '+y+'%,rgba(255,142,196,0.08),transparent 60%)'});
 
 /* ===== PARTICLES ===== */
 const pc=document.getElementById('particles');
-var pColors=['rgba(255,142,196,0.15)','rgba(244,210,224,0.15)','rgba(255,142,196,0.15)'];
-for(let i=0;i<18;i++){const p=document.createElement('div');p.className='particle';const s=3+Math.random()*4;const c=pColors[i%3];p.style.cssText='width:'+s+'px;height:'+s+'px;background:'+c+';left:'+Math.random()*100+'%;top:'+Math.random()*100+'%;--po:'+(0.1+Math.random()*0.2)+';--dx:'+(Math.random()*100-50)+'px;--dy:'+(Math.random()*100-50)+'px;--dur:'+(8+Math.random()*12)+'s;--del:'+(Math.random()*8)+'s';pc.appendChild(p)}
+var pColors=['rgba(255,142,196,0.2)','rgba(217,249,157,0.2)'];
+for(let i=0;i<15;i++){const p=document.createElement('div');p.className='particle';const s=2+Math.random()*3;const c=pColors[i%2];p.style.cssText='width:'+s+'px;height:'+s+'px;background:'+c+';left:'+Math.random()*100+'%;top:'+Math.random()*100+'%;--po:'+(0.1+Math.random()*0.15)+';--dx:'+(Math.random()*100-50)+'px;--dy:'+(Math.random()*100-50)+'px;--dur:'+(8+Math.random()*12)+'s;--del:'+(Math.random()*8)+'s';pc.appendChild(p)}
 
 /* ===== TILT 3D (lerp + rAF) ===== */
 if(window.innerWidth>768){
@@ -1553,8 +1570,8 @@ if(heroSplit){
     heroSplit.querySelectorAll('.gt .split-char').forEach(c=>c.classList.add('gt'));
     /* Apply pink color to shimmer chars during entrance */
     heroSplit.querySelectorAll('.shimmer .split-char').forEach(c=>{
-        c.style.color='#EC4899';
-        c.style.webkitTextFillColor='#EC4899';
+        c.style.color='#FF8EC4';
+        c.style.webkitTextFillColor='#FF8EC4';
     });
     /* After entrance animation completes, activate text-only shimmer on the parent span */
     var shimmerSpan=heroSplit.querySelector('.shimmer');
